@@ -19,11 +19,13 @@ export const prettyErrorMessage = (u: unknown): string => {
   }
 
   if (hasProperty(u, '_tag') && hasProperty(u, 'message')) {
-    const message = chalk
-      .hex('#c25c30')(u.message as string)
-      .replace(cwdRegex, '.');
+    const message = u.message
+      ? chalk
+          .hex('#c25c30')(u.message as string)
+          .replace(cwdRegex, '.')
+      : undefined;
 
-    return `💥 ${chalk.bold.bgRed(` ${u._tag} `)} • ${message}\r\n`;
+    return `💥 ${chalk.bgRed(` ${u._tag} `)} ${message ? `• ${message}` : ''}\r\n`;
   }
 
   return `Error: ${JSON.stringify(u)}`;

@@ -4,7 +4,9 @@ import { Cause, isInterruptedOnly } from 'effect/Cause';
 import { ParentSpan, Span } from 'effect/Tracer';
 
 import { filterStack } from './logic/filter-stack';
+import { getSpanAttributes } from './logic/get-span-attributes';
 import { prettyErrors } from './logic/pretty-errors';
+import { spanStackTrailingChar } from './logic/spans-stack-trailing-char';
 
 export const pretty = <E>(cause: Cause<E>): string => {
   if (isInterruptedOnly(cause)) {
@@ -35,14 +37,14 @@ export const pretty = <E>(cause: Cause<E>): string => {
         }
 
         message += spans
-          .map(({ name }, index) => {
+          .map(({ name, attributes }, index) => {
             const isFirstEntry = index === 0;
             const isLastEntry = index === spans.length - 1;
 
             const filePath = ` at ${name.replace(new RegExp(process.cwd()), '.')}`;
 
             return chalk.whiteBright(
-              `${isFirstEntry ? `\r\n${chalk.gray('◯')}` : ''}\r\n${isLastEntry ? chalk.gray('╰') : chalk.gray('├')}${chalk.gray('─')}${filePath}`,
+              `${isFirstEntry ? `\r\n${chalk.gray('◯')}` : ''}\r\n${spanStackTrailingChar(isLastEntry)}${chalk.gray('─')}${filePath}${getSpanAttributes(attributes, isLastEntry)}`,
             );
           })
           .join('');
@@ -52,3 +54,6 @@ export const pretty = <E>(cause: Cause<E>): string => {
     })
     .join('\r\n');
 };
+
+export * from './runners/run-promise';
+export * from './runners/run-sync';
