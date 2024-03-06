@@ -1,6 +1,6 @@
 import { Effect, pipe } from 'effect';
 
-import { pretty } from '..';
+import { prettyPrint } from '..';
 import { prettyPrintEnabled } from '../config/pretty-print-enabled';
 
 export const runPromise = <A, E>(effect: Effect.Effect<A, E>): Promise<A> =>
@@ -10,9 +10,9 @@ export const runPromise = <A, E>(effect: Effect.Effect<A, E>): Promise<A> =>
       Effect.sandbox,
       Effect.catchAll((e) => {
         if (prettyPrintEnabled) {
-          console.error(pretty(e));
+          console.error(prettyPrint(e));
 
-          return Effect.fail('runPromise failure') as never;
+          return Effect.fail('❌ runPromise failure') as never;
         }
 
         return Effect.fail(e);
