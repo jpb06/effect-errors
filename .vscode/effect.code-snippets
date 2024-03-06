@@ -1,0 +1,7 @@
+{
+  "Import effect and pipe": {
+    "prefix": "eff",
+    "body": ["import { pipe, Effect } from 'effect'"],
+    "description": "Import effect and pipe"
+  }
+}
