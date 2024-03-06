@@ -30,7 +30,7 @@ import { runPromise } from 'effect-errors';
 
 The fancy logging behavior is enabled if your node env is `development` or if you set `EFFECT_PRETTY_PRINT` env var to `true`.
 
-You can also directly import the `prettyPrint` function to do whatever you want with it if you want 🤷:
+You can also directly import the `prettyPrint` function to do whatever with it if you want 🤷
 
 ```typescript
 import { prettyPrint } from 'effect-errors';
