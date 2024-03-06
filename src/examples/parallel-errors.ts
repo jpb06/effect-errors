@@ -2,7 +2,7 @@ import { Effect } from 'effect';
 
 import { runPromise } from '../runners/run-promise';
 
-import { TaggedErrorWithMessage } from './errors/tagged-error-with-message';
+import { UserNotFoundError } from './errors/user-not-found.error';
 import { filename } from './util/filename.effect';
 
 const readUser = (name: string) =>
@@ -12,10 +12,9 @@ const readUser = (name: string) =>
     },
   })(
     Effect.tryPromise({
-      try: () =>
-        Promise.reject('Oh no, life sucks this user does no exist, bro'),
+      try: () => Promise.reject('Oh no, this user does no exist!'),
       catch: (e) =>
-        new TaggedErrorWithMessage({
+        new UserNotFoundError({
           message: e,
         }),
     }),

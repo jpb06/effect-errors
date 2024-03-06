@@ -6,15 +6,47 @@
 
 <!-- readme-package-icons end -->
 
+Some sort of POC to improve the way [Effect](https://effect.website/) reports errors in a dev env 🤔
+
 ![example](./docs/parallel-errors-example.png)
 
-## env
+## ⚡ So how does it work?
 
-```
-EFFECT_PRETTY_PRINT
+Had to re-export `runSync` and `runPromise` to apply `prettyPrint` function on the cause returned by a `catchAll`.
+
+So using it would look like this :
+
+```typescript
+import { runPromise } from 'effect-errors';
+
+(async () => {
+  await runPromise(
+    Effect.gen(function* (_) {
+      // ...
+    }),
+  );
+})();
 ```
 
-## examples
+The fancy logging behavior is enabled if your node env is `development` or if you set `EFFECT_PRETTY_PRINT` env var to `true`.
+
+You can also directly import the `prettyPrint` function to do whatever you want with it if you want 🤷:
+
+```typescript
+import { prettyPrint } from 'effect-errors';
+
+// ...
+```
+
+Signature is the following:
+
+```typescript
+const prettyPrint: <E>(cause: Cause<E>) => string;
+```
+
+## ⚡ examples
+
+I wrote some examples for fun and giggles. You can run them using:
 
 ```bash
 bun run-examples

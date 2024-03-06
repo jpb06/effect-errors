@@ -1,6 +1,6 @@
 import { Effect, pipe } from 'effect';
 
-import { pretty } from '..';
+import { prettyPrint } from '..';
 import { prettyPrintEnabled } from '../config/pretty-print-enabled';
 
 export const runSync = <A, E>(effect: Effect.Effect<A, E>): A =>
@@ -10,9 +10,9 @@ export const runSync = <A, E>(effect: Effect.Effect<A, E>): A =>
       Effect.sandbox,
       Effect.catchAll((e) => {
         if (prettyPrintEnabled) {
-          console.error(pretty(e));
+          console.error(prettyPrint(e));
 
-          return Effect.fail('runSync failure') as never;
+          return Effect.fail('❌ runSync failure') as never;
         }
 
         return Effect.fail(e);
