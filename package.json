@@ -2,7 +2,7 @@
   "repository": "https://github.com/jpb06/effect-errors.git",
   "main": "dist/index.js",
   "name": "effect-errors",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "jpb06 <jp.bois.06@outlook.fr>",
   "description": "Getting user stats from github",
   "keywords": [],
