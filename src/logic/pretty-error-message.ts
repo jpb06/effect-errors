@@ -6,7 +6,7 @@ const cwdRegex = new RegExp(`${process.cwd()}`, 'g');
 
 export const prettyErrorMessage = (u: unknown): string => {
   if (typeof u === 'string') {
-    return `Error: ${u}`;
+    return `💥 ${u}`;
   }
 
   if (
@@ -15,7 +15,14 @@ export const prettyErrorMessage = (u: unknown): string => {
     u['toString'] !== Object.prototype.toString &&
     u['toString'] !== Array.prototype.toString
   ) {
-    return u['toString']();
+    const message = u['toString']();
+    const maybeWithUnderlyingType = message.split(': ');
+    if (maybeWithUnderlyingType.length > 1) {
+      const [type, ...message] = maybeWithUnderlyingType;
+      return `💥 ${chalk.bgRed(` ${type} `)} • ${message}`;
+    }
+
+    return `💥 ${message}`;
   }
 
   if (hasProperty(u, '_tag') && hasProperty(u, 'message')) {
