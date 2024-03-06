@@ -12,7 +12,10 @@
   },
   "scripts": {
     "update-deps": "bunx npm-check-updates --root --format group -i",
+    "copy-package": "copyfiles package.json ./dist/",
+    "copy-readme": "copyfiles README.md ./dist/",
     "build": "del-cli ./dist && tsc --project tsconfig-prod.json",
+    "postbuild": "bun run copy-package && bun run copy-readme",
     "lint": "eslint ./src",
     "type-check": "tsc --noEmit",
     "sync-icons": "bun generateReadmeIcons -h 50",
@@ -30,6 +33,7 @@
     "@types/node": "^20.11.24",
     "@typescript-eslint/eslint-plugin": "^7.1.1",
     "@typescript-eslint/parser": "^7.1.1",
+    "copyfiles": "^2.4.1",
     "del-cli": "^5.1.0",
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
