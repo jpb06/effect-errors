@@ -41,8 +41,14 @@ import { prettyPrint } from 'effect-errors';
 Signature is the following:
 
 ```typescript
-const prettyPrint: <E>(cause: Cause<E>) => string;
+const prettyPrint: <E>(cause: Cause<E>, options?: PrettyPrintOptions) => string;
 ```
+
+`PrettyPrintOptions` allows you to tweak the following:
+
+#### `stripCwd` - Whether spans and stacktrace should contain absolute or relative paths
+
+> default: `false` (absolute paths)
 
 ## ⚡ How should I raise errors?
 
@@ -97,7 +103,7 @@ Effect.fail(new UserNotFoundError({ cause: "User does not exist" }));
 
 ### 🔶 Plain object
 
-Alternativly, you _can_ use a plain object with a `_tag` and `message` attribute:
+Alternatively, you _can_ use a plain object with a `_tag` and `message` attribute, but you won't get any stacktrace if you use this method:
 
 ```typescript
 Effect.fail({ _tag: 'SucksToBeMe', message: 'Yeah...' });

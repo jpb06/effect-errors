@@ -8,8 +8,16 @@ import { getSpanAttributes } from './logic/get-span-attributes';
 import { getSpanDuration } from './logic/get-span-duration';
 import { prettyErrors } from './logic/pretty-errors';
 import { spanStackTrailingChar } from './logic/spans-stack-trailing-char';
+import { stripCwdPath } from './logic/strip-cwd-path';
+import {
+  PrettyPrintOptions,
+  prettyPrintOptionsDefault,
+} from './types/pretty-print-options.type';
 
-export const prettyPrint = <E>(cause: Cause<E>): string => {
+export const prettyPrint = <E>(
+  cause: Cause<E>,
+  { stripCwd }: PrettyPrintOptions = prettyPrintOptionsDefault,
+): string => {
   if (isInterruptedOnly(cause)) {
     return 'All fibers interrupted without errors.';
   }
@@ -44,7 +52,7 @@ export const prettyPrint = <E>(cause: Cause<E>): string => {
               const isFirstEntry = index === 0;
               const isLastEntry = index === spans.length - 1;
 
-              const filePath = ` at ${name.replace(new RegExp(process.cwd()), '.')}`;
+              const filePath = ` at ${stripCwd ? stripCwdPath(name) : name}`;
 
               return chalk.whiteBright(
                 (isFirstEntry ? `\r\n${chalk.gray('◯')}` : '') +
@@ -60,7 +68,7 @@ export const prettyPrint = <E>(cause: Cause<E>): string => {
       }
 
       if (stack) {
-        message += `\r\n${span ? '\r\n' : ''}🚨 Stacktrace\r\n${chalk.red(filterStack(stack).replace(/ {4}at /g, '🭳 at '))}`;
+        message += `\r\n${span ? '\r\n' : ''}🚨 Stacktrace\r\n${chalk.red(filterStack(stack, stripCwd))}`;
       }
 
       return message + '\r\n';
