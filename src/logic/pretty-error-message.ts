@@ -9,6 +9,10 @@ export const prettyErrorMessage = (u: unknown): string => {
     return `💥 ${u}`;
   }
 
+  if (u instanceof Error && hasProperty(u, 'error')) {
+    return `💥 ${chalk.bgRed(` ${u.name} `)} ${`• ${u.error}`}\r\n`;
+  }
+
   if (
     hasProperty(u, 'toString') &&
     isFunction(u['toString']) &&
@@ -17,6 +21,7 @@ export const prettyErrorMessage = (u: unknown): string => {
   ) {
     const message = u['toString']();
     const maybeWithUnderlyingType = message.split(': ');
+
     if (maybeWithUnderlyingType.length > 1) {
       const [type, ...message] = maybeWithUnderlyingType;
       return `💥 ${chalk.bgRed(` ${type} `)} • ${message}`;
