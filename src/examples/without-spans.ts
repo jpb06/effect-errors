@@ -4,9 +4,13 @@ import { readJson } from 'fs-extra';
 import { runPromise } from '../runners/run-promise';
 
 import { FetchError } from './errors/fetch-error';
+import { FileError } from './errors/file-error';
 import { filename } from './util/filename.effect';
 
-const readUser = Effect.tryPromise(() => readJson('cool.ts'));
+const readUser = Effect.tryPromise({
+  try: () => readJson('cool.ts'),
+  catch: (e) => new FileError({ cause: e }),
+});
 
 const fetchTask = (userId: string) =>
   Effect.tryPromise({

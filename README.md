@@ -44,6 +44,57 @@ Signature is the following:
 const prettyPrint: <E>(cause: Cause<E>) => string;
 ```
 
+## ⚡ How should I raise errors?
+
+The best way is to use either `SchemaError` or `TaggedError`.
+
+### 🔶 `SchemaError`
+
+Declaring the error could look like this:
+
+```typescript
+import * as Schema from '@effect/schema/Schema';
+
+export class FileNotFoundError extends Schema.TaggedError<SchemaError>()(
+  'FileNotFound',
+  {
+    cause: Schema.optional(Schema.unknown),
+  },
+) {}
+```
+
+You would then raise a `FileNotFoundError` to the error channel like this:
+
+```typescript
+Effect.tryPromise({
+  try: () => ...,
+  catch: (e) => new FileNotFoundError({ cause: e }),
+});
+
+// or raising directly
+Effect.fail(new FileNotFoundError({ cause: "Oh no!" }));
+```
+
+### 🔶 `TaggedError`
+
+```typescript
+export class UserNotFoundError extends TaggedError('UserNotFound')<{
+  cause?: unknown;
+}> {}
+```
+
+You would then raise a `UserNotFoundError` to the error channel like this:
+
+```typescript
+Effect.tryPromise({
+  try: () => ...,
+  catch: (e) => new UserNotFoundError({ cause: e }),
+});
+
+// or raising directly
+Effect.fail(new UserNotFoundError({ cause: "User does not exist" }));
+```
+
 ## ⚡ examples
 
 I wrote some examples for fun and giggles. You can run them using:
