@@ -28,7 +28,10 @@ const fetchTask = (userId: string) =>
   })(
     Effect.tryPromise({
       try: () => fetch(`https://yolo-bro-oh-no.org/users/${userId}`),
-      catch: (e) => new FetchError({ cause: e }),
+      catch: (e) =>
+        new FetchError({
+          cause: e,
+        }),
     }),
   );
 

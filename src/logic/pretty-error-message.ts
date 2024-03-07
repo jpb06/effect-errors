@@ -4,7 +4,7 @@ import { hasProperty } from 'effect/Predicate';
 
 export const prettyErrorMessage = (u: unknown): string => {
   if (typeof u === 'string') {
-    return `💥 ${u}`;
+    return `💥 ${u}\r\n\r\nℹ️ ${chalk.gray('You used a plain string to represent a failure in the error channel (E). You should consider using tagged objects (with the _tag) field, or yieldable errors such as Data.TaggedError and Schema.TaggedError for better handling experience.')}`;
   }
 
   // TaggedError with cause
@@ -15,6 +15,11 @@ export const prettyErrorMessage = (u: unknown): string => {
   // TaggedError with error ctor
   if (u instanceof Error && hasProperty(u, 'error')) {
     return `💥 ${chalk.bgRed(` ${u.name} `)} ${chalk.bold.whiteBright(`• ${u.error}`)}\r\n`;
+  }
+
+  // Plain objects with tag attribute
+  if (hasProperty(u, '_tag') && hasProperty(u, 'message')) {
+    return `💥 ${chalk.bgRed(` ${u._tag} `)} ${chalk.bold.whiteBright(`• ${u.message}`)}\r\n`;
   }
 
   if (
