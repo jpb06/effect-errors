@@ -23,7 +23,7 @@ export const prettyPrint = <E>(cause: Cause<E>): string => {
   );
 
   return failures
-    .map(({ message, stack, span }) => {
+    .map(({ message, stack, span }, failuresIndex) => {
       if (span) {
         let current: Span | ParentSpan | undefined = span;
 
@@ -33,24 +33,30 @@ export const prettyPrint = <E>(cause: Cause<E>): string => {
           current = Option.getOrUndefined(current.parent);
         }
 
-        message += spans
-          .map(({ name, attributes, status }, index) => {
-            const isFirstEntry = index === 0;
-            const isLastEntry = index === spans.length - 1;
+        message =
+          '💥 ' +
+          (failures.length > 1
+            ? `${chalk.bgRed.whiteBright(` #${failuresIndex + 1} -`)}`
+            : '') +
+          message +
+          spans
+            .map(({ name, attributes, status }, index) => {
+              const isFirstEntry = index === 0;
+              const isLastEntry = index === spans.length - 1;
 
-            const filePath = ` at ${name.replace(new RegExp(process.cwd()), '.')}`;
+              const filePath = ` at ${name.replace(new RegExp(process.cwd()), '.')}`;
 
-            return chalk.whiteBright(
-              (isFirstEntry ? `\r\n${chalk.gray('◯')}` : '') +
-                '\r\n' +
-                spanStackTrailingChar(isLastEntry) +
-                chalk.gray('─') +
-                filePath +
-                getSpanDuration(status, isLastEntry) +
-                getSpanAttributes(attributes, isLastEntry),
-            );
-          })
-          .join('');
+              return chalk.whiteBright(
+                (isFirstEntry ? `\r\n${chalk.gray('◯')}` : '') +
+                  '\r\n' +
+                  spanStackTrailingChar(isLastEntry) +
+                  chalk.gray('─') +
+                  filePath +
+                  getSpanDuration(status, isLastEntry) +
+                  getSpanAttributes(attributes, isLastEntry),
+              );
+            })
+            .join('');
       }
 
       if (stack) {
