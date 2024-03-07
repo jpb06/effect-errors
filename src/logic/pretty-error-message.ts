@@ -4,7 +4,7 @@ import { hasProperty } from 'effect/Predicate';
 
 export const prettyErrorMessage = (u: unknown): string => {
   if (typeof u === 'string') {
-    return `${u}\r\n\r\nℹ️ ${chalk.gray('You used a plain string to represent a failure in the error channel (E). You should consider using tagged objects (with a _tag field), or yieldable errors such as Data.TaggedError and Schema.TaggedError for better handling experience.')}`;
+    return `${u}\r\n\r\nℹ️  ${chalk.gray('You used a plain string to represent a failure in the error channel (E). You should consider using tagged objects (with a _tag field), or yieldable errors such as Data.TaggedError and Schema.TaggedError for better handling experience.')}`;
   }
 
   // TaggedError with cause
