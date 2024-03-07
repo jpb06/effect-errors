@@ -1,4 +1,6 @@
-export const filterStack = (stack: string) => {
+import { stripCwdPath } from './strip-cwd-path';
+
+export const filterStack = (stack: string, stripCwd: boolean) => {
   const lines = stack.split('\n');
   const out: string[] = [];
 
@@ -10,5 +12,7 @@ export const filterStack = (stack: string) => {
     }
   }
 
-  return out.join('\n');
+  const final = out.join('\n').replace(/ {4}at /g, '🭳 at ');
+
+  return stripCwd ? stripCwdPath(final) : final;
 };
