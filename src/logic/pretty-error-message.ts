@@ -9,6 +9,10 @@ export const prettyErrorMessage = (u: unknown): string => {
     return `💥 ${u}`;
   }
 
+  if (u instanceof Error && hasProperty(u, 'error')) {
+    return `💥 ${chalk.bgRed(` ${u.name} `)} ${chalk.bold.whiteBright(`• ${u.error}`)}\r\n`;
+  }
+
   if (
     hasProperty(u, 'toString') &&
     isFunction(u['toString']) &&
@@ -17,9 +21,10 @@ export const prettyErrorMessage = (u: unknown): string => {
   ) {
     const message = u['toString']();
     const maybeWithUnderlyingType = message.split(': ');
+
     if (maybeWithUnderlyingType.length > 1) {
       const [type, ...message] = maybeWithUnderlyingType;
-      return `💥 ${chalk.bgRed(` ${type} `)} • ${message}`;
+      return `💥 ${chalk.bgRed(` ${type} `)} ${chalk.bold.whiteBright(`• ${message}`)}`;
     }
 
     return `💥 ${message}`;
@@ -32,7 +37,7 @@ export const prettyErrorMessage = (u: unknown): string => {
           .replace(cwdRegex, '.')
       : undefined;
 
-    return `💥 ${chalk.bgRed(` ${u._tag} `)} ${message ? `• ${message}` : ''}\r\n`;
+    return `💥 ${chalk.bgRed(` ${u._tag} `)} ${message ? chalk.bold.whiteBright(`• ${message}`) : ''}\r\n`;
   }
 
   return `Error: ${JSON.stringify(u)}`;

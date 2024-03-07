@@ -24,10 +24,6 @@ export const prettyPrint = <E>(cause: Cause<E>): string => {
 
   return failures
     .map(({ message, stack, span }) => {
-      if (stack) {
-        message += `\r\n${filterStack(stack)}`;
-      }
-
       if (span) {
         let current: Span | ParentSpan | undefined = span;
 
@@ -55,6 +51,10 @@ export const prettyPrint = <E>(cause: Cause<E>): string => {
             );
           })
           .join('');
+      }
+
+      if (stack) {
+        message += `\r\n${span ? '\r\n' : ''}🚨 Stacktrace:\r\n${chalk.red(filterStack(stack))}`;
       }
 
       return message + '\r\n';
