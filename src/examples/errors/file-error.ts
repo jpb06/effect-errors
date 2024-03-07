@@ -1,7 +1,7 @@
-import { TaggedClass } from 'effect/Data';
+import { TaggedError } from 'effect/Data';
 
-export class FileError extends TaggedClass('FileError') {
-  constructor(readonly message: string) {
+export class FileError extends TaggedError('FileError') {
+  constructor(readonly error?: unknown) {
     super();
   }
 }

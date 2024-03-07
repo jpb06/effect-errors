@@ -16,7 +16,7 @@ const readUser = Effect.withSpan('readUser')(
     FileError
   >({
     try: () => readJson('./src/examples/data/user.json'),
-    catch: (e) => new FileError((e as { message: string }).message),
+    catch: (e) => new FileError(e),
   }),
 );
 
@@ -28,7 +28,7 @@ const fetchTask = (userId: string) =>
   })(
     Effect.tryPromise({
       try: () => fetch(`https://yolo-bro-oh-no.org/users/${userId}`),
-      catch: (e) => new FetchError(e as never),
+      catch: (e) => new FetchError(e),
     }),
   );
 
