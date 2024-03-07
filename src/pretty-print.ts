@@ -54,7 +54,7 @@ export const prettyPrint = <E>(cause: Cause<E>): string => {
       }
 
       if (stack) {
-        message += `\r\n${span ? '\r\n' : ''}🚨 Stacktrace:\r\n${chalk.red(filterStack(stack))}`;
+        message += `\r\n${span ? '\r\n' : ''}🚨 Stacktrace\r\n${chalk.red(filterStack(stack).replace(/ {4}at /g, '🭳 at '))}`;
       }
 
       return message + '\r\n';
