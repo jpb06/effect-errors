@@ -95,6 +95,14 @@ Effect.tryPromise({
 Effect.fail(new UserNotFoundError({ cause: "User does not exist" }));
 ```
 
+### 🔶 Plain object
+
+Alternativly, you _can_ use a plain object with a `_tag` and `message` attribute:
+
+```typescript
+Effect.fail({ _tag: 'SucksToBeMe', message: 'Yeah...' });
+```
+
 ## ⚡ examples
 
 I wrote some examples for fun and giggles. You can run them using:
