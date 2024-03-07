@@ -6,5 +6,7 @@ export const getSpanDuration = (status: SpanStatus, isLastEntry: boolean) => {
     return '';
   }
 
-  return `\r\n${isLastEntry ? ' ' : chalk.gray('│')}     ~ ${(status.endTime - status.startTime) / BigInt(100000)}ms`;
+  const duration = (status.endTime - status.startTime) / BigInt(1000000);
+
+  return `\r\n${isLastEntry ? ' ' : chalk.gray('│')}     ~ ${duration}ms`;
 };
