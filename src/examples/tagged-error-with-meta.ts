@@ -10,7 +10,7 @@ const subTask = Effect.withSpan('subTask', {
     cool: true,
     yolo: 'bro',
   },
-})(Effect.fail(new TaggedErrorWithMeta('Oh no! I failed!')));
+})(Effect.fail(new TaggedErrorWithMeta({ cause: 'Oh no! I failed!' })));
 
 const mainTask = Effect.withSpan('mainTask', {
   attributes: {

@@ -9,8 +9,14 @@ export const prettyErrorMessage = (u: unknown): string => {
     return `💥 ${u}`;
   }
 
+  // TaggedError with error ctor
   if (u instanceof Error && hasProperty(u, 'error')) {
     return `💥 ${chalk.bgRed(` ${u.name} `)} ${chalk.bold.whiteBright(`• ${u.error}`)}\r\n`;
+  }
+
+  // TaggedError with cause
+  if (u instanceof Error && hasProperty(u, 'cause')) {
+    return `💥 ${chalk.bgRed(` ${u.name} `)} ${chalk.bold.whiteBright(`• ${u.cause}`)}\r\n`;
   }
 
   if (

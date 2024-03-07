@@ -11,13 +11,13 @@ const readUser = Effect.tryPromise(() => readJson('cool.ts'));
 const fetchTask = (userId: string) =>
   Effect.tryPromise({
     try: () => fetch(`https://yolo-bro-oh-no.org/users/${userId}`),
-    catch: (e) => new FetchError(e as never),
+    catch: (e) => new FetchError({ cause: e }),
   });
 
 const unwrapResponseTask = (response: Response) =>
   Effect.tryPromise({
     try: () => response.json(),
-    catch: (e) => new FetchError(e as never),
+    catch: (e) => new FetchError({ cause: e }),
   });
 
 const mainTask = Effect.gen(function* (_) {

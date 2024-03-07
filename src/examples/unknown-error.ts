@@ -18,7 +18,7 @@ const fetchTask = (userId: string) =>
   })(
     Effect.tryPromise({
       try: () => fetch(`https://yolo-bro-oh-no.org/users/${userId}`),
-      catch: (e) => new FetchError(e as never),
+      catch: (e) => new FetchError({ cause: e }),
     }),
   );
 
@@ -26,7 +26,7 @@ const unwrapResponseTask = (response: Response) =>
   Effect.withSpan('unwrapFetchUserResponse')(
     Effect.tryPromise({
       try: () => response.json(),
-      catch: (e) => new FetchError(e as never),
+      catch: (e) => new FetchError({ cause: e }),
     }),
   );
 

@@ -13,7 +13,7 @@ const readUser = (name: string) =>
   })(
     Effect.tryPromise({
       try: () => Promise.reject('Oh no, this user does no exist!'),
-      catch: (e) => new UserNotFoundError(e),
+      catch: (e) => new UserNotFoundError({ cause: e }),
     }),
   );
 
