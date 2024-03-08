@@ -8,10 +8,12 @@ export const getSpanAttributes = (
     return '';
   }
 
-  return `${`\r\n${Array.from(attributes.entries())
+  const formattedAttributes = Array.from(attributes.entries())
     .map(
       ([key, value]) =>
         `${isLastEntry ? ' ' : chalk.gray('│')}     ${chalk.blue(key)}${chalk.gray(':')} ${value}`,
     )
-    .join('\r\n')}`}`;
+    .join('\r\n');
+
+  return `${`\r\n${formattedAttributes}`}`;
 };

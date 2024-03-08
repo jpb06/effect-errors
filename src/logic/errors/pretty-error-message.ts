@@ -22,6 +22,7 @@ export const prettyErrorMessage = (u: unknown): string => {
     return `${chalk.bgRed(` ${u._tag} `)} ${chalk.bold.whiteBright(`• ${u.message}`)}\r\n`;
   }
 
+  // Plain objects with toString impl
   if (
     hasProperty(u, 'toString') &&
     isFunction(u['toString']) &&

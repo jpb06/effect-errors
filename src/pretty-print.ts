@@ -3,11 +3,11 @@ import { Option } from 'effect';
 import { Cause, isInterruptedOnly } from 'effect/Cause';
 import { ParentSpan, Span } from 'effect/Tracer';
 
-import { filterStack } from './logic/filter-stack';
-import { getSpanAttributes } from './logic/get-span-attributes';
-import { getSpanDuration } from './logic/get-span-duration';
-import { prettyErrors } from './logic/pretty-errors';
-import { spanStackTrailingChar } from './logic/spans-stack-trailing-char';
+import { captureErrorsFrom } from './logic/errors/capture-errors-from-cause';
+import { getSpanAttributes } from './logic/spans/get-span-attributes';
+import { getSpanDuration } from './logic/spans/get-span-duration';
+import { spanStackTrailingChar } from './logic/spans/spans-stack-trailing-char';
+import { filterStack } from './logic/stack/filter-stack';
 import { stripCwdPath } from './logic/strip-cwd-path';
 import {
   PrettyPrintOptions,
@@ -22,7 +22,7 @@ export const prettyPrint = <E>(
     return 'All fibers interrupted without errors.';
   }
 
-  const failures = prettyErrors<E>(cause);
+  const failures = captureErrorsFrom<E>(cause);
 
   console.error(
     `\r\n🫠  ${chalk.bold.yellowBright.underline(
@@ -48,6 +48,7 @@ export const prettyPrint = <E>(
             : '') +
           message +
           spans
+            .reverse()
             .map(({ name, attributes, status }, index) => {
               const isFirstEntry = index === 0;
               const isLastEntry = index === spans.length - 1;
