@@ -2,11 +2,15 @@ import chalk from 'chalk';
 import { describe, expect, it, vi } from 'vitest';
 
 import { mockConsole } from '../tests/mocks/console.mock';
+import { mockProcess } from '../tests/mocks/process.mock';
 import { effectCause } from '../tests/runners/effect-cause';
 import { regex } from '../tests/util/regex';
 
 import { withCwdStrippingTask } from './strip-cwd';
 
+mockProcess({
+  cwd: vi.fn(() => '/Users/jpb06/repos/perso/effect-errors'),
+});
 mockConsole({
   info: vi.fn(),
   error: vi.fn(),
