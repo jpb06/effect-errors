@@ -1,10 +1,26 @@
 # effect-errors
 
-<!-- readme-package-icons start -->
+[![Open in Visual Studio Code](https://img.shields.io/static/v1?logo=visualstudiocode&label=&message=Open%20in%20Visual%20Studio%20Code&labelColor=2c2c32&color=007acc&logoColor=007acc)](https://github.dev/jpb06/effect-errors)
+![npm bundle size](https://img.shields.io/bundlephobia/min/effect-errors)
+![Github workflow](https://img.shields.io/github/actions/workflow/status/jpb06/effect-errors/ci.yml?branch=main&logo=github-actions&label=last%20workflow)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=jpb06_effect-errors&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=jpb06_effect-errors)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=jpb06_effect-errors&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=jpb06_effect-errors)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=jpb06_effect-errors&metric=security_rating)](https://sonarcloud.io/dashboard?id=jpb06_effect-errors)
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=jpb06_effect-errors&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=jpb06_effect-errors)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=jpb06_effect-errors&metric=coverage)](https://sonarcloud.io/dashboard?id=jpb06_effect-errors)
+[![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=jpb06_effect-errors&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=jpb06_effect-errors)
+[![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=jpb06_effect-errors&metric=sqale_index)](https://sonarcloud.io/summary/new_code?id=jpb06_effect-errors)
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=jpb06_effect-errors&metric=code_smells)](https://sonarcloud.io/dashboard?id=jpb06_effect-errors)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=jpb06_effect-errors&metric=bugs)](https://sonarcloud.io/summary/new_code?id=jpb06_effect-errors)
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=jpb06_effect-errors&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=jpb06_effect-errors)
+[![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=jpb06_effect-errors&metric=duplicated_lines_density)](https://sonarcloud.io/dashboard?id=jpb06_effect-errors)
+![Last commit](https://img.shields.io/github/last-commit/jpb06/effect-errors?logo=git)
 
-<p align="left"><a href="https://docs.github.com/en/actions" target="_blank"><img height="50" src="https://raw.githubusercontent.com/jpb06/jpb06/master/icons/GithubActions-Dark.svg" /></a>&nbsp;<a href="https://www.typescriptlang.org/docs/" target="_blank"><img height="50" src="https://raw.githubusercontent.com/jpb06/jpb06/master/icons/TypeScript.svg" /></a>&nbsp;<a href="https://nodejs.org/en/docs/" target="_blank"><img height="50" src="https://raw.githubusercontent.com/jpb06/jpb06/master/icons/NodeJS-Dark.svg" /></a>&nbsp;<a href="https://bun.sh/docs" target="_blank"><img height="50" src="https://raw.githubusercontent.com/jpb06/jpb06/master/icons/Bun-Dark.svg" /></a>&nbsp;<a href="https://github.com/motdotla/dotenv#readme" target="_blank"><img height="50" src="https://raw.githubusercontent.com/jpb06/jpb06/master/icons/Dotenv-Dark.svg" /></a>&nbsp;<a href="https://eslint.org/docs/latest/" target="_blank"><img height="50" src="https://raw.githubusercontent.com/jpb06/jpb06/master/icons/Eslint-Dark.svg" /></a>&nbsp;<a href="https://prettier.io/docs/en/index.html" target="_blank"><img height="50" src="https://raw.githubusercontent.com/jpb06/jpb06/master/icons/Prettier-Dark.svg" /></a>&nbsp;<a href="https://www.effect.website/docs/quickstart" target="_blank"><img height="50" src="https://raw.githubusercontent.com/jpb06/jpb06/master/icons/Effect-Dark.svg" /></a></p>
+<!-- effect-errors start -->
 
-<!-- readme-package-icons end -->
+<p align="left"><a href="https://docs.github.com/en/actions" target="_blank"><img height="50" src="https://raw.githubusercontent.com/jpb06/jpb06/master/icons/GithubActions-Dark.svg" /></a>&nbsp;<a href="https://www.typescriptlang.org/docs/" target="_blank"><img height="50" src="https://raw.githubusercontent.com/jpb06/jpb06/master/icons/TypeScript.svg" /></a>&nbsp;<a href="https://nodejs.org/en/docs/" target="_blank"><img height="50" src="https://raw.githubusercontent.com/jpb06/jpb06/master/icons/NodeJS-Dark.svg" /></a>&nbsp;<a href="https://bun.sh/docs" target="_blank"><img height="50" src="https://raw.githubusercontent.com/jpb06/jpb06/master/icons/Bun-Dark.svg" /></a>&nbsp;<a href="https://github.com/motdotla/dotenv#readme" target="_blank"><img height="50" src="https://raw.githubusercontent.com/jpb06/jpb06/master/icons/Dotenv-Dark.svg" /></a>&nbsp;<a href="https://eslint.org/docs/latest/" target="_blank"><img height="50" src="https://raw.githubusercontent.com/jpb06/jpb06/master/icons/Eslint-Dark.svg" /></a>&nbsp;<a href="https://prettier.io/docs/en/index.html" target="_blank"><img height="50" src="https://raw.githubusercontent.com/jpb06/jpb06/master/icons/Prettier-Dark.svg" /></a>&nbsp;<a href="https://vitest.dev/guide/" target="_blank"><img height="50" src="https://raw.githubusercontent.com/jpb06/jpb06/master/icons/Vitest-Dark.svg" /></a>&nbsp;<a href="https://www.effect.website/docs/quickstart" target="_blank"><img height="50" src="https://raw.githubusercontent.com/jpb06/jpb06/master/icons/Effect-Dark.svg" /></a></p>
+
+<!-- effect-errors end -->
 
 Some sort of POC to improve the way [Effect](https://effect.website/) reports errors in a dev env 🤔
 
