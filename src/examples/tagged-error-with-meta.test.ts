@@ -3,7 +3,6 @@ import { describe, expect, it, vi } from 'vitest';
 
 import { mockConsole } from '../tests/mocks/console.mock';
 import { effectCause } from '../tests/runners/effect-cause';
-import { regex } from '../tests/util/regex';
 
 import { withMetaTaggedErrorTask } from './tagged-error-with-meta';
 
@@ -20,8 +19,8 @@ describe('tagged-error-with-meta task', () => {
     prettyPrint(cause);
 
     expect(console.error).toHaveBeenCalledTimes(1);
-    expect(vi.mocked(console.error).mock.calls[0][0]).toMatch(
-      regex(chalk.bold.yellowBright.underline('1 error occurred')),
+    expect(vi.mocked(console.error).mock.calls[0][0]).toChalkMatch(
+      chalk.bold.yellowBright.underline('1 error occurred'),
     );
   });
 
@@ -31,8 +30,8 @@ describe('tagged-error-with-meta task', () => {
     const { prettyPrint } = await import('./../pretty-print');
     const result = prettyPrint(cause);
 
-    expect(result).toMatch(regex(chalk.bgRed(' WithMeta ')));
-    expect(result).toMatch(regex(chalk.bold.whiteBright('• Oh no! I failed!')));
+    expect(result).toChalkMatch(chalk.bgRed(' WithMeta '));
+    expect(result).toChalkMatch(chalk.bold.whiteBright('• Oh no! I failed!'));
   });
 
   it('should display spans', async () => {
@@ -41,20 +40,16 @@ describe('tagged-error-with-meta task', () => {
     const { prettyPrint } = await import('./../pretty-print');
     const result = prettyPrint(cause);
 
-    expect(result).toMatch(regex(chalk.gray('◯')));
-    expect(result).toMatch(
-      regex(
-        chalk.whiteBright(
-          `${chalk.gray('├')}${chalk.gray('─')} at withMetaTaggedErrorTask`,
-        ),
+    expect(result).toChalkMatch(chalk.gray('◯'));
+    expect(result).toChalkMatch(
+      chalk.whiteBright(
+        `${chalk.gray('├')}${chalk.gray('─')} at withMetaTaggedErrorTask`,
       ),
     );
-    expect(result).toMatch(
-      regex(
-        chalk.whiteBright(`${chalk.gray('╰')}${chalk.gray('─')} at subTask`),
-      ),
+    expect(result).toChalkMatch(
+      chalk.whiteBright(`${chalk.gray('╰')}${chalk.gray('─')} at subTask`),
     );
-    expect(result).toMatch(/~ \dms/);
+    expect(result).toChalkMatch(/~ \dms/);
   });
 
   it('should display span attributes', async () => {
@@ -63,22 +58,16 @@ describe('tagged-error-with-meta task', () => {
     const { prettyPrint } = await import('./../pretty-print');
     const result = prettyPrint(cause);
 
-    expect(result).toMatch(
-      regex(
-        `${chalk.whiteBright(
-          `${chalk.gray('│')}     ${chalk.blue('struff')}${chalk.gray(':')} awoowoo`,
-        )}`,
-      ),
+    expect(result).toChalkMatch(
+      `${chalk.whiteBright(
+        `${chalk.gray('│')}     ${chalk.blue('struff')}${chalk.gray(':')} awoowoo`,
+      )}`,
     );
-    expect(result).toMatch(
-      regex(
-        chalk.whiteBright(`      ${chalk.blue('cool')}${chalk.gray(':')} true`),
-      ),
+    expect(result).toChalkMatch(
+      chalk.whiteBright(`      ${chalk.blue('cool')}${chalk.gray(':')} true`),
     );
-    expect(result).toMatch(
-      regex(
-        chalk.whiteBright(`      ${chalk.blue('yolo')}${chalk.gray(':')} bro`),
-      ),
+    expect(result).toChalkMatch(
+      chalk.whiteBright(`      ${chalk.blue('yolo')}${chalk.gray(':')} bro`),
     );
   });
 
@@ -88,7 +77,7 @@ describe('tagged-error-with-meta task', () => {
     const { prettyPrint } = await import('./../pretty-print');
     const result = prettyPrint(cause);
 
-    expect(result).toMatch('🚨 Stacktrace');
-    expect(result).toMatch(/🭳 at /);
+    expect(result).toChalkMatch('🚨 Stacktrace');
+    expect(result).toChalkMatch(/🭳 at /);
   });
 });

@@ -3,7 +3,6 @@ import { describe, expect, it, vi } from 'vitest';
 
 import { mockConsole } from '../tests/mocks/console.mock';
 import { effectCause } from '../tests/runners/effect-cause';
-import { regex } from '../tests/util/regex';
 
 import { withStringErrorTask } from './with-string-error';
 
@@ -20,8 +19,8 @@ describe('with-string-error task', () => {
     prettyPrint(cause);
 
     expect(console.error).toHaveBeenCalledTimes(1);
-    expect(vi.mocked(console.error).mock.calls[0][0]).toMatch(
-      regex(chalk.bold.yellowBright.underline('1 error occurred')),
+    expect(vi.mocked(console.error).mock.calls[0][0]).toChalkMatch(
+      chalk.bold.yellowBright.underline('1 error occurred'),
     );
   });
 
@@ -31,7 +30,7 @@ describe('with-string-error task', () => {
     const { prettyPrint } = await import('./../pretty-print');
     const result = prettyPrint(cause);
 
-    expect(result).toMatch(/Oh no!/);
+    expect(result).toChalkMatch(/Oh no!/);
   });
 
   it('should display an info message', async () => {
@@ -40,12 +39,10 @@ describe('with-string-error task', () => {
     const { prettyPrint } = await import('./../pretty-print');
     const result = prettyPrint(cause);
 
-    expect(result).toMatch(
-      regex(
-        `ℹ️  ${chalk.gray(
-          'You used a plain string to represent a failure in the error channel (E). You should consider using tagged objects (with a _tag field), or yieldable errors such as Data.TaggedError and Schema.TaggedError for better handling experience.',
-        )}`,
-      ),
+    expect(result).toChalkMatch(
+      `ℹ️  ${chalk.gray(
+        'You used a plain string to represent a failure in the error channel (E). You should consider using tagged objects (with a _tag field), or yieldable errors such as Data.TaggedError and Schema.TaggedError for better handling experience.',
+      )}`,
     );
   });
 });

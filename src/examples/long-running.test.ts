@@ -3,7 +3,6 @@ import { Duration, Effect, Fiber, TestClock, TestContext } from 'effect';
 import { describe, expect, it, vi } from 'vitest';
 
 import { mockConsole } from '../tests/mocks/console.mock';
-import { regex } from '../tests/util/regex';
 
 import { longRunningTask } from './long-running';
 
@@ -31,8 +30,8 @@ describe('long-running task', () => {
     prettyPrint(cause);
 
     expect(console.error).toHaveBeenCalledTimes(1);
-    expect(vi.mocked(console.error).mock.calls[0][0]).toMatch(
-      regex(chalk.bold.yellowBright.underline('1 error occurred')),
+    expect(vi.mocked(console.error).mock.calls[0][0]).toChalkMatch(
+      chalk.bold.yellowBright.underline('1 error occurred'),
     );
   });
 
@@ -42,12 +41,10 @@ describe('long-running task', () => {
     const { prettyPrint } = await import('./../pretty-print');
     const result = prettyPrint(cause);
 
-    expect(result).toMatch(regex(chalk.bgRed(' SomethingBad ')));
-    expect(result).toMatch(
-      regex(
-        chalk.bold.whiteBright(
-          "• Error: ENOENT: no such file or directory, open 'cool.ts'",
-        ),
+    expect(result).toChalkMatch(chalk.bgRed(' SomethingBad '));
+    expect(result).toChalkMatch(
+      chalk.bold.whiteBright(
+        "• Error: ENOENT: no such file or directory, open 'cool.ts'",
       ),
     );
   });
@@ -58,20 +55,16 @@ describe('long-running task', () => {
     const { prettyPrint } = await import('./../pretty-print');
     const result = prettyPrint(cause);
 
-    expect(result).toMatch(regex(chalk.gray('◯')));
-    expect(result).toMatch(
-      regex(
-        chalk.whiteBright(
-          `${chalk.gray('├')}${chalk.gray('─')} at longRunningTask`,
-        ),
+    expect(result).toChalkMatch(chalk.gray('◯'));
+    expect(result).toChalkMatch(
+      chalk.whiteBright(
+        `${chalk.gray('├')}${chalk.gray('─')} at longRunningTask`,
       ),
     );
-    expect(result).toMatch(
-      regex(
-        chalk.whiteBright(`${chalk.gray('╰')}${chalk.gray('─')} at readUser`),
-      ),
+    expect(result).toChalkMatch(
+      chalk.whiteBright(`${chalk.gray('╰')}${chalk.gray('─')} at readUser`),
     );
-    expect(result).toMatch(/~ \dms/);
+    expect(result).toChalkMatch(/~ \dms/);
   });
 
   it('should display the stack', async () => {
@@ -80,7 +73,7 @@ describe('long-running task', () => {
     const { prettyPrint } = await import('./../pretty-print');
     const result = prettyPrint(cause);
 
-    expect(result).toMatch('🚨 Stacktrace');
-    expect(result).toMatch(/🭳 at /);
+    expect(result).toChalkMatch('🚨 Stacktrace');
+    expect(result).toChalkMatch(/🭳 at /);
   });
 });

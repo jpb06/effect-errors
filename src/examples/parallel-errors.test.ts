@@ -3,7 +3,6 @@ import { describe, expect, it, vi } from 'vitest';
 
 import { mockConsole } from '../tests/mocks/console.mock';
 import { effectCause } from '../tests/runners/effect-cause';
-import { regex } from '../tests/util/regex';
 
 import { withParallelErrorsTask } from './parallel-errors';
 
@@ -20,8 +19,8 @@ describe('parallel-errors task', () => {
     prettyPrint(cause);
 
     expect(console.error).toHaveBeenCalledTimes(1);
-    expect(vi.mocked(console.error).mock.calls[0][0]).toMatch(
-      regex(chalk.bold.yellowBright.underline('3 errors occurred')),
+    expect(vi.mocked(console.error).mock.calls[0][0]).toChalkMatch(
+      chalk.bold.yellowBright.underline('3 errors occurred'),
     );
   });
 
@@ -31,24 +30,18 @@ describe('parallel-errors task', () => {
     const { prettyPrint } = await import('./../pretty-print');
     const result = prettyPrint(cause);
 
-    expect(result).toMatch(
-      regex(
-        `${chalk.bgRed.whiteBright(' #1 -')}${chalk.bgRed(' UserNotFound ')}`,
-      ),
+    expect(result).toChalkMatch(
+      `${chalk.bgRed.whiteBright(' #1 -')}${chalk.bgRed(' UserNotFound ')}`,
     );
-    expect(result).toMatch(
-      regex(
-        `${chalk.bgRed.whiteBright(' #2 -')}${chalk.bgRed(' UserNotFound ')}`,
-      ),
+    expect(result).toChalkMatch(
+      `${chalk.bgRed.whiteBright(' #2 -')}${chalk.bgRed(' UserNotFound ')}`,
     );
-    expect(result).toMatch(
-      regex(
-        `${chalk.bgRed.whiteBright(' #3 -')}${chalk.bgRed(' UserNotFound ')}`,
-      ),
+    expect(result).toChalkMatch(
+      `${chalk.bgRed.whiteBright(' #3 -')}${chalk.bgRed(' UserNotFound ')}`,
     );
 
-    expect(result).toMatch(
-      regex(chalk.bold.whiteBright('• Oh no, this user does no exist!')),
+    expect(result).toChalkMatch(
+      chalk.bold.whiteBright('• Oh no, this user does no exist!'),
     );
   });
 
@@ -58,27 +51,19 @@ describe('parallel-errors task', () => {
     const { prettyPrint } = await import('./../pretty-print');
     const result = prettyPrint(cause);
 
-    expect(result).toMatch(regex(chalk.gray('◯')));
-    expect(result).toMatch(
-      regex(
-        chalk.whiteBright(
-          `${chalk.gray('├')}${chalk.gray('─')} at withParallelErrorsTask`,
-        ),
+    expect(result).toChalkMatch(chalk.gray('◯'));
+    expect(result).toChalkMatch(
+      chalk.whiteBright(
+        `${chalk.gray('├')}${chalk.gray('─')} at withParallelErrorsTask`,
       ),
     );
-    expect(result).toMatch(
-      regex(
-        chalk.whiteBright(
-          `${chalk.gray('├')}${chalk.gray('─')} at parallelGet`,
-        ),
-      ),
+    expect(result).toChalkMatch(
+      chalk.whiteBright(`${chalk.gray('├')}${chalk.gray('─')} at parallelGet`),
     );
-    expect(result).toMatch(
-      regex(
-        chalk.whiteBright(`${chalk.gray('╰')}${chalk.gray('─')} at readUser`),
-      ),
+    expect(result).toChalkMatch(
+      chalk.whiteBright(`${chalk.gray('╰')}${chalk.gray('─')} at readUser`),
     );
-    expect(result).toMatch(/~ \dms/);
+    expect(result).toChalkMatch(/~ \dms/);
   });
 
   it('should display span attributes', async () => {
@@ -87,27 +72,19 @@ describe('parallel-errors task', () => {
     const { prettyPrint } = await import('./../pretty-print');
     const result = prettyPrint(cause);
 
-    expect(result).toMatch(
-      regex(
-        `${chalk.whiteBright(
-          `${chalk.gray('│')}     ${chalk.blue('names')}${chalk.gray(':')} yolo,bro,cool`,
-        )}`,
-      ),
+    expect(result).toChalkMatch(
+      `${chalk.whiteBright(
+        `${chalk.gray('│')}     ${chalk.blue('names')}${chalk.gray(':')} yolo,bro,cool`,
+      )}`,
     );
-    expect(result).toMatch(
-      regex(
-        chalk.whiteBright(`      ${chalk.blue('name')}${chalk.gray(':')} yolo`),
-      ),
+    expect(result).toChalkMatch(
+      chalk.whiteBright(`      ${chalk.blue('name')}${chalk.gray(':')} yolo`),
     );
-    expect(result).toMatch(
-      regex(
-        chalk.whiteBright(`      ${chalk.blue('name')}${chalk.gray(':')} bro`),
-      ),
+    expect(result).toChalkMatch(
+      chalk.whiteBright(`      ${chalk.blue('name')}${chalk.gray(':')} bro`),
     );
-    expect(result).toMatch(
-      regex(
-        chalk.whiteBright(`      ${chalk.blue('name')}${chalk.gray(':')} cool`),
-      ),
+    expect(result).toChalkMatch(
+      chalk.whiteBright(`      ${chalk.blue('name')}${chalk.gray(':')} cool`),
     );
   });
 
@@ -117,7 +94,7 @@ describe('parallel-errors task', () => {
     const { prettyPrint } = await import('./../pretty-print');
     const result = prettyPrint(cause);
 
-    expect(result).toMatch('🚨 Stacktrace');
-    expect(result).toMatch(/🭳 at /);
+    expect(result).toChalkMatch('🚨 Stacktrace');
+    expect(result).toChalkMatch(/🭳 at /);
   });
 });

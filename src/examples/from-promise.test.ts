@@ -3,7 +3,6 @@ import { describe, expect, it, vi } from 'vitest';
 
 import { mockConsole } from '../tests/mocks/console.mock';
 import { effectCause } from '../tests/runners/effect-cause';
-import { regex } from '../tests/util/regex';
 
 import { fromPromiseTask } from './from-promise';
 
@@ -20,8 +19,8 @@ describe('from-promise task', () => {
     prettyPrint(cause);
 
     expect(console.error).toHaveBeenCalledTimes(1);
-    expect(vi.mocked(console.error).mock.calls[0][0]).toMatch(
-      regex(chalk.bold.yellowBright.underline('1 error occurred')),
+    expect(vi.mocked(console.error).mock.calls[0][0]).toChalkMatch(
+      chalk.bold.yellowBright.underline('1 error occurred'),
     );
   });
 
@@ -31,9 +30,9 @@ describe('from-promise task', () => {
     const { prettyPrint } = await import('./../pretty-print');
     const result = prettyPrint(cause);
 
-    expect(result).toMatch(regex(chalk.bgRed(' FetchError ')));
-    expect(result).toMatch(
-      regex(chalk.bold.whiteBright('• TypeError: fetch failed')),
+    expect(result).toChalkMatch(chalk.bgRed(' FetchError '));
+    expect(result).toChalkMatch(
+      chalk.bold.whiteBright('• TypeError: fetch failed'),
     );
   });
 
@@ -43,20 +42,16 @@ describe('from-promise task', () => {
     const { prettyPrint } = await import('./../pretty-print');
     const result = prettyPrint(cause);
 
-    expect(result).toMatch(regex(chalk.gray('◯')));
-    expect(result).toMatch(
-      regex(
-        chalk.whiteBright(
-          `${chalk.gray('├')}${chalk.gray('─')} at fromPromiseTask`,
-        ),
+    expect(result).toChalkMatch(chalk.gray('◯'));
+    expect(result).toChalkMatch(
+      chalk.whiteBright(
+        `${chalk.gray('├')}${chalk.gray('─')} at fromPromiseTask`,
       ),
     );
-    expect(result).toMatch(
-      regex(
-        chalk.whiteBright(`${chalk.gray('╰')}${chalk.gray('─')} at fetchUser`),
-      ),
+    expect(result).toChalkMatch(
+      chalk.whiteBright(`${chalk.gray('╰')}${chalk.gray('─')} at fetchUser`),
     );
-    expect(result).toMatch(/~ \dms/);
+    expect(result).toChalkMatch(/~ \dms/);
   });
 
   it('should display span attributes', async () => {
@@ -65,12 +60,10 @@ describe('from-promise task', () => {
     const { prettyPrint } = await import('./../pretty-print');
     const result = prettyPrint(cause);
 
-    expect(result).toMatch(
-      regex(
-        `${chalk.whiteBright(
-          `      ${chalk.blue('userId')}${chalk.gray(':')} 123`,
-        )}`,
-      ),
+    expect(result).toChalkMatch(
+      `${chalk.whiteBright(
+        `      ${chalk.blue('userId')}${chalk.gray(':')} 123`,
+      )}`,
     );
   });
 
@@ -80,7 +73,7 @@ describe('from-promise task', () => {
     const { prettyPrint } = await import('./../pretty-print');
     const result = prettyPrint(cause);
 
-    expect(result).toMatch('🚨 Stacktrace');
-    expect(result).toMatch(/🭳 at /);
+    expect(result).toChalkMatch('🚨 Stacktrace');
+    expect(result).toChalkMatch(/🭳 at /);
   });
 });
