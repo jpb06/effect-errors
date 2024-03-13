@@ -2,6 +2,7 @@ import chalk from 'chalk';
 import { describe, expect, it, vi } from 'vitest';
 
 import { mockConsole } from '../tests/mocks/console.mock';
+import { durationRegex } from '../tests/regex/duration.regex';
 import { effectCause } from '../tests/runners/effect-cause';
 
 import { withTaggedErrorTask } from './tagged-error-with-error-ctor';
@@ -53,7 +54,7 @@ describe('tagged-error-with-error-ctor task', () => {
     expect(result).toChalkMatch(
       chalk.whiteBright(`${chalk.gray('╰')}${chalk.gray('─')} at readUser`),
     );
-    expect(result).toChalkMatch(/~ \dms/);
+    expect(result).toChalkMatch(durationRegex);
   });
 
   it('should display the stack', async () => {

@@ -3,6 +3,7 @@ import { Duration, Effect, Fiber, TestClock, TestContext } from 'effect';
 import { describe, expect, it, vi } from 'vitest';
 
 import { mockConsole } from '../tests/mocks/console.mock';
+import { durationRegex } from '../tests/regex/duration.regex';
 
 import { longRunningTask } from './long-running';
 
@@ -64,7 +65,7 @@ describe('long-running task', () => {
     expect(result).toChalkMatch(
       chalk.whiteBright(`${chalk.gray('╰')}${chalk.gray('─')} at readUser`),
     );
-    expect(result).toChalkMatch(/~ \dms/);
+    expect(result).toChalkMatch(durationRegex);
   });
 
   it('should display the stack', async () => {
