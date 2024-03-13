@@ -1,8 +1,6 @@
 import { Effect } from 'effect';
 import { readJson } from 'fs-extra';
 
-import { runPromise } from '../runners/run-promise';
-
 import { FetchError } from './errors/fetch-error';
 import { FileError } from './errors/file-error';
 import { filename } from './util/filename.effect';
@@ -43,7 +41,7 @@ const unwrapResponseTask = (response: Response) =>
     }),
   );
 
-const mainTask = Effect.withSpan('mainTask')(
+export const fromPromiseTask = Effect.withSpan('fromPromiseTask')(
   Effect.gen(function* (_) {
     yield* _(filename(__filename));
 
@@ -54,4 +52,4 @@ const mainTask = Effect.withSpan('mainTask')(
   }),
 );
 
-runPromise(mainTask);
+export default fromPromiseTask;

@@ -19,13 +19,11 @@ So using it would look like this :
 ```typescript
 import { runPromise } from 'effect-errors';
 
-(async () => {
-  await runPromise(
-    Effect.gen(function* (_) {
-      // ...
-    }),
-  );
-})();
+await runPromise(
+  Effect.gen(function* (_) {
+    // ...
+  }),
+);
 ```
 
 The fancy logging behavior is enabled if your node env is `development` or if you set `EFFECT_PRETTY_PRINT` env var to `true`.
@@ -35,7 +33,19 @@ You can also directly import the `prettyPrint` function to do whatever with it i
 ```typescript
 import { prettyPrint } from 'effect-errors';
 
-// ...
+await Effect.runPromise(
+  pipe(
+    Effect.gen(function* (_) {
+      // ...
+    }),
+    Effect.sandbox,
+    Effect.catchAll((e) => {
+      console.error(prettyPrint(e));
+
+      return Effect.fail('❌ runPromise failure') as never;
+    }),
+  ),
+);
 ```
 
 Signature is the following:

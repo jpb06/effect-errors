@@ -1,7 +1,5 @@
 import { Effect } from 'effect';
 
-import { runPromise } from '../runners/run-promise';
-
 import { UserNotFoundError } from './errors/user-not-found.error';
 import { filename } from './util/filename.effect';
 
@@ -28,14 +26,8 @@ const parallelGet = (names: string[]) =>
     }),
   );
 
-const mainTask = Effect.withSpan('mainTask')(
-  Effect.gen(function* (_) {
-    yield* _(filename(__filename));
-
-    return yield* _(parallelGet(['yolo', 'bro', 'cool']));
-  }),
+export const withParallelErrorsTask = Effect.withSpan('withParallelErrorsTask')(
+  Effect.all([filename(__filename), parallelGet(['yolo', 'bro', 'cool'])]),
 );
 
-(async () => {
-  await runPromise(mainTask);
-})();
+export default withParallelErrorsTask;
