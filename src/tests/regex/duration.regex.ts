@@ -1,1 +1,1 @@
-export const durationRegex = /~ \dms/;
+export const durationRegex = /~ \d+ms/;
