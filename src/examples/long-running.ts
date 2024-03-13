@@ -1,29 +1,18 @@
 import { Effect } from 'effect';
 import { readJson } from 'fs-extra';
 
-import { runPromise } from '../runners/run-promise';
-
 import { SchemaError } from './errors/schema-error';
 import { filename } from './util/filename.effect';
 
-const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
-
 const readUser = Effect.withSpan('readUser')(
   Effect.tryPromise({
-    try: async () => {
-      await delay(2000);
-      return readJson('cool.ts');
-    },
+    try: () => readJson('cool.ts'),
     catch: (e) => new SchemaError({ cause: e }),
   }),
 );
 
-const mainTask = Effect.withSpan('mainTask')(
-  Effect.gen(function* (_) {
-    yield* _(filename(__filename));
-
-    yield* _(readUser);
-  }),
+export const longRunningTask = Effect.withSpan('longRunningTask')(
+  Effect.all([filename(__filename), Effect.sleep('2 seconds'), readUser]),
 );
 
-runPromise(mainTask);
+export default longRunningTask;

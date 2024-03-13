@@ -1,19 +1,13 @@
 import { Effect } from 'effect';
 
-import { runPromise } from '../runners/run-promise';
-
 import { filename } from './util/filename.effect';
 
 const readUser = Effect.withSpan('readUser')(
   Effect.fail({ _tag: 'BigBadError', message: 'Oh no!' }),
 );
 
-const mainTask = Effect.withSpan('mainTask')(
-  Effect.gen(function* (_) {
-    yield* _(filename(__filename));
+export const withPlainObjectErrorTask = Effect.withSpan(
+  'withPlainObjectErrorTask',
+)(Effect.all([filename(__filename), readUser]));
 
-    yield* _(readUser);
-  }),
-);
-
-runPromise(mainTask);
+export default withPlainObjectErrorTask;

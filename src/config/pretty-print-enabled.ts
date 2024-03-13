@@ -1,6 +1,6 @@
 import { config } from 'dotenv-flow';
 
-config();
+config({ silent: true });
 
 export const prettyPrintEnabled =
   process.env.NODE_ENV === 'development' ||

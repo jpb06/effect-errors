@@ -1,8 +1,6 @@
 import { Effect } from 'effect';
 import { readJson } from 'fs-extra';
 
-import { runPromise } from '../runners/run-promise';
-
 import { SchemaError } from './errors/schema-error';
 import { filename } from './util/filename.effect';
 
@@ -15,14 +13,8 @@ const readUser = Effect.withSpan(
   }),
 );
 
-const mainTask = Effect.withSpan('mainTask')(
-  Effect.gen(function* (_) {
-    yield* _(filename(__filename));
+export const withCwdStrippingTask = Effect.withSpan(
+  '/Users/jpb06/repos/perso/effect-errors/src/examples/strip-cwd/task.ts',
+)(Effect.all([filename(__filename), readUser]));
 
-    yield* _(readUser);
-  }),
-);
-
-runPromise(mainTask, {
-  stripCwd: true,
-});
+export default withCwdStrippingTask;
