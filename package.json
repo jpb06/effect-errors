@@ -2,7 +2,7 @@
   "repository": "https://github.com/jpb06/effect-errors.git",
   "main": "index.js",
   "name": "effect-errors",
-  "version": "1.2.15",
+  "version": "1.2.16",
   "author": "jpb06 <jp.bois.06@outlook.fr>",
   "description": "A POC for errors reporting in Effect",
   "keywords": [],
