@@ -1,6 +1,6 @@
 {
   "repository": "https://github.com/jpb06/effect-errors.git",
-  "main": "dist/index.js",
+  "main": "index.js",
   "name": "effect-errors",
   "version": "1.2.14",
   "author": "jpb06 <jp.bois.06@outlook.fr>",
