@@ -27,18 +27,18 @@
     "run-examples": "bun run ./src/examples/util/run-all"
   },
   "dependencies": {
-    "@effect/schema": "^0.64.6",
-    "chalk": "^5.3.0",
+    "@effect/schema": "^0.64.8",
+    "chalk": "<5",
     "dotenv-flow": "^4.1.0",
-    "effect": "^2.4.8"
+    "effect": "^2.4.9"
   },
   "devDependencies": {
     "@stylistic/eslint-plugin": "^1.7.0",
-    "@types/eslint": "^8.56.5",
+    "@types/eslint": "^8.56.6",
     "@types/fs-extra": "^11.0.4",
-    "@types/node": "^20.11.28",
-    "@typescript-eslint/eslint-plugin": "^7.3.0",
-    "@typescript-eslint/parser": "^7.3.0",
+    "@types/node": "^20.11.30",
+    "@typescript-eslint/eslint-plugin": "^7.3.1",
+    "@typescript-eslint/parser": "^7.3.1",
     "@vitest/coverage-v8": "^1.4.0",
     "copyfiles": "^2.4.1",
     "del-cli": "^5.1.0",
