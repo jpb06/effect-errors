@@ -15,5 +15,5 @@ export const getSpanAttributes = (
     )
     .join('\r\n');
 
-  return `${`\r\n${formattedAttributes}`}`;
+  return `\r\n${formattedAttributes}`;
 };

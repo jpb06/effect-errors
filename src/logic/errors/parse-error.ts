@@ -14,7 +14,7 @@ export const parseError = (error: unknown): PrettyError => {
       prettyErrorMessage(error),
       error.stack
         ?.split('\n')
-        .filter((el) => el.match(/at (.*)/))
+        .filter((el) => /at (.*)/.exec(el)) // el.match(/at (.*)/))
         .join('\n'),
       span,
     );

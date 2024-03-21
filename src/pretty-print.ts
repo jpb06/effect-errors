@@ -44,11 +44,11 @@ export const prettyPrint = <E>(
         message =
           '💥 ' +
           (failures.length > 1
-            ? `${chalk.bgRed.whiteBright(` #${failuresIndex + 1} -`)}`
+            ? chalk.bgRed.whiteBright(` #${failuresIndex + 1} -`)
             : '') +
           message +
           spans
-            .reverse()
+            .toReversed()
             .map(({ name, attributes, status }, index) => {
               const isFirstEntry = index === 0;
               const isLastEntry = index === spans.length - 1;
@@ -69,7 +69,7 @@ export const prettyPrint = <E>(
       }
 
       if (stack) {
-        message += `\r\n${span ? '\r\n' : ''}🚨 Stacktrace\r\n${chalk.red(filterStack(stack, stripCwd))}`;
+        message += `\r\n${span ? '\r\n' : ''}🚨 Stacktrace\r\n${chalk.red(filterStack(stack, stripCwd === true))}`;
       }
 
       return message + '\r\n';

@@ -42,8 +42,6 @@ await runPromise(
 );
 ```
 
-The fancy logging behavior is enabled if your node env is `development` or if you set `EFFECT_PRETTY_PRINT` env var to `true`.
-
 You can also directly import the `prettyPrint` function to do whatever with it if you want 🤷
 
 ```typescript
@@ -71,6 +69,10 @@ const prettyPrint: <E>(cause: Cause<E>, options?: PrettyPrintOptions) => string;
 ```
 
 `PrettyPrintOptions` allows you to tweak the following:
+
+#### `enabled` - Whether pretty printing is enabled or not
+
+> default: `true`
 
 #### `stripCwd` - Whether spans and stacktrace should contain absolute or relative paths
 
