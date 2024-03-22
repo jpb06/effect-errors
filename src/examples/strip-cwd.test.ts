@@ -70,6 +70,6 @@ describe('strip-cwd task', () => {
     const result = prettyPrint(cause, { stripCwd: true });
 
     expect(result).toChalkMatch('🚨 Stacktrace');
-    expect(result).toChalkMatch(/🭳 at /);
+    expect(result).toChalkMatch(/│ at /);
   });
 });

@@ -12,7 +12,7 @@ export const filterStack = (stack: string, stripCwd: boolean) => {
     }
   }
 
-  const final = out.join('\n').replace(/ {4}at /g, '🭳 at ');
+  const final = out.join('\n').replace(/ {4}at /g, '│ at ');
 
   return stripCwd ? stripCwdPath(final) : final;
 };
