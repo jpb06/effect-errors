@@ -45,7 +45,7 @@ describe('without-spans task', () => {
     const result = prettyPrint(cause);
 
     expect(result).not.toChalkMatch(/◯/);
-    expect(result).not.toChalkMatch(/│/);
+    expect(result).not.toChalkMatch(/│ {2}/);
     expect(result).not.toChalkMatch(/├/);
     expect(result).not.toChalkMatch(/╰/);
   });
@@ -57,6 +57,6 @@ describe('without-spans task', () => {
     const result = prettyPrint(cause);
 
     expect(result).toChalkMatch('🚨 Stacktrace');
-    expect(result).toChalkMatch(/🭳 at /);
+    expect(result).toChalkMatch(/│ at /);
   });
 });

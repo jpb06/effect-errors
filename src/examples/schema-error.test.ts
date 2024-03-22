@@ -64,6 +64,6 @@ describe('schema-error task', () => {
     const result = prettyPrint(cause);
 
     expect(result).toChalkMatch('🚨 Stacktrace');
-    expect(result).toChalkMatch(/🭳 at /);
+    expect(result).toChalkMatch(/│ at /);
   });
 });
