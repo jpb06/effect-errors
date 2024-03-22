@@ -26,7 +26,7 @@ export const prettyPrint = <E>(
 
   console.error(
     `\r\n🫠  ${chalk.bold.yellowBright.underline(
-      `${failures.length} error${failures.length > 1 ? 's' : ''} occurred\n`,
+      `${failures.length} error${failures.length > 1 ? 's' : ''} occurred\r\n`,
     )}`,
   );
 
