@@ -31,10 +31,10 @@ describe('tagged-error-with-error-ctor task', () => {
     const { prettyPrint } = await import('./../pretty-print');
     const result = prettyPrint(cause);
 
-    expect(result).toChalkMatch(chalk.bgRed(' OhNo '));
+    expect(result).toChalkMatch(chalk.bgRed.whiteBright(' OhNo '));
     expect(result).toChalkMatch(
       chalk.bold.whiteBright(
-        "• Error: ENOENT: no such file or directory, open './src/examples/data/yolo.json'",
+        " • Error: ENOENT: no such file or directory, open './src/examples/data/yolo.json'",
       ),
     );
   });

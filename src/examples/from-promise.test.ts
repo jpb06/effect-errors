@@ -31,9 +31,9 @@ describe('from-promise task', () => {
     const { prettyPrint } = await import('./../pretty-print');
     const result = prettyPrint(cause);
 
-    expect(result).toChalkMatch(chalk.bgRed(' FetchError '));
+    expect(result).toChalkMatch(chalk.bgRed.whiteBright(' FetchError '));
     expect(result).toChalkMatch(
-      chalk.bold.whiteBright('• TypeError: fetch failed'),
+      chalk.bold.whiteBright(' • TypeError: fetch failed'),
     );
   });
 

@@ -31,8 +31,8 @@ describe('plain-object-error task', () => {
     const { prettyPrint } = await import('./../pretty-print');
     const result = prettyPrint(cause);
 
-    expect(result).toChalkMatch(chalk.bgRed(' BigBadError '));
-    expect(result).toChalkMatch(chalk.bold.whiteBright('• Oh no!'));
+    expect(result).toChalkMatch(chalk.bgRed.whiteBright(' BigBadError '));
+    expect(result).toChalkMatch(chalk.bold.whiteBright(' • Oh no!'));
   });
 
   it('should display spans', async () => {

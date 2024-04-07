@@ -3,22 +3,25 @@ import { Span } from 'effect/Tracer';
 
 import { PrettyError } from '../../types/pretty-error.type';
 
-import { prettyErrorMessage } from './pretty-error-message';
+import { extractErrorDetails } from './extract-error-details';
 
 const spanSymbol = Symbol.for('effect/SpanAnnotation');
 
 export const parseError = (error: unknown): PrettyError => {
   const span = (hasProperty(error, spanSymbol) && error[spanSymbol]) as Span;
+  const { message, type, isPlainString } = extractErrorDetails(error);
+
   if (error instanceof Error) {
     return new PrettyError(
-      prettyErrorMessage(error),
+      message,
       error.stack
         ?.split('\n')
-        .filter((el) => /at (.*)/.exec(el)) // el.match(/at (.*)/))
+        .filter((el) => /at (.*)/.exec(el))
         .join('\r\n'),
       span,
+      type,
     );
   }
 
-  return new PrettyError(prettyErrorMessage(error), void 0, span);
+  return new PrettyError(message, void 0, span, type, isPlainString);
 };

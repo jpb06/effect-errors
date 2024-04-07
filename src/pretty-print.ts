@@ -31,23 +31,34 @@ export const prettyPrint = <E>(
   );
 
   return failures
-    .map(({ message, stack, span }, failuresIndex) => {
-      if (span) {
-        let current: Span | ParentSpan | undefined = span;
-
-        const spans = [];
-        while (current && current._tag === 'Span') {
-          spans.push(current);
-          current = Option.getOrUndefined(current.parent);
-        }
-
-        message =
+    .map(
+      (
+        { errorType, message: errorMessage, stack, span, isPlainString },
+        failuresIndex,
+      ) => {
+        let message =
           '💥 ' +
           (failures.length > 1
             ? chalk.bgRed.whiteBright(` #${failuresIndex + 1} -`)
             : '') +
-          message +
-          spans
+          chalk.bgRed.whiteBright(` ${errorType ?? 'Unknown error'} `) +
+          chalk.bold.whiteBright(` • ${errorMessage}`) +
+          '\r\n';
+
+        if (isPlainString === true) {
+          message += `\r\n${chalk.gray('ℹ️  You used a plain string to represent a failure in the error channel (E). You should consider using tagged objects (with a _tag field), or yieldable errors such as Data.TaggedError and Schema.TaggedError for better handling experience.')}`;
+        }
+
+        if (span) {
+          let current: Span | ParentSpan | undefined = span;
+
+          const spans = [];
+          while (current && current._tag === 'Span') {
+            spans.push(current);
+            current = Option.getOrUndefined(current.parent);
+          }
+
+          message += spans
             .toReversed()
             .map(({ name, attributes, status }, index) => {
               const isFirstEntry = index === 0;
@@ -66,13 +77,18 @@ export const prettyPrint = <E>(
               );
             })
             .join('');
-      }
+        } else if (!isPlainString) {
+          message += `\r\n${chalk.gray('ℹ️  Consider using spans to improve errors reporting.\r\n')}`;
+        }
 
-      if (stack) {
-        message += `\r\n${span ? '\r\n' : ''}🚨 Stacktrace\r\n${chalk.red(filterStack(stack, stripCwd === true))}`;
-      }
+        if (stack) {
+          message += `\r\n${span ? '\r\n' : ''}🚨 Stacktrace\r\n${chalk.red(filterStack(stack, stripCwd === true))}`;
+        } else if (!isPlainString) {
+          message += `\r\n\r\n${chalk.gray('ℹ️  Consider using a yieldable error such as Data.TaggedError and Schema.TaggedError to get a stacktrace.')}`;
+        }
 
-      return message + '\r\n';
-    })
+        return message + '\r\n';
+      },
+    )
     .join('\r\n');
 };

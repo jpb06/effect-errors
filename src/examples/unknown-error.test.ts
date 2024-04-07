@@ -31,10 +31,10 @@ describe('unknown-error task', () => {
     const { prettyPrint } = await import('./../pretty-print');
     const result = prettyPrint(cause);
 
-    expect(result).toChalkMatch(chalk.bgRed(' UnknownException '));
+    expect(result).toChalkMatch(chalk.bgRed.whiteBright(' UnknownException '));
     expect(result).toChalkMatch(
       chalk.bold.whiteBright(
-        "• Error: ENOENT: no such file or directory, open 'cool.ts'",
+        " • Error: ENOENT: no such file or directory, open 'cool.ts'",
       ),
     );
   });

@@ -35,10 +35,10 @@ describe('strip-cwd task', () => {
     const { prettyPrint } = await import('./../pretty-print');
     const result = prettyPrint(cause, { stripCwd: true });
 
-    expect(result).toChalkMatch(chalk.bgRed(' SomethingBad '));
+    expect(result).toChalkMatch(chalk.bgRed.whiteBright(' SomethingBad '));
     expect(result).toChalkMatch(
       chalk.bold.whiteBright(
-        "• Error: ENOENT: no such file or directory, open 'cool.ts'",
+        " • Error: ENOENT: no such file or directory, open 'cool.ts'",
       ),
     );
   });

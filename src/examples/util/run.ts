@@ -9,8 +9,11 @@ import { runPromise } from '../../runners/run-promise';
   }
 
   const file = process.argv[2];
+  const stripCwd = process.argv[3] === 'strip';
 
   const task = await import(path.join('..', file));
 
-  await runPromise(task.default);
+  await runPromise(task.default, {
+    stripCwd,
+  });
 })();

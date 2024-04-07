@@ -31,8 +31,8 @@ describe('tagged-error-with-meta task', () => {
     const { prettyPrint } = await import('./../pretty-print');
     const result = prettyPrint(cause);
 
-    expect(result).toChalkMatch(chalk.bgRed(' WithMeta '));
-    expect(result).toChalkMatch(chalk.bold.whiteBright('• Oh no! I failed!'));
+    expect(result).toChalkMatch(chalk.bgRed.whiteBright(' WithMeta '));
+    expect(result).toChalkMatch(chalk.bold.whiteBright(' • Oh no! I failed!'));
   });
 
   it('should display spans', async () => {

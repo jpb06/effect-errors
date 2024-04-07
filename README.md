@@ -137,6 +137,45 @@ Alternatively, you _can_ use a plain object with a `_tag` and `message` attribut
 Effect.fail({ _tag: 'SucksToBeMe', message: 'Yeah...' });
 ```
 
+## ⚡ Capturing errors data
+
+You might want to apply your own logic to reported errors data; for example if you want to display errors in html. You can do so using `captureErrors`. The function has the following signature:
+
+```typescript
+type CapturedSpan = {
+  name: string;
+  attributes: ReadonlyMap<string, unknown>;
+  status: SpanStatus;
+}
+
+type CapturedError = {
+  errorType: unknown;
+  message: unknown;
+  stack?: string;
+  spans?: CapturedSpan[];
+  isPlainString?: boolean;
+}
+
+type captureErrorsFunction: <E>(cause: Cause<E>) => CapturedError[]
+```
+
+You can use `captureErrors` like so:
+
+```typescript
+import { captureErrors } from 'effect-errors';
+
+await Effect.runPromise(
+  pipe(
+    effect,
+    Effect.catchAll((e) => {
+      const data = captureErrors(e);
+
+      // ...
+    }),
+  ),
+);
+```
+
 ## ⚡ examples
 
 I wrote some examples for fun and giggles. You can run them using:
