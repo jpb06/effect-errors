@@ -4,28 +4,34 @@ import { ParentSpan, Span, SpanStatus } from 'effect/Tracer';
 
 import { captureErrorsFrom } from './logic/errors/capture-errors-from-cause';
 
-export interface CapturedSpan {
+export interface ErrorSpan {
   name: string;
   attributes: ReadonlyMap<string, unknown>;
   status: SpanStatus;
 }
 
-export interface CapturedError {
+export interface ErrorData {
   errorType: unknown;
   message: unknown;
   stack?: string;
-  spans?: CapturedSpan[];
+  spans?: ErrorSpan[];
   isPlainString?: boolean;
 }
 
-export const captureErrors = <E>(
-  cause: Cause<E>,
-): 'All fibers interrupted without errors.' | CapturedError[] => {
+export interface CapturedErrors {
+  interrupted: boolean;
+  errors: ErrorData[];
+}
+
+export const captureErrors = <E>(cause: Cause<E>): CapturedErrors => {
   if (isInterruptedOnly(cause)) {
-    return 'All fibers interrupted without errors.' as const;
+    return {
+      interrupted: true,
+      errors: [],
+    };
   }
 
-  return captureErrorsFrom<E>(cause).map(
+  const errors = captureErrorsFrom<E>(cause).map(
     ({ message, stack, span, errorType, isPlainString }) => {
       const spans = [];
 
@@ -52,4 +58,9 @@ export const captureErrors = <E>(
       };
     },
   );
+
+  return {
+    interrupted: false,
+    errors,
+  };
 };

@@ -3,6 +3,7 @@ import type { Assertion, AsymmetricMatchersContaining } from 'vitest';
 
 interface CustomMatchers<R = unknown> {
   toChalkMatch(input: string | RegExp): R;
+  toHaveAttributes(input: { key: string; value: unknown }[]): R;
 }
 
 declare module 'vitest' {
