@@ -32,17 +32,17 @@ describe('parallel-errors task', () => {
     const result = prettyPrint(cause);
 
     expect(result).toChalkMatch(
-      `${chalk.bgRed.whiteBright(' #1 -')}${chalk.bgRed(' UserNotFound ')}`,
+      `${chalk.bgRed.whiteBright(' #1 -')}${chalk.bgRed.whiteBright(' UserNotFound ')}`,
     );
     expect(result).toChalkMatch(
-      `${chalk.bgRed.whiteBright(' #2 -')}${chalk.bgRed(' UserNotFound ')}`,
+      `${chalk.bgRed.whiteBright(' #2 -')}${chalk.bgRed.whiteBright(' UserNotFound ')}`,
     );
     expect(result).toChalkMatch(
-      `${chalk.bgRed.whiteBright(' #3 -')}${chalk.bgRed(' UserNotFound ')}`,
+      `${chalk.bgRed.whiteBright(' #3 -')}${chalk.bgRed.whiteBright(' UserNotFound ')}`,
     );
 
     expect(result).toChalkMatch(
-      chalk.bold.whiteBright('• Oh no, this user does no exist!'),
+      chalk.bold.whiteBright(' • Oh no, this user does no exist!'),
     );
   });
 
