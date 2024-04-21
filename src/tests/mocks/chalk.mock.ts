@@ -1,4 +1,4 @@
-import { Chalk } from 'chalk';
+import { type Chalk } from 'chalk';
 import { vi } from 'vitest';
 import { mockDeep } from 'vitest-mock-extended';
 

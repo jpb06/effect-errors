@@ -7,7 +7,7 @@ import { effectCause } from '../tests/runners/effect-cause';
 
 import { fromPromiseTask } from './from-promise';
 
-mockConsole({
+void mockConsole({
   info: vi.fn(),
   error: vi.fn(),
 });

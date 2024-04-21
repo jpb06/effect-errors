@@ -2,7 +2,7 @@ import { Effect, pipe } from 'effect';
 
 import { prettyPrint } from '..';
 import {
-  PrettyPrintOptions,
+  type PrettyPrintOptions,
   prettyPrintOptionsDefault,
 } from '../types/pretty-print-options.type';
 
@@ -15,7 +15,7 @@ export const runSync = <A, E>(
       effect,
       Effect.sandbox,
       Effect.catchAll((e) => {
-        if (options.enabled) {
+        if (options.enabled === true) {
           console.error(prettyPrint(e, options));
 
           return Effect.fail('❌ runSync failure') as never;

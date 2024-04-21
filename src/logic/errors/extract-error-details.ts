@@ -2,7 +2,7 @@ import { isFunction } from 'effect/Function';
 import { hasProperty } from 'effect/Predicate';
 
 interface ErrorDetails {
-  isPlainString?: boolean;
+  isPlainString: boolean;
   type?: unknown;
   message: unknown;
 }
@@ -22,6 +22,7 @@ export const extractErrorDetails = (error: unknown): ErrorDetails => {
     hasProperty(error, '_tag')
   ) {
     return {
+      isPlainString: false,
       type: error._tag,
       message: error.cause,
     };
@@ -30,6 +31,7 @@ export const extractErrorDetails = (error: unknown): ErrorDetails => {
   // TaggedError with error ctor
   if (error instanceof Error && hasProperty(error, 'error')) {
     return {
+      isPlainString: false,
       type: error.name,
       message: error.error,
     };
@@ -38,6 +40,7 @@ export const extractErrorDetails = (error: unknown): ErrorDetails => {
   // Plain objects with tag attribute
   if (hasProperty(error, '_tag') && hasProperty(error, 'message')) {
     return {
+      isPlainString: false,
       type: error._tag,
       message: error.message,
     };
@@ -46,9 +49,9 @@ export const extractErrorDetails = (error: unknown): ErrorDetails => {
   // Plain objects with toString impl
   if (
     hasProperty(error, 'toString') &&
-    isFunction(error['toString']) &&
-    error['toString'] !== Object.prototype.toString &&
-    error['toString'] !== Array.prototype.toString
+    isFunction(error.toString) &&
+    error.toString !== Object.prototype.toString &&
+    error.toString !== Array.prototype.toString
   ) {
     const message = error.toString();
     const maybeWithUnderlyingType = message.split(': ');
@@ -57,13 +60,14 @@ export const extractErrorDetails = (error: unknown): ErrorDetails => {
       const [type, ...message] = maybeWithUnderlyingType;
 
       return {
+        isPlainString: false,
         type,
         message,
       };
     }
 
-    return { message };
+    return { message, isPlainString: false };
   }
 
-  return { message: `Error: ${JSON.stringify(error)}` };
+  return { message: `Error: ${JSON.stringify(error)}`, isPlainString: false };
 };

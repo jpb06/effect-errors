@@ -1,6 +1,6 @@
 import { Option } from 'effect';
-import { Cause, isInterruptedOnly } from 'effect/Cause';
-import { ParentSpan, Span, SpanStatus } from 'effect/Tracer';
+import { type Cause, isInterruptedOnly } from 'effect/Cause';
+import { type AnySpan, type Span, type SpanStatus } from 'effect/Tracer';
 
 import { captureErrorsFrom } from './logic/errors/capture-errors-from-cause';
 
@@ -15,7 +15,7 @@ export interface ErrorData {
   message: unknown;
   stack?: string;
   spans?: ErrorSpan[];
-  isPlainString?: boolean;
+  isPlainString: boolean;
 }
 
 export interface CapturedErrors {
@@ -35,10 +35,10 @@ export const captureErrors = <E>(cause: Cause<E>): CapturedErrors => {
     ({ message, stack, span, errorType, isPlainString }) => {
       const spans = [];
 
-      if (span) {
-        let current: Span | ParentSpan | undefined = span;
+      if (span !== undefined) {
+        let current: Span | AnySpan | undefined = span;
 
-        while (current && current._tag === 'Span') {
+        while (current !== undefined && current._tag === 'Span') {
           const { name, attributes, status } = current;
           spans.push({
             name,

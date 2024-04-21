@@ -153,7 +153,7 @@ export interface ErrorData {
   message: unknown;
   stack?: string;
   spans?: ErrorSpan[];
-  isPlainString?: boolean;
+  isPlainString: boolean;
 }
 
 export interface CapturedErrors {

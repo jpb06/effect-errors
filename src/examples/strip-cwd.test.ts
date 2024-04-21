@@ -8,10 +8,10 @@ import { effectCause } from '../tests/runners/effect-cause';
 
 import { withCwdStrippingTask } from './strip-cwd';
 
-mockProcess({
+void mockProcess({
   cwd: vi.fn(() => '/Users/jpb06/repos/perso/effect-errors'),
 });
-mockConsole({
+void mockConsole({
   info: vi.fn(),
   error: vi.fn(),
 });

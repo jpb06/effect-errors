@@ -7,7 +7,7 @@ import { effectCause } from '../tests/runners/effect-cause';
 
 import { withMetaTaggedErrorTask } from './tagged-error-with-meta';
 
-mockConsole({
+void mockConsole({
   info: vi.fn(),
   error: vi.fn(),
 });

@@ -12,7 +12,7 @@ const readUser = Effect.withSpan('readUser')(
     },
     TaggedErrorWithErrorCtor
   >({
-    try: () => readJson('./src/examples/data/yolo.json'),
+    try: async () => await readJson('./src/examples/data/yolo.json'),
     catch: (e) => new TaggedErrorWithErrorCtor(e),
   }),
 );

@@ -1,4 +1,4 @@
-import { Mock, vi } from 'vitest';
+import { type Mock, vi } from 'vitest';
 
 interface ProcessMockingArgs {
   cwd?: Mock;

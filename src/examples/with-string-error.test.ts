@@ -6,7 +6,7 @@ import { effectCause } from '../tests/runners/effect-cause';
 
 import { withStringErrorTask } from './with-string-error';
 
-mockConsole({
+void mockConsole({
   info: vi.fn(),
   error: vi.fn(),
 });

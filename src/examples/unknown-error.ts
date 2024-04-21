@@ -5,7 +5,7 @@ import { FetchError } from './errors/fetch-error';
 import { filename } from './util/filename.effect';
 
 const readUser = Effect.withSpan('readUser')(
-  Effect.tryPromise(() => readJson('cool.ts')),
+  Effect.tryPromise(async () => await readJson('cool.ts')),
 );
 
 const fetchTask = (userId: string) =>
@@ -15,7 +15,8 @@ const fetchTask = (userId: string) =>
     },
   })(
     Effect.tryPromise({
-      try: () => fetch(`https://yolo-bro-oh-no.org/users/${userId}`),
+      try: async () =>
+        await fetch(`https://yolo-bro-oh-no.org/users/${userId}`),
       catch: (e) => new FetchError({ cause: e }),
     }),
   );
@@ -23,7 +24,7 @@ const fetchTask = (userId: string) =>
 const unwrapResponseTask = (response: Response) =>
   Effect.withSpan('unwrapFetchUserResponse')(
     Effect.tryPromise({
-      try: () => response.json(),
+      try: async () => await response.json(),
       catch: (e) => new FetchError({ cause: e }),
     }),
   );
@@ -33,7 +34,7 @@ export const unknownErrorTask = Effect.withSpan('unknownErrorTask')(
     yield* _(filename(__filename));
 
     const { id } = yield* _(readUser);
-    const response = yield* _(fetchTask(id));
+    const response = yield* _(fetchTask(id as never));
 
     return yield* _(unwrapResponseTask(response));
   }),

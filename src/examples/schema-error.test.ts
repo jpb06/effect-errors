@@ -7,7 +7,7 @@ import { effectCause } from '../tests/runners/effect-cause';
 
 import { withSchemaErrorTask } from './schema-error';
 
-mockConsole({
+void mockConsole({
   info: vi.fn(),
   error: vi.fn(),
 });

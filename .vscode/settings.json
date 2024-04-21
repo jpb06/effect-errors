@@ -1,9 +1,8 @@
 {
   "eslint.run": "onSave",
+  "eslint.experimental.useFlatConfig": true,
   "editor.formatOnSave": true,
-  "editor.codeActionsOnSave": {
-    "source.fixAll": "explicit"
-  },
+  "editor.codeActionsOnSave": ["source.formatDocument", "source.fixAll.eslint"],
   "editor.tabSize": 2,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "[shellscript]": {

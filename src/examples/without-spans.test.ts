@@ -6,7 +6,7 @@ import { effectCause } from '../tests/runners/effect-cause';
 
 import { withoutSpansTask } from './without-spans';
 
-mockConsole({
+void mockConsole({
   info: vi.fn(),
   error: vi.fn(),
 });

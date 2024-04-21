@@ -2,7 +2,7 @@ import path from 'path';
 
 import { runPromise } from '../../runners/run-promise';
 
-(async () => {
+void (async () => {
   if (process.argv.length === 2) {
     console.error('Expected at least one argument!');
     process.exit(1);
@@ -13,7 +13,7 @@ import { runPromise } from '../../runners/run-promise';
 
   const task = await import(path.join('..', file));
 
-  await runPromise(task.default, {
+  await runPromise(task.default as never, {
     stripCwd,
   });
 })();

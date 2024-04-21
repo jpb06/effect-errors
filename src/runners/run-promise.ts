@@ -2,15 +2,15 @@ import { Effect, pipe } from 'effect';
 
 import { prettyPrint } from '..';
 import {
-  PrettyPrintOptions,
+  type PrettyPrintOptions,
   prettyPrintOptionsDefault,
 } from '../types/pretty-print-options.type';
 
-export const runPromise = <A, E>(
+export const runPromise = async <A, E>(
   effect: Effect.Effect<A, E>,
   options: PrettyPrintOptions = prettyPrintOptionsDefault,
 ): Promise<A> =>
-  Effect.runPromise(
+  await Effect.runPromise(
     pipe(
       effect,
       Effect.sandbox,
