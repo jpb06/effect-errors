@@ -8,7 +8,7 @@ const readUser = Effect.withSpan(
   '/Users/jpb06/repos/perso/effect-errors/src/examples/strip-cwd.ts',
 )(
   Effect.tryPromise({
-    try: () => readJson('cool.ts'),
+    try: async () => await readJson('cool.ts'),
     catch: (e) => new SchemaError({ cause: e }),
   }),
 );

@@ -6,7 +6,7 @@ import { filename } from './util/filename.effect';
 
 const readUser = Effect.withSpan('readUser')(
   Effect.tryPromise({
-    try: () => readJson('cool.ts'),
+    try: async () => await readJson('cool.ts'),
     catch: (e) => new SchemaError({ cause: e }),
   }),
 );

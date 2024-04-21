@@ -7,7 +7,7 @@ import { durationRegex } from '../tests/regex/duration.regex';
 
 import { longRunningTask } from './long-running';
 
-mockConsole({
+void mockConsole({
   info: vi.fn(),
   error: vi.fn(),
 });

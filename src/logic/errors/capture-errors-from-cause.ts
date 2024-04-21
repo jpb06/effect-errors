@@ -1,11 +1,11 @@
-import { Cause, reduceWithContext } from 'effect/Cause';
+import { type Cause, reduceWithContext } from 'effect/Cause';
 
-import { PrettyError } from '../../types/pretty-error.type';
+import { type PrettyError } from '../../types/pretty-error.type';
 
 import { parseError } from './parse-error';
 
 export const captureErrorsFrom = <E>(cause: Cause<E>): readonly PrettyError[] =>
-  reduceWithContext(cause, void 0, {
+  reduceWithContext(cause, undefined, {
     emptyCase: (): readonly PrettyError[] => [],
     dieCase: (_, unknownError) => [parseError(unknownError)],
     failCase: (_, error) => [parseError(error)],

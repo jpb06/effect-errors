@@ -4,7 +4,7 @@ import { readdir } from 'fs-extra';
 
 import { runPromise } from '../..';
 
-(async () => {
+void (async () => {
   const files = await readdir('./src/examples');
   for (const file of files) {
     if (
@@ -15,8 +15,7 @@ import { runPromise } from '../..';
       const task = await import(path.join('..', file));
 
       try {
-        await runPromise(task.default);
-        // eslint-disable-next-line no-empty
+        await runPromise(task.default as never);
       } catch (e) {}
     }
   }

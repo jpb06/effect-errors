@@ -3,7 +3,7 @@ import { expect } from 'vitest';
 export const spanAttributesMatcher = async () => {
   expect.extend({
     toHaveAttributes(received, expected) {
-      if (received instanceof Map === false) {
+      if (!(received instanceof Map)) {
         return {
           pass: false,
           message: () => `Expecting an instance of Map as received input`,

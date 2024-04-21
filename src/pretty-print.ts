@@ -1,7 +1,7 @@
 import chalk from 'chalk';
 import { Option } from 'effect';
-import { Cause, isInterruptedOnly } from 'effect/Cause';
-import { ParentSpan, Span } from 'effect/Tracer';
+import { type Cause, isInterruptedOnly } from 'effect/Cause';
+import { type AnySpan, type Span } from 'effect/Tracer';
 
 import { captureErrorsFrom } from './logic/errors/capture-errors-from-cause';
 import { getSpanAttributes } from './logic/spans/get-span-attributes';
@@ -10,7 +10,7 @@ import { spanStackTrailingChar } from './logic/spans/spans-stack-trailing-char';
 import { filterStack } from './logic/stack/filter-stack';
 import { stripCwdPath } from './logic/strip-cwd-path';
 import {
-  PrettyPrintOptions,
+  type PrettyPrintOptions,
   prettyPrintOptionsDefault,
 } from './types/pretty-print-options.type';
 
@@ -41,19 +41,21 @@ export const prettyPrint = <E>(
           (failures.length > 1
             ? chalk.bgRed.whiteBright(` #${failuresIndex + 1} -`)
             : '') +
-          chalk.bgRed.whiteBright(` ${errorType ?? 'Unknown error'} `) +
-          chalk.bold.whiteBright(` • ${errorMessage}`) +
+          chalk.bgRed.whiteBright(
+            ` ${(errorType as string | undefined) ?? 'Unknown error'} `,
+          ) +
+          chalk.bold.whiteBright(` • ${errorMessage as string}`) +
           '\r\n';
 
-        if (isPlainString === true) {
+        if (isPlainString) {
           message += `\r\n${chalk.gray('ℹ️  You used a plain string to represent a failure in the error channel (E). You should consider using tagged objects (with a _tag field), or yieldable errors such as Data.TaggedError and Schema.TaggedError for better handling experience.')}`;
         }
 
-        if (span) {
-          let current: Span | ParentSpan | undefined = span;
+        if (span !== undefined) {
+          let current: Span | AnySpan | undefined = span;
 
           const spans = [];
-          while (current && current._tag === 'Span') {
+          while (current !== undefined && current._tag === 'Span') {
             spans.push(current);
             current = Option.getOrUndefined(current.parent);
           }
@@ -64,7 +66,7 @@ export const prettyPrint = <E>(
               const isFirstEntry = index === 0;
               const isLastEntry = index === spans.length - 1;
 
-              const filePath = ` at ${stripCwd ? stripCwdPath(name) : name}`;
+              const filePath = ` at ${stripCwd !== undefined ? stripCwdPath(name) : name}`;
 
               return chalk.whiteBright(
                 (isFirstEntry ? `\r\n${chalk.gray('◯')}` : '') +
@@ -81,8 +83,8 @@ export const prettyPrint = <E>(
           message += `\r\n${chalk.gray('ℹ️  Consider using spans to improve errors reporting.\r\n')}`;
         }
 
-        if (stack) {
-          message += `\r\n${span ? '\r\n' : ''}🚨 Stacktrace\r\n${chalk.red(filterStack(stack, stripCwd === true))}`;
+        if (stack !== undefined) {
+          message += `\r\n${span !== undefined ? '\r\n' : ''}🚨 Stacktrace\r\n${chalk.red(filterStack(stack, stripCwd === true))}`;
         } else if (!isPlainString) {
           message += `\r\n\r\n${chalk.gray('ℹ️  Consider using a yieldable error such as Data.TaggedError and Schema.TaggedError to get a stacktrace.')}`;
         }
