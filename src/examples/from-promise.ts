@@ -43,13 +43,13 @@ const unwrapResponseTask = (response: Response) =>
   );
 
 export const fromPromiseTask = Effect.withSpan('fromPromiseTask')(
-  Effect.gen(function* (_) {
-    yield* _(filename(__filename));
+  Effect.gen(function* () {
+    yield* filename(__filename);
 
-    const { id } = yield* _(readUser);
-    const response = yield* _(fetchTask(id));
+    const { id } = yield* readUser;
+    const response = yield* fetchTask(id);
 
-    return yield* _(unwrapResponseTask(response));
+    return yield* unwrapResponseTask(response);
   }),
 );
 

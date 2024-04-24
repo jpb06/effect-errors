@@ -1,5 +1,5 @@
 import chalk from 'chalk';
-import { Duration, Effect, Fiber, TestClock, TestContext } from 'effect';
+import { Duration, Effect, Fiber, pipe, TestClock, TestContext } from 'effect';
 import { describe, expect, it, vi } from 'vitest';
 
 import { mockConsole } from '../tests/mocks/console.mock';
@@ -13,11 +13,11 @@ void mockConsole({
 });
 
 describe('long-running task', () => {
-  const effect = Effect.gen(function* (_) {
-    const f = yield* _(longRunningTask, Effect.fork);
-    yield* _(TestClock.adjust(Duration.seconds(2)));
+  const effect = Effect.gen(function* () {
+    const f = yield* pipe(longRunningTask, Effect.fork);
+    yield* TestClock.adjust(Duration.seconds(2));
 
-    return yield* _(Fiber.join(f));
+    return yield* Fiber.join(f);
   }).pipe(
     Effect.catchAllCause((e) => Effect.fail(e)),
     Effect.flip,
