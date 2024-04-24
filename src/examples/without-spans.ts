@@ -22,13 +22,13 @@ const unwrapResponseTask = (response: Response) =>
     catch: (e) => new FetchError({ cause: e }),
   });
 
-export const withoutSpansTask = Effect.gen(function* (_) {
-  yield* _(filename(__filename));
+export const withoutSpansTask = Effect.gen(function* () {
+  yield* filename(__filename);
 
-  const { id } = yield* _(readUser);
-  const response = yield* _(fetchTask(id as never));
+  const { id } = yield* readUser;
+  const response = yield* fetchTask(id as never);
 
-  return yield* _(unwrapResponseTask(response));
+  return yield* unwrapResponseTask(response);
 });
 
 export default withoutSpansTask;

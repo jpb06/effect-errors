@@ -36,7 +36,7 @@ So using it would look like this :
 import { runPromise } from 'effect-errors';
 
 await runPromise(
-  Effect.gen(function* (_) {
+  Effect.gen(function* () {
     // ...
   }),
 );
@@ -49,7 +49,7 @@ import { prettyPrint } from 'effect-errors';
 
 await Effect.runPromise(
   pipe(
-    Effect.gen(function* (_) {
+    Effect.gen(function* () {
       // ...
     }),
     Effect.sandbox,
