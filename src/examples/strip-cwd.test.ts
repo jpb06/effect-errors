@@ -21,7 +21,7 @@ describe('strip-cwd task', () => {
     const cause = await effectCause(withCwdStrippingTask);
 
     const { prettyPrint } = await import('./../pretty-print');
-    prettyPrint(cause, { stripCwd: true });
+    prettyPrint(cause, { stripCwd: true, reverseSpans: true });
 
     expect(console.error).toHaveBeenCalledTimes(1);
     expect(vi.mocked(console.error).mock.calls[0][0]).toChalkMatch(
@@ -33,7 +33,7 @@ describe('strip-cwd task', () => {
     const cause = await effectCause(withCwdStrippingTask);
 
     const { prettyPrint } = await import('./../pretty-print');
-    const result = prettyPrint(cause, { stripCwd: true });
+    const result = prettyPrint(cause, { stripCwd: true, reverseSpans: true });
 
     expect(result).toChalkMatch(chalk.bgRed.whiteBright(' SomethingBad '));
     expect(result).toChalkMatch(
@@ -47,7 +47,7 @@ describe('strip-cwd task', () => {
     const cause = await effectCause(withCwdStrippingTask);
 
     const { prettyPrint } = await import('./../pretty-print');
-    const result = prettyPrint(cause, { stripCwd: true });
+    const result = prettyPrint(cause, { stripCwd: true, reverseSpans: true });
 
     expect(result).toChalkMatch(chalk.gray('◯'));
     expect(result).toChalkMatch(
@@ -67,7 +67,7 @@ describe('strip-cwd task', () => {
     const cause = await effectCause(withCwdStrippingTask);
 
     const { prettyPrint } = await import('./../pretty-print');
-    const result = prettyPrint(cause, { stripCwd: true });
+    const result = prettyPrint(cause, { stripCwd: true, reverseSpans: true });
 
     expect(result).toChalkMatch('🚨 Stacktrace');
     expect(result).toChalkMatch(/│ at /);

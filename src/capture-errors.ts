@@ -23,7 +23,16 @@ export interface CapturedErrors {
   errors: ErrorData[];
 }
 
-export const captureErrors = <E>(cause: Cause<E>): CapturedErrors => {
+export interface CaptureErrorsOptions {
+  reverseSpans: boolean;
+}
+
+export const captureErrors = <E>(
+  cause: Cause<E>,
+  { reverseSpans }: CaptureErrorsOptions = {
+    reverseSpans: true,
+  },
+): CapturedErrors => {
   if (isInterruptedOnly(cause)) {
     return {
       interrupted: true,
@@ -53,7 +62,7 @@ export const captureErrors = <E>(cause: Cause<E>): CapturedErrors => {
         errorType,
         message,
         stack,
-        spans,
+        spans: reverseSpans ? spans.toReversed() : spans,
         isPlainString,
       };
     },

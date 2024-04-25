@@ -78,6 +78,10 @@ const prettyPrint: <E>(cause: Cause<E>, options?: PrettyPrintOptions) => string;
 
 > default: `false` (absolute paths)
 
+#### `reverseSpans` - Whether spans order should reversed (entry point first instead of inner callee first)
+
+> default: `true` (entry point first)
+
 ## ⚡ How should I raise errors?
 
 The best way is to use either `SchemaError` or `TaggedError`.
@@ -161,7 +165,11 @@ export interface CapturedErrors {
   errors: ErrorData[];
 }
 
-type captureErrorsFunction: <E>(cause: Cause<E>) => CapturedErrors
+export interface CaptureErrorsOptions {
+  reverseSpans: boolean;
+}
+
+type captureErrorsFunction: <E>(cause: Cause<E>, options: CaptureErrorsOptions) => CapturedErrors
 ```
 
 You can use `captureErrors` like so:

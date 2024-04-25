@@ -14,7 +14,7 @@ describe('captureErrors function', () => {
   it('should capture errors from promises', async () => {
     const cause = await effectCause(fromPromiseTask);
 
-    const result = captureErrors(cause);
+    const result = captureErrors(cause, { reverseSpans: false });
 
     expect(result.interrupted).toBe(false);
     expect(result.errors).toHaveLength(1);
@@ -44,7 +44,7 @@ describe('captureErrors function', () => {
   it('should capture parallel errors', async () => {
     const cause = await effectCause(withParallelErrorsTask);
 
-    const result = captureErrors(cause);
+    const result = captureErrors(cause, { reverseSpans: false });
 
     expect(result.interrupted).toBe(false);
     expect(result.errors).toHaveLength(3);

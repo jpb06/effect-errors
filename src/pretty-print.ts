@@ -16,7 +16,7 @@ import {
 
 export const prettyPrint = <E>(
   cause: Cause<E>,
-  { stripCwd }: PrettyPrintOptions = prettyPrintOptionsDefault,
+  { stripCwd, reverseSpans }: PrettyPrintOptions = prettyPrintOptionsDefault,
 ): string => {
   if (isInterruptedOnly(cause)) {
     return 'All fibers interrupted without errors.';
@@ -60,8 +60,10 @@ export const prettyPrint = <E>(
             current = Option.getOrUndefined(current.parent);
           }
 
-          message += spans
-            .toReversed()
+          const orderedSpans =
+            reverseSpans === true ? spans.toReversed() : spans;
+
+          message += orderedSpans
             .map(({ name, attributes, status }, index) => {
               const isFirstEntry = index === 0;
               const isLastEntry = index === spans.length - 1;
