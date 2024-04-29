@@ -25,8 +25,8 @@ export interface CapturedErrors {
 }
 
 export interface CaptureErrorsOptions {
-  reverseSpans: boolean;
-  stripCwd: boolean;
+  reverseSpans?: boolean;
+  stripCwd?: boolean;
 }
 
 export const captureErrors = <E>(
@@ -63,14 +63,14 @@ export const captureErrors = <E>(
 
       let stack;
       if (maybeStack !== undefined) {
-        stack = stripCwd ? stripCwdPath(maybeStack) : maybeStack;
+        stack = stripCwd === true ? stripCwdPath(maybeStack) : maybeStack;
       }
 
       return {
         errorType,
         message,
         stack,
-        spans: reverseSpans ? spans.toReversed() : spans,
+        spans: reverseSpans === true ? spans.toReversed() : spans,
         isPlainString,
       };
     },
