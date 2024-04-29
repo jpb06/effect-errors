@@ -166,8 +166,8 @@ export interface CapturedErrors {
 }
 
 export interface CaptureErrorsOptions {
-  reverseSpans: boolean;
-  stripCwd: boolean;
+  reverseSpans?: boolean;
+  stripCwd?: boolean;
 }
 
 type captureErrorsFunction: <E>(cause: Cause<E>, options: CaptureErrorsOptions) => CapturedErrors
