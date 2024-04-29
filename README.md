@@ -167,6 +167,7 @@ export interface CapturedErrors {
 
 export interface CaptureErrorsOptions {
   reverseSpans: boolean;
+  stripCwd: boolean;
 }
 
 type captureErrorsFunction: <E>(cause: Cause<E>, options: CaptureErrorsOptions) => CapturedErrors
@@ -188,6 +189,8 @@ await Effect.runPromise(
   ),
 );
 ```
+
+![alt text](./docs/remix-example.png)
 
 ## ⚡ examples
 
