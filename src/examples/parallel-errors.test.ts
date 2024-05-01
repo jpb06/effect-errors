@@ -21,7 +21,7 @@ describe('parallel-errors task', () => {
 
     expect(console.error).toHaveBeenCalledTimes(1);
     expect(vi.mocked(console.error).mock.calls[0][0]).toChalkMatch(
-      chalk.bold.yellowBright.underline('3 errors occurred'),
+      chalk.bold.yellowBright.underline('3 errors occured'),
     );
   });
 

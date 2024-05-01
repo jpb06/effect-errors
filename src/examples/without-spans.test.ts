@@ -20,7 +20,7 @@ describe('without-spans task', () => {
 
     expect(console.error).toHaveBeenCalledTimes(1);
     expect(vi.mocked(console.error).mock.calls[0][0]).toChalkMatch(
-      chalk.bold.yellowBright.underline('1 error occurred'),
+      chalk.bold.yellowBright.underline('1 error occured'),
     );
   });
 
