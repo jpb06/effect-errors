@@ -65,5 +65,8 @@ describe('tagged-error-with-error-ctor task', () => {
 
     expect(result).toChalkMatch('🚨 Node Stacktrace');
     expect(result).toChalkMatch(/│ at /);
+
+    expect(result).toChalkMatch('🚨 Effect Stacktrace');
+    expect(result).toChalkMatch(/│ at \//);
   });
 });

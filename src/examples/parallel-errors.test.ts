@@ -97,5 +97,9 @@ describe('parallel-errors task', () => {
 
     expect(result).toChalkMatch('🚨 Node Stacktrace');
     expect(result).toChalkMatch(/│ at /);
+
+    expect(result).toChalkMatch('🚨 Effect Stacktrace');
+    expect(result).toChalkMatch(/│ at parallelGet/);
+    expect(result).toChalkMatch(/│ at readUser/);
   });
 });
