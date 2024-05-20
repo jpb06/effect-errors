@@ -27,13 +27,13 @@
     "run-examples": "bun run ./src/examples/util/run-all"
   },
   "dependencies": {
-    "@effect/schema": "^0.67.3",
+    "@effect/schema": "^0.67.9",
     "chalk": "<5",
-    "effect": "^3.1.5"
+    "effect": "^3.2.1"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "^3.0.2",
-    "@eslint/js": "^9.2.0",
+    "@eslint/eslintrc": "^3.1.0",
+    "@eslint/js": "^9.3.0",
     "@stylistic/eslint-plugin": "^2.1.0",
     "@stylistic/eslint-plugin-ts": "^2.1.0",
     "@types/eslint": "^8.56.10",
@@ -44,7 +44,7 @@
     "@vitest/coverage-v8": "^1.6.0",
     "copyfiles": "^2.4.1",
     "del-cli": "^5.1.0",
-    "eslint": "^9.2.0",
+    "eslint": "^9.3.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-config-standard-with-typescript": "^43.0.1",
     "eslint-import-resolver-typescript": "^3.6.1",
@@ -55,7 +55,7 @@
     "eslint-plugin-promise": "^6.1.1",
     "eslint-plugin-vitest": "^0.5.4",
     "fs-extra": "^11.2.0",
-    "globals": "^15.2.0",
+    "globals": "^15.3.0",
     "prettier": "^3.2.5",
     "readme-package-icons": "^1.1.14",
     "typescript": "*",
