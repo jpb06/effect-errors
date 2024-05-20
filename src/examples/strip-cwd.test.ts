@@ -69,7 +69,9 @@ describe('strip-cwd task', () => {
     const { prettyPrint } = await import('./../pretty-print');
     const result = prettyPrint(cause, { stripCwd: true, reverseSpans: true });
 
-    expect(result).toChalkMatch('🚨 Stacktrace');
+    expect(result).toChalkMatch('🚨 Node Stacktrace');
     expect(result).toChalkMatch(/│ at /);
+
+    expect(result).toChalkMatch('🚨 Effect Stacktrace');
   });
 });

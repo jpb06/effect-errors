@@ -3,6 +3,7 @@ import { type Cause, isInterruptedOnly } from 'effect/Cause';
 import { type AnySpan, type Span, type SpanStatus } from 'effect/Tracer';
 
 import { captureErrorsFrom } from './logic/errors/capture-errors-from-cause';
+import { splitSpansAttributesByTypes } from './logic/spans/split-spans-attributes-by-type';
 import { stripCwdPath } from './logic/strip-cwd-path';
 
 export interface ErrorSpan {
@@ -15,6 +16,7 @@ export interface ErrorData {
   errorType: unknown;
   message: unknown;
   stack?: string;
+  effectStacktrace?: string;
   spans?: ErrorSpan[];
   isPlainString: boolean;
 }
@@ -45,13 +47,20 @@ export const captureErrors = <E>(
 
   const errors = captureErrorsFrom<E>(cause).map(
     ({ message, stack: maybeStack, span, errorType, isPlainString }) => {
+      const effectStacktrace: string[] = [];
       const spans = [];
 
       if (span !== undefined) {
         let current: Span | AnySpan | undefined = span;
 
         while (current !== undefined && current._tag === 'Span') {
-          const { name, attributes, status } = current;
+          const { name, attributes: allAttributes, status } = current;
+
+          const { attributes, stacktrace } =
+            splitSpansAttributesByTypes(allAttributes);
+
+          effectStacktrace.push(...stacktrace);
+
           spans.push({
             name,
             attributes,
@@ -70,6 +79,10 @@ export const captureErrors = <E>(
         errorType,
         message,
         stack,
+        effectStacktrace:
+          effectStacktrace.length > 0
+            ? effectStacktrace.join('\r\n')
+            : undefined,
         spans: reverseSpans === true ? spans.toReversed() : spans,
         isPlainString,
       };

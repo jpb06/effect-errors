@@ -146,31 +146,35 @@ Effect.fail({ _tag: 'SucksToBeMe', message: 'Yeah...' });
 You might want to apply your own logic to reported errors data; for example if you want to display errors in html. You can do so using `captureErrors`. The function has the following signature:
 
 ```typescript
-export interface ErrorSpan {
+interface ErrorSpan {
   name: string;
   attributes: ReadonlyMap<string, unknown>;
   status: SpanStatus;
 }
 
-export interface ErrorData {
+interface ErrorData {
   errorType: unknown;
   message: unknown;
   stack?: string;
+  effectStacktrace?: string;
   spans?: ErrorSpan[];
   isPlainString: boolean;
 }
 
-export interface CapturedErrors {
+interface CapturedErrors {
   interrupted: boolean;
   errors: ErrorData[];
 }
 
-export interface CaptureErrorsOptions {
+interface CaptureErrorsOptions {
   reverseSpans?: boolean;
   stripCwd?: boolean;
 }
 
-type captureErrorsFunction: <E>(cause: Cause<E>, options: CaptureErrorsOptions) => CapturedErrors
+const captureErrors: <E>(
+  cause: Cause<E>,
+  { reverseSpans, stripCwd }?: CaptureErrorsOptions,
+) => CapturedErrors;
 ```
 
 You can use `captureErrors` like so:
