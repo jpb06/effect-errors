@@ -30,7 +30,7 @@ const flatConfig = [
   ...tseslint.configs.recommended,
   prettierConfig,
   {
-    files: ['**/*.ts'],
+    files: ['**/*.ts', '**/*.mts'],
     plugins: {
       import: importPlugin,
       '@stylistic/ts': stylisticTsPlugin,

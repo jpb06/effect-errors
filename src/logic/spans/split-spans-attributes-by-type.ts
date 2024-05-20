@@ -22,6 +22,6 @@ export const splitSpansAttributesByTypes = (
     },
     {
       stacktrace: [],
-      attributes: new Map<string, unknown>(),
+      attributes: new Map(),
     },
   );

@@ -48,7 +48,9 @@ describe('captureErrors function', () => {
 
     expect(stack).not.toHaveLength(0);
 
-    expect(effectStacktrace).toContain('at fetchTask');
+    expect(effectStacktrace).toEqual(
+      expect.arrayContaining([expect.stringContaining('at fetchTask')]),
+    );
   });
 
   // eslint-disable-next-line complexity
@@ -86,8 +88,12 @@ describe('captureErrors function', () => {
     expect(firstError.spans?.[2].name).toBe('withParallelErrorsTask');
     expect(firstError.spans?.[2].attributes).toHaveAttributes([]);
 
-    expect(firstError.effectStacktrace).toContain('at readUser');
-    expect(firstError.effectStacktrace).toContain('at parallelGet');
+    expect(firstError.effectStacktrace).toEqual(
+      expect.arrayContaining([
+        expect.stringContaining('at readUser'),
+        expect.stringContaining('at parallelGet'),
+      ]),
+    );
     // --
 
     const secondError = result.errors[1];
@@ -115,8 +121,12 @@ describe('captureErrors function', () => {
     expect(secondError.spans?.[2].name).toBe('withParallelErrorsTask');
     expect(secondError.spans?.[2].attributes).toHaveAttributes([]);
 
-    expect(secondError.effectStacktrace).toContain('at readUser');
-    expect(secondError.effectStacktrace).toContain('at parallelGet');
+    expect(secondError.effectStacktrace).toEqual(
+      expect.arrayContaining([
+        expect.stringContaining('at readUser'),
+        expect.stringContaining('at parallelGet'),
+      ]),
+    );
     // --
 
     const thirdError = result.errors[2];
@@ -142,7 +152,11 @@ describe('captureErrors function', () => {
     expect(thirdError.spans?.[2].name).toBe('withParallelErrorsTask');
     expect(thirdError.spans?.[2].attributes).toHaveAttributes([]);
 
-    expect(thirdError.effectStacktrace).toContain('at readUser');
-    expect(thirdError.effectStacktrace).toContain('at parallelGet');
+    expect(thirdError.effectStacktrace).toEqual(
+      expect.arrayContaining([
+        expect.stringContaining('at readUser'),
+        expect.stringContaining('at parallelGet'),
+      ]),
+    );
   });
 });
