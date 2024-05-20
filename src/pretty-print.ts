@@ -96,7 +96,7 @@ export const prettyPrint = <E>(
 
         if (spanAttributesStack.length > 0) {
           const cleanedStack = `│ ${filterStack(spanAttributesStack.join('\r\n│ '), stripCwd === true)}`;
-          message += `\r\n🚨 Effect Stacktrace\r\n${chalk.red(cleanedStack)}`;
+          message += `\r\n${span !== undefined ? '\r\n' : ''}🚨 Effect Stacktrace\r\n${chalk.red(cleanedStack)}`;
         }
 
         if (stack !== undefined) {
