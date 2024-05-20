@@ -5,14 +5,13 @@ import { FetchError } from './errors/fetch-error';
 import { FileError } from './errors/file-error';
 import { filename } from './util/filename.effect';
 
+interface User {
+  id: string;
+  name: string;
+}
+
 const readUser = Effect.withSpan('readUser')(
-  Effect.tryPromise<
-    {
-      id: string;
-      name: string;
-    },
-    FileError
-  >({
+  Effect.tryPromise<User, FileError>({
     try: async () => await readJson('./src/examples/data/user.json'),
     catch: (e) => new FileError({ cause: e }),
   }),
