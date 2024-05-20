@@ -9,6 +9,7 @@ export const getSpanAttributes = (
   }
 
   const formattedAttributes = Array.from(attributes.entries())
+    .filter(([key]) => key !== 'code.stacktrace')
     .map(
       ([key, value]) =>
         `${isLastEntry ? ' ' : chalk.gray('│')}     ${chalk.blue(key)}${chalk.gray(':')} ${value as string}`,

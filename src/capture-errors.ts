@@ -52,9 +52,16 @@ export const captureErrors = <E>(
 
         while (current !== undefined && current._tag === 'Span') {
           const { name, attributes, status } = current;
+
+          const attributesWithoutCodeStacktrace = new Map(
+            Array.from(attributes.entries()).filter(
+              ([key]) => key !== 'code.stacktrace',
+            ),
+          );
+
           spans.push({
             name,
-            attributes,
+            attributes: attributesWithoutCodeStacktrace,
             status,
           });
           current = Option.getOrUndefined(current.parent);
