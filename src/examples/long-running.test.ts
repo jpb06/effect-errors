@@ -74,7 +74,7 @@ describe('long-running task', () => {
     const { prettyPrint } = await import('./../pretty-print');
     const result = prettyPrint(cause);
 
-    expect(result).toChalkMatch('🚨 Stacktrace');
+    expect(result).toChalkMatch('🚨 Node Stacktrace');
     expect(result).toChalkMatch(/│ at /);
   });
 });

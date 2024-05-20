@@ -22,8 +22,14 @@ describe('captureErrors function', () => {
     expect(result.interrupted).toBe(false);
     expect(result.errors).toHaveLength(1);
 
-    const { errorType, isPlainString, message, spans, stack } =
-      result.errors[0];
+    const {
+      errorType,
+      isPlainString,
+      message,
+      spans,
+      effectStacktrace,
+      stack,
+    } = result.errors[0];
     expect(errorType).toBe('FetchError');
     expect(isPlainString).toBe(false);
     expect((message as { toString: () => string }).toString()).toStrictEqual(
@@ -41,6 +47,8 @@ describe('captureErrors function', () => {
     expect(spans?.[1].attributes).toHaveAttributes([]);
 
     expect(stack).not.toHaveLength(0);
+
+    expect(effectStacktrace).toContain('at fetchTask');
   });
 
   // eslint-disable-next-line complexity
@@ -78,6 +86,8 @@ describe('captureErrors function', () => {
     expect(firstError.spans?.[2].name).toBe('withParallelErrorsTask');
     expect(firstError.spans?.[2].attributes).toHaveAttributes([]);
 
+    expect(firstError.effectStacktrace).toContain('at readUser');
+    expect(firstError.effectStacktrace).toContain('at parallelGet');
     // --
 
     const secondError = result.errors[1];
@@ -105,6 +115,8 @@ describe('captureErrors function', () => {
     expect(secondError.spans?.[2].name).toBe('withParallelErrorsTask');
     expect(secondError.spans?.[2].attributes).toHaveAttributes([]);
 
+    expect(secondError.effectStacktrace).toContain('at readUser');
+    expect(secondError.effectStacktrace).toContain('at parallelGet');
     // --
 
     const thirdError = result.errors[2];
@@ -129,5 +141,8 @@ describe('captureErrors function', () => {
     ]);
     expect(thirdError.spans?.[2].name).toBe('withParallelErrorsTask');
     expect(thirdError.spans?.[2].attributes).toHaveAttributes([]);
+
+    expect(thirdError.effectStacktrace).toContain('at readUser');
+    expect(thirdError.effectStacktrace).toContain('at parallelGet');
   });
 });

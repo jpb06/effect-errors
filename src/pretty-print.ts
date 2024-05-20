@@ -51,6 +51,8 @@ export const prettyPrint = <E>(
           message += `\r\n${chalk.gray('ℹ️  You used a plain string to represent a failure in the error channel (E). You should consider using tagged objects (with a _tag field), or yieldable errors such as Data.TaggedError and Schema.TaggedError for better handling experience.')}`;
         }
 
+        const spanAttributesStack: string[] = [];
+
         if (span !== undefined) {
           let current: Span | AnySpan | undefined = span;
 
@@ -70,6 +72,13 @@ export const prettyPrint = <E>(
 
               const filePath = ` at ${stripCwd !== undefined ? stripCwdPath(name) : name}`;
 
+              const { formattedAttributes, stack } = getSpanAttributes(
+                attributes,
+                isLastEntry,
+              );
+
+              spanAttributesStack.push(...stack);
+
               return chalk.whiteBright(
                 (isFirstEntry ? `\r\n${chalk.gray('◯')}` : '') +
                   '\r\n' +
@@ -77,7 +86,7 @@ export const prettyPrint = <E>(
                   chalk.gray('─') +
                   filePath +
                   getSpanDuration(status, isLastEntry) +
-                  getSpanAttributes(attributes, isLastEntry),
+                  formattedAttributes,
               );
             })
             .join('');
@@ -85,8 +94,12 @@ export const prettyPrint = <E>(
           message += `\r\n${chalk.gray('ℹ️  Consider using spans to improve errors reporting.\r\n')}`;
         }
 
+        if (spanAttributesStack.length > 0) {
+          message += `\r\n🚨 Effect Stacktrace\r\n${chalk.red(`│ ${filterStack(spanAttributesStack.join('\r\n│ '), stripCwd === true)}`)}`;
+        }
+
         if (stack !== undefined) {
-          message += `\r\n${span !== undefined ? '\r\n' : ''}🚨 Stacktrace\r\n${chalk.red(filterStack(stack, stripCwd === true))}`;
+          message += `\r\n${span !== undefined ? '\r\n' : ''}🚨 Node Stacktrace\r\n${chalk.red(filterStack(stack, stripCwd === true))}`;
         } else if (!isPlainString) {
           message += `\r\n\r\n${chalk.gray('ℹ️  Consider using a yieldable error such as Data.TaggedError and Schema.TaggedError to get a stacktrace.')}`;
         }

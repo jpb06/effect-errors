@@ -59,6 +59,6 @@ describe('plain-object-error task', () => {
     const { prettyPrint } = await import('./../pretty-print');
     const result = prettyPrint(cause);
 
-    expect(result).not.toChalkMatch('🚨 Stacktrace');
+    expect(result).not.toChalkMatch('🚨 Node Stacktrace');
   });
 });

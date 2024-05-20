@@ -1,20 +1,29 @@
 import chalk from 'chalk';
 
+import { splitSpansAttributesByTypes } from './split-spans-attributes-by-type';
+
+const maybePrintPipe = (isLastEntry: boolean) =>
+  isLastEntry ? ' ' : chalk.gray('│');
+
 export const getSpanAttributes = (
-  attributes: ReadonlyMap<string, unknown>,
+  allAttributes: ReadonlyMap<string, unknown>,
   isLastEntry: boolean,
 ) => {
-  if (attributes.size === 0) {
-    return '';
+  if (allAttributes.size === 0) {
+    return { formattedAttributes: '', stack: [] };
   }
 
-  const formattedAttributes = Array.from(attributes.entries())
-    .filter(([key]) => key !== 'code.stacktrace')
+  const { attributes, stacktrace } = splitSpansAttributesByTypes(allAttributes);
+
+  const formattedAttributes = Array.from(attributes)
     .map(
       ([key, value]) =>
-        `${isLastEntry ? ' ' : chalk.gray('│')}     ${chalk.blue(key)}${chalk.gray(':')} ${value as string}`,
+        `${maybePrintPipe(isLastEntry)}     ${chalk.blue(key)}${chalk.gray(':')} ${value as string}`,
     )
     .join('\r\n');
 
-  return `\r\n${formattedAttributes}`;
+  return {
+    formattedAttributes: `\r\n${formattedAttributes}`,
+    stack: stacktrace,
+  };
 };

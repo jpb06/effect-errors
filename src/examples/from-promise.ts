@@ -19,11 +19,7 @@ const readUser = Effect.withSpan('readUser')(
 );
 
 const fetchTask = (userId: string) =>
-  Effect.withSpan('fetchUser', {
-    attributes: {
-      userId,
-    },
-  })(
+  Effect.withSpan('fetchUser', { attributes: { userId } })(
     Effect.tryPromise({
       try: async () =>
         await fetch(`https://yolo-bro-oh-no.org/users/${userId}`),
