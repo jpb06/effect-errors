@@ -21,10 +21,9 @@ describe('strip-cwd task', () => {
     const cause = await effectCause(withCwdStrippingTask);
 
     const { prettyPrint } = await import('./../pretty-print');
-    prettyPrint(cause, { stripCwd: true, reverseSpans: true });
+    const result = prettyPrint(cause, { stripCwd: true, reverseSpans: true });
 
-    expect(console.error).toHaveBeenCalledTimes(1);
-    expect(vi.mocked(console.error).mock.calls[0][0]).toChalkMatch(
+    expect(result).toChalkMatch(
       chalk.bold.yellowBright.underline('1 error occured'),
     );
   });
