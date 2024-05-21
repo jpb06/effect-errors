@@ -17,10 +17,9 @@ describe('tagged-error-with-meta task', () => {
     const cause = await effectCause(withMetaTaggedErrorTask);
 
     const { prettyPrint } = await import('./../pretty-print');
-    prettyPrint(cause);
+    const result = prettyPrint(cause);
 
-    expect(console.error).toHaveBeenCalledTimes(1);
-    expect(vi.mocked(console.error).mock.calls[0][0]).toChalkMatch(
+    expect(result).toChalkMatch(
       chalk.bold.yellowBright.underline('1 error occured'),
     );
   });

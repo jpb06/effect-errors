@@ -155,8 +155,8 @@ interface ErrorSpan {
 interface ErrorData {
   errorType: unknown;
   message: unknown;
-  stack?: string;
-  effectStacktrace?: string;
+  stack?: string[];
+  effectStacktrace?: string[];
   spans?: ErrorSpan[];
   isPlainString: boolean;
 }

@@ -15,8 +15,8 @@ export interface ErrorSpan {
 export interface ErrorData {
   errorType: unknown;
   message: unknown;
-  stack?: string;
-  effectStacktrace?: string;
+  stack?: string[];
+  effectStacktrace?: string[];
   spans?: ErrorSpan[];
   isPlainString: boolean;
 }
@@ -78,11 +78,9 @@ export const captureErrors = <E>(
       return {
         errorType,
         message,
-        stack,
+        stack: stack?.replaceAll(/ {4}at /g, 'at ').split('\r\n'),
         effectStacktrace:
-          effectStacktrace.length > 0
-            ? effectStacktrace.join('\r\n')
-            : undefined,
+          effectStacktrace.length > 0 ? effectStacktrace : undefined,
         spans: reverseSpans === true ? spans.toReversed() : spans,
         isPlainString,
       };

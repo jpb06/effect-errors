@@ -23,7 +23,7 @@ export const getSpanAttributes = (
     .join('\r\n');
 
   return {
-    formattedAttributes: `\r\n${formattedAttributes}`,
+    formattedAttributes: `${formattedAttributes.length > 0 ? '\r\n' : ''}${formattedAttributes}`,
     stack: stacktrace,
   };
 };
