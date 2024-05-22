@@ -35,9 +35,9 @@
     "run-examples": "bun run ./src/examples/util/run-all"
   },
   "dependencies": {
-    "@effect/schema": "^0.67.9",
+    "@effect/schema": "^0.67.11",
     "chalk": "<5",
-    "effect": "^3.2.1"
+    "effect": "^3.2.3"
   },
   "devDependencies": {
     "@babel/cli": "^7.24.5",
