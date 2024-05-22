@@ -2,10 +2,10 @@ import chalk from 'chalk';
 import { Duration, Effect, Fiber, pipe, TestClock, TestContext } from 'effect';
 import { describe, expect, it, vi } from 'vitest';
 
-import { mockConsole } from '../tests/mocks/console.mock';
-import { durationRegex } from '../tests/regex/duration.regex';
+import { mockConsole } from '../tests/mocks/console.mock.js';
+import { durationRegex } from '../tests/regex/duration.regex.js';
 
-import { longRunningTask } from './long-running';
+import { longRunningTask } from './long-running.js';
 
 void mockConsole({
   info: vi.fn(),
@@ -27,7 +27,7 @@ describe('long-running task', () => {
   it('should report one error', async () => {
     const cause = await Effect.runPromise(effect);
 
-    const { prettyPrint } = await import('./../pretty-print');
+    const { prettyPrint } = await import('./../pretty-print.js');
     const result = prettyPrint(cause);
 
     expect(result).toChalkMatch(
@@ -38,7 +38,7 @@ describe('long-running task', () => {
   it('should display the error', async () => {
     const cause = await Effect.runPromise(effect);
 
-    const { prettyPrint } = await import('./../pretty-print');
+    const { prettyPrint } = await import('./../pretty-print.js');
     const result = prettyPrint(cause);
 
     expect(result).toChalkMatch(chalk.bgRed.whiteBright(' SomethingBad '));
@@ -52,7 +52,7 @@ describe('long-running task', () => {
   it('should display spans', async () => {
     const cause = await Effect.runPromise(effect);
 
-    const { prettyPrint } = await import('./../pretty-print');
+    const { prettyPrint } = await import('./../pretty-print.js');
     const result = prettyPrint(cause);
 
     expect(result).toChalkMatch(chalk.gray('◯'));
@@ -70,7 +70,7 @@ describe('long-running task', () => {
   it('should display the stack', async () => {
     const cause = await Effect.runPromise(effect);
 
-    const { prettyPrint } = await import('./../pretty-print');
+    const { prettyPrint } = await import('./../pretty-print.js');
     const result = prettyPrint(cause);
 
     expect(result).toChalkMatch('🚨 Node Stacktrace');

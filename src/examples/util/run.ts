@@ -1,6 +1,6 @@
 import path from 'path';
 
-import { runPromise } from '../../runners/run-promise';
+import { runPromise } from '../../runners/run-promise.js';
 
 void (async () => {
   if (process.argv.length === 2) {

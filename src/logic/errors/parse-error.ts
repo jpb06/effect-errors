@@ -1,9 +1,9 @@
 import { hasProperty } from 'effect/Predicate';
 import { type Span } from 'effect/Tracer';
 
-import { PrettyError } from '../../types/pretty-error.type';
+import { PrettyError } from '../../types/pretty-error.type.js';
 
-import { extractErrorDetails } from './extract-error-details';
+import { extractErrorDetails } from './extract-error-details.js';
 
 const spanSymbol = Symbol.for('effect/SpanAnnotation');
 

@@ -2,7 +2,7 @@ import path from 'path';
 
 import { readdir } from 'fs-extra';
 
-import { runPromise } from '../..';
+import { runPromise } from '../../index.js';
 
 void (async () => {
   const files = await readdir('./src/examples');

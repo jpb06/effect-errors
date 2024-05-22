@@ -1,11 +1,11 @@
 import chalk from 'chalk';
 import { describe, expect, it, vi } from 'vitest';
 
-import { mockConsole } from '../tests/mocks/console.mock';
-import { durationRegex } from '../tests/regex/duration.regex';
-import { effectCause } from '../tests/runners/effect-cause';
+import { mockConsole } from '../tests/mocks/console.mock.js';
+import { durationRegex } from '../tests/regex/duration.regex.js';
+import { effectCause } from '../tests/runners/effect-cause.js';
 
-import { fromPromiseTask } from './from-promise';
+import { fromPromiseTask } from './from-promise.js';
 
 void mockConsole({
   info: vi.fn(),
@@ -16,7 +16,7 @@ describe('from-promise task', () => {
   it('should report one error', async () => {
     const cause = await effectCause(fromPromiseTask);
 
-    const { prettyPrint } = await import('./../pretty-print');
+    const { prettyPrint } = await import('./../pretty-print.js');
     const result = prettyPrint(cause);
 
     expect(result).toChalkMatch(
@@ -27,7 +27,7 @@ describe('from-promise task', () => {
   it('should display the error', async () => {
     const cause = await effectCause(fromPromiseTask);
 
-    const { prettyPrint } = await import('./../pretty-print');
+    const { prettyPrint } = await import('./../pretty-print.js');
     const result = prettyPrint(cause);
 
     expect(result).toChalkMatch(chalk.bgRed.whiteBright(' FetchError '));
@@ -39,7 +39,7 @@ describe('from-promise task', () => {
   it('should display spans', async () => {
     const cause = await effectCause(fromPromiseTask);
 
-    const { prettyPrint } = await import('./../pretty-print');
+    const { prettyPrint } = await import('./../pretty-print.js');
     const result = prettyPrint(cause);
 
     expect(result).toChalkMatch(chalk.gray('◯'));
@@ -57,7 +57,7 @@ describe('from-promise task', () => {
   it('should display span attributes', async () => {
     const cause = await effectCause(fromPromiseTask);
 
-    const { prettyPrint } = await import('./../pretty-print');
+    const { prettyPrint } = await import('./../pretty-print.js');
     const result = prettyPrint(cause);
 
     expect(result).toChalkMatch(
@@ -70,7 +70,7 @@ describe('from-promise task', () => {
   it('should display the stack', async () => {
     const cause = await effectCause(fromPromiseTask);
 
-    const { prettyPrint } = await import('./../pretty-print');
+    const { prettyPrint } = await import('./../pretty-print.js');
     const result = prettyPrint(cause);
 
     expect(result).toChalkMatch('🚨 Node Stacktrace');

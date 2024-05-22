@@ -2,9 +2,9 @@ import { Option } from 'effect';
 import { type Cause, isInterruptedOnly } from 'effect/Cause';
 import { type AnySpan, type Span, type SpanStatus } from 'effect/Tracer';
 
-import { captureErrorsFrom } from './logic/errors/capture-errors-from-cause';
-import { splitSpansAttributesByTypes } from './logic/spans/split-spans-attributes-by-type';
-import { stripCwdPath } from './logic/strip-cwd-path';
+import { captureErrorsFrom } from './logic/errors/capture-errors-from-cause.js';
+import { splitSpansAttributesByTypes } from './logic/spans/split-spans-attributes-by-type.js';
+import { stripCwdPath } from './logic/strip-cwd-path.js';
 
 export interface ErrorSpan {
   name: string;

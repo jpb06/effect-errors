@@ -1,10 +1,10 @@
 import chalk from 'chalk';
 import { describe, expect, it, vi } from 'vitest';
 
-import { mockConsole } from '../tests/mocks/console.mock';
-import { effectCause } from '../tests/runners/effect-cause';
+import { mockConsole } from '../tests/mocks/console.mock.js';
+import { effectCause } from '../tests/runners/effect-cause.js';
 
-import { withStringErrorTask } from './with-string-error';
+import { withStringErrorTask } from './with-string-error.js';
 
 void mockConsole({
   info: vi.fn(),
@@ -15,7 +15,7 @@ describe('with-string-error task', () => {
   it('should report one error', async () => {
     const cause = await effectCause(withStringErrorTask);
 
-    const { prettyPrint } = await import('./../pretty-print');
+    const { prettyPrint } = await import('./../pretty-print.js');
     const result = prettyPrint(cause);
 
     expect(result).toChalkMatch(
@@ -26,7 +26,7 @@ describe('with-string-error task', () => {
   it('should display the error message', async () => {
     const cause = await effectCause(withStringErrorTask);
 
-    const { prettyPrint } = await import('./../pretty-print');
+    const { prettyPrint } = await import('./../pretty-print.js');
     const result = prettyPrint(cause);
 
     expect(result).toChalkMatch(/Oh no!/);
@@ -35,7 +35,7 @@ describe('with-string-error task', () => {
   it('should display an info message', async () => {
     const cause = await effectCause(withStringErrorTask);
 
-    const { prettyPrint } = await import('./../pretty-print');
+    const { prettyPrint } = await import('./../pretty-print.js');
     const result = prettyPrint(cause);
 
     expect(result).toChalkMatch(

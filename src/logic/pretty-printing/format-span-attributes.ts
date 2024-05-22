@@ -2,11 +2,11 @@ import chalk from 'chalk';
 import { Option } from 'effect';
 import { type AnySpan, type Span } from 'effect/Tracer';
 
-import { type PrettyPrintOptions } from '../../types/pretty-print-options.type';
-import { getSpanAttributes } from '../spans/get-span-attributes';
-import { getSpanDuration } from '../spans/get-span-duration';
-import { spanStackTrailingChar } from '../spans/spans-stack-trailing-char';
-import { stripCwdPath } from '../strip-cwd-path';
+import { type PrettyPrintOptions } from '../../types/pretty-print-options.type.js';
+import { getSpanAttributes } from '../spans/get-span-attributes.js';
+import { getSpanDuration } from '../spans/get-span-duration.js';
+import { spanStackTrailingChar } from '../spans/spans-stack-trailing-char.js';
+import { stripCwdPath } from '../strip-cwd-path.js';
 
 export const formatSpanAttributes = (
   span: Span | undefined,

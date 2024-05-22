@@ -1,4 +1,4 @@
-import { stripCwdPath } from '../strip-cwd-path';
+import { stripCwdPath } from '../strip-cwd-path.js';
 
 export const filterStack = (stack: string, stripCwd: boolean) => {
   const lines = stack.split('\r\n');
