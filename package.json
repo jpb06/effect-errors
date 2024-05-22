@@ -1,8 +1,18 @@
 {
   "repository": "https://github.com/jpb06/effect-errors.git",
+  "type": "module",
   "main": "./cjs/index.js",
   "module": "./esm/index.js",
   "types": "./dts/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dts/index.d.ts",
+        "default": "./esm/index.js"
+      },
+      "require": "./cjs/index.js"
+    }
+  },
   "name": "effect-errors",
   "version": "1.4.3",
   "author": "jpb06 <jp.bois.06@outlook.fr>",
