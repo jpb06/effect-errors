@@ -1,6 +1,6 @@
 import chalk from 'chalk';
 
-import { splitSpansAttributesByTypes } from './split-spans-attributes-by-type';
+import { splitSpansAttributesByTypes } from './split-spans-attributes-by-type.js';
 
 const maybePrintPipe = (isLastEntry: boolean) =>
   isLastEntry ? ' ' : chalk.gray('│');

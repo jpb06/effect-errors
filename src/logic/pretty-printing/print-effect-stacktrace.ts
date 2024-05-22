@@ -1,8 +1,8 @@
 import chalk from 'chalk';
 import { type Span } from 'effect/Tracer';
 
-import { type PrettyPrintOptions } from '../../types/pretty-print-options.type';
-import { filterStack } from '../stack/filter-stack';
+import { type PrettyPrintOptions } from '../../types/pretty-print-options.type.js';
+import { filterStack } from '../stack/filter-stack.js';
 
 export const printEffectStacktrace = (
   d: string[],

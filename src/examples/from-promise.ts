@@ -1,9 +1,9 @@
 import { Effect } from 'effect';
 import { readJson } from 'fs-extra';
 
-import { FetchError } from './errors/fetch-error';
-import { FileError } from './errors/file-error';
-import { filename } from './util/filename.effect';
+import { FetchError } from './errors/fetch-error.js';
+import { FileError } from './errors/file-error.js';
+import { filename } from './util/filename.effect.js';
 
 interface User {
   id: string;

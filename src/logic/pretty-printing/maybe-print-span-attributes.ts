@@ -1,9 +1,9 @@
 import chalk from 'chalk';
 import { type Span } from 'effect/Tracer';
 
-import { type PrettyPrintOptions } from '../../types/pretty-print-options.type';
+import { type PrettyPrintOptions } from '../../types/pretty-print-options.type.js';
 
-import { formatSpanAttributes } from './format-span-attributes';
+import { formatSpanAttributes } from './format-span-attributes.js';
 
 export const maybePrintSpanAttributes = (
   d: string[],

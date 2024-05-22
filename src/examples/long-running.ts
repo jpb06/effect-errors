@@ -1,8 +1,8 @@
 import { Effect } from 'effect';
 import { readJson } from 'fs-extra';
 
-import { SchemaError } from './errors/schema-error';
-import { filename } from './util/filename.effect';
+import { SchemaError } from './errors/schema-error.js';
+import { filename } from './util/filename.effect.js';
 
 const readUser = Effect.withSpan('readUser')(
   Effect.tryPromise({

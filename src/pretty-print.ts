@@ -1,16 +1,16 @@
 import chalk from 'chalk';
 import { type Cause, isInterruptedOnly } from 'effect/Cause';
 
-import { captureErrorsFrom } from './logic/errors/capture-errors-from-cause';
-import { formatFailuresTitle } from './logic/pretty-printing/format-failures-title';
-import { maybePrintNodeStacktrace } from './logic/pretty-printing/maybe-print-node-stacktrace';
-import { maybePrintSpanAttributes } from './logic/pretty-printing/maybe-print-span-attributes';
-import { maybeWarnAboutPlainStrings } from './logic/pretty-printing/maybe-warn-about-plain-strings';
-import { printEffectStacktrace } from './logic/pretty-printing/print-effect-stacktrace';
+import { captureErrorsFrom } from './logic/errors/capture-errors-from-cause.js';
+import { formatFailuresTitle } from './logic/pretty-printing/format-failures-title.js';
+import { maybePrintNodeStacktrace } from './logic/pretty-printing/maybe-print-node-stacktrace.js';
+import { maybePrintSpanAttributes } from './logic/pretty-printing/maybe-print-span-attributes.js';
+import { maybeWarnAboutPlainStrings } from './logic/pretty-printing/maybe-warn-about-plain-strings.js';
+import { printEffectStacktrace } from './logic/pretty-printing/print-effect-stacktrace.js';
 import {
   type PrettyPrintOptions,
   prettyPrintOptionsDefault,
-} from './types/pretty-print-options.type';
+} from './types/pretty-print-options.type.js';
 
 export const prettyPrint = <E>(
   cause: Cause<E>,

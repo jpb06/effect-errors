@@ -1,6 +1,6 @@
 import { Effect } from 'effect';
 
-import { filename } from './util/filename.effect';
+import { filename } from './util/filename.effect.js';
 
 const readUser = Effect.withSpan('readUser')(
   Effect.fail({ _tag: 'BigBadError', message: 'Oh no!' }),

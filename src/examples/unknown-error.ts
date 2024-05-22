@@ -1,8 +1,8 @@
 import { Effect } from 'effect';
 import { readJson } from 'fs-extra';
 
-import { FetchError } from './errors/fetch-error';
-import { filename } from './util/filename.effect';
+import { FetchError } from './errors/fetch-error.js';
+import { filename } from './util/filename.effect.js';
 
 const readUser = Effect.withSpan('readUser')(
   Effect.tryPromise(async () => await readJson('cool.ts')),

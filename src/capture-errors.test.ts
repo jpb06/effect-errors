@@ -1,10 +1,10 @@
 import { describe, expect, it, vi } from 'vitest';
 
-import { captureErrors } from './capture-errors';
-import { fromPromiseTask } from './examples/from-promise';
-import { withParallelErrorsTask } from './examples/parallel-errors';
-import { mockConsole } from './tests/mocks/console.mock';
-import { effectCause } from './tests/runners/effect-cause';
+import { captureErrors } from './capture-errors.js';
+import { fromPromiseTask } from './examples/from-promise.js';
+import { withParallelErrorsTask } from './examples/parallel-errors.js';
+import { mockConsole } from './tests/mocks/console.mock.js';
+import { effectCause } from './tests/runners/effect-cause.js';
 
 void mockConsole({
   info: vi.fn(),

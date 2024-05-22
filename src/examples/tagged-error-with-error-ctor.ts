@@ -1,8 +1,8 @@
 import { Effect } from 'effect';
 import { readJson } from 'fs-extra';
 
-import { TaggedErrorWithErrorCtor } from './errors/tagged-error-with-error-ctor';
-import { filename } from './util/filename.effect';
+import { TaggedErrorWithErrorCtor } from './errors/tagged-error-with-error-ctor.js';
+import { filename } from './util/filename.effect.js';
 
 const readUser = Effect.withSpan('readUser')(
   Effect.tryPromise<

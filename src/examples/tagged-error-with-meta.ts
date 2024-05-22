@@ -1,7 +1,7 @@
 import { Effect } from 'effect';
 
-import { TaggedErrorWithMeta } from './errors/tagged-error-with-meta';
-import { filename } from './util/filename.effect';
+import { TaggedErrorWithMeta } from './errors/tagged-error-with-meta.js';
+import { filename } from './util/filename.effect.js';
 
 const subTask = Effect.withSpan('subTask', {
   attributes: {

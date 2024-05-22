@@ -1,7 +1,7 @@
 import { Effect } from 'effect';
 
-import { UserNotFoundError } from './errors/user-not-found.error';
-import { filename } from './util/filename.effect';
+import { UserNotFoundError } from './errors/user-not-found.error.js';
+import { filename } from './util/filename.effect.js';
 
 const readUser = (name: string) =>
   Effect.withSpan('readUser', {
