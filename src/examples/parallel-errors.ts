@@ -1,7 +1,11 @@
+import { fileURLToPath } from 'node:url';
+
 import { Effect } from 'effect';
 
 import { UserNotFoundError } from './errors/user-not-found.error.js';
 import { filename } from './util/filename.effect.js';
+
+const fileName = fileURLToPath(import.meta.url);
 
 const readUser = (name: string) =>
   Effect.withSpan('readUser', {
@@ -28,7 +32,7 @@ const parallelGet = (names: string[]) =>
   );
 
 export const withParallelErrorsTask = Effect.withSpan('withParallelErrorsTask')(
-  Effect.all([filename(__filename), parallelGet(['yolo', 'bro', 'cool'])]),
+  Effect.all([filename(fileName), parallelGet(['yolo', 'bro', 'cool'])]),
 );
 
 export default withParallelErrorsTask;
