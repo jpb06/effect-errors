@@ -14,7 +14,7 @@ describe('captureErrors function', () => {
   it('should capture errors from promises', async () => {
     const cause = await effectCause(fromPromiseTask);
 
-    const result = captureErrors(cause, {
+    const result = await captureErrors(cause, {
       reverseSpans: false,
       stripCwd: false,
     });
@@ -48,7 +48,7 @@ describe('captureErrors function', () => {
 
     expect(stack).not.toHaveLength(0);
 
-    expect(effectStacktrace).toEqual(
+    expect(effectStacktrace?.map((el) => el.file)).toEqual(
       expect.arrayContaining([expect.stringContaining('at fetchTask')]),
     );
   });
@@ -57,7 +57,7 @@ describe('captureErrors function', () => {
   it('should capture parallel errors', async () => {
     const cause = await effectCause(withParallelErrorsTask);
 
-    const result = captureErrors(cause, {
+    const result = await captureErrors(cause, {
       reverseSpans: false,
       stripCwd: false,
     });
@@ -88,7 +88,7 @@ describe('captureErrors function', () => {
     expect(firstError.spans?.[2].name).toBe('withParallelErrorsTask');
     expect(firstError.spans?.[2].attributes).toHaveAttributes([]);
 
-    expect(firstError.effectStacktrace).toEqual(
+    expect(firstError.effectStacktrace?.map((el) => el.file)).toEqual(
       expect.arrayContaining([
         expect.stringContaining('at readUser'),
         expect.stringContaining('at parallelGet'),
@@ -121,7 +121,7 @@ describe('captureErrors function', () => {
     expect(secondError.spans?.[2].name).toBe('withParallelErrorsTask');
     expect(secondError.spans?.[2].attributes).toHaveAttributes([]);
 
-    expect(secondError.effectStacktrace).toEqual(
+    expect(secondError.effectStacktrace?.map((el) => el.file)).toEqual(
       expect.arrayContaining([
         expect.stringContaining('at readUser'),
         expect.stringContaining('at parallelGet'),
@@ -152,7 +152,7 @@ describe('captureErrors function', () => {
     expect(thirdError.spans?.[2].name).toBe('withParallelErrorsTask');
     expect(thirdError.spans?.[2].attributes).toHaveAttributes([]);
 
-    expect(thirdError.effectStacktrace).toEqual(
+    expect(thirdError.effectStacktrace?.map((el) => el.file)).toEqual(
       expect.arrayContaining([
         expect.stringContaining('at readUser'),
         expect.stringContaining('at parallelGet'),
