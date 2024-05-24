@@ -1,5 +1,7 @@
 import { stripCwdPath } from '../strip-cwd-path.js';
 
+import { stackAtRegex } from './stack-regex.js';
+
 export const filterStack = (stack: string, stripCwd: boolean) => {
   const lines = stack.split('\r\n');
   const out: string[] = [];
@@ -12,7 +14,7 @@ export const filterStack = (stack: string, stripCwd: boolean) => {
     }
   }
 
-  const final = out.join('\r\n').replace(/ {4}at /g, '│ at ');
+  const final = out.join('\r\n').replace(stackAtRegex, '│ at ');
 
   return stripCwd ? stripCwdPath(final) : final;
 };

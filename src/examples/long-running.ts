@@ -1,18 +1,22 @@
+import { fileURLToPath } from 'node:url';
+
 import { Effect } from 'effect';
-import { readJson } from 'fs-extra';
+import fs from 'fs-extra';
 
 import { SchemaError } from './errors/schema-error.js';
 import { filename } from './util/filename.effect.js';
 
+const fileName = fileURLToPath(import.meta.url);
+
 const readUser = Effect.withSpan('readUser')(
   Effect.tryPromise({
-    try: async () => await readJson('cool.ts'),
+    try: async () => await fs.readJson('cool.ts'),
     catch: (e) => new SchemaError({ cause: e }),
   }),
 );
 
 export const longRunningTask = Effect.withSpan('longRunningTask')(
-  Effect.all([filename(__filename), Effect.sleep('2 seconds'), readUser]),
+  Effect.all([filename(fileName), Effect.sleep('2 seconds'), readUser]),
 );
 
 export default longRunningTask;

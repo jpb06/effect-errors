@@ -1,6 +1,10 @@
+import { fileURLToPath } from 'node:url';
+
 import { Effect } from 'effect';
 
 import { filename } from './util/filename.effect.js';
+
+const fileName = fileURLToPath(import.meta.url);
 
 const readUser = Effect.withSpan('readUser')(
   Effect.fail({ _tag: 'BigBadError', message: 'Oh no!' }),
@@ -8,6 +12,6 @@ const readUser = Effect.withSpan('readUser')(
 
 export const withPlainObjectErrorTask = Effect.withSpan(
   'withPlainObjectErrorTask',
-)(Effect.all([filename(__filename), readUser]));
+)(Effect.all([filename(fileName), readUser]));
 
 export default withPlainObjectErrorTask;

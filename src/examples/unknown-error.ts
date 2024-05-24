@@ -1,11 +1,15 @@
+import { fileURLToPath } from 'node:url';
+
 import { Effect } from 'effect';
-import { readJson } from 'fs-extra';
+import fs from 'fs-extra';
 
 import { FetchError } from './errors/fetch-error.js';
 import { filename } from './util/filename.effect.js';
 
+const fileName = fileURLToPath(import.meta.url);
+
 const readUser = Effect.withSpan('readUser')(
-  Effect.tryPromise(async () => await readJson('cool.ts')),
+  Effect.tryPromise(async () => await fs.readJson('cool.ts')),
 );
 
 const fetchTask = (userId: string) =>
@@ -31,7 +35,7 @@ const unwrapResponseTask = (response: Response) =>
 
 export const unknownErrorTask = Effect.withSpan('unknownErrorTask')(
   Effect.gen(function* () {
-    yield* filename(__filename);
+    yield* filename(fileName);
 
     const { id } = yield* readUser;
     const response = yield* fetchTask(id as never);

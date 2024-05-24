@@ -1,7 +1,11 @@
+import { fileURLToPath } from 'node:url';
+
 import { Effect } from 'effect';
 
 import { TaggedErrorWithMeta } from './errors/tagged-error-with-meta.js';
 import { filename } from './util/filename.effect.js';
+
+const fileName = fileURLToPath(import.meta.url);
 
 const subTask = Effect.withSpan('subTask', {
   attributes: {
@@ -17,6 +21,6 @@ export const withMetaTaggedErrorTask = Effect.withSpan(
       struff: 'awoowoo',
     },
   },
-)(Effect.all([filename(__filename), subTask]));
+)(Effect.all([filename(fileName), subTask]));
 
 export default withMetaTaggedErrorTask;
