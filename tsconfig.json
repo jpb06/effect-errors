@@ -27,7 +27,8 @@
     "noImplicitAny": true,
     "noImplicitThis": true,
     "noUncheckedIndexedAccess": false,
-    "strictNullChecks": true
+    "strictNullChecks": true,
+    "exactOptionalPropertyTypes": true
   },
   "include": ["./src"],
   "exclude": ["node_modules", "dist"]

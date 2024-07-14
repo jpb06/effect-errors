@@ -9,7 +9,7 @@ import { getSourceExcerpt } from './get-source-excerpt.js';
 const sourceFileRegex = /^(file:\/\/)?(.*.(j|t)s)(\?.*)?:(\d*):(\d*)$/;
 
 export interface TsCodeErrorDetails {
-  codeExcerpt?: string;
+  codeExcerpt: string | undefined;
   file: string;
 }
 
