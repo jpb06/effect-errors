@@ -18,9 +18,9 @@ export interface ErrorSpan {
 export interface ErrorData {
   errorType: unknown;
   message: unknown;
-  stack?: string[];
-  effectStacktrace?: TsCodeErrorDetails[];
-  spans?: ErrorSpan[];
+  stack: string[] | undefined;
+  effectStacktrace: TsCodeErrorDetails[] | undefined;
+  spans: ErrorSpan[] | undefined;
   isPlainString: boolean;
 }
 

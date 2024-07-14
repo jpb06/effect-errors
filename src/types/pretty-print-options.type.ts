@@ -1,7 +1,7 @@
 export interface PrettyPrintOptions {
   enabled?: boolean;
-  stripCwd?: boolean;
-  reverseSpans?: boolean;
+  stripCwd?: boolean | undefined;
+  reverseSpans?: boolean | undefined;
 }
 
 export const prettyPrintOptionsDefault: PrettyPrintOptions = {
