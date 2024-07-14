@@ -91,12 +91,12 @@ The best way is to use either `SchemaError` or `TaggedError`.
 Declaring the error could look like this:
 
 ```typescript
-import * as Schema from '@effect/schema/Schema';
+import { Schema } from '@effect/schema';
 
 export class FileNotFoundError extends Schema.TaggedError<SchemaError>()(
   'FileNotFound',
   {
-    cause: Schema.optional(Schema.unknown),
+    cause: Schema.CauseDefectUnknown,
   },
 ) {}
 ```
