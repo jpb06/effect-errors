@@ -3,6 +3,8 @@ import { describe, expect, it, vi } from 'vitest';
 import { captureErrors } from './capture-errors.js';
 import { fromPromiseTask } from './examples/from-promise.js';
 import { withParallelErrorsTask } from './examples/parallel-errors.js';
+import { fromPromiseTaskSources } from './tests/mock-data/from-promises-sources.mock-data.js';
+import { parallelErrorsTaskSources } from './tests/mock-data/parallel-errors.mock-data.js';
 import { mockConsole } from './tests/mocks/console.mock.js';
 import { effectCause } from './tests/runners/effect-cause.js';
 
@@ -22,14 +24,9 @@ describe('captureErrors function', () => {
     expect(result.interrupted).toBe(false);
     expect(result.errors).toHaveLength(1);
 
-    const {
-      errorType,
-      isPlainString,
-      message,
-      spans,
-      effectStacktrace,
-      stack,
-    } = result.errors[0];
+    const { errorType, isPlainString, message, spans, sources, stack } =
+      result.errors[0];
+
     expect(errorType).toBe('FetchError');
     expect(isPlainString).toBe(false);
     expect((message as { toString: () => string }).toString()).toStrictEqual(
@@ -45,12 +42,8 @@ describe('captureErrors function', () => {
       },
     ]);
     expect(spans?.[1].attributes).toHaveAttributes([]);
-
     expect(stack).not.toHaveLength(0);
-
-    expect(effectStacktrace?.map((el) => el.file)).toEqual(
-      expect.arrayContaining([expect.stringContaining('at fetchTask')]),
-    );
+    expect(sources).toStrictEqual(fromPromiseTaskSources);
   });
 
   // eslint-disable-next-line complexity
@@ -88,13 +81,9 @@ describe('captureErrors function', () => {
     expect(firstError.spans?.[2].name).toBe('withParallelErrorsTask');
     expect(firstError.spans?.[2].attributes).toHaveAttributes([]);
 
-    expect(firstError.effectStacktrace?.map((el) => el.file)).toEqual(
-      expect.arrayContaining([
-        expect.stringContaining('at readUser'),
-        expect.stringContaining('at parallelGet'),
-      ]),
-    );
-    // --
+    expect(firstError.sources).toStrictEqual(parallelErrorsTaskSources);
+
+    // ------------------------------------------------------------------------------
 
     const secondError = result.errors[1];
     expect(secondError.errorType).toBe('UserNotFound');
@@ -121,13 +110,9 @@ describe('captureErrors function', () => {
     expect(secondError.spans?.[2].name).toBe('withParallelErrorsTask');
     expect(secondError.spans?.[2].attributes).toHaveAttributes([]);
 
-    expect(secondError.effectStacktrace?.map((el) => el.file)).toEqual(
-      expect.arrayContaining([
-        expect.stringContaining('at readUser'),
-        expect.stringContaining('at parallelGet'),
-      ]),
-    );
-    // --
+    expect(firstError.sources).toStrictEqual(parallelErrorsTaskSources);
+
+    // ------------------------------------------------------------------------------
 
     const thirdError = result.errors[2];
     expect(thirdError.errorType).toBe('UserNotFound');
@@ -152,11 +137,6 @@ describe('captureErrors function', () => {
     expect(thirdError.spans?.[2].name).toBe('withParallelErrorsTask');
     expect(thirdError.spans?.[2].attributes).toHaveAttributes([]);
 
-    expect(thirdError.effectStacktrace?.map((el) => el.file)).toEqual(
-      expect.arrayContaining([
-        expect.stringContaining('at readUser'),
-        expect.stringContaining('at parallelGet'),
-      ]),
-    );
+    expect(firstError.sources).toStrictEqual(parallelErrorsTaskSources);
   });
 });

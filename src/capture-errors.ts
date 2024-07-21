@@ -6,7 +6,7 @@ import { captureErrorsFrom } from './logic/errors/capture-errors-from-cause.js';
 import { splitSpansAttributesByTypes } from './logic/spans/split-spans-attributes-by-type.js';
 import { stackAtRegex } from './logic/stack/stack-regex.js';
 import { stripCwdPath } from './logic/strip-cwd-path.js';
-import { type TsCodeErrorDetails } from './source-maps/get-ts-code-from-sourcemap.js';
+import { type ErrorRelatedSources } from './source-maps/get-sources-from-map-file.js';
 import { maybeMapSourcemaps } from './source-maps/maybe-map-sourcemaps.js';
 
 export interface ErrorSpan {
@@ -19,7 +19,7 @@ export interface ErrorData {
   errorType: unknown;
   message: unknown;
   stack: string[] | undefined;
-  effectStacktrace: TsCodeErrorDetails[] | undefined;
+  sources: ErrorRelatedSources[] | undefined;
   spans: ErrorSpan[] | undefined;
   isPlainString: boolean;
 }
@@ -57,7 +57,7 @@ export const captureErrors = async <E>(
         errorType,
         isPlainString,
       }) => {
-        const effectStacktrace: TsCodeErrorDetails[] = [];
+        const sources: ErrorRelatedSources[] = [];
         const spans = [];
 
         if (span !== undefined) {
@@ -69,11 +69,9 @@ export const captureErrors = async <E>(
             const { attributes, stacktrace } =
               splitSpansAttributesByTypes(allAttributes);
 
-            const stacktraceWithMaybeSources =
-              await maybeMapSourcemaps(stacktrace);
+            const errorSources = await maybeMapSourcemaps(stacktrace);
 
-            effectStacktrace.push(...stacktraceWithMaybeSources);
-
+            sources.push(...errorSources);
             spans.push({
               name,
               attributes,
@@ -92,8 +90,7 @@ export const captureErrors = async <E>(
           errorType,
           message,
           stack: stack?.replaceAll(stackAtRegex, 'at ').split('\r\n'),
-          effectStacktrace:
-            effectStacktrace.length > 0 ? effectStacktrace : undefined,
+          sources: sources.length > 0 ? sources : undefined,
           spans: reverseSpans === true ? spans.toReversed() : spans,
           isPlainString,
         };
