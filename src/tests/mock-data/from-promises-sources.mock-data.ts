@@ -1,12 +1,11 @@
 export const fromPromiseStack = [
-  'at fetchTask (/Users/jpb06/repos/perso/effect-errors/src/examples/from-promise.ts:25:10)',
-  'at module code (/Users/jpb06/repos/perso/effect-errors/src/examples/from-promise.ts:44:39)',
+  'at fetchTask (effect-errors/src/examples/from-promise.ts:25:10)',
+  'at module code (effect-errors/src/examples/from-promise.ts:44:39)',
 ];
 
 export const fromPromiseTaskSources = [
   {
-    runPath:
-      '/Users/jpb06/repos/perso/effect-errors/src/examples/from-promise.ts:25:10',
+    runPath: 'effect-errors/src/examples/from-promise.ts:25:10',
     sourcesPath: undefined,
     source: [
       {
@@ -48,8 +47,7 @@ export const fromPromiseTaskSources = [
     ],
   },
   {
-    runPath:
-      '/Users/jpb06/repos/perso/effect-errors/src/examples/from-promise.ts:44:39',
+    runPath: 'effect-errors/src/examples/from-promise.ts:44:39',
     sourcesPath: undefined,
     source: [
       {

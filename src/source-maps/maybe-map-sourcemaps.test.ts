@@ -115,17 +115,21 @@ describe('maybeMapSourcemaps function', () => {
     const effectError = parsedError.errors.at(0);
 
     const runPaths = [
-      '/Users/jpb06/repos/perso/effect-errors/src/tests/bundle/from-promise.js:44:216',
-      '/Users/jpb06/repos/perso/effect-errors/src/tests/bundle/from-promise.js:44:497',
+      'effect-errors/src/tests/bundle/from-promise.js:44:216',
+      'effect-errors/src/tests/bundle/from-promise.js:44:497',
     ];
-    expect(effectError.sources).toStrictEqual(
-      fromPromiseTaskSources.map(({ runPath, source }, index) => ({
-        sourcesPath: runPath,
-        source: source.map((d) =>
+
+    expect(effectError.sources?.length).toBe(2);
+    for (let i = 0; i < effectError.sources.length; i++) {
+      const error = effectError.sources[i];
+      const expected = fromPromiseTaskSources[i];
+      expect(error.runPath.endsWith(runPaths[i])).toBe(true);
+      expect(error.sourcesPath.endsWith(expected.runPath)).toBe(true);
+      expect(error.source).toStrictEqual(
+        expected.source.map((d) =>
           d.column !== undefined ? d : { code: d.code, line: d.line },
         ),
-        runPath: runPaths.at(index),
-      })),
-    );
+      );
+    }
   });
 });

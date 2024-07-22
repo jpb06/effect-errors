@@ -1,13 +1,12 @@
 export const parallelErrorsStack = [
-  'at readUser (/Users/jpb06/repos/perso/effect-errors/src/examples/parallel-errors.ts:11:10)',
-  'at parallelGet (/Users/jpb06/repos/perso/effect-errors/src/examples/parallel-errors.ts:24:10)',
-  'at module code (/Users/jpb06/repos/perso/effect-errors/src/examples/parallel-errors.ts:34:46)',
+  'at readUser (effect-errors/src/examples/parallel-errors.ts:11:10)',
+  'at parallelGet (effect-errors/src/examples/parallel-errors.ts:24:10)',
+  'at module code (effect-errors/src/examples/parallel-errors.ts:34:46)',
 ];
 
 export const parallelErrorsTaskSources = [
   {
-    runPath:
-      '/Users/jpb06/repos/perso/effect-errors/src/examples/parallel-errors.ts:11:10',
+    runPath: 'effect-errors/src/examples/parallel-errors.ts:11:10',
     sourcesPath: undefined,
     source: [
       {
@@ -48,8 +47,7 @@ export const parallelErrorsTaskSources = [
     ],
   },
   {
-    runPath:
-      '/Users/jpb06/repos/perso/effect-errors/src/examples/parallel-errors.ts:24:10',
+    runPath: 'effect-errors/src/examples/parallel-errors.ts:24:10',
     sourcesPath: undefined,
     source: [
       {
@@ -90,8 +88,7 @@ export const parallelErrorsTaskSources = [
     ],
   },
   {
-    runPath:
-      '/Users/jpb06/repos/perso/effect-errors/src/examples/parallel-errors.ts:34:46',
+    runPath: 'effect-errors/src/examples/parallel-errors.ts:34:46',
     sourcesPath: undefined,
     source: [
       {

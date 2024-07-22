@@ -43,7 +43,16 @@ describe('captureErrors function', () => {
     ]);
     expect(spans?.[1].attributes).toHaveAttributes([]);
     expect(stack).not.toHaveLength(0);
-    expect(sources).toStrictEqual(fromPromiseTaskSources);
+
+    expect(sources?.length).toBe(2);
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    for (let i = 0; i < sources!.length; i++) {
+      const current = sources?.at(i);
+      const expected = fromPromiseTaskSources[i];
+      expect(current?.runPath.endsWith(expected.runPath)).toBe(true);
+      expect(current?.sourcesPath).toBe(undefined);
+      expect(current?.source).toStrictEqual(expected?.source);
+    }
   });
 
   // eslint-disable-next-line complexity
@@ -81,7 +90,11 @@ describe('captureErrors function', () => {
     expect(firstError.spans?.[2].name).toBe('withParallelErrorsTask');
     expect(firstError.spans?.[2].attributes).toHaveAttributes([]);
 
-    expect(firstError.sources).toStrictEqual(parallelErrorsTaskSources);
+    const sources0 = firstError.sources?.at(0);
+    const expected0 = parallelErrorsTaskSources[0];
+    expect(sources0?.runPath.endsWith(expected0.runPath)).toBe(true);
+    expect(sources0?.sourcesPath).toBe(undefined);
+    expect(sources0?.source).toStrictEqual(expected0?.source);
 
     // ------------------------------------------------------------------------------
 
@@ -110,7 +123,11 @@ describe('captureErrors function', () => {
     expect(secondError.spans?.[2].name).toBe('withParallelErrorsTask');
     expect(secondError.spans?.[2].attributes).toHaveAttributes([]);
 
-    expect(firstError.sources).toStrictEqual(parallelErrorsTaskSources);
+    const sources1 = firstError.sources?.at(1);
+    const expected1 = parallelErrorsTaskSources[1];
+    expect(sources1?.runPath.endsWith(expected1.runPath)).toBe(true);
+    expect(sources1?.sourcesPath).toBe(undefined);
+    expect(sources1?.source).toStrictEqual(expected1?.source);
 
     // ------------------------------------------------------------------------------
 
@@ -137,6 +154,10 @@ describe('captureErrors function', () => {
     expect(thirdError.spans?.[2].name).toBe('withParallelErrorsTask');
     expect(thirdError.spans?.[2].attributes).toHaveAttributes([]);
 
-    expect(firstError.sources).toStrictEqual(parallelErrorsTaskSources);
+    const sources3 = firstError.sources?.at(2);
+    const expected3 = parallelErrorsTaskSources[2];
+    expect(sources3?.runPath.endsWith(expected3.runPath)).toBe(true);
+    expect(sources3?.sourcesPath).toBe(undefined);
+    expect(sources3?.source).toStrictEqual(expected3?.source);
   });
 });
