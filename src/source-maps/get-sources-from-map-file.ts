@@ -25,8 +25,11 @@ export const getSourcesFromMapFile = (
   Effect.gen(function* () {
     const fileExists = yield* existsEffect(`${location.filePath}.map`);
     if (!fileExists) {
+      const message = chalk.yellow(
+        `${location.filePath}.map does not exist: unable to retrieve spans sourcemaps.`,
+      );
       console.warn(
-        `${chalk.blueBright.underline('effect-errors')}: ${chalk.yellow(`${location.filePath}.map does not exist: unable to retrieve spans sourcemaps.`)}  `,
+        `${chalk.blueBright.underline('effect-errors')}: ${message}`,
       );
       return;
     }

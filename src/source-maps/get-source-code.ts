@@ -28,15 +28,12 @@ export const getSourceCode = (
       .map((currentLine, index) => {
         const currentLineNumber = index + start + 1;
 
+        const actualColumn = isFromJs ? column + 1 : column;
+
         return {
           line: currentLineNumber,
           code: currentLine,
-          column:
-            currentLineNumber === line
-              ? isFromJs
-                ? column + 1
-                : column
-              : undefined,
+          column: currentLineNumber === line ? actualColumn : undefined,
         };
       });
   });
