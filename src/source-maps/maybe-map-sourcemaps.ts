@@ -1,31 +1,35 @@
-import { fileRegex, stackAtRegex } from '../logic/stack/stack-regex.js';
+import { Effect } from 'effect';
 
-import {
-  getTsCodeFromSourcemap,
-  type TsCodeErrorDetails,
-} from './get-ts-code-from-sourcemap.js';
+import { type FsError } from '../logic/effects/fs/fs-error.js';
+import { stackAtRegex } from '../logic/stack/stack-regex.js';
 
-export const maybeMapSourcemaps = async (
+import { getErrorRelatedSources } from './get-error-related-sources.js';
+import { type ErrorRelatedSources } from './get-sources-from-map-file.js';
+
+export const maybeMapSourcemaps = (
   stacktrace: string[],
-): Promise<TsCodeErrorDetails[]> =>
-  await Promise.all(
-    stacktrace.map(async (stackLine) => {
-      const matches = stackLine.matchAll(/^at .*\((.*)\)$/g);
-      const path = [...matches].map((el) => el[1])[0];
+): Effect.Effect<ErrorRelatedSources[], FsError> =>
+  Effect.forEach(stacktrace, (stackLine) =>
+    Effect.gen(function* () {
+      const chunks = stackLine.split(' ');
+      const path =
+        chunks.length === 2
+          ? chunks[1]
+          : chunks[chunks.length - 1].slice(1, -1);
 
-      const r = await getTsCodeFromSourcemap(path);
-      if (r === undefined) {
+      const details = yield* getErrorRelatedSources(path);
+      if (details === undefined) {
         return {
-          file: stackLine.replaceAll(stackAtRegex, 'at '),
-          codeExcerpt: '',
+          runPath: stackLine.replaceAll(stackAtRegex, 'at '),
+          source: undefined,
+          sourcesPath: undefined,
         };
       }
 
       return {
-        file: stackLine
-          .replaceAll(stackAtRegex, 'at ')
-          .replaceAll(fileRegex, `(${r.file})`),
-        codeExcerpt: r.codeExcerpt,
+        runPath: details.runPath,
+        sourcesPath: details.sourcesPath,
+        source: details.source,
       };
     }),
   );

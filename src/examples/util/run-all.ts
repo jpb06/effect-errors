@@ -1,11 +1,11 @@
 import path from 'path';
 
-import { readdir } from 'fs-extra';
+import fs from 'fs-extra';
 
 import { runPromise } from '../../index.js';
 
 void (async () => {
-  const files = await readdir('./src/examples');
+  const files = await fs.readdir('./src/examples');
   for (const file of files) {
     if (
       file.endsWith('.ts') &&

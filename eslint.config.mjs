@@ -20,7 +20,15 @@ const compat = new FlatCompat({
 
 /** @type {import('eslint').Linter.FlatConfig} */
 const flatConfig = [
-  { ignores: ['**/dist', '**/node_modules', '**/coverage'] },
+  {
+    ignores: [
+      '**/dist',
+      '**/node_modules',
+      '**/coverage',
+      'src/tests/bundle/*',
+      'src/examples/bundling/*',
+    ],
+  },
   {
     languageOptions: {
       globals: { ...globals.node },

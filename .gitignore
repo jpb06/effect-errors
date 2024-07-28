@@ -131,3 +131,4 @@ dist
 
 # custom
 src/temp
+.DS_Store
