@@ -26,6 +26,7 @@ const flatConfig = [
       '**/node_modules',
       '**/coverage',
       'src/tests/bundle/*',
+      'src/examples/bundling/*',
     ],
   },
   {

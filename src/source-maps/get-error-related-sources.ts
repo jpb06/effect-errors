@@ -1,3 +1,7 @@
+import { Effect } from 'effect';
+
+import { type FsError } from '../logic/effects/fs/fs-error.js';
+
 import { getErrorLocationFrom } from './get-error-location-from-file-path.js';
 import { getSourceCode } from './get-source-code.js';
 import {
@@ -5,25 +9,27 @@ import {
   getSourcesFromMapFile,
 } from './get-sources-from-map-file.js';
 
-export const getErrorRelatedSources = async (
+export const getErrorRelatedSources = (
   sourceFile: string,
-): Promise<ErrorRelatedSources | undefined> => {
-  const location = getErrorLocationFrom(sourceFile);
-  if (location === undefined) {
-    return;
-  }
+): Effect.Effect<ErrorRelatedSources | undefined, FsError> =>
+  Effect.gen(function* () {
+    const location = getErrorLocationFrom(sourceFile);
+    if (location === undefined) {
+      return;
+    }
 
-  const { filePath, line, column } = location;
+    const { filePath, line, column } = location;
 
-  if (filePath.endsWith('.ts')) {
-    const source = await getSourceCode(location);
+    const isTypescriptFile = filePath.endsWith('.ts');
+    if (isTypescriptFile) {
+      const source = yield* getSourceCode(location);
 
-    return {
-      runPath: `${filePath}:${line}:${column}`,
-      sourcesPath: undefined,
-      source,
-    };
-  }
+      return {
+        runPath: `${filePath}:${line}:${column}`,
+        sourcesPath: undefined,
+        source,
+      };
+    }
 
-  return await getSourcesFromMapFile(location);
-};
+    return yield* getSourcesFromMapFile(location);
+  });

@@ -1,4 +1,7 @@
-import fs from 'fs-extra';
+import { Effect } from 'effect';
+
+import { type FsError } from '../logic/effects/fs/fs-error.js';
+import { readFileEffect } from '../logic/effects/fs/fs-extra.effects.js';
 
 import { type ErrorLocation } from './get-error-location-from-file-path.js';
 
@@ -10,31 +13,30 @@ export interface SourceCode {
 
 const numberOflinesToExtract = 7;
 
-export const getSourceCode = async (
+export const getSourceCode = (
   { filePath, line, column }: ErrorLocation,
   isFromJs = false,
-): Promise<SourceCode[]> => {
-  const start = line >= 4 ? line - 4 : 0;
+): Effect.Effect<SourceCode[], FsError> =>
+  Effect.gen(function* () {
+    const start = line >= 4 ? line - 4 : 0;
 
-  const sourceCode = await fs.readFile(filePath, {
-    encoding: 'utf-8',
+    const sourceCode = yield* readFileEffect(filePath);
+
+    return sourceCode
+      .split('\n')
+      .splice(start, numberOflinesToExtract)
+      .map((currentLine, index) => {
+        const currentLineNumber = index + start + 1;
+
+        return {
+          line: currentLineNumber,
+          code: currentLine,
+          column:
+            currentLineNumber === line
+              ? isFromJs
+                ? column + 1
+                : column
+              : undefined,
+        };
+      });
   });
-
-  return sourceCode
-    .split('\n')
-    .splice(start, numberOflinesToExtract)
-    .map((currentLine, index) => {
-      const currentLineNumber = index + start + 1;
-
-      return {
-        line: currentLineNumber,
-        code: currentLine,
-        column:
-          currentLineNumber === line
-            ? isFromJs
-              ? column + 1
-              : column
-            : undefined,
-      };
-    });
-};
