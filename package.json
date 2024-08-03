@@ -49,7 +49,7 @@
     "bundle-example": "bun esbuild --bundle --platform=node --format=esm --sourcemap=external --minify --inject:./src/examples/bundling/cjs-shims.ts --outfile=./src/tests/bundle/from-promise.js ./src/examples/bundling/from-promise.bundle.ts"
   },
   "dependencies": {
-    "@effect/schema": "^0.69.2",
+    "@effect/schema": "^0.70.0",
     "chalk": "<5",
     "effect": "^3.5.8",
     "source-map-js": "^1.2.0"
