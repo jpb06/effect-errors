@@ -39,7 +39,7 @@ jobs:
         run: bun install --frozen-lockfile
 
       - name: 📓 Format
-        run: bun run format
+        run: bun run format-ci
 
       - name: 🔬 Lint
         run: bun run lint
