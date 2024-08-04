@@ -9,7 +9,7 @@ import { fromPromiseTaskSources } from './tests/mock-data/from-promises-sources.
 import { mockConsole } from './tests/mocks/console.mock.js';
 import { effectCause } from './tests/runners/effect-cause.js';
 
-void mockConsole({
+mockConsole({
   info: vi.fn(),
 });
 
@@ -48,7 +48,6 @@ describe('captureErrors function', () => {
     expect(stack).not.toHaveLength(0);
 
     expect(sources?.length).toBe(2);
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     for (let i = 0; i < sources!.length; i++) {
       const current = sources?.at(i);
       const expected = fromPromiseTaskSources[i];

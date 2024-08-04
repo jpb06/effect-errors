@@ -14,7 +14,6 @@ const readUser = (name: string) =>
     },
   })(
     Effect.tryPromise({
-      // eslint-disable-next-line prefer-promise-reject-errors
       try: async () => await Promise.reject('Oh no, this user does no exist!'),
       catch: (e) => new UserNotFoundError({ cause: e }),
     }),

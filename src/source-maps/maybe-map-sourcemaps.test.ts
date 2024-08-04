@@ -2,11 +2,11 @@ import fs from 'fs';
 import { beforeEach } from 'node:test';
 
 import { Effect } from 'effect';
-import { describe, it, expect, vi } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 
 import {
-  fromPromiseTaskSources,
   fromPromiseStack,
+  fromPromiseTaskSources,
 } from '../tests/mock-data/from-promises-sources.mock-data.js';
 import {
   parallelErrorsStack,
@@ -17,7 +17,7 @@ import { mockFsExtra } from '../tests/mocks/fs-extra.mock.js';
 import { execShellCommand } from '../tests/util/exec-shell-command.util.js';
 import { getExampleSources } from '../tests/util/get-example-sources.util.js';
 
-void mockConsole({
+mockConsole({
   warn: vi.fn(),
 });
 
@@ -123,7 +123,7 @@ describe('maybeMapSourcemaps function', () => {
 
   it('should return sources from the map file associated with a js file', async () => {
     const jsFile =
-      '/Users/jpb06/repos/perso/effect-errors/src/tests/bundle/from-promise.js:44:216';
+      '/Users/jpb06/repos/perso/effect-errors/src/tests/bundle/from-promise.js:41:216';
 
     exists.mockResolvedValueOnce(true as never);
     const mapFile = await fs.promises.readFile(
@@ -169,8 +169,8 @@ describe('maybeMapSourcemaps function', () => {
     const effectError = parsedError.errors.at(0);
 
     const runPaths = [
-      'effect-errors/src/tests/bundle/from-promise.js:44:216',
-      'effect-errors/src/tests/bundle/from-promise.js:44:497',
+      'effect-errors/src/tests/bundle/from-promise.js:41:216',
+      'effect-errors/src/tests/bundle/from-promise.js:41:497',
     ];
 
     expect(effectError.sources?.length).toBe(2);
