@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import type { Assertion, AsymmetricMatchersContaining } from 'vitest';
 
 interface CustomMatchers<R = unknown> {

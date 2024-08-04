@@ -10,6 +10,7 @@ export default defineConfig({
       exclude: [
         'src/tests',
         'src/types',
+        'src/temp',
         'src/examples',
         'src/runners',
         'src/config',

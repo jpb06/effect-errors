@@ -2,7 +2,7 @@ import path from 'path';
 
 import { runPromise } from '../../runners/run-promise.js';
 
-void (async () => {
+(async () => {
   if (process.argv.length === 2) {
     console.error('Expected at least one argument!');
     process.exit(1);

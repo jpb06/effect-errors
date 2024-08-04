@@ -40,7 +40,6 @@ export const fromPromiseTaskSources = [
       },
       {
         line: 28,
-        // eslint-disable-next-line no-template-curly-in-string
         code: '        await fetch(`https://yolo-bro-oh-no.org/users/${userId}`),',
         column: undefined,
       },

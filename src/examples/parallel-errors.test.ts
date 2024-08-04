@@ -7,7 +7,7 @@ import { effectCause } from '../tests/runners/effect-cause.js';
 
 import { withParallelErrorsTask } from './parallel-errors.js';
 
-void mockConsole({
+mockConsole({
   info: vi.fn(),
   error: vi.fn(),
 });

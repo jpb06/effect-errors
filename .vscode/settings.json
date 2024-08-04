@@ -1,10 +1,11 @@
 {
-  "eslint.run": "onSave",
-  "eslint.experimental.useFlatConfig": true,
+  "biome.enabled": true,
   "editor.formatOnSave": true,
-  "editor.codeActionsOnSave": ["source.formatDocument", "source.fixAll.eslint"],
+  "editor.codeActionsOnSave": {
+    "source.organizeImports.biome": "explicit"
+  },
   "editor.tabSize": 2,
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.defaultFormatter": "biomejs.biome",
   "[shellscript]": {
     "editor.defaultFormatter": "foxundermoon.shell-format"
   },

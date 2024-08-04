@@ -7,7 +7,7 @@ import { effectCause } from '../tests/runners/effect-cause.js';
 
 import { withPlainObjectErrorTask } from './plain-object-error.js';
 
-void mockConsole({
+mockConsole({
   info: vi.fn(),
   error: vi.fn(),
 });

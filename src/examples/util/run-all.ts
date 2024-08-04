@@ -4,7 +4,7 @@ import fs from 'fs-extra';
 
 import { runPromise } from '../../index.js';
 
-void (async () => {
+(async () => {
   const files = await fs.readdir('./src/examples');
   for (const file of files) {
     if (
@@ -16,7 +16,8 @@ void (async () => {
 
       try {
         await runPromise(task.default as never);
-      } catch (e) {}
+        // biome-ignore lint/suspicious/noEmptyBlockStatements: <explanation>
+      } catch (_) {}
     }
   }
 })();

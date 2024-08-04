@@ -1,7 +1,7 @@
 export const parallelErrorsStack = [
   'at readUser (effect-errors/src/examples/parallel-errors.ts:11:10)',
-  'at parallelGet (effect-errors/src/examples/parallel-errors.ts:24:10)',
-  'at module code (effect-errors/src/examples/parallel-errors.ts:34:46)',
+  'at parallelGet (effect-errors/src/examples/parallel-errors.ts:23:10)',
+  'at module code (effect-errors/src/examples/parallel-errors.ts:33:46)',
 ];
 
 export const parallelErrorsTaskSources = [
@@ -47,82 +47,82 @@ export const parallelErrorsTaskSources = [
     ],
   },
   {
-    runPath: 'effect-errors/src/examples/parallel-errors.ts:24:10',
+    runPath: 'effect-errors/src/examples/parallel-errors.ts:23:10',
     sourcesPath: undefined,
     source: [
       {
-        line: 21,
+        line: 20,
         code: '  );',
         column: undefined,
       },
       {
-        line: 22,
+        line: 21,
         code: '',
         column: undefined,
       },
       {
-        line: 23,
+        line: 22,
         code: 'const parallelGet = (names: string[]) =>',
         column: undefined,
       },
       {
-        line: 24,
+        line: 23,
         code: "  Effect.withSpan('parallelGet', {",
         column: 10,
       },
       {
-        line: 25,
+        line: 24,
         code: '    attributes: {',
         column: undefined,
       },
       {
-        line: 26,
+        line: 25,
         code: '      names,',
         column: undefined,
       },
       {
-        line: 27,
+        line: 26,
         code: '    },',
         column: undefined,
       },
     ],
   },
   {
-    runPath: 'effect-errors/src/examples/parallel-errors.ts:34:46',
+    runPath: 'effect-errors/src/examples/parallel-errors.ts:33:46',
     sourcesPath: undefined,
     source: [
       {
-        line: 31,
+        line: 30,
         code: '    }),',
         column: undefined,
       },
       {
-        line: 32,
+        line: 31,
         code: '  );',
         column: undefined,
       },
       {
-        line: 33,
+        line: 32,
         code: '',
         column: undefined,
       },
       {
-        line: 34,
+        line: 33,
         code: "export const withParallelErrorsTask = Effect.withSpan('withParallelErrorsTask')(",
         column: 46,
       },
       {
-        line: 35,
+        line: 34,
         code: "  Effect.all([filename(fileName), parallelGet(['yolo', 'bro', 'cool'])]),",
         column: undefined,
       },
       {
-        line: 36,
+        line: 35,
         code: ');',
         column: undefined,
       },
       {
-        line: 37,
+        line: 36,
         code: '',
         column: undefined,
       },
