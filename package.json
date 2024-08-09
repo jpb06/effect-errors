@@ -52,7 +52,7 @@
   },
   "dependencies": {
     "@effect/schema": "^0.70.3",
-    "chalk": "<5",
+    "chalk": "<6",
     "effect": "^3.6.2",
     "source-map-js": "^1.2.0"
   },
