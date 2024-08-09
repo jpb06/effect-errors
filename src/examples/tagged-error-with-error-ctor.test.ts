@@ -1,10 +1,10 @@
-import chalk from 'chalk';
 import { describe, expect, it, vi } from 'vitest';
 
 import { mockConsole } from '../tests/mocks/console.mock.js';
 import { durationRegex } from '../tests/regex/duration.regex.js';
 import { effectCause } from '../tests/runners/effect-cause.js';
 
+import { stripAnsiCodes } from '../tests/util/strip-ansi-codes.util.js';
 import { withTaggedErrorTask } from './tagged-error-with-error-ctor.js';
 
 mockConsole({
@@ -19,9 +19,7 @@ describe('tagged-error-with-error-ctor task', () => {
     const { prettyPrint } = await import('./../pretty-print.js');
     const result = prettyPrint(cause);
 
-    expect(result).toChalkMatch(
-      chalk.bold.yellowBright.underline('1 error occured'),
-    );
+    expect(result).toContain('1 error occured');
   });
 
   it('should display the error', async () => {
@@ -30,11 +28,9 @@ describe('tagged-error-with-error-ctor task', () => {
     const { prettyPrint } = await import('./../pretty-print.js');
     const result = prettyPrint(cause);
 
-    expect(result).toChalkMatch(chalk.bgRed.whiteBright(' OhNo '));
-    expect(result).toChalkMatch(
-      chalk.bold.whiteBright(
-        " • Error: ENOENT: no such file or directory, open './src/examples/data/yolo.json'",
-      ),
+    expect(result).toContain(' OhNo ');
+    expect(result).toContain(
+      " • Error: ENOENT: no such file or directory, open './src/examples/data/yolo.json'",
     );
   });
 
@@ -43,17 +39,12 @@ describe('tagged-error-with-error-ctor task', () => {
 
     const { prettyPrint } = await import('./../pretty-print.js');
     const result = prettyPrint(cause);
+    const raw = stripAnsiCodes(result);
 
-    expect(result).toChalkMatch(chalk.gray('◯'));
-    expect(result).toChalkMatch(
-      chalk.whiteBright(
-        `${chalk.gray('├')}${chalk.gray('─')} at withTaggedErrorTask`,
-      ),
-    );
-    expect(result).toChalkMatch(
-      chalk.whiteBright(`${chalk.gray('╰')}${chalk.gray('─')} at readUser`),
-    );
-    expect(result).toChalkMatch(durationRegex);
+    expect(result).toContain('◯');
+    expect(raw).toContain('├─ at withTaggedErrorTask');
+    expect(raw).toContain('╰─ at readUser');
+    expect(raw.match(durationRegex)).toHaveLength(2);
   });
 
   it('should display the stack', async () => {
@@ -62,10 +53,13 @@ describe('tagged-error-with-error-ctor task', () => {
     const { prettyPrint } = await import('./../pretty-print.js');
     const result = prettyPrint(cause);
 
-    expect(result).toChalkMatch('🚨 Node Stacktrace');
-    expect(result).toChalkMatch(/│ at /);
-
-    expect(result).toChalkMatch('🚨 Effect Stacktrace');
-    expect(result).toChalkMatch(/│ at \//);
+    expect(result).toContain('🚨 Node Stacktrace');
+    expect(result).toContain('🚨 Effect Stacktrace');
+    expect(result).toMatch(
+      /│ at .*\/effect-errors\/src\/examples\/tagged-error-with-error-ctor\.ts:24:43/,
+    );
+    expect(result).toMatch(
+      /│ at .*\/effect-errors\/src\/examples\/tagged-error-with-error-ctor\.ts:11:25/,
+    );
   });
 });

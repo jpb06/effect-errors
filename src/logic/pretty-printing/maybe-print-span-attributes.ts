@@ -1,5 +1,5 @@
-import chalk from 'chalk';
 import { type Span } from 'effect/Tracer';
+import color from 'picocolors';
 
 import { type PrettyPrintOptions } from '../../types/pretty-print-options.type.js';
 
@@ -23,7 +23,7 @@ export const maybePrintSpanAttributes = (
 
   if (!isPlainString) {
     d.push(
-      `\r\n${chalk.gray('ℹ️  Consider using spans to improve errors reporting.\r\n')}`,
+      `\r\n${color.gray('ℹ️  Consider using spans to improve errors reporting.\r\n')}`,
     );
   }
 };

@@ -1,9 +1,9 @@
-import chalk from 'chalk';
+import color from 'picocolors';
 
 import { splitSpansAttributesByTypes } from './split-spans-attributes-by-type.js';
 
 const maybePrintPipe = (isLastEntry: boolean) =>
-  isLastEntry ? ' ' : chalk.gray('│');
+  isLastEntry ? ' ' : color.gray('│');
 
 export const getSpanAttributes = (
   allAttributes: ReadonlyMap<string, unknown>,
@@ -18,7 +18,7 @@ export const getSpanAttributes = (
   const formattedAttributes = Array.from(attributes)
     .map(
       ([key, value]) =>
-        `${maybePrintPipe(isLastEntry)}     ${chalk.blue(key)}${chalk.gray(':')} ${value as string}`,
+        `${maybePrintPipe(isLastEntry)}     ${color.blue(key)}${color.gray(':')} ${value as string}`,
     )
     .join('\r\n');
 

@@ -1,4 +1,4 @@
-import chalk from 'chalk';
+import color from 'picocolors';
 
 export const formatFailuresTitle = (
   errorType: unknown,
@@ -8,10 +8,10 @@ export const formatFailuresTitle = (
 ) =>
   '💥 ' +
   (failuresLength > 1
-    ? chalk.bgRed.whiteBright(` #${failureIndex + 1} -`)
+    ? color.bgRed(color.white(` #${failureIndex + 1} -`))
     : '') +
-  chalk.bgRed.whiteBright(
-    ` ${(errorType as string | undefined) ?? 'Unknown error'} `,
+  color.bgRed(
+    color.white(` ${(errorType as string | undefined) ?? 'Unknown error'} `),
   ) +
-  chalk.bold.whiteBright(` • ${message as string}`) +
+  color.bold(color.white(` • ${message as string}`)) +
   '\r\n';

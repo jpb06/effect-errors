@@ -1,9 +1,9 @@
-import chalk from 'chalk';
 import { describe, expect, it, vi } from 'vitest';
 
 import { mockConsole } from '../tests/mocks/console.mock.js';
 import { effectCause } from '../tests/runners/effect-cause.js';
 
+import { stripAnsiCodes } from '../tests/util/strip-ansi-codes.util.js';
 import { withoutSpansTask } from './without-spans.js';
 
 mockConsole({
@@ -18,9 +18,7 @@ describe('without-spans task', () => {
     const { prettyPrint } = await import('./../pretty-print.js');
     const result = prettyPrint(cause);
 
-    expect(result).toChalkMatch(
-      chalk.bold.yellowBright.underline('1 error occured'),
-    );
+    expect(result).toContain('1 error occured');
   });
 
   it('should display the error', async () => {
@@ -29,11 +27,9 @@ describe('without-spans task', () => {
     const { prettyPrint } = await import('./../pretty-print.js');
     const result = prettyPrint(cause);
 
-    expect(result).toChalkMatch(chalk.bgRed.whiteBright(' FileError '));
-    expect(result).toChalkMatch(
-      chalk.bold.whiteBright(
-        " • Error: ENOENT: no such file or directory, open 'cool.ts'",
-      ),
+    expect(result).toContain(' FileError ');
+    expect(result).toContain(
+      " • Error: ENOENT: no such file or directory, open 'cool.ts'",
     );
   });
 
@@ -42,11 +38,12 @@ describe('without-spans task', () => {
 
     const { prettyPrint } = await import('./../pretty-print.js');
     const result = prettyPrint(cause);
+    const raw = stripAnsiCodes(result);
 
-    expect(result).not.toChalkMatch(/◯/);
-    expect(result).not.toChalkMatch(/│ {2}/);
-    expect(result).not.toChalkMatch(/├/);
-    expect(result).not.toChalkMatch(/╰/);
+    expect(raw).not.toContain(/◯/);
+    expect(raw).not.toContain(/│ {2}/);
+    expect(raw).not.toContain(/├/);
+    expect(raw).not.toContain(/╰/);
   });
 
   it('should display the stack', async () => {
@@ -55,7 +52,10 @@ describe('without-spans task', () => {
     const { prettyPrint } = await import('./../pretty-print.js');
     const result = prettyPrint(cause);
 
-    expect(result).toChalkMatch('🚨 Node Stacktrace');
-    expect(result).toChalkMatch(/│ at /);
+    expect(result).not.toContain('🚨 Effect Stacktrace');
+    expect(result).toContain('🚨 Node Stacktrace');
+    expect(result).toMatch(
+      /│ at catcher (.*\/effect-errors\/src\/examples\/without-spans.ts:14:17)/,
+    );
   });
 });

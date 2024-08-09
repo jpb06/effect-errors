@@ -1,4 +1,4 @@
-import chalk from 'chalk';
+import color from 'picocolors';
 
 export const spanStackTrailingChar = (isLastEntry: boolean) =>
-  isLastEntry ? chalk.gray('╰') : chalk.gray('├');
+  isLastEntry ? color.gray('╰') : color.gray('├');

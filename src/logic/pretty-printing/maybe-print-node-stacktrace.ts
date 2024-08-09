@@ -1,5 +1,5 @@
-import chalk from 'chalk';
 import { type Span } from 'effect/Tracer';
+import color from 'picocolors';
 
 import { type PrettyPrintOptions } from '../../types/pretty-print-options.type.js';
 import { filterStack } from '../stack/filter-stack.js';
@@ -13,11 +13,11 @@ export const maybePrintNodeStacktrace = (
 ) => {
   if (stack !== undefined) {
     d.push(
-      `\r\n${span !== undefined ? '\r\n' : ''}🚨 Node Stacktrace\r\n${chalk.red(filterStack(stack, stripCwd === true))}`,
+      `\r\n${span !== undefined ? '\r\n' : ''}🚨 Node Stacktrace\r\n${color.red(filterStack(stack, stripCwd === true))}`,
     );
   } else if (!isPlainString) {
     d.push(
-      `\r\n\r\n${chalk.gray('ℹ️  Consider using a yieldable error such as Data.TaggedError and Schema.TaggedError to get a stacktrace.')}`,
+      `\r\n\r\n${color.gray('ℹ️  Consider using a yieldable error such as Data.TaggedError and Schema.TaggedError to get a stacktrace.')}`,
     );
   }
 };
