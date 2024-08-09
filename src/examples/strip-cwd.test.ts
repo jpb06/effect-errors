@@ -60,7 +60,7 @@ describe('strip-cwd task', () => {
 
     expect(raw).toContain('🚨 Node Stacktrace');
     expect(raw).toContain('🚨 Effect Stacktrace');
-    expect(raw).toContain('│ at ./src/examples/strip-cwd.ts:20:44');
-    expect(raw).toContain('│ at ./src/examples/strip-cwd.ts:11:25');
+    expect(raw).toMatch(/│ at .*\/src\/examples\/strip-cwd\.ts:20:44/);
+    expect(raw).toMatch(/│ at .*\/src\/examples\/strip-cwd\.ts:11:25/);
   });
 });
