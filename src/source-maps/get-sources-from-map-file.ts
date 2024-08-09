@@ -1,7 +1,7 @@
 import path from 'path';
 
-import chalk from 'chalk';
 import { Effect } from 'effect';
+import color from 'picocolors';
 import { type RawSourceMap, SourceMapConsumer } from 'source-map-js';
 
 import { type FsError } from '../logic/effects/fs/fs-error.js';
@@ -25,11 +25,11 @@ export const getSourcesFromMapFile = (
   Effect.gen(function* () {
     const fileExists = yield* existsEffect(`${location.filePath}.map`);
     if (!fileExists) {
-      const message = chalk.yellow(
+      const message = color.yellow(
         `${location.filePath}.map does not exist: unable to retrieve spans sourcemaps.`,
       );
       console.warn(
-        `${chalk.blueBright.underline('effect-errors')}: ${message}`,
+        `${color.blue(color.underline('effect-errors'))}: ${message}`,
       );
       return;
     }

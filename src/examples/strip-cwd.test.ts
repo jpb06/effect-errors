@@ -1,4 +1,3 @@
-import chalk from 'chalk';
 import { describe, expect, it, vi } from 'vitest';
 
 import { mockConsole } from '../tests/mocks/console.mock.js';
@@ -6,6 +5,7 @@ import { mockProcess } from '../tests/mocks/process.mock.js';
 import { durationRegex } from '../tests/regex/duration.regex.js';
 import { effectCause } from '../tests/runners/effect-cause.js';
 
+import { stripAnsiCodes } from '../tests/util/strip-ansi-codes.util.js';
 import { withCwdStrippingTask } from './strip-cwd.js';
 
 mockProcess({
@@ -23,9 +23,7 @@ describe('strip-cwd task', () => {
     const { prettyPrint } = await import('./../pretty-print.js');
     const result = prettyPrint(cause, { stripCwd: true, reverseSpans: true });
 
-    expect(result).toChalkMatch(
-      chalk.bold.yellowBright.underline('1 error occured'),
-    );
+    expect(result).toContain('1 error occured');
   });
 
   it('should display the error', async () => {
@@ -34,11 +32,9 @@ describe('strip-cwd task', () => {
     const { prettyPrint } = await import('./../pretty-print.js');
     const result = prettyPrint(cause, { stripCwd: true, reverseSpans: true });
 
-    expect(result).toChalkMatch(chalk.bgRed.whiteBright(' SomethingBad '));
-    expect(result).toChalkMatch(
-      chalk.bold.whiteBright(
-        " • Error: ENOENT: no such file or directory, open 'cool.ts'",
-      ),
+    expect(result).toContain(' SomethingBad ');
+    expect(result).toContain(
+      " • Error: ENOENT: no such file or directory, open 'cool.ts'",
     );
   });
 
@@ -47,19 +43,12 @@ describe('strip-cwd task', () => {
 
     const { prettyPrint } = await import('./../pretty-print.js');
     const result = prettyPrint(cause, { stripCwd: true, reverseSpans: true });
+    const raw = stripAnsiCodes(result);
 
-    expect(result).toChalkMatch(chalk.gray('◯'));
-    expect(result).toChalkMatch(
-      chalk.whiteBright(
-        `${chalk.gray('├')}${chalk.gray('─')} at ./src/examples/strip-cwd/task.ts`,
-      ),
-    );
-    expect(result).toChalkMatch(
-      chalk.whiteBright(
-        `${chalk.gray('╰')}${chalk.gray('─')} at ./src/examples/strip-cwd.ts`,
-      ),
-    );
-    expect(result).toChalkMatch(durationRegex);
+    expect(result).toContain('◯');
+    expect(raw).toContain('├─ at ./src/examples/strip-cwd/task.ts');
+    expect(raw).toContain('╰─ at ./src/examples/strip-cwd.ts');
+    expect(raw.match(durationRegex)).toHaveLength(2);
   });
 
   it('should display the stack', async () => {
@@ -67,10 +56,11 @@ describe('strip-cwd task', () => {
 
     const { prettyPrint } = await import('./../pretty-print.js');
     const result = prettyPrint(cause, { stripCwd: true, reverseSpans: true });
+    const raw = stripAnsiCodes(result);
 
-    expect(result).toChalkMatch('🚨 Node Stacktrace');
-    expect(result).toChalkMatch(/│ at /);
-
-    expect(result).toChalkMatch('🚨 Effect Stacktrace');
+    expect(raw).toContain('🚨 Node Stacktrace');
+    expect(raw).toContain('🚨 Effect Stacktrace');
+    expect(raw).toMatch(/│ at .*\/src\/examples\/strip-cwd\.ts:20:44/);
+    expect(raw).toMatch(/│ at .*\/src\/examples\/strip-cwd\.ts:11:25/);
   });
 });
