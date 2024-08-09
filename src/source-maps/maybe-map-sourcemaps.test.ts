@@ -123,7 +123,7 @@ describe('maybeMapSourcemaps function', () => {
 
   it('should return sources from the map file associated with a js file', async () => {
     const jsFile =
-      '/Users/jpb06/repos/perso/effect-errors/src/tests/bundle/from-promise.js:41:216';
+      '/Users/jpb06/repos/perso/effect-errors/src/tests/bundle/from-promise.js:36:212';
 
     exists.mockResolvedValueOnce(true as never);
     const mapFile = await fs.promises.readFile(
@@ -169,8 +169,8 @@ describe('maybeMapSourcemaps function', () => {
     const effectError = parsedError.errors.at(0);
 
     const runPaths = [
-      'effect-errors/src/tests/bundle/from-promise.js:41:216',
-      'effect-errors/src/tests/bundle/from-promise.js:41:497',
+      'effect-errors/src/tests/bundle/from-promise.js:36:213',
+      'effect-errors/src/tests/bundle/from-promise.js:36:490',
     ];
 
     expect(effectError.sources?.length).toBe(2);

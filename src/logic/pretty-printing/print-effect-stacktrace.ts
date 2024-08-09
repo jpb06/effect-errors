@@ -1,5 +1,5 @@
-import chalk from 'chalk';
 import { type Span } from 'effect/Tracer';
+import color from 'picocolors';
 
 import { type PrettyPrintOptions } from '../../types/pretty-print-options.type.js';
 import { filterStack } from '../stack/filter-stack.js';
@@ -16,6 +16,6 @@ export const printEffectStacktrace = (
 
   const cleanedStack = `│ ${filterStack(spanAttributesStack.join('\r\n│ '), stripCwd === true)}`;
   d.push(
-    `\r\n${span !== undefined ? '\r\n' : ''}🚨 Effect Stacktrace\r\n${chalk.red(cleanedStack)}`,
+    `\r\n${span !== undefined ? '\r\n' : ''}🚨 Effect Stacktrace\r\n${color.red(cleanedStack)}`,
   );
 };

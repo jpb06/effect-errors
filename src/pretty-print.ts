@@ -1,5 +1,5 @@
-import chalk from 'chalk';
 import { type Cause, isInterruptedOnly } from 'effect/Cause';
+import color from 'picocolors';
 
 import { captureErrorsFrom } from './logic/errors/capture-errors-from-cause.js';
 import { formatFailuresTitle } from './logic/pretty-printing/format-failures-title.js';
@@ -22,9 +22,13 @@ export const prettyPrint = <E>(
 
   const failures = captureErrorsFrom<E>(cause);
 
-  const title = `\r\n🫠  ${chalk.bold.yellowBright.underline(
-    `${failures.length} error${failures.length > 1 ? 's' : ''} occured\r\n`,
-  )}\r\n`;
+  const title = `\r\n🫠  ${color.bold(
+    color.yellow(
+      color.underline(
+        `${failures.length} error${failures.length > 1 ? 's' : ''} occured`,
+      ),
+    ),
+  )}\r\n\r\n`;
 
   return (
     title +

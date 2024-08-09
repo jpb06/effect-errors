@@ -1,6 +1,6 @@
-import chalk from 'chalk';
 import { Option } from 'effect';
 import { type AnySpan, type Span } from 'effect/Tracer';
+import color from 'picocolors';
 
 import { type PrettyPrintOptions } from '../../types/pretty-print-options.type.js';
 import { getSpanAttributes } from '../spans/get-span-attributes.js';
@@ -34,11 +34,11 @@ export const formatSpanAttributes = (
         isLastEntry,
       );
 
-      const message = chalk.whiteBright(
-        (isFirstEntry ? `\r\n${chalk.gray('◯')}` : '') +
+      const message = color.white(
+        (isFirstEntry ? `\r\n${color.gray('◯')}` : '') +
           '\r\n' +
           spanStackTrailingChar(isLastEntry) +
-          chalk.gray('─') +
+          color.gray('─') +
           filePath +
           getSpanDuration(status, isLastEntry) +
           formattedAttributes,

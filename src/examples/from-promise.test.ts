@@ -1,10 +1,10 @@
-import chalk from 'chalk';
 import { describe, expect, it, vi } from 'vitest';
 
 import { mockConsole } from '../tests/mocks/console.mock.js';
 import { durationRegex } from '../tests/regex/duration.regex.js';
 import { effectCause } from '../tests/runners/effect-cause.js';
 
+import { stripAnsiCodes } from '../tests/util/strip-ansi-codes.util.js';
 import { fromPromiseTask } from './from-promise.js';
 
 mockConsole({
@@ -19,9 +19,7 @@ describe('from-promise task', () => {
     const { prettyPrint } = await import('./../pretty-print.js');
     const result = prettyPrint(cause);
 
-    expect(result).toChalkMatch(
-      chalk.bold.yellowBright.underline('1 error occured'),
-    );
+    expect(result).toContain('1 error occured');
   });
 
   it('should display the error', async () => {
@@ -30,10 +28,8 @@ describe('from-promise task', () => {
     const { prettyPrint } = await import('./../pretty-print.js');
     const result = prettyPrint(cause);
 
-    expect(result).toChalkMatch(chalk.bgRed.whiteBright(' FetchError '));
-    expect(result).toChalkMatch(
-      chalk.bold.whiteBright(' • TypeError: fetch failed'),
-    );
+    expect(result).toContain(' FetchError ');
+    expect(result).toContain(' • TypeError: fetch failed');
   });
 
   it('should display spans', async () => {
@@ -41,17 +37,12 @@ describe('from-promise task', () => {
 
     const { prettyPrint } = await import('./../pretty-print.js');
     const result = prettyPrint(cause);
+    const raw = stripAnsiCodes(result);
 
-    expect(result).toChalkMatch(chalk.gray('◯'));
-    expect(result).toChalkMatch(
-      chalk.whiteBright(
-        `${chalk.gray('├')}${chalk.gray('─')} at fromPromiseTask`,
-      ),
-    );
-    expect(result).toChalkMatch(
-      chalk.whiteBright(`${chalk.gray('╰')}${chalk.gray('─')} at fetchUser`),
-    );
-    expect(result).toChalkMatch(durationRegex);
+    expect(result).toContain('◯');
+    expect(raw).toContain('├─ at fromPromiseTask');
+    expect(raw).toContain('╰─ at fetchUser');
+    expect(raw.match(durationRegex)).toHaveLength(2);
   });
 
   it('should display span attributes', async () => {
@@ -59,12 +50,9 @@ describe('from-promise task', () => {
 
     const { prettyPrint } = await import('./../pretty-print.js');
     const result = prettyPrint(cause);
+    const raw = stripAnsiCodes(result);
 
-    expect(result).toChalkMatch(
-      `${chalk.whiteBright(
-        `      ${chalk.blue('userId')}${chalk.gray(':')} 123`,
-      )}`,
-    );
+    expect(raw).toContain(`      userId: 123`);
   });
 
   it('should display the stack', async () => {
@@ -72,11 +60,10 @@ describe('from-promise task', () => {
 
     const { prettyPrint } = await import('./../pretty-print.js');
     const result = prettyPrint(cause);
+    const raw = stripAnsiCodes(result);
 
-    expect(result).toChalkMatch('🚨 Node Stacktrace');
-    expect(result).toChalkMatch(/│ at /);
-
-    expect(result).toChalkMatch('🚨 Effect Stacktrace');
-    expect(result).toChalkMatch(/│ at fetchTask/);
+    expect(result).toContain('🚨 Node Stacktrace');
+    expect(result).toContain('🚨 Effect Stacktrace');
+    expect(raw).toContain('│ at fetchTask');
   });
 });

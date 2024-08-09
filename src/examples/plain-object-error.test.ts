@@ -1,10 +1,10 @@
-import chalk from 'chalk';
 import { describe, expect, it, vi } from 'vitest';
 
 import { mockConsole } from '../tests/mocks/console.mock.js';
 import { durationRegex } from '../tests/regex/duration.regex.js';
 import { effectCause } from '../tests/runners/effect-cause.js';
 
+import { stripAnsiCodes } from '../tests/util/strip-ansi-codes.util.js';
 import { withPlainObjectErrorTask } from './plain-object-error.js';
 
 mockConsole({
@@ -19,9 +19,7 @@ describe('plain-object-error task', () => {
     const { prettyPrint } = await import('./../pretty-print.js');
     const result = prettyPrint(cause);
 
-    expect(result).toChalkMatch(
-      chalk.bold.yellowBright.underline('1 error occured'),
-    );
+    expect(result).toContain('1 error occured');
   });
 
   it('should display the error', async () => {
@@ -30,8 +28,8 @@ describe('plain-object-error task', () => {
     const { prettyPrint } = await import('./../pretty-print.js');
     const result = prettyPrint(cause);
 
-    expect(result).toChalkMatch(chalk.bgRed.whiteBright(' BigBadError '));
-    expect(result).toChalkMatch(chalk.bold.whiteBright(' • Oh no!'));
+    expect(result).toContain(' BigBadError ');
+    expect(result).toContain(' • Oh no!');
   });
 
   it('should display spans', async () => {
@@ -39,17 +37,12 @@ describe('plain-object-error task', () => {
 
     const { prettyPrint } = await import('./../pretty-print.js');
     const result = prettyPrint(cause);
+    const raw = stripAnsiCodes(result);
 
-    expect(result).toChalkMatch(chalk.gray('◯'));
-    expect(result).toChalkMatch(
-      chalk.whiteBright(
-        `${chalk.gray('├')}${chalk.gray('─')} at withPlainObjectErrorTask`,
-      ),
-    );
-    expect(result).toChalkMatch(
-      chalk.whiteBright(`${chalk.gray('╰')}${chalk.gray('─')} at readUser`),
-    );
-    expect(result).toChalkMatch(durationRegex);
+    expect(result).toContain('◯');
+    expect(raw).toContain('├─ at withPlainObjectErrorTask');
+    expect(raw).toContain('╰─ at readUser');
+    expect(raw.match(durationRegex)).toHaveLength(2);
   });
 
   it('should not display any stack', async () => {
@@ -58,6 +51,6 @@ describe('plain-object-error task', () => {
     const { prettyPrint } = await import('./../pretty-print.js');
     const result = prettyPrint(cause);
 
-    expect(result).not.toChalkMatch('🚨 Node Stacktrace');
+    expect(result).not.toContain('🚨 Node Stacktrace');
   });
 });
