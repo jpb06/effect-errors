@@ -52,7 +52,6 @@
   },
   "dependencies": {
     "@effect/schema": "^0.70.3",
-    "chalk": "<5",
     "effect": "^3.6.2",
     "source-map-js": "^1.2.0"
   },
@@ -63,7 +62,7 @@
     "@babel/plugin-transform-modules-commonjs": "^7.24.8",
     "@biomejs/biome": "^1.8.3",
     "@types/fs-extra": "^11.0.4",
-    "@types/node": "^22.1.0",
+    "@types/node": "^22.2.0",
     "@vitest/coverage-v8": "^2.0.5",
     "babel-plugin-annotate-pure-calls": "^0.4.0",
     "copyfiles": "^2.4.1",
