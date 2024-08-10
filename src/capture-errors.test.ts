@@ -38,13 +38,8 @@ describe('captureErrors function', () => {
     expect(spans).toHaveLength(2);
     expect(spans?.[0].name).toBe('fetchUser');
 
-    expect(spans?.[0].attributes).toHaveAttributes([
-      {
-        key: 'userId',
-        value: '123',
-      },
-    ]);
-    expect(spans?.[1].attributes).toHaveAttributes([]);
+    expect(spans?.[0].attributes).toStrictEqual({ userId: '123' });
+    expect(spans?.[1].attributes).toStrictEqual({});
     expect(stack).not.toHaveLength(0);
 
     expect(sources?.length).toBe(2);

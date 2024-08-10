@@ -2,7 +2,7 @@ import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
   test: {
-    setupFiles: ['./src/tests/matchers'],
+    //setupFiles: ['./src/tests/matchers'],
     coverage: {
       reporter: ['text', 'json', 'html', 'lcov', 'json-summary'],
       all: true,

@@ -1,8 +1,6 @@
 import type { Assertion, AsymmetricMatchersContaining } from 'vitest';
 
-interface CustomMatchers<R = unknown> {
-  toHaveAttributes: (input: Array<{ key: string; value: unknown }>) => R;
-}
+interface CustomMatchers<R = unknown> {}
 
 declare module 'vitest' {
   interface Assertion<T = unknown> extends CustomMatchers<T> {}
