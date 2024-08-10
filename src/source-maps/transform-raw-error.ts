@@ -34,11 +34,16 @@ export const transformRawError =
 
           const errorSources = yield* maybeMapSourcemaps(stacktrace);
 
+          const duration =
+            status._tag === 'Ended'
+              ? +`${(status.endTime - status.startTime) / BigInt(1000000)}`
+              : undefined;
+
           sources.push(...errorSources);
           spans.push({
             name,
-            attributes,
-            status,
+            attributes: Object.fromEntries(attributes),
+            durationInMilliseconds: duration,
           });
           current = Option.getOrUndefined(current.parent);
         }

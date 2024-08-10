@@ -42,7 +42,7 @@ await runPromise(
 );
 ```
 
-You can also directly import the `prettyPrint` function to do whatever with it if you want 🤷
+You can also directly import the `prettyPrint` function to do whatever you want with it 🤷
 
 ```typescript
 import { prettyPrint } from 'effect-errors';
@@ -56,7 +56,7 @@ await Effect.runPromise(
     Effect.catchAll((e) => {
       console.error(prettyPrint(e));
 
-      return Effect.fail('❌ runPromise failure') as never;
+      return Effect.fail('❌ runPromise failure');
     }),
   ),
 );
@@ -65,7 +65,7 @@ await Effect.runPromise(
 Signature is the following:
 
 ```typescript
-const prettyPrint: <E>(cause: Cause<E>, options?: PrettyPrintOptions) => string;
+const prettyPrint: <E>(cause: Cause<E>, options?: PrettyPrintOptions) => string
 ```
 
 `PrettyPrintOptions` allows you to tweak the following:
@@ -96,7 +96,7 @@ import { Schema } from '@effect/schema';
 export class FileNotFoundError extends Schema.TaggedError<SchemaError>()(
   'FileNotFound',
   {
-    cause: Schema.CauseDefectUnknown,
+    cause: Schema.Defect,
   },
 ) {}
 ```
@@ -148,33 +148,33 @@ You might want to apply your own logic to reported errors data; for example if y
 ```typescript
 interface ErrorSpan {
   name: string;
-  attributes: ReadonlyMap<string, unknown>;
-  status: SpanStatus;
+  attributes: Record<string, unknown>;
+  durationInMilliseconds: number | undefined;
 }
 
-interface ErrorData {
+export interface ErrorData {
   errorType: unknown;
   message: unknown;
-  stack?: string[];
-  sources?: string[];
-  spans?: ErrorSpan[];
+  stack: string[] | undefined;
+  sources: ErrorRelatedSources[] | undefined;
+  spans: ErrorSpan[] | undefined;
   isPlainString: boolean;
 }
 
-interface CapturedErrors {
+export interface CapturedErrors {
   interrupted: boolean;
   errors: ErrorData[];
 }
 
-interface CaptureErrorsOptions {
+export interface CaptureErrorsOptions {
   reverseSpans?: boolean;
   stripCwd?: boolean;
 }
 
 const captureErrors: <E>(
-  cause: Cause<E>,
-  { reverseSpans, stripCwd }?: CaptureErrorsOptions,
-) => CapturedErrors;
+  cause: Cause<E>, 
+  options?: CaptureErrorsOptions
+) => Effect.Effect<CapturedErrors, FsError>
 ```
 
 You can use `captureErrors` like so:
@@ -185,13 +185,129 @@ import { captureErrors } from 'effect-errors';
 await Effect.runPromise(
   pipe(
     effect,
-    Effect.catchAll((e) => {
-      const data = captureErrors(e);
+    Effect.catchAll((e) =>
+      Effect.gen(function* () {
+        const errors = yield* captureErrors(e);
 
-      // ...
-    }),
+        // ...
+      }),
+    ),
   ),
 );
+```
+
+Capturing errors from the [`from-promise` bundle](./src/tests/bundle/from-promise.js) would return something like this, for example:
+
+```json
+{
+  "interrupted": false,
+  "errors": [
+    {
+      "errorType": "FetchError",
+      "message": {
+        "code": "ConnectionRefused",
+        "path": "https://yolo-bro-oh-no.org/users/123",
+        "errno": 0
+      },
+      "stack": [
+        "at new e (:1:28)",
+        "at new <anonymous> (./src/tests/bundle/from-promise.js:31:85157)",
+        "at new t (:1:28)",
+        "at new za (:1:28)",
+        "at catch (./src/tests/bundle/from-promise.js:36:352)",
+        "at <anonymous> (./src/tests/bundle/from-promise.js:24:27585)",
+        "at processTicksAndRejections (:12:39)"
+      ],
+      "sources": [
+        {
+          "runPath": "/Users/jpb06/repos/perso/effect-errors/src/tests/bundle/from-promise.js:36:213",
+          "sourcesPath": "/Users/jpb06/repos/perso/effect-errors/src/examples/from-promise.ts:25:10",
+          "source": [
+            {
+              "line": 22,
+              "code": ");"
+            },
+            {
+              "line": 23,
+              "code": ""
+            },
+            {
+              "line": 24,
+              "code": "const fetchTask = (userId: string) =>"
+            },
+            {
+              "line": 25,
+              "code": "  Effect.withSpan('fetchUser', { attributes: { userId } })(",
+              "column": 10
+            },
+            {
+              "line": 26,
+              "code": "    Effect.tryPromise({"
+            },
+            {
+              "line": 27,
+              "code": "      try: async () =>"
+            },
+            {
+              "line": 28,
+              "code": "        await fetch(`https://yolo-bro-oh-no.org/users/${userId}`),"
+            }
+          ]
+        },
+        {
+          "runPath": "/Users/jpb06/repos/perso/effect-errors/src/tests/bundle/from-promise.js:36:490",
+          "sourcesPath": "/Users/jpb06/repos/perso/effect-errors/src/examples/from-promise.ts:44:39",
+          "source": [
+            {
+              "line": 41,
+              "code": "    }),"
+            },
+            {
+              "line": 42,
+              "code": "  );"
+            },
+            {
+              "line": 43,
+              "code": ""
+            },
+            {
+              "line": 44,
+              "code": "export const fromPromiseTask = Effect.withSpan('fromPromiseTask')(",
+              "column": 39
+            },
+            {
+              "line": 45,
+              "code": "  Effect.gen(function* () {"
+            },
+            {
+              "line": 46,
+              "code": "    yield* filename(fileName);"
+            },
+            {
+              "line": 47,
+              "code": ""
+            }
+          ]
+        }
+      ],
+      "spans": [
+        {
+          "name": "fromPromiseTask",
+          "attributes": {},
+          "durationInMilliseconds": 20
+        },
+        {
+          "name": "fetchUser",
+          "attributes": {
+            "userId": "123"
+          },
+          "durationInMilliseconds": 13
+        }
+      ],
+      "isPlainString": false
+    }
+  ]
+}
 ```
 
 ## ⚡ examples

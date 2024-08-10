@@ -13,21 +13,15 @@ export const checkParallelErrorsData = (
 
   expect(spans).toHaveLength(3);
   expect(spans?.[0].name).toBe('readUser');
-  expect(spans?.[0].attributes).toHaveAttributes([
-    {
-      key: 'name',
-      value: readUserSpanName,
-    },
-  ]);
+  expect(spans?.[0].attributes).toStrictEqual({
+    name: readUserSpanName,
+  });
   expect(spans?.[1].name).toBe('parallelGet');
-  expect(spans?.[1].attributes).toHaveAttributes([
-    {
-      key: 'names',
-      value: ['yolo', 'bro', 'cool'],
-    },
-  ]);
+  expect(spans?.[1].attributes).toStrictEqual({
+    names: ['yolo', 'bro', 'cool'],
+  });
   expect(spans?.[2].name).toBe('withParallelErrorsTask');
-  expect(spans?.[2].attributes).toHaveAttributes([]);
+  expect(spans?.[2].attributes).toStrictEqual({});
 
   const sources0 = sources?.at(0);
   const expected0 = parallelErrorsTaskSources[0];

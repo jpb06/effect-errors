@@ -1,6 +1,5 @@
 import { Effect } from 'effect';
 import { type Cause, isInterruptedOnly } from 'effect/Cause';
-import { type SpanStatus } from 'effect/Tracer';
 
 import { type FsError } from './logic/effects/fs/fs-error.js';
 import { captureErrorsFrom } from './logic/errors/capture-errors-from-cause.js';
@@ -9,8 +8,8 @@ import { transformRawError } from './source-maps/transform-raw-error.js';
 
 export interface ErrorSpan {
   name: string;
-  attributes: ReadonlyMap<string, unknown>;
-  status: SpanStatus;
+  attributes: Record<string, unknown>;
+  durationInMilliseconds: number | undefined;
 }
 
 export interface ErrorData {
