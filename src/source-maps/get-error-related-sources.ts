@@ -20,7 +20,8 @@ export const getErrorRelatedSources = (
 
     const { filePath, line, column } = location;
 
-    const isTypescriptFile = filePath.endsWith('.ts');
+    const isTypescriptFile =
+      filePath.endsWith('.ts') || filePath.endsWith('.tsx');
     if (isTypescriptFile) {
       const source = yield* getSourceCode(location);
 
