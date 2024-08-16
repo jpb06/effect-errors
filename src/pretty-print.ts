@@ -7,6 +7,7 @@ import { maybePrintNodeStacktrace } from './logic/pretty-printing/maybe-print-no
 import { maybePrintSpanAttributes } from './logic/pretty-printing/maybe-print-span-attributes.js';
 import { maybeWarnAboutPlainStrings } from './logic/pretty-printing/maybe-warn-about-plain-strings.js';
 import { printEffectStacktrace } from './logic/pretty-printing/print-effect-stacktrace.js';
+import { maybeAddErrorToSpansStack } from './logic/spans/maybe-add-error-to-spans-stack.js';
 import {
   type PrettyPrintOptions,
   prettyPrintOptionsDefault,
@@ -56,7 +57,12 @@ export const prettyPrint = <E>(
             options,
           );
 
-          printEffectStacktrace(d, span, spanAttributesStack, options);
+          const effectStack = maybeAddErrorToSpansStack(
+            stack,
+            spanAttributesStack,
+          );
+
+          printEffectStacktrace(d, span, effectStack, options);
           maybePrintNodeStacktrace(d, span, stack, isPlainString, options);
 
           return [...d, '\r\n'].join('');

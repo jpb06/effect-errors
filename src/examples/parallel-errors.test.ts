@@ -70,7 +70,7 @@ describe('parallel-errors task', () => {
     const result = prettyPrint(cause);
 
     expect(result).toContain('🚨 Node Stacktrace');
-    expect(result).toContain('🚨 Effect Stacktrace');
+    expect(result).toContain('🚨 Spans Stacktrace');
     expect(result).toContain('│ at parallelGet');
     expect(result).toContain('│ at readUser');
   });

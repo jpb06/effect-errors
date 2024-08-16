@@ -42,7 +42,7 @@ describe('captureErrors function', () => {
     expect(spans?.[1].attributes).toStrictEqual({});
     expect(stack).not.toHaveLength(0);
 
-    expect(sources?.length).toBe(2);
+    expect(sources?.length).toBe(3);
     for (let i = 0; i < sources!.length; i++) {
       const current = sources?.at(i);
       const expected = fromPromiseTaskSources[i];
