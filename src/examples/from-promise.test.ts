@@ -63,7 +63,7 @@ describe('from-promise task', () => {
     const raw = stripAnsiCodes(result);
 
     expect(result).toContain('🚨 Node Stacktrace');
-    expect(result).toContain('🚨 Effect Stacktrace');
+    expect(result).toContain('🚨 Spans Stacktrace');
     expect(raw).toContain('│ at fetchTask');
   });
 });

@@ -59,7 +59,7 @@ describe('strip-cwd task', () => {
     const raw = stripAnsiCodes(result);
 
     expect(raw).toContain('🚨 Node Stacktrace');
-    expect(raw).toContain('🚨 Effect Stacktrace');
+    expect(raw).toContain('🚨 Spans Stacktrace');
     expect(raw).toMatch(/│ at .*\/src\/examples\/strip-cwd\.ts:20:44/);
     expect(raw).toMatch(/│ at .*\/src\/examples\/strip-cwd\.ts:11:25/);
   });

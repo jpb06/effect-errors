@@ -64,7 +64,7 @@ describe('tagged-error-with-meta task', () => {
     const result = prettyPrint(cause);
 
     expect(result).toContain('🚨 Node Stacktrace');
-    expect(result).toContain('🚨 Effect Stacktrace');
+    expect(result).toContain('🚨 Spans Stacktrace');
     expect(result).toMatch(
       /│ at .*\/effect-errors\/src\/examples\/tagged-error-with-meta\.ts:17:47/,
     );

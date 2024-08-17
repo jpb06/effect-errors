@@ -7,6 +7,7 @@ import { stackAtRegex } from '../logic/stack/stack-regex.js';
 import { stripCwdPath } from '../logic/strip-cwd-path.js';
 import { type PrettyError } from '../types/pretty-error.type.js';
 
+import { removeNodeModulesEntriesFromStack } from '../logic/spans/maybe-add-error-to-spans-stack.js';
 import { type ErrorRelatedSources } from './get-sources-from-map-file.js';
 import { maybeMapSourcemaps } from './maybe-map-sourcemaps.js';
 
@@ -22,6 +23,14 @@ export const transformRawError =
     Effect.gen(function* () {
       const sources: ErrorRelatedSources[] = [];
       const spans = [];
+
+      if (maybeStack) {
+        const relevantStackEntries =
+          removeNodeModulesEntriesFromStack(maybeStack);
+        const errorSources = yield* maybeMapSourcemaps(relevantStackEntries);
+
+        sources.push(...errorSources);
+      }
 
       if (span !== undefined) {
         let current: Span | AnySpan | undefined = span;
@@ -45,6 +54,7 @@ export const transformRawError =
             attributes: Object.fromEntries(attributes),
             durationInMilliseconds: duration,
           });
+
           current = Option.getOrUndefined(current.parent);
         }
       }

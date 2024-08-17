@@ -52,7 +52,7 @@ describe('without-spans task', () => {
     const { prettyPrint } = await import('./../pretty-print.js');
     const result = prettyPrint(cause);
 
-    expect(result).not.toContain('🚨 Effect Stacktrace');
+    expect(result).not.toContain('🚨 Spans Stacktrace');
     expect(result).toContain('🚨 Node Stacktrace');
     expect(result).toMatch(
       /│ at catcher (.*\/effect-errors\/src\/examples\/without-spans.ts:14:17)/,

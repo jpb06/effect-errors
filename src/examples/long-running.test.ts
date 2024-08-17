@@ -65,7 +65,7 @@ describe('long-running task', () => {
     const result = prettyPrint(cause);
 
     expect(result).toContain('🚨 Node Stacktrace');
-    expect(result).toContain('🚨 Effect Stacktrace');
+    expect(result).toContain('🚨 Spans Stacktrace');
     expect(result).toMatch(
       /\/effect-errors\/src\/examples\/long-running.ts:18:39/,
     );

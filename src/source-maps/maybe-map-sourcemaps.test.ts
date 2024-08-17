@@ -40,7 +40,8 @@ describe('maybeMapSourcemaps function', () => {
       maybeMapSourcemaps(fromPromiseStack),
     );
 
-    expect(result).toStrictEqual(fromPromiseTaskSources);
+    //console.log(JSON.stringify(result));
+    expect(result).toStrictEqual(fromPromiseTaskSources.slice(1));
   });
 
   it('should extract sources from a parallel run', async () => {
@@ -57,7 +58,7 @@ describe('maybeMapSourcemaps function', () => {
       maybeMapSourcemaps(parallelErrorsStack),
     );
 
-    expect(result).toStrictEqual(parallelErrorsTaskSources);
+    expect(result).toStrictEqual(parallelErrorsTaskSources.slice(1));
   });
 
   it('should return no sources', async () => {
@@ -123,7 +124,7 @@ describe('maybeMapSourcemaps function', () => {
 
   it('should return sources from the map file associated with a js file', async () => {
     const jsFile =
-      '/Users/jpb06/repos/perso/effect-errors/src/tests/bundle/from-promise.js:36:212';
+      '/Users/jpb06/repos/perso/effect-errors/src/tests/bundle/from-promise.js:37:213';
 
     exists.mockResolvedValueOnce(true as never);
     const mapFile = await fs.promises.readFile(
@@ -144,7 +145,7 @@ describe('maybeMapSourcemaps function', () => {
 
     expect(result).toStrictEqual([
       {
-        source: fromPromiseTaskSources[0].source,
+        source: fromPromiseTaskSources[1].source,
         runPath: jsFile,
         sourcesPath:
           '/Users/jpb06/repos/perso/effect-errors/src/examples/from-promise.ts:25:10',
@@ -169,18 +170,21 @@ describe('maybeMapSourcemaps function', () => {
     const effectError = parsedError.errors.at(0);
 
     const runPaths = [
-      'effect-errors/src/tests/bundle/from-promise.js:36:213',
-      'effect-errors/src/tests/bundle/from-promise.js:36:490',
+      'effect-errors/src/tests/bundle/from-promise.js:37:348',
+      'effect-errors/src/tests/bundle/from-promise.js:37:213',
+      'effect-errors/src/tests/bundle/from-promise.js:37:490',
     ];
 
-    expect(effectError.sources?.length).toBe(2);
+    expect(effectError.sources?.length).toBe(3);
     for (let i = 0; i < effectError.sources.length; i++) {
       const error = effectError.sources[i];
       const expected = fromPromiseTaskSources[i];
+
       expect(error.runPath.endsWith(runPaths[i])).toBe(true);
       expect(error.sourcesPath.endsWith(expected.runPath)).toBe(true);
+      expect(error.source).not.toBeUndefined();
       expect(error.source).toStrictEqual(
-        expected.source.map((d) =>
+        expected.source!.map((d) =>
           d.column !== undefined ? d : { code: d.code, line: d.line },
         ),
       );
