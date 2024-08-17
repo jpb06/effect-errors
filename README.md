@@ -146,7 +146,7 @@ Effect.fail({ _tag: 'SucksToBeMe', message: 'Yeah...' });
 You might want to apply your own logic to reported errors data; for example if you want to display errors in html. You can do so using `captureErrors`. The function has the following signature:
 
 ```typescript
-interface ErrorSpan {
+export interface ErrorSpan {
   name: string;
   attributes: Record<string, unknown>;
   durationInMilliseconds: number | undefined;
@@ -211,16 +211,57 @@ Capturing errors from the [`from-promise` bundle](./src/tests/bundle/from-promis
       },
       "stack": [
         "at new e (:1:28)",
-        "at new <anonymous> (./src/tests/bundle/from-promise.js:31:85157)",
+        "at new <anonymous> (./src/tests/bundle/from-promise.js:31:85172)",
         "at new t (:1:28)",
-        "at new za (:1:28)",
-        "at catch (./src/tests/bundle/from-promise.js:36:352)",
-        "at <anonymous> (./src/tests/bundle/from-promise.js:24:27585)",
+        "at new Ga (:1:28)",
+        "at catch (./src/tests/bundle/from-promise.js:37:352)",
+        "at Sync (./src/tests/bundle/from-promise.js:31:39923)",
+        "at runLoop (./src/tests/bundle/from-promise.js:31:42686)",
+        "at evaluateEffect (./src/tests/bundle/from-promise.js:31:38196)",
+        "at evaluateMessageWhileSuspended (./src/tests/bundle/from-promise.js:31:37872)",
+        "at drainQueueOnCurrentThread (./src/tests/bundle/from-promise.js:31:35561)",
+        "at run (./src/tests/bundle/from-promise.js:31:43020)",
+        "at starveInternal (./src/tests/bundle/from-promise.js:31:6243)",
         "at processTicksAndRejections (:12:39)"
       ],
       "sources": [
         {
-          "runPath": "/Users/jpb06/repos/perso/effect-errors/src/tests/bundle/from-promise.js:36:213",
+          "runPath": "/Users/jpb06/repos/perso/effect-errors/src/tests/bundle/from-promise.js:37:352",
+          "sourcesPath": "/Users/jpb06/repos/perso/effect-errors/src/examples/from-promise.ts:30:13",
+          "source": [
+            {
+              "line": 27,
+              "code": "      try: async () =>"
+            },
+            {
+              "line": 28,
+              "code": "        await fetch(`https://yolo-bro-oh-no.org/users/${userId}`),"
+            },
+            {
+              "line": 29,
+              "code": "      catch: (e) =>"
+            },
+            {
+              "line": 30,
+              "code": "        new FetchError({",
+              "column": 13
+            },
+            {
+              "line": 31,
+              "code": "          cause: e,"
+            },
+            {
+              "line": 32,
+              "code": "        }),"
+            },
+            {
+              "line": 33,
+              "code": "    }),"
+            }
+          ]
+        },
+        {
+          "runPath": "/Users/jpb06/repos/perso/effect-errors/src/tests/bundle/from-promise.js:37:213",
           "sourcesPath": "/Users/jpb06/repos/perso/effect-errors/src/examples/from-promise.ts:25:10",
           "source": [
             {
@@ -255,7 +296,7 @@ Capturing errors from the [`from-promise` bundle](./src/tests/bundle/from-promis
           ]
         },
         {
-          "runPath": "/Users/jpb06/repos/perso/effect-errors/src/tests/bundle/from-promise.js:36:490",
+          "runPath": "/Users/jpb06/repos/perso/effect-errors/src/tests/bundle/from-promise.js:37:490",
           "sourcesPath": "/Users/jpb06/repos/perso/effect-errors/src/examples/from-promise.ts:44:39",
           "source": [
             {
@@ -294,14 +335,14 @@ Capturing errors from the [`from-promise` bundle](./src/tests/bundle/from-promis
         {
           "name": "fromPromiseTask",
           "attributes": {},
-          "durationInMilliseconds": 20
+          "durationInMilliseconds": 246
         },
         {
           "name": "fetchUser",
           "attributes": {
             "userId": "123"
           },
-          "durationInMilliseconds": 13
+          "durationInMilliseconds": 239
         }
       ],
       "isPlainString": false

@@ -19,9 +19,10 @@ export const runPromise = async <A, E>(
           return Effect.fail(e);
         }
 
-        console.error(prettyPrint(e, options));
+        const prettyError = prettyPrint(e, options);
+        console.error(prettyError);
 
-        return Effect.fail('❌ runPromise failure') as never;
+        return Effect.fail('❌ runPromise failure' as never);
       }),
     ),
   );
