@@ -14,7 +14,8 @@ export const printEffectStacktrace = (
     return;
   }
 
-  const cleanedStack = `│ ${filterStack(spanAttributesStack.join('\r\n│ '), stripCwd === true)}`;
+  const cleanedStack = `│ ${filterStack(spanAttributesStack.join('\r\n│ '), 'effect', stripCwd === true)}`;
+
   d.push(
     `\r\n${span !== undefined ? '\r\n' : ''}🚨 Spans Stacktrace\r\n${color.red(cleanedStack)}`,
   );
