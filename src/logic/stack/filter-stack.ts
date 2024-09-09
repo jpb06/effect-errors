@@ -1,8 +1,19 @@
-import { stripCwdPath } from '../strip-cwd-path.js';
+import { Match } from 'effect';
 
+import { stripCwdPath } from '../strip-cwd-path.js';
 import { stackAtRegex } from './stack-regex.js';
 
-export const filterStack = (stack: string, stripCwd: boolean) => {
+const match = Match.type<'node' | 'effect'>().pipe(
+  Match.when('effect', (_) => 'at '),
+  Match.when('node', (_) => '│ at '),
+  Match.exhaustive,
+);
+
+export const filterStack = (
+  stack: string,
+  type: 'node' | 'effect',
+  stripCwd: boolean,
+) => {
   const lines = stack.split('\r\n');
   const out: string[] = [];
 
@@ -14,7 +25,7 @@ export const filterStack = (stack: string, stripCwd: boolean) => {
     }
   }
 
-  const final = out.join('\r\n').replace(stackAtRegex, '│ at ');
+  const final = out.join('\r\n').replace(stackAtRegex, match(type));
 
   return stripCwd ? stripCwdPath(final) : final;
 };

@@ -13,7 +13,7 @@ export const maybePrintNodeStacktrace = (
 ) => {
   if (stack !== undefined) {
     d.push(
-      `\r\n${span !== undefined ? '\r\n' : ''}🚨 Node Stacktrace\r\n${color.red(filterStack(stack, stripCwd === true))}`,
+      `\r\n${span !== undefined ? '\r\n' : ''}🚨 Node Stacktrace\r\n${color.red(filterStack(stack, 'node', stripCwd === true))}`,
     );
   } else if (!isPlainString) {
     d.push(
