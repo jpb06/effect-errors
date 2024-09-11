@@ -53,6 +53,7 @@
   "dependencies": {
     "@effect/schema": "^0.72.3",
     "effect": "^3.7.2",
+    "picocolors": "^1.1.0",
     "source-map-js": "^1.2.1"
   },
   "devDependencies": {
