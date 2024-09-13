@@ -12,7 +12,7 @@ export const maybeMapSourcemaps = (
   pipe(
     Effect.forEach(stacktrace, (stackLine) =>
       Effect.gen(function* () {
-        const chunks = stackLine.split(' ');
+        const chunks = stackLine.trimStart().split(' ');
         const path =
           chunks.length === 2
             ? chunks[1]

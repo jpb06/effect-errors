@@ -40,7 +40,6 @@ describe('maybeMapSourcemaps function', () => {
       maybeMapSourcemaps(fromPromiseStack),
     );
 
-    //console.log(JSON.stringify(result));
     expect(result).toStrictEqual(fromPromiseTaskSources.slice(1));
   });
 
@@ -189,5 +188,36 @@ describe('maybeMapSourcemaps function', () => {
         ),
       );
     }
+  });
+
+  it('should handle stacktraces with trailing spaces', async () => {
+    const jsFile =
+      '/Users/jpb06/repos/perso/effect-errors/src/tests/bundle/from-promise.js:37:213';
+
+    exists.mockResolvedValueOnce(true as never);
+    const mapFile = await fs.promises.readFile(
+      `./src/tests/bundle/from-promise.js.map`,
+      {
+        encoding: 'utf-8',
+      },
+    );
+    readJson.mockResolvedValueOnce(JSON.parse(mapFile));
+    const fromPromiseSources = await getExampleSources('from-promise');
+    readFile.mockResolvedValueOnce(fromPromiseSources as never);
+
+    const { maybeMapSourcemaps } = await import('./maybe-map-sourcemaps.js');
+
+    const result = await Effect.runPromise(
+      maybeMapSourcemaps([`    at file://${jsFile}`]),
+    );
+
+    expect(result).toStrictEqual([
+      {
+        source: fromPromiseTaskSources[1].source,
+        runPath: jsFile,
+        sourcesPath:
+          '/Users/jpb06/repos/perso/effect-errors/src/examples/from-promise.ts:25:10',
+      },
+    ]);
   });
 });
