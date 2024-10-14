@@ -51,8 +51,8 @@
     "bundle-example": "bun esbuild --bundle --platform=node --format=esm --sourcemap=external --minify --inject:./src/examples/bundling/cjs-shims.ts --outfile=./src/tests/bundle/from-promise.js ./src/examples/bundling/from-promise.bundle.ts"
   },
   "dependencies": {
-    "@effect/schema": "^0.75.2",
-    "effect": "^3.9.1",
+    "@effect/schema": "^0.75.4",
+    "effect": "^3.9.2",
     "picocolors": "^1.1.0",
     "source-map-js": "^1.2.1"
   },
@@ -64,18 +64,18 @@
     "@biomejs/biome": "^1.9.3",
     "@types/fs-extra": "^11.0.4",
     "@types/node": "^22.7.5",
-    "@vitest/coverage-v8": "^2.1.2",
+    "@vitest/coverage-v8": "^2.1.3",
     "babel-plugin-annotate-pure-calls": "^0.4.0",
     "copyfiles": "^2.4.1",
     "del-cli": "^6.0.0",
     "esbuild": "^0.24.0",
     "fs-extra": "^11.2.0",
     "globals": "^15.11.0",
-    "readme-package-icons": "^1.1.15",
+    "readme-package-icons": "^1.1.16",
     "ts-node": "^10.9.2",
     "tsx": "^4.19.1",
     "typescript": "^5.6.3",
-    "vitest": "^2.1.2",
+    "vitest": "^2.1.3",
     "vitest-mock-extended": "^2.0.2"
   }
 }
