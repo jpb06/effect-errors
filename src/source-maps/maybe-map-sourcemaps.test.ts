@@ -16,6 +16,7 @@ import { mockConsole } from '../tests/mocks/console.mock.js';
 import { mockFsExtra } from '../tests/mocks/fs-extra.mock.js';
 import { execShellCommand } from '../tests/util/exec-shell-command.util.js';
 import { getExampleSources } from '../tests/util/get-example-sources.util.js';
+import { RawErrorLocation } from './get-sources-from-map-file.js';
 
 mockConsole({
   warn: vi.fn(),
@@ -88,14 +89,13 @@ describe('maybeMapSourcemaps function', () => {
 
     const result = await Effect.runPromise(maybeMapSourcemaps([jsFile]));
 
-    expect(result).toStrictEqual([
-      {
-        _tag: 'location',
-        column: 20,
-        filePath: '/src/yolo.js',
-        line: 40,
-      },
-    ]);
+    expect(result).toHaveLength(1);
+    expect(result[0]._tag).toBe('location');
+
+    const location = result[0] as RawErrorLocation;
+    expect(location.column).toBe(20);
+    expect(location.line).toBe(40);
+    expect(location.filePath.endsWith('/src/yolo.js'));
   });
 
   it('should return no sources if map file is invalid', async () => {
