@@ -8,6 +8,7 @@ export const parallelErrorsStack = [
 
 export const parallelErrorsTaskSources: ErrorRelatedSources[] = [
   {
+    _tag: 'sources',
     runPath: 'effect-errors/src/examples/parallel-errors.ts:18:21',
     sourcesPath: undefined,
     source: [
@@ -29,6 +30,7 @@ export const parallelErrorsTaskSources: ErrorRelatedSources[] = [
     ],
   },
   {
+    _tag: 'sources',
     runPath: 'effect-errors/src/examples/parallel-errors.ts:11:10',
     sourcesPath: undefined,
     source: [
@@ -50,6 +52,7 @@ export const parallelErrorsTaskSources: ErrorRelatedSources[] = [
     ],
   },
   {
+    _tag: 'sources',
     runPath: 'effect-errors/src/examples/parallel-errors.ts:23:10',
     sourcesPath: undefined,
     source: [
@@ -67,6 +70,7 @@ export const parallelErrorsTaskSources: ErrorRelatedSources[] = [
     ],
   },
   {
+    _tag: 'sources',
     runPath: 'effect-errors/src/examples/parallel-errors.ts:33:46',
     sourcesPath: undefined,
     source: [

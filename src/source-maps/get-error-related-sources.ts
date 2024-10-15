@@ -6,12 +6,13 @@ import { getErrorLocationFrom } from './get-error-location-from-file-path.js';
 import { getSourceCode } from './get-source-code.js';
 import {
   type ErrorRelatedSources,
+  type RawErrorLocation,
   getSourcesFromMapFile,
 } from './get-sources-from-map-file.js';
 
 export const getErrorRelatedSources = (
   sourceFile: string,
-): Effect.Effect<ErrorRelatedSources | undefined, FsError> =>
+): Effect.Effect<ErrorRelatedSources | RawErrorLocation | undefined, FsError> =>
   Effect.gen(function* () {
     const location = getErrorLocationFrom(sourceFile);
     if (location === undefined) {
@@ -26,6 +27,7 @@ export const getErrorRelatedSources = (
       const source = yield* getSourceCode(location);
 
       return {
+        _tag: 'sources' as const,
         runPath: `${filePath}:${line}:${column}`,
         sourcesPath: undefined,
         source,

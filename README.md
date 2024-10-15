@@ -156,7 +156,8 @@ export interface ErrorData {
   errorType: unknown;
   message: unknown;
   stack: string[] | undefined;
-  sources: ErrorRelatedSources[] | undefined;
+  sources: Omit<ErrorRelatedSources, '_tag'>[] | undefined;
+  location: Omit<ErrorLocation, '_tag'>[] | undefined;
   spans: ErrorSpan[] | undefined;
   isPlainString: boolean;
 }
@@ -343,6 +344,75 @@ Capturing errors from the [`from-promise` bundle](./src/tests/bundle/from-promis
             "userId": "123"
           },
           "durationInMilliseconds": 239
+        }
+      ],
+      "isPlainString": false
+    }
+  ]
+}
+```
+
+If no map file is found, a `location` array will be returned instead of `sources`:
+
+
+
+```json
+{
+  "interrupted": false,
+  "errors": [
+    {
+      "errorType": "FetchError",
+      "message": "request to https://yolo-bro-oh-no.org/users/1 failed, reason: getaddrinfo ENOTFOUND yolo-bro-oh-no.org",
+      "stack": [
+        "at catcher (file:///Users/jpb06/repos/remix-effect-errors/build/server/nodejs-eyJydW50aW1lIjoibm9kZWpzIn0/index.js?t=1729013117205.3699:2:14550)",
+        "at EffectPrimitive.effect_instruction_i0 (file:///Users/jpb06/repos/remix-effect-errors/node_modules/effect/src/internal/core-effect.ts:1694:56)",
+        "at body (file:///Users/jpb06/repos/remix-effect-errors/node_modules/effect/src/internal/fiberRuntime.ts:1113:41)",
+        "at Object.effect_internal_function (file:///Users/jpb06/repos/remix-effect-errors/node_modules/effect/src/Utils.ts:780:14)",
+        "at internalCall (file:///Users/jpb06/repos/remix-effect-errors/node_modules/effect/src/Utils.ts:784:22)",
+        "at FiberRuntime.Sync (file:///Users/jpb06/repos/remix-effect-errors/node_modules/effect/src/internal/fiberRuntime.ts:1113:19)",
+        "at f (file:///Users/jpb06/repos/remix-effect-errors/node_modules/effect/src/internal/fiberRuntime.ts:1347:53)",
+        "at Object.context (file:///Users/jpb06/repos/remix-effect-errors/node_modules/effect/src/internal/tracer.ts:93:19)",
+        "at FiberRuntime.runLoop (file:///Users/jpb06/repos/remix-effect-errors/node_modules/effect/src/internal/fiberRuntime.ts:1337:34)",
+        "at FiberRuntime.evaluateEffect (file:///Users/jpb06/repos/remix-effect-errors/node_modules/effect/src/internal/fiberRuntime.ts:900:27)"
+      ],
+      "location": [
+        {
+          "filePath": "/build/server/nodejs-eyJydW50aW1lIjoibm9kZWpzIn0/index.js",
+          "line": 2,
+          "column": 14414
+        },
+        {
+          "filePath": "/build/server/nodejs-eyJydW50aW1lIjoibm9kZWpzIn0/index.js",
+          "line": 2,
+          "column": 14703
+        },
+        {
+          "filePath": "/build/server/nodejs-eyJydW50aW1lIjoibm9kZWpzIn0/index.js",
+          "line": 2,
+          "column": 17636
+        }
+      ],
+      "spans": [
+        {
+          "name": "fetch-user",
+          "attributes": {
+            "userId": 1
+          },
+          "durationInMilliseconds": 52
+        },
+        {
+          "name": "from-promise-task",
+          "attributes": {},
+          "durationInMilliseconds": 54
+        },
+        {
+          "name": "promise-example-loader",
+          "attributes": {
+            "url": "http://localhost:3000/promise",
+            "method": "GET",
+            "body": null
+          },
+          "durationInMilliseconds": 55
         }
       ],
       "isPlainString": false

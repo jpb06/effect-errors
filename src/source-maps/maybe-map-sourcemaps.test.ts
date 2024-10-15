@@ -16,6 +16,7 @@ import { mockConsole } from '../tests/mocks/console.mock.js';
 import { mockFsExtra } from '../tests/mocks/fs-extra.mock.js';
 import { execShellCommand } from '../tests/util/exec-shell-command.util.js';
 import { getExampleSources } from '../tests/util/get-example-sources.util.js';
+import { RawErrorLocation } from './get-sources-from-map-file.js';
 
 mockConsole({
   warn: vi.fn(),
@@ -71,15 +72,14 @@ describe('maybeMapSourcemaps function', () => {
 
     expect(result).toStrictEqual([
       {
+        _tag: 'stack-entry',
         runPath:
           'at /Users/jpb06/repos/perso/effect-errors/src/examples/parallel-errors.ts',
-        source: undefined,
-        sourcesPath: undefined,
       },
     ]);
   });
 
-  it('should warn when no map file is associated to a js file', async () => {
+  it('should return locations when no map file is associated to a js file', async () => {
     const jsFile =
       'at /Users/jpb06/repos/perso/effect-errors/src/yolo.js:40:20';
 
@@ -89,14 +89,13 @@ describe('maybeMapSourcemaps function', () => {
 
     const result = await Effect.runPromise(maybeMapSourcemaps([jsFile]));
 
-    expect(console.warn).toHaveBeenCalledTimes(1);
-    expect(result).toStrictEqual([
-      {
-        runPath: jsFile,
-        source: undefined,
-        sourcesPath: undefined,
-      },
-    ]);
+    expect(result).toHaveLength(1);
+    expect(result[0]._tag).toBe('location');
+
+    const location = result[0] as RawErrorLocation;
+    expect(location.column).toBe(20);
+    expect(location.line).toBe(40);
+    expect(location.filePath.endsWith('/src/yolo.js'));
   });
 
   it('should return no sources if map file is invalid', async () => {
@@ -114,9 +113,8 @@ describe('maybeMapSourcemaps function', () => {
 
     expect(result).toStrictEqual([
       {
+        _tag: 'stack-entry',
         runPath: 'at /Users/jpb06/repos/perso/effect-errors/src/yolo.js:40:20',
-        source: undefined,
-        sourcesPath: undefined,
       },
     ]);
   });
@@ -144,7 +142,7 @@ describe('maybeMapSourcemaps function', () => {
 
     expect(result).toStrictEqual([
       {
-        source: fromPromiseTaskSources[1].source,
+        ...fromPromiseTaskSources[1],
         runPath: jsFile,
         sourcesPath:
           '/Users/jpb06/repos/perso/effect-errors/src/examples/from-promise.ts:25:10',
@@ -213,7 +211,7 @@ describe('maybeMapSourcemaps function', () => {
 
     expect(result).toStrictEqual([
       {
-        source: fromPromiseTaskSources[1].source,
+        ...fromPromiseTaskSources[1],
         runPath: jsFile,
         sourcesPath:
           '/Users/jpb06/repos/perso/effect-errors/src/examples/from-promise.ts:25:10',
