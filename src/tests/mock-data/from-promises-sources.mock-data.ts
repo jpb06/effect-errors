@@ -7,6 +7,7 @@ export const fromPromiseStack = [
 
 export const fromPromiseTaskSources: ErrorRelatedSources[] = [
   {
+    _tag: 'sources',
     runPath: 'effect-errors/src/examples/from-promise.ts:30:9',
     sourcesPath: undefined,
     source: [
@@ -28,6 +29,7 @@ export const fromPromiseTaskSources: ErrorRelatedSources[] = [
     ],
   },
   {
+    _tag: 'sources',
     runPath: 'effect-errors/src/examples/from-promise.ts:25:10',
     sourcesPath: undefined,
     source: [
@@ -53,6 +55,7 @@ export const fromPromiseTaskSources: ErrorRelatedSources[] = [
     ],
   },
   {
+    _tag: 'sources',
     runPath: 'effect-errors/src/examples/from-promise.ts:44:39',
     sourcesPath: undefined,
     source: [
