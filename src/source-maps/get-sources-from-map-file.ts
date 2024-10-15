@@ -1,7 +1,6 @@
 import path from 'path';
 
 import { Effect } from 'effect';
-import color from 'picocolors';
 import { type RawSourceMap, SourceMapConsumer } from 'source-map-js';
 
 import { type FsError } from '../logic/effects/fs/fs-error.js';
@@ -11,27 +10,30 @@ import {
 } from '../logic/effects/fs/fs-extra.effects.js';
 
 import { type ErrorLocation } from './get-error-location-from-file-path.js';
-import { getSourceCode, type SourceCode } from './get-source-code.js';
+import { type SourceCode, getSourceCode } from './get-source-code.js';
 
 export interface ErrorRelatedSources {
-  source: SourceCode[] | undefined;
+  _tag: 'sources';
+  source: SourceCode[];
   runPath: string;
   sourcesPath: string | undefined;
 }
 
+export interface RawErrorLocation extends ErrorLocation {
+  _tag: 'location';
+}
+
 export const getSourcesFromMapFile = (
   location: ErrorLocation,
-): Effect.Effect<ErrorRelatedSources | undefined, FsError> =>
+): Effect.Effect<ErrorRelatedSources | RawErrorLocation | undefined, FsError> =>
   Effect.gen(function* () {
     const fileExists = yield* existsEffect(`${location.filePath}.map`);
     if (!fileExists) {
-      const message = color.yellow(
-        `${location.filePath}.map does not exist: unable to retrieve spans sourcemaps.`,
-      );
-      console.warn(
-        `${color.blue(color.underline('effect-errors'))}: ${message}`,
-      );
-      return;
+      return {
+        _tag: 'location' as const,
+        ...location,
+        filePath: location.filePath.replace(process.cwd(), ''),
+      };
     }
 
     const data = yield* readJsonEffect<RawSourceMap>(
@@ -68,6 +70,7 @@ export const getSourcesFromMapFile = (
     );
 
     return {
+      _tag: 'sources' as const,
       runPath: `${location.filePath}:${location.line}:${location.column}`,
       sourcesPath: `${absolutePath}:${sources.line}:${sources.column + 1}`,
       source,
