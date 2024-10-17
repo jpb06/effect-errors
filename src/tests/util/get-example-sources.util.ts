@@ -1,4 +1,4 @@
-import fs from 'fs';
+import fs from 'node:fs';
 
 export const getExampleSources = async (
   file: 'from-promise' | 'parallel-errors',

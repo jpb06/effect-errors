@@ -1,4 +1,4 @@
-import fs from 'fs';
+import fs from 'node:fs';
 import { beforeEach } from 'node:test';
 
 import { Effect } from 'effect';
@@ -16,7 +16,7 @@ import { mockConsole } from '../tests/mocks/console.mock.js';
 import { mockFsExtra } from '../tests/mocks/fs-extra.mock.js';
 import { execShellCommand } from '../tests/util/exec-shell-command.util.js';
 import { getExampleSources } from '../tests/util/get-example-sources.util.js';
-import { RawErrorLocation } from './get-sources-from-map-file.js';
+import type { RawErrorLocation } from './get-sources-from-map-file.js';
 
 mockConsole({
   warn: vi.fn(),
@@ -125,7 +125,7 @@ describe('maybeMapSourcemaps function', () => {
 
     exists.mockResolvedValueOnce(true as never);
     const mapFile = await fs.promises.readFile(
-      `./src/tests/bundle/from-promise.js.map`,
+      './src/tests/bundle/from-promise.js.map',
       {
         encoding: 'utf-8',
       },
@@ -194,7 +194,7 @@ describe('maybeMapSourcemaps function', () => {
 
     exists.mockResolvedValueOnce(true as never);
     const mapFile = await fs.promises.readFile(
-      `./src/tests/bundle/from-promise.js.map`,
+      './src/tests/bundle/from-promise.js.map',
       {
         encoding: 'utf-8',
       },

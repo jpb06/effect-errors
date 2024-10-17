@@ -44,4 +44,5 @@ export const unknownErrorTask = Effect.withSpan('unknownErrorTask')(
   }),
 );
 
+// biome-ignore lint/style/noDefaultExport: <explanation>
 export default unknownErrorTask;

@@ -24,7 +24,25 @@
         "noWith": "error",
         "useLiteralKeys": "error",
         "useOptionalChain": "error",
-        "useRegexLiterals": "error"
+        "useRegexLiterals": "error",
+        "noEmptyTypeParameters": "error",
+        "noExcessiveCognitiveComplexity": {
+          "level": "error",
+          "options": {
+            "maxAllowedComplexity": 25
+          }
+        },
+        "noExcessiveNestedTestSuites": "error",
+        "noForEach": "error",
+        "noThisInStatic": "error",
+        "noUselessEmptyExport": "error",
+        "noUselessFragments": "error",
+        "noUselessLabel": "error",
+        "noUselessThisAlias": "error",
+        "useArrowFunction": "error",
+        "useFlatMap": "error",
+        "useSimpleNumberKeys": "error",
+        "useSimplifiedLogicExpression": "error"
       },
       "correctness": {
         "noConstAssign": "error",
@@ -44,16 +62,40 @@
         "noUnsafeFinally": "error",
         "noUnusedVariables": "error",
         "useArrayLiterals": "error",
-        "useIsNan": "error"
+        "useIsNan": "error",
+        "noInnerDeclarations": "error",
+        "noInvalidNewBuiltin": "error",
+        "noSetterReturn": "error",
+        "noUnnecessaryContinue": "error",
+        "noStringCaseMismatch": "error",
+        "noUnsafeOptionalChaining": "error",
+        "noUnusedImports": "error",
+        "noUnusedPrivateClassMembers": "error",
+        "noVoidTypeReturn": "error",
+        "useExhaustiveDependencies": "error",
+        "useHookAtTopLevel": "error",
+        "useJsxKeyInIterable": "error",
+        "useValidForDirection": "error",
+        "useYield": "error",
+        "noChildrenProp": "error",
+        "noConstructorReturn": "error",
+        "noFlatMapIdentity": "error",
+        "noRenderReturnValue": "error",
+        "noUnusedLabels": "error",
+        "noVoidElementsWithChildren": "error"
       },
-      "security": { "noGlobalEval": "error" },
+      "security": {
+        "noGlobalEval": "error",
+        "noDangerouslySetInnerHtml": "error",
+        "noDangerouslySetInnerHtmlWithChildren": "error"
+      },
       "style": {
         "noCommaOperator": "error",
         "noNamespace": "error",
         "noUselessElse": "error",
         "noImplicitBoolean": "error",
         "noNonNullAssertion": "off",
-        "noVar": "warn",
+        "noVar": "error",
         "useAsConstAssertion": "error",
         "useBlockStatements": "error",
         "useConsistentArrayType": {
@@ -62,7 +104,43 @@
         },
         "useConst": "error",
         "useShorthandFunctionType": "error",
-        "useSingleVarDeclarator": "error"
+        "useSingleVarDeclarator": "error",
+        "noArguments": "error",
+        "noDefaultExport": "error",
+        "noInferrableTypes": "error",
+        "noNamespaceImport": "error",
+        "noNegationElse": "error",
+        "noParameterAssign": "error",
+        "noParameterProperties": "off",
+        "noShoutyConstants": "error",
+        "noUnusedTemplateLiteral": "error",
+        "useCollapsedElseIf": "error",
+        "useDefaultParameterLast": "error",
+        "useEnumInitializers": "error",
+        "useExponentiationOperator": "error",
+        "useExportType": "error",
+        "useFilenamingConvention": {
+          "level": "error",
+          "options": {
+            "requireAscii": true,
+            "filenameCases": ["kebab-case"]
+          }
+        },
+        "useForOf": "error",
+        "useFragmentSyntax": "error",
+        "useImportType": "error",
+        "useLiteralEnumMembers": "error",
+        "useNodejsImportProtocol": "error",
+        "useNumericLiterals": "error",
+        "useSelfClosingElements": "error",
+        "useShorthandArrayType": "error",
+        "useShorthandAssign": "error",
+        "useSingleCaseStatement": "error",
+        "useTemplate": {
+          "level": "warn",
+          "fix": "none"
+        },
+        "useWhile": "error"
       },
       "suspicious": {
         "noAsyncPromiseExecutor": "error",
@@ -94,7 +172,32 @@
         "noUnsafeNegation": "error",
         "useDefaultSwitchClauseLast": "error",
         "useNamespaceKeyword": "error",
-        "useValidTypeof": "error"
+        "useValidTypeof": "error",
+        "noApproximativeNumericConstant": "error",
+        "noArrayIndexKey": "error",
+        "noAssignInExpressions": "error",
+        "noCommentText": "error",
+        "noConfusingLabels": "error",
+        "noConsoleLog": "error",
+        "noConstEnum": "error",
+        "noDuplicateJsxProps": "error",
+        "noDuplicateTestHooks": "error",
+        "noEmptyInterface": "error",
+        "noExportsInTest": "error",
+        "noFocusedTests": "error",
+        "noGlobalIsFinite": "error",
+        "noGlobalIsNan": "error",
+        "noImplicitAnyLet": "error",
+        "noLabelVar": "error",
+        "noMisrefactoredShorthandAssign": "error",
+        "noRedundantUseStrict": "error",
+        "noSkippedTests": "error",
+        "noSparseArray": "error",
+        "noSuspiciousSemicolonInJsx": "error",
+        "noThenProperty": "error",
+        "useAwait": "error",
+        "useGetterReturn": "error",
+        "useIsArray": "error"
       }
     },
     "ignore": [
@@ -112,56 +215,5 @@
       "semicolons": "always",
       "indentStyle": "space"
     }
-  },
-  "overrides": [
-    {
-      "include": ["**/*.ts", "**/*.tsx", "**/*.mts", "**/*.cts"],
-      "linter": {
-        "rules": {
-          "correctness": {
-            "noConstAssign": "off",
-            "noGlobalObjectCalls": "off",
-            "noInvalidConstructorSuper": "off",
-            "noInvalidNewBuiltin": "off",
-            "noNewSymbol": "off",
-            "noSetterReturn": "off",
-            "noUndeclaredVariables": "off",
-            "noUnreachable": "off",
-            "noUnreachableSuper": "off"
-          },
-          "style": {
-            "noArguments": "error",
-            "noVar": "error",
-            "useConst": "error"
-          },
-          "suspicious": {
-            "noDuplicateClassMembers": "off",
-            "noDuplicateObjectKeys": "off",
-            "noDuplicateParameters": "off",
-            "noFunctionAssign": "off",
-            "noImportAssign": "off",
-            "noRedeclare": "off",
-            "noUnsafeNegation": "off",
-            "useGetterReturn": "off",
-            "useAwait": "error"
-          }
-        }
-      }
-    },
-    {
-      "include": ["**/*.ts", "**/*.mts"],
-      "linter": {
-        "rules": {
-          "complexity": { "noUselessTernary": "error" },
-          "nursery": {},
-          "suspicious": {
-            "noDoubleEquals": "error",
-            "useIsArray": "error",
-            "noFocusedTests": "error",
-            "noSkippedTests": "error"
-          }
-        }
-      }
-    }
-  ]
+  }
 }

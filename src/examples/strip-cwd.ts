@@ -21,4 +21,5 @@ export const withCwdStrippingTask = Effect.withSpan(
   '/Users/jpb06/repos/perso/effect-errors/src/examples/strip-cwd/task.ts',
 )(Effect.all([filename(fileName), readUser]));
 
+// biome-ignore lint/style/noDefaultExport: <explanation>
 export default withCwdStrippingTask;

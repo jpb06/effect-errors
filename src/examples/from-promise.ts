@@ -52,4 +52,5 @@ export const fromPromiseTask = Effect.withSpan('fromPromiseTask')(
   }),
 );
 
+// biome-ignore lint/style/noDefaultExport: <explanation>
 export default fromPromiseTask;

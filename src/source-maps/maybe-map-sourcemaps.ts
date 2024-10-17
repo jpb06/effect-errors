@@ -1,11 +1,11 @@
 import { Effect, pipe } from 'effect';
 
-import { type FsError } from '../logic/effects/fs/fs-error.js';
+import type { FsError } from '../logic/effects/fs/fs-error.js';
 import { stackAtRegex } from '../logic/stack/stack-regex.js';
 
 import { getErrorRelatedSources } from './get-error-related-sources.js';
-import {
-  type ErrorRelatedSources,
+import type {
+  ErrorRelatedSources,
   RawErrorLocation,
 } from './get-sources-from-map-file.js';
 

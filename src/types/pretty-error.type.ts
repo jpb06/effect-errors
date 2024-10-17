@@ -1,4 +1,4 @@
-import { type Span } from 'effect/Tracer';
+import type { Span } from 'effect/Tracer';
 
 export class PrettyError {
   constructor(

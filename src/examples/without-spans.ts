@@ -35,4 +35,5 @@ export const withoutSpansTask = Effect.gen(function* () {
   return yield* unwrapResponseTask(response);
 });
 
+// biome-ignore lint/style/noDefaultExport: <explanation>
 export default withoutSpansTask;

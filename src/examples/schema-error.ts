@@ -19,4 +19,5 @@ export const withSchemaErrorTask = Effect.withSpan('withSchemaErrorTask')(
   Effect.all([filename(fileName), readUser]),
 );
 
+// biome-ignore lint/style/noDefaultExport: <explanation>
 export default withSchemaErrorTask;

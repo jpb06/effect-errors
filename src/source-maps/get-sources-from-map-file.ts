@@ -1,15 +1,15 @@
-import path from 'path';
+import path from 'node:path';
 
 import { Effect } from 'effect';
 import { type RawSourceMap, SourceMapConsumer } from 'source-map-js';
 
-import { type FsError } from '../logic/effects/fs/fs-error.js';
+import type { FsError } from '../logic/effects/fs/fs-error.js';
 import {
   existsEffect,
   readJsonEffect,
 } from '../logic/effects/fs/fs-extra.effects.js';
 
-import { type ErrorLocation } from './get-error-location-from-file-path.js';
+import type { ErrorLocation } from './get-error-location-from-file-path.js';
 import { type SourceCode, getSourceCode } from './get-source-code.js';
 
 export interface ErrorRelatedSources {

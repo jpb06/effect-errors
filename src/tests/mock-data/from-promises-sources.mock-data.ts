@@ -1,4 +1,4 @@
-import { ErrorRelatedSources } from '../../source-maps/get-sources-from-map-file.js';
+import type { ErrorRelatedSources } from '../../source-maps/get-sources-from-map-file.js';
 
 export const fromPromiseStack = [
   'at fetchTask (effect-errors/src/examples/from-promise.ts:25:10)',

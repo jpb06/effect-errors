@@ -14,4 +14,5 @@ export const withPlainObjectErrorTask = Effect.withSpan(
   'withPlainObjectErrorTask',
 )(Effect.all([filename(fileName), readUser]));
 
+// biome-ignore lint/style/noDefaultExport: <explanation>
 export default withPlainObjectErrorTask;
