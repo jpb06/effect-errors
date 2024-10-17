@@ -1,10 +1,10 @@
 import { Effect } from 'effect';
 import { type Cause, isInterruptedOnly } from 'effect/Cause';
 
-import { type FsError } from './logic/effects/fs/fs-error.js';
+import type { FsError } from './logic/effects/fs/fs-error.js';
 import { captureErrorsFrom } from './logic/errors/capture-errors-from-cause.js';
-import { ErrorLocation } from './source-maps/get-error-location-from-file-path.js';
-import { type ErrorRelatedSources } from './source-maps/get-sources-from-map-file.js';
+import type { ErrorLocation } from './source-maps/get-error-location-from-file-path.js';
+import type { ErrorRelatedSources } from './source-maps/get-sources-from-map-file.js';
 import { transformRawError } from './source-maps/transform-raw-error.js';
 
 export interface ErrorSpan {

@@ -34,4 +34,5 @@ export const withParallelErrorsTask = Effect.withSpan('withParallelErrorsTask')(
   Effect.all([filename(fileName), parallelGet(['yolo', 'bro', 'cool'])]),
 );
 
+// biome-ignore lint/style/noDefaultExport: <explanation>
 export default withParallelErrorsTask;

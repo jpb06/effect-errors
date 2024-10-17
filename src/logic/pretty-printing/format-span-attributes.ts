@@ -1,8 +1,8 @@
 import { Option } from 'effect';
-import { type AnySpan, type Span } from 'effect/Tracer';
+import type { AnySpan, Span } from 'effect/Tracer';
 import color from 'picocolors';
 
-import { type PrettyPrintOptions } from '../../types/pretty-print-options.type.js';
+import type { PrettyPrintOptions } from '../../types/pretty-print-options.type.js';
 import { getSpanAttributes } from '../spans/get-span-attributes.js';
 import { getSpanDuration } from '../spans/get-span-duration.js';
 import { spanStackTrailingChar } from '../spans/spans-stack-trailing-char.js';
@@ -34,15 +34,20 @@ export const formatSpanAttributes = (
         isLastEntry,
       );
 
+      const maybeCircle = isFirstEntry ? `\r\n${color.gray('◯')}` : '';
+
       const message = color.white(
-        (isFirstEntry ? `\r\n${color.gray('◯')}` : '') +
-          '\r\n' +
-          spanStackTrailingChar(isLastEntry) +
-          color.gray('─') +
-          filePath +
-          getSpanDuration(status, isLastEntry) +
-          formattedAttributes,
+        `${maybeCircle}\r\n${spanStackTrailingChar(isLastEntry)}${color.gray('─')}${filePath}${getSpanDuration(status, isLastEntry)}${formattedAttributes}`,
       );
+      // const message = color.white(
+      //   maybeCircle +
+      //     '\r\n' +
+      //     spanStackTrailingChar(isLastEntry) +
+      //     color.gray('─') +
+      //     filePath +
+      //     getSpanDuration(status, isLastEntry) +
+      //     formattedAttributes,
+      // );
 
       return {
         message,

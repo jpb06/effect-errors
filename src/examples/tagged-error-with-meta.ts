@@ -23,4 +23,5 @@ export const withMetaTaggedErrorTask = Effect.withSpan(
   },
 )(Effect.all([filename(fileName), subTask]));
 
+// biome-ignore lint/style/noDefaultExport: <explanation>
 export default withMetaTaggedErrorTask;

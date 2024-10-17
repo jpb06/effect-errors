@@ -1,9 +1,9 @@
 import { Effect } from 'effect';
 
-import { type FsError } from '../logic/effects/fs/fs-error.js';
+import type { FsError } from '../logic/effects/fs/fs-error.js';
 import { readFileEffect } from '../logic/effects/fs/fs-extra.effects.js';
 
-import { type ErrorLocation } from './get-error-location-from-file-path.js';
+import type { ErrorLocation } from './get-error-location-from-file-path.js';
 
 export interface SourceCode {
   line: number;

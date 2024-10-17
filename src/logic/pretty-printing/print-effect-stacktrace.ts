@@ -1,7 +1,7 @@
-import { type Span } from 'effect/Tracer';
+import type { Span } from 'effect/Tracer';
 import color from 'picocolors';
 
-import { type PrettyPrintOptions } from '../../types/pretty-print-options.type.js';
+import type { PrettyPrintOptions } from '../../types/pretty-print-options.type.js';
 import { filterStack } from '../stack/filter-stack.js';
 
 export const printEffectStacktrace = (

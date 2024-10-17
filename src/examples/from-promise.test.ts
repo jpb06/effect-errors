@@ -52,7 +52,7 @@ describe('from-promise task', () => {
     const result = prettyPrint(cause);
     const raw = stripAnsiCodes(result);
 
-    expect(raw).toContain(`      userId: 123`);
+    expect(raw).toContain('      userId: 123');
   });
 
   it('should display the stack', async () => {

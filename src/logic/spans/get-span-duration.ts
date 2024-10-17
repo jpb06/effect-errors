@@ -1,4 +1,4 @@
-import { type SpanStatus } from 'effect/Tracer';
+import type { SpanStatus } from 'effect/Tracer';
 import color from 'picocolors';
 
 export const getSpanDuration = (status: SpanStatus, isLastEntry: boolean) => {

@@ -1,4 +1,4 @@
-import { ErrorRelatedSources } from '../../source-maps/get-sources-from-map-file.js';
+import type { ErrorRelatedSources } from '../../source-maps/get-sources-from-map-file.js';
 
 export const parallelErrorsStack = [
   'at readUser (effect-errors/src/examples/parallel-errors.ts:11:10)',

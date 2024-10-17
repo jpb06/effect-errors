@@ -12,4 +12,5 @@ export const withStringErrorTask = Effect.withSpan('withStringErrorTask')(
   Effect.all([filename(fileName), readUser]),
 );
 
+// biome-ignore lint/style/noDefaultExport: <explanation>
 export default withStringErrorTask;

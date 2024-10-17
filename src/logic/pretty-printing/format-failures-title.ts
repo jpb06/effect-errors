@@ -5,13 +5,15 @@ export const formatFailuresTitle = (
   message: unknown,
   failuresLength: number,
   failureIndex: number,
-) =>
-  '💥 ' +
-  (failuresLength > 1
-    ? color.bgRed(color.white(` #${failureIndex + 1} -`))
-    : '') +
-  color.bgRed(
+) => {
+  const failuresCount =
+    failuresLength > 1
+      ? color.bgRed(color.white(` #${failureIndex + 1} -`))
+      : '';
+  const type = color.bgRed(
     color.white(` ${(errorType as string | undefined) ?? 'Unknown error'} `),
-  ) +
-  color.bold(color.white(` • ${message as string}`)) +
-  '\r\n';
+  );
+  const formattedMessage = color.bold(color.white(` • ${message as string}`));
+
+  return `💥 ${failuresCount}${type}${formattedMessage}\r\n`;
+};

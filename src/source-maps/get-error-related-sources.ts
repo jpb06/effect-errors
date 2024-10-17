@@ -1,6 +1,6 @@
 import { Effect } from 'effect';
 
-import { type FsError } from '../logic/effects/fs/fs-error.js';
+import type { FsError } from '../logic/effects/fs/fs-error.js';
 
 import { getErrorLocationFrom } from './get-error-location-from-file-path.js';
 import { getSourceCode } from './get-source-code.js';

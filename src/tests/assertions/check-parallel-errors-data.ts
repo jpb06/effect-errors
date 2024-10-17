@@ -1,6 +1,6 @@
 import { expect } from 'vitest';
 
-import { type ErrorData } from '../../capture-errors.js';
+import type { ErrorData } from '../../capture-errors.js';
 import { parallelErrorsTaskSources } from '../mock-data/parallel-errors.mock-data.js';
 
 export const checkParallelErrorsData = (

@@ -1,5 +1,5 @@
 import { hasProperty } from 'effect/Predicate';
-import { type Span } from 'effect/Tracer';
+import type { Span } from 'effect/Tracer';
 
 import { PrettyError } from '../../types/pretty-error.type.js';
 

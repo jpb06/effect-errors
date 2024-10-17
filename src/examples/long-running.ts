@@ -19,4 +19,5 @@ export const longRunningTask = Effect.withSpan('longRunningTask')(
   Effect.all([filename(fileName), Effect.sleep('2 seconds'), readUser]),
 );
 
+// biome-ignore lint/style/noDefaultExport: <explanation>
 export default longRunningTask;
