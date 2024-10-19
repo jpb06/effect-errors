@@ -39,15 +39,6 @@ export const formatSpanAttributes = (
       const message = color.white(
         `${maybeCircle}\r\n${spanStackTrailingChar(isLastEntry)}${color.gray('─')}${filePath}${getSpanDuration(status, isLastEntry)}${formattedAttributes}`,
       );
-      // const message = color.white(
-      //   maybeCircle +
-      //     '\r\n' +
-      //     spanStackTrailingChar(isLastEntry) +
-      //     color.gray('─') +
-      //     filePath +
-      //     getSpanDuration(status, isLastEntry) +
-      //     formattedAttributes,
-      // );
 
       return {
         message,
