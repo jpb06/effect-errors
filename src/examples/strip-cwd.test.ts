@@ -60,7 +60,8 @@ describe('strip-cwd task', () => {
 
     expect(raw).toContain('🚨 Node Stacktrace');
     expect(raw).toContain('🚨 Spans Stacktrace');
-    expect(raw).toMatch(/│ at .*\/src\/examples\/strip-cwd\.ts:20:44/);
-    expect(raw).toMatch(/│ at .*\/src\/examples\/strip-cwd\.ts:11:25/);
+    expect(raw).toMatch(/│ at .*\/src\/examples\/strip-cwd\.ts:14:19/);
+    expect(raw).toMatch(/│ at .*\/src\/examples\/strip-cwd\.ts:23:10/);
+    expect(raw).toMatch(/│ at .*\/src\/examples\/strip-cwd\.ts:16:10/);
   });
 });

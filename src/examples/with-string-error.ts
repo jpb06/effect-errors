@@ -1,15 +1,16 @@
 import { fileURLToPath } from 'node:url';
 
-import { Effect } from 'effect';
+import { Effect, pipe } from 'effect';
 
 import { filename } from './util/filename.effect.js';
 
 const fileName = fileURLToPath(import.meta.url);
 
-const readUser = Effect.withSpan('readUser')(Effect.fail('Oh no!'));
+const readUser = pipe(Effect.fail('Oh no!'), Effect.withSpan('readUser'));
 
-export const withStringErrorTask = Effect.withSpan('withStringErrorTask')(
+export const withStringErrorTask = pipe(
   Effect.all([filename(fileName), readUser]),
+  Effect.withSpan('withStringErrorTask'),
 );
 
 // biome-ignore lint/style/noDefaultExport: <explanation>

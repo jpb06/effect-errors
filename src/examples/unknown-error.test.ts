@@ -56,10 +56,10 @@ describe('unknown-error task', () => {
     expect(result).toContain('🚨 Node Stacktrace');
     expect(result).toContain('🚨 Spans Stacktrace');
     expect(result).toMatch(
-      /│ at .*\/effect-errors\/src\/examples\/unknown-error\.ts:36:40/,
+      /│ at .*\/effect-errors\/src\/examples\/unknown-error\.ts:46:10/,
     );
     expect(result).toMatch(
-      /│ at .*\/effect-errors\/src\/examples\/unknown-error\.ts:11:25/,
+      /│ at .*\/effect-errors\/src\/examples\/unknown-error\.ts:13:10/,
     );
   });
 });

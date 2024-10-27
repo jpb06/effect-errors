@@ -1,6 +1,6 @@
 import { fileURLToPath } from 'node:url';
 
-import { Effect } from 'effect';
+import { Effect, pipe } from 'effect';
 import fs from 'fs-extra';
 
 import { FetchError } from './errors/fetch-error.js';
@@ -14,15 +14,16 @@ interface User {
   name: string;
 }
 
-const readUser = Effect.withSpan('readUser')(
+const readUser = pipe(
   Effect.tryPromise<User, FileError>({
     try: async () => await fs.readJson('./src/examples/data/user.json'),
     catch: (e) => new FileError({ cause: e }),
   }),
+  Effect.withSpan('readUser'),
 );
 
 const fetchTask = (userId: string) =>
-  Effect.withSpan('fetchUser', { attributes: { userId } })(
+  pipe(
     Effect.tryPromise({
       try: async () =>
         await fetch(`https://yolo-bro-oh-no.org/users/${userId}`),
@@ -31,17 +32,19 @@ const fetchTask = (userId: string) =>
           cause: e,
         }),
     }),
+    Effect.withSpan('fetchUser', { attributes: { userId } }),
   );
 
 const unwrapResponseTask = (response: Response) =>
-  Effect.withSpan('unwrapFetchUserResponse')(
+  pipe(
     Effect.tryPromise({
       try: async () => await response.json(),
       catch: (e) => new FetchError({ cause: e }),
     }),
+    Effect.withSpan('unwrapFetchUserResponse'),
   );
 
-export const fromPromiseTask = Effect.withSpan('fromPromiseTask')(
+export const fromPromiseTask = pipe(
   Effect.gen(function* () {
     yield* filename(fileName);
 
@@ -50,6 +53,7 @@ export const fromPromiseTask = Effect.withSpan('fromPromiseTask')(
 
     return yield* unwrapResponseTask(response);
   }),
+  Effect.withSpan('fromPromiseTask'),
 );
 
 // biome-ignore lint/style/noDefaultExport: <explanation>

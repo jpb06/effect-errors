@@ -12,15 +12,10 @@ import {
   parallelErrorsStack,
   parallelErrorsTaskSources,
 } from '../tests/mock-data/parallel-errors.mock-data.js';
-import { mockConsole } from '../tests/mocks/console.mock.js';
 import { mockFsExtra } from '../tests/mocks/fs-extra.mock.js';
 import { execShellCommand } from '../tests/util/exec-shell-command.util.js';
 import { getExampleSources } from '../tests/util/get-example-sources.util.js';
 import type { RawErrorLocation } from './get-sources-from-map-file.js';
-
-mockConsole({
-  warn: vi.fn(),
-});
 
 describe('maybeMapSourcemaps function', () => {
   const { readFile, exists, readJson } = mockFsExtra();
@@ -33,6 +28,7 @@ describe('maybeMapSourcemaps function', () => {
     const fromPromiseSources = await getExampleSources('from-promise');
     readFile
       .mockResolvedValueOnce(fromPromiseSources as never)
+      .mockResolvedValueOnce(fromPromiseSources as never)
       .mockResolvedValueOnce(fromPromiseSources as never);
 
     const { maybeMapSourcemaps } = await import('./maybe-map-sourcemaps.js');
@@ -41,13 +37,14 @@ describe('maybeMapSourcemaps function', () => {
       maybeMapSourcemaps(fromPromiseStack),
     );
 
-    expect(result).toStrictEqual(fromPromiseTaskSources.slice(1));
+    expect(result).toStrictEqual(fromPromiseTaskSources);
   });
 
   it('should extract sources from a parallel run', async () => {
     const parallelSources = await getExampleSources('parallel-errors');
 
     readFile
+      .mockResolvedValueOnce(parallelSources as never)
       .mockResolvedValueOnce(parallelSources as never)
       .mockResolvedValueOnce(parallelSources as never)
       .mockResolvedValueOnce(parallelSources as never);
@@ -58,7 +55,7 @@ describe('maybeMapSourcemaps function', () => {
       maybeMapSourcemaps(parallelErrorsStack),
     );
 
-    expect(result).toStrictEqual(parallelErrorsTaskSources.slice(1));
+    expect(result).toStrictEqual(parallelErrorsTaskSources);
   });
 
   it('should return no sources', async () => {
@@ -121,7 +118,7 @@ describe('maybeMapSourcemaps function', () => {
 
   it('should return sources from the map file associated with a js file', async () => {
     const jsFile =
-      '/Users/jpb06/repos/perso/effect-errors/src/tests/bundle/from-promise.js:37:213';
+      '/Users/jpb06/repos/perso/effect-errors/src/tests/bundle/from-promise.js:37:326';
 
     exists.mockResolvedValueOnce(true as never);
     const mapFile = await fs.promises.readFile(
@@ -144,8 +141,7 @@ describe('maybeMapSourcemaps function', () => {
       {
         ...fromPromiseTaskSources[1],
         runPath: jsFile,
-        sourcesPath:
-          '/Users/jpb06/repos/perso/effect-errors/src/examples/from-promise.ts:25:10',
+        sourcesPath: `/Users/jpb06/repos/perso/${fromPromiseTaskSources[1].runPath}`,
       },
     ]);
   });
@@ -167,9 +163,9 @@ describe('maybeMapSourcemaps function', () => {
     const effectError = parsedError.errors.at(0);
 
     const runPaths = [
-      'effect-errors/src/tests/bundle/from-promise.js:37:348',
-      'effect-errors/src/tests/bundle/from-promise.js:37:213',
-      'effect-errors/src/tests/bundle/from-promise.js:37:490',
+      'effect-errors/src/tests/bundle/from-promise.js:37:304',
+      'effect-errors/src/tests/bundle/from-promise.js:37:326',
+      'effect-errors/src/tests/bundle/from-promise.js:37:583',
     ];
 
     expect(effectError.sources?.length).toBe(3);
@@ -190,7 +186,7 @@ describe('maybeMapSourcemaps function', () => {
 
   it('should handle stacktraces with trailing spaces', async () => {
     const jsFile =
-      '/Users/jpb06/repos/perso/effect-errors/src/tests/bundle/from-promise.js:37:213';
+      '/Users/jpb06/repos/perso/effect-errors/src/tests/bundle/from-promise.js:37:326';
 
     exists.mockResolvedValueOnce(true as never);
     const mapFile = await fs.promises.readFile(
@@ -213,8 +209,7 @@ describe('maybeMapSourcemaps function', () => {
       {
         ...fromPromiseTaskSources[1],
         runPath: jsFile,
-        sourcesPath:
-          '/Users/jpb06/repos/perso/effect-errors/src/examples/from-promise.ts:25:10',
+        sourcesPath: `/Users/jpb06/repos/perso/${fromPromiseTaskSources[1].runPath}`,
       },
     ]);
   });

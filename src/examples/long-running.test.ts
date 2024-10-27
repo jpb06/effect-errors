@@ -67,7 +67,7 @@ describe('long-running task', () => {
     expect(result).toContain('🚨 Node Stacktrace');
     expect(result).toContain('🚨 Spans Stacktrace');
     expect(result).toMatch(
-      /\/effect-errors\/src\/examples\/long-running.ts:18:39/,
+      /\/effect-errors\/src\/examples\/long-running.ts:15:19/,
     );
   });
 });
