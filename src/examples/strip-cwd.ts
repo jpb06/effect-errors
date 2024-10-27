@@ -1,6 +1,6 @@
 import { fileURLToPath } from 'node:url';
 
-import { Effect } from 'effect';
+import { Effect, pipe } from 'effect';
 import fs from 'fs-extra';
 
 import { SchemaError } from './errors/schema-error.js';
@@ -8,18 +8,22 @@ import { filename } from './util/filename.effect.js';
 
 const fileName = fileURLToPath(import.meta.url);
 
-const readUser = Effect.withSpan(
-  '/Users/jpb06/repos/perso/effect-errors/src/examples/strip-cwd.ts',
-)(
+const readUser = pipe(
   Effect.tryPromise({
     try: async () => await fs.readJson('cool.ts'),
     catch: (e) => new SchemaError({ cause: e }),
   }),
+  Effect.withSpan(
+    '/Users/jpb06/repos/perso/effect-errors/src/examples/strip-cwd.ts',
+  ),
 );
 
-export const withCwdStrippingTask = Effect.withSpan(
-  '/Users/jpb06/repos/perso/effect-errors/src/examples/strip-cwd/task.ts',
-)(Effect.all([filename(fileName), readUser]));
+export const withCwdStrippingTask = pipe(
+  Effect.all([filename(fileName), readUser]),
+  Effect.withSpan(
+    '/Users/jpb06/repos/perso/effect-errors/src/examples/strip-cwd/task.ts',
+  ),
+);
 
 // biome-ignore lint/style/noDefaultExport: <explanation>
 export default withCwdStrippingTask;

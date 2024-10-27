@@ -1,8 +1,9 @@
 export const removeNodeModulesEntriesFromStack = (stack: string) => {
   const lines = stack.split('\r\n');
-  const regex = new RegExp(`${process.cwd()}/.(?![node_modules])`);
 
-  return lines.filter((l) => regex.exec(l)?.map((l) => l.trimStart()));
+  return lines.filter(
+    (line) => line.includes(process.cwd()) && !line.includes('/node_modules/'),
+  );
 };
 
 export const maybeAddErrorToSpansStack = (

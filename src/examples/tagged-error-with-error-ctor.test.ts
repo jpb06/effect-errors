@@ -56,10 +56,13 @@ describe('tagged-error-with-error-ctor task', () => {
     expect(result).toContain('🚨 Node Stacktrace');
     expect(result).toContain('🚨 Spans Stacktrace');
     expect(result).toMatch(
-      /│ at .*\/effect-errors\/src\/examples\/tagged-error-with-error-ctor\.ts:24:43/,
+      /│ at .*\/effect-errors\/src\/examples\/tagged-error-with-error-ctor\.ts:19:19/,
     );
     expect(result).toMatch(
-      /│ at .*\/effect-errors\/src\/examples\/tagged-error-with-error-ctor\.ts:11:25/,
+      /│ at .*\/effect-errors\/src\/examples\/tagged-error-with-error-ctor\.ts:26:10/,
+    );
+    expect(result).toMatch(
+      /│ at .*\/effect-errors\/src\/examples\/tagged-error-with-error-ctor\.ts:21:10/,
     );
   });
 });

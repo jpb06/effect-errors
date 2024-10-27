@@ -66,10 +66,13 @@ describe('tagged-error-with-meta task', () => {
     expect(result).toContain('🚨 Node Stacktrace');
     expect(result).toContain('🚨 Spans Stacktrace');
     expect(result).toMatch(
-      /│ at .*\/effect-errors\/src\/examples\/tagged-error-with-meta\.ts:17:47/,
+      /│ at .*\/effect-errors\/src\/examples\/tagged-error-with-meta\.ts:11:15/,
     );
     expect(result).toMatch(
-      /│ at .*\/effect-errors\/src\/examples\/tagged-error-with-meta\.ts:10:24/,
+      /│ at .*\/effect-errors\/src\/examples\/tagged-error-with-meta\.ts:19:10/,
+    );
+    expect(result).toMatch(
+      /│ at .*\/effect-errors\/src\/examples\/tagged-error-with-meta\.ts:12:10/,
     );
   });
 });
