@@ -54,6 +54,8 @@ export const getSourcesFromSpan = ({
           name,
           attributes: Object.fromEntries(attributes),
           durationInMilliseconds: duration,
+          startTime: status.startTime,
+          endTime: status._tag === 'Ended' ? status.endTime : undefined,
         });
 
         current = Option.getOrUndefined(current.parent);
