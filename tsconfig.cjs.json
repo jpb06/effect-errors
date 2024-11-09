@@ -1,8 +1,12 @@
 {
 	"extends": "./tsconfig",
 	"compilerOptions": {
-		"outDir": "dist/esm",
-		"declarationDir": "dist/dts"
+		"module": "CommonJS",
+		"moduleResolution": "Node",
+		"outDir": "dist/cjs",
+		"noEmit": false,
+		"declaration": false,
+		"sourceMap": true
 	},
 	"exclude": [
 		"./src/examples",

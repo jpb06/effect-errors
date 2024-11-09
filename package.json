@@ -7,12 +7,12 @@
   "exports": {
     ".": {
       "require": {
-        "types": "./dts/index.d.ts",
-        "default": "./cjs/index.js"
+        "default": "./cjs/index.js",
+        "types": "./dts/index.d.ts"
       },
       "import": {
-        "types": "./dts/index.d.ts",
-        "default": "./esm/index.js"
+        "default": "./esm/index.js",
+        "types": "./dts/index.d.ts"
       }
     }
   },
@@ -31,10 +31,11 @@
     "update-deps": "bunx npm-check-updates --root --format group -i",
     "copy-package": "copyfiles package.json ./dist/",
     "copy-readme": "copyfiles README.md ./dist/",
-    "build": "del-cli ./dist && bun build-esm && bun build-cjs && bun build-annotate",
-    "build-esm": "tsc -b tsconfig-prod.json",
-    "build-cjs": "babel dist/esm --plugins @babel/transform-export-namespace-from --plugins @babel/transform-modules-commonjs --out-dir dist/cjs --source-maps",
-    "build-annotate": "babel dist --plugins annotate-pure-calls --out-dir dist --source-maps",
+    "build": "del-cli ./dist && bun build-esm && bun build-cjs",
+    "build-esm": "tsc --project tsconfig.esm.json",
+    "build-cjs": "tsc --project tsconfig.cjs.json",
+    "postbuild-cjs": "echo '{\"type\": \"commonjs\"}' > dist/cjs/package.json",
+    "postbuild-esm": "echo '{\"type\": \"module\"}' > dist/esm/package.json",
     "postbuild": "bun run copy-package && bun run copy-readme",
     "format": "biome format --write ./src",
     "format-ci": "biome format ./src",
