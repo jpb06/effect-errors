@@ -1,7 +1,6 @@
+import type { PlatformError } from '@effect/platform/Error';
+import { FileSystem } from '@effect/platform/FileSystem';
 import { Effect } from 'effect';
-
-import type { FsError } from '../logic/effects/fs/fs-error.js';
-import { readFileEffect } from '../logic/effects/fs/fs-extra.effects.js';
 
 import type { ErrorLocation } from './get-error-location-from-file-path.js';
 
@@ -16,11 +15,12 @@ const numberOflinesToExtract = 7;
 export const getSourceCode = (
   { filePath, line, column }: ErrorLocation,
   isFromJs = false,
-): Effect.Effect<SourceCode[], FsError> =>
+): Effect.Effect<SourceCode[], PlatformError, FileSystem> =>
   Effect.gen(function* () {
-    const start = line >= 4 ? line - 4 : 0;
+    const fs = yield* FileSystem;
+    const sourceCode = yield* fs.readFileString(filePath, 'utf8');
 
-    const sourceCode = yield* readFileEffect(filePath);
+    const start = line >= 4 ? line - 4 : 0;
 
     return sourceCode
       .split('\n')

@@ -1,9 +1,10 @@
 import fs from 'node:fs';
 import { beforeEach } from 'node:test';
 
-import { Effect } from 'effect';
+import { NodeFileSystem } from '@effect/platform-node';
+import { FileSystem } from '@effect/platform/FileSystem';
+import { Effect, Layer, Match, pipe } from 'effect';
 import { describe, expect, it, vi } from 'vitest';
-
 import {
   fromPromiseStack,
   fromPromiseTaskSources,
@@ -12,29 +13,31 @@ import {
   parallelErrorsStack,
   parallelErrorsTaskSources,
 } from '../tests/mock-data/parallel-errors.mock-data.js';
-import { mockFsExtra } from '../tests/mocks/fs-extra.mock.js';
 import { execShellCommand } from '../tests/util/exec-shell-command.util.js';
 import { getExampleSources } from '../tests/util/get-example-sources.util.js';
 import type { RawErrorLocation } from './get-sources-from-map-file.js';
 
 describe('maybeMapSourcemaps function', () => {
-  const { readFile, exists, readJson } = mockFsExtra();
-
   beforeEach(() => {
     vi.clearAllMocks();
   });
 
   it('should extract sources from a typescript file', async () => {
     const fromPromiseSources = await getExampleSources('from-promise');
-    readFile
-      .mockResolvedValueOnce(fromPromiseSources as never)
-      .mockResolvedValueOnce(fromPromiseSources as never)
-      .mockResolvedValueOnce(fromPromiseSources as never);
+    const TestFileSystemlayer = Layer.succeed(
+      FileSystem,
+      FileSystem.of({
+        readFileString: () => Effect.succeed(fromPromiseSources),
+      } as unknown as FileSystem),
+    );
 
     const { maybeMapSourcemaps } = await import('./maybe-map-sourcemaps.js');
 
     const result = await Effect.runPromise(
-      maybeMapSourcemaps(fromPromiseStack),
+      pipe(
+        maybeMapSourcemaps(fromPromiseStack),
+        Effect.provide(TestFileSystemlayer),
+      ),
     );
 
     expect(result).toStrictEqual(fromPromiseTaskSources);
@@ -43,16 +46,20 @@ describe('maybeMapSourcemaps function', () => {
   it('should extract sources from a parallel run', async () => {
     const parallelSources = await getExampleSources('parallel-errors');
 
-    readFile
-      .mockResolvedValueOnce(parallelSources as never)
-      .mockResolvedValueOnce(parallelSources as never)
-      .mockResolvedValueOnce(parallelSources as never)
-      .mockResolvedValueOnce(parallelSources as never);
+    const TestFileSystemlayer = Layer.succeed(
+      FileSystem,
+      FileSystem.of({
+        readFileString: () => Effect.succeed(parallelSources),
+      } as unknown as FileSystem),
+    );
 
     const { maybeMapSourcemaps } = await import('./maybe-map-sourcemaps.js');
 
     const result = await Effect.runPromise(
-      maybeMapSourcemaps(parallelErrorsStack),
+      pipe(
+        maybeMapSourcemaps(parallelErrorsStack),
+        Effect.provide(TestFileSystemlayer),
+      ),
     );
 
     expect(result).toStrictEqual(parallelErrorsTaskSources);
@@ -62,9 +69,12 @@ describe('maybeMapSourcemaps function', () => {
     const { maybeMapSourcemaps } = await import('./maybe-map-sourcemaps.js');
 
     const result = await Effect.runPromise(
-      maybeMapSourcemaps([
-        'at /Users/jpb06/repos/perso/effect-errors/src/examples/parallel-errors.ts',
-      ]),
+      pipe(
+        maybeMapSourcemaps([
+          'at /Users/jpb06/repos/perso/effect-errors/src/examples/parallel-errors.ts',
+        ]),
+        Effect.provide(NodeFileSystem.layer),
+      ),
     );
 
     expect(result).toStrictEqual([
@@ -80,11 +90,18 @@ describe('maybeMapSourcemaps function', () => {
     const jsFile =
       'at /Users/jpb06/repos/perso/effect-errors/src/yolo.js:40:20';
 
-    exists.mockResolvedValueOnce(false as never);
+    const TestFileSystemlayer = Layer.succeed(
+      FileSystem,
+      FileSystem.of({
+        exists: () => Effect.succeed(false),
+      } as unknown as FileSystem),
+    );
 
     const { maybeMapSourcemaps } = await import('./maybe-map-sourcemaps.js');
 
-    const result = await Effect.runPromise(maybeMapSourcemaps([jsFile]));
+    const result = await Effect.runPromise(
+      pipe(maybeMapSourcemaps([jsFile]), Effect.provide(TestFileSystemlayer)),
+    );
 
     expect(result).toHaveLength(1);
     expect(result[0]._tag).toBe('location');
@@ -99,14 +116,19 @@ describe('maybeMapSourcemaps function', () => {
     const jsFile =
       'at /Users/jpb06/repos/perso/effect-errors/src/yolo.js:40:20';
 
-    exists.mockResolvedValueOnce(true as never);
-    readJson.mockResolvedValueOnce({
-      version: 3,
-    });
+    const TestFileSystemlayer = Layer.succeed(
+      FileSystem,
+      FileSystem.of({
+        exists: () => Effect.succeed(true),
+        readFileString: () => Effect.succeed(`{ "version": 3 }`),
+      } as unknown as FileSystem),
+    );
 
     const { maybeMapSourcemaps } = await import('./maybe-map-sourcemaps.js');
 
-    const result = await Effect.runPromise(maybeMapSourcemaps([jsFile]));
+    const result = await Effect.runPromise(
+      pipe(maybeMapSourcemaps([jsFile]), Effect.provide(TestFileSystemlayer)),
+    );
 
     expect(result).toStrictEqual([
       {
@@ -119,22 +141,41 @@ describe('maybeMapSourcemaps function', () => {
   it('should return sources from the map file associated with a js file', async () => {
     const jsFile =
       '/Users/jpb06/repos/perso/effect-errors/src/tests/bundle/from-promise.js:37:326';
-
-    exists.mockResolvedValueOnce(true as never);
     const mapFile = await fs.promises.readFile(
       './src/tests/bundle/from-promise.js.map',
       {
         encoding: 'utf-8',
       },
     );
-    readJson.mockResolvedValueOnce(JSON.parse(mapFile));
     const fromPromiseSources = await getExampleSources('from-promise');
-    readFile.mockResolvedValueOnce(fromPromiseSources as never);
+
+    const TestFileSystemlayer = Layer.succeed(
+      FileSystem,
+      FileSystem.of({
+        exists: () => Effect.succeed(true),
+        readFileString: (path: string) => {
+          return Match.value(path).pipe(
+            Match.when(
+              (path) => path.endsWith('from-promise.js.map'),
+              () => Effect.succeed(mapFile),
+            ),
+            Match.when(
+              (path) => path.endsWith('from-promise.ts'),
+              () => Effect.succeed(fromPromiseSources),
+            ),
+            Match.orElseAbsurd,
+          );
+        },
+      } as unknown as FileSystem),
+    );
 
     const { maybeMapSourcemaps } = await import('./maybe-map-sourcemaps.js');
 
     const result = await Effect.runPromise(
-      maybeMapSourcemaps([`at ${jsFile}`]),
+      pipe(
+        maybeMapSourcemaps([`at ${jsFile}`]),
+        Effect.provide(TestFileSystemlayer),
+      ),
     );
 
     expect(result).toStrictEqual([
@@ -188,21 +229,40 @@ describe('maybeMapSourcemaps function', () => {
     const jsFile =
       '/Users/jpb06/repos/perso/effect-errors/src/tests/bundle/from-promise.js:37:326';
 
-    exists.mockResolvedValueOnce(true as never);
     const mapFile = await fs.promises.readFile(
       './src/tests/bundle/from-promise.js.map',
       {
         encoding: 'utf-8',
       },
     );
-    readJson.mockResolvedValueOnce(JSON.parse(mapFile));
     const fromPromiseSources = await getExampleSources('from-promise');
-    readFile.mockResolvedValueOnce(fromPromiseSources as never);
+    const TestFileSystemlayer = Layer.succeed(
+      FileSystem,
+      FileSystem.of({
+        exists: () => Effect.succeed(true),
+        readFileString: (path: string) => {
+          return Match.value(path).pipe(
+            Match.when(
+              (path) => path.endsWith('from-promise.js.map'),
+              () => Effect.succeed(mapFile),
+            ),
+            Match.when(
+              (path) => path.endsWith('from-promise.ts'),
+              () => Effect.succeed(fromPromiseSources),
+            ),
+            Match.orElseAbsurd,
+          );
+        },
+      } as unknown as FileSystem),
+    );
 
     const { maybeMapSourcemaps } = await import('./maybe-map-sourcemaps.js');
 
     const result = await Effect.runPromise(
-      maybeMapSourcemaps([`    at file://${jsFile}`]),
+      pipe(
+        maybeMapSourcemaps([`    at file://${jsFile}`]),
+        Effect.provide(TestFileSystemlayer),
+      ),
     );
 
     expect(result).toStrictEqual([

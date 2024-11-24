@@ -1,7 +1,8 @@
+import type { PlatformError } from '@effect/platform/Error';
+import type { FileSystem } from '@effect/platform/FileSystem';
 import { Effect } from 'effect';
 
-import type { FsError } from '../logic/effects/fs/fs-error.js';
-
+import type { JsonParsingError } from '../logic/fs/read-json/index.js';
 import { getErrorLocationFrom } from './get-error-location-from-file-path.js';
 import { getSourceCode } from './get-source-code.js';
 import {
@@ -12,7 +13,11 @@ import {
 
 export const getErrorRelatedSources = (
   sourceFile: string,
-): Effect.Effect<ErrorRelatedSources | RawErrorLocation | undefined, FsError> =>
+): Effect.Effect<
+  ErrorRelatedSources | RawErrorLocation | undefined,
+  PlatformError | JsonParsingError,
+  FileSystem
+> =>
   Effect.gen(function* () {
     const location = getErrorLocationFrom(sourceFile);
     if (location === undefined) {

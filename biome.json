@@ -128,7 +128,10 @@
         },
         "useForOf": "error",
         "useFragmentSyntax": "error",
-        "useImportType": "error",
+        "useImportType": {
+          "level": "error",
+          "fix": "safe"
+        },
         "useLiteralEnumMembers": "error",
         "useNodejsImportProtocol": "error",
         "useNumericLiterals": "error",
