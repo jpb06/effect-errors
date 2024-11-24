@@ -177,13 +177,14 @@ export interface CaptureErrorsOptions {
 const captureErrors: <E>(
   cause: Cause<E>, 
   options?: CaptureErrorsOptions
-) => Effect.Effect<CapturedErrors, FsError>
+) => Effect.Effect<CapturedErrors, FsError, FileSystem>
 ```
 
 You can use `captureErrors` like so:
 
 ```typescript
 import { captureErrors } from 'effect-errors';
+import { NodeFileSystem } from '@effect/platform-node';
 
 await Effect.runPromise(
   pipe(
@@ -195,6 +196,7 @@ await Effect.runPromise(
         // ...
       }),
     ),
+    Effect.provide(NodeFileSystem.layer),
   ),
 );
 ```
