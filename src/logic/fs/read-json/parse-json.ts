@@ -1,11 +1,6 @@
 import { parse } from 'comment-json';
 import { Effect, pipe } from 'effect';
-import { TaggedError } from 'effect/Data';
-
-export class JsonParsingError extends TaggedError('json-parsing-error')<{
-  cause?: unknown;
-  message?: string;
-}> {}
+import { JsonParsingError } from './json-parsing.error.js';
 
 export const parseJson = (data: string) =>
   pipe(

@@ -1,2 +1,2 @@
 export * from './read-json.js';
-export * from './parse-json.js';
+export * from './json-parsing.error.js';
