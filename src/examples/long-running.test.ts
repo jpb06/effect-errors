@@ -5,7 +5,6 @@ import { mockConsole } from '../tests/mocks/console.mock.js';
 import { durationRegex } from '../tests/regex/duration.regex.js';
 
 import { stripAnsiCodes } from '../tests/util/strip-ansi-codes.util.js';
-import { longRunningTask } from './long-running.js';
 
 mockConsole({
   info: vi.fn(),
@@ -13,18 +12,23 @@ mockConsole({
 });
 
 describe('long-running task', () => {
-  const effect = Effect.gen(function* () {
-    const f = yield* pipe(longRunningTask, Effect.fork);
-    yield* TestClock.adjust(Duration.seconds(2));
+  const longRunningTaskEffect = async () => {
+    const { longRunningTask } = await import('./long-running.js');
 
-    return yield* Fiber.join(f);
-  }).pipe(
-    Effect.catchAllCause((e) => Effect.fail(e)),
-    Effect.flip,
-    Effect.provide(TestContext.TestContext),
-  );
+    return Effect.gen(function* () {
+      const f = yield* pipe(longRunningTask, Effect.fork);
+      yield* TestClock.adjust(Duration.seconds(2));
+
+      return yield* Fiber.join(f);
+    }).pipe(
+      Effect.catchAllCause((e) => Effect.fail(e)),
+      Effect.flip,
+      Effect.provide(TestContext.TestContext),
+    );
+  };
 
   it('should report one error', async () => {
+    const effect = await longRunningTaskEffect();
     const cause = await Effect.runPromise(effect);
 
     const { prettyPrint } = await import('./../pretty-print.js');
@@ -34,6 +38,7 @@ describe('long-running task', () => {
   });
 
   it('should display the error', async () => {
+    const effect = await longRunningTaskEffect();
     const cause = await Effect.runPromise(effect);
 
     const { prettyPrint } = await import('./../pretty-print.js');
@@ -46,6 +51,7 @@ describe('long-running task', () => {
   });
 
   it('should display spans', async () => {
+    const effect = await longRunningTaskEffect();
     const cause = await Effect.runPromise(effect);
 
     const { prettyPrint } = await import('./../pretty-print.js');
@@ -59,6 +65,7 @@ describe('long-running task', () => {
   });
 
   it('should display the stack', async () => {
+    const effect = await longRunningTaskEffect();
     const cause = await Effect.runPromise(effect);
 
     const { prettyPrint } = await import('./../pretty-print.js');
@@ -67,7 +74,7 @@ describe('long-running task', () => {
     expect(result).toContain('🚨 Node Stacktrace');
     expect(result).toContain('🚨 Spans Stacktrace');
     expect(result).toMatch(
-      /\/effect-errors\/src\/examples\/long-running.ts:15:19/,
+      /\/effect-errors\/src\/examples\/long-running.ts:13:19/,
     );
   });
 });

@@ -2,7 +2,8 @@
 	"biome.enabled": true,
 	"editor.formatOnSave": true,
 	"editor.codeActionsOnSave": {
-		"source.organizeImports.biome": "explicit"
+		"source.organizeImports.biome": "explicit",
+		"source.fixAll.biome": "always"
 	},
 	"editor.tabSize": 2,
 	"editor.defaultFormatter": "biomejs.biome",

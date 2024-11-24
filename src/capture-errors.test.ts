@@ -1,6 +1,6 @@
-import { Effect } from 'effect';
+import { NodeFileSystem } from '@effect/platform-node';
+import { Effect, pipe } from 'effect';
 import { describe, expect, it, vi } from 'vitest';
-
 import { captureErrors } from './capture-errors.js';
 import { fromPromiseTask } from './examples/from-promise.js';
 import { withParallelErrorsTask } from './examples/parallel-errors.js';
@@ -18,10 +18,13 @@ describe('captureErrors function', () => {
     const cause = await effectCause(fromPromiseTask);
 
     const result = await Effect.runPromise(
-      captureErrors(cause, {
-        reverseSpans: false,
-        stripCwd: false,
-      }),
+      pipe(
+        captureErrors(cause, {
+          reverseSpans: false,
+          stripCwd: false,
+        }),
+        Effect.provide(NodeFileSystem.layer),
+      ),
     );
 
     expect(result.interrupted).toBe(false);
@@ -56,10 +59,13 @@ describe('captureErrors function', () => {
     const cause = await effectCause(withParallelErrorsTask);
 
     const result = await Effect.runPromise(
-      captureErrors(cause, {
-        reverseSpans: false,
-        stripCwd: false,
-      }),
+      pipe(
+        captureErrors(cause, {
+          reverseSpans: false,
+          stripCwd: false,
+        }),
+        Effect.provide(NodeFileSystem.layer),
+      ),
     );
 
     expect(result.interrupted).toBe(false);
@@ -74,10 +80,13 @@ describe('captureErrors function', () => {
     const cause = await effectCause(Effect.interrupt);
 
     const result = await Effect.runPromise(
-      captureErrors(cause, {
-        reverseSpans: false,
-        stripCwd: false,
-      }),
+      pipe(
+        captureErrors(cause, {
+          reverseSpans: false,
+          stripCwd: false,
+        }),
+        Effect.provide(NodeFileSystem.layer),
+      ),
     );
 
     expect(result).toStrictEqual({

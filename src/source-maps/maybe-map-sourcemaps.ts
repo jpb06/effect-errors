@@ -1,8 +1,10 @@
+import type { FileSystem } from '@effect/platform/FileSystem';
 import { Effect, pipe } from 'effect';
 
-import type { FsError } from '../logic/effects/fs/fs-error.js';
 import { stackAtRegex } from '../logic/stack/stack-regex.js';
 
+import type { PlatformError } from '@effect/platform/Error';
+import type { JsonParsingError } from '../logic/fs/read-json/index.js';
 import { getErrorRelatedSources } from './get-error-related-sources.js';
 import type {
   ErrorRelatedSources,
@@ -21,7 +23,11 @@ export type MaybeMappedSources =
 
 export const maybeMapSourcemaps = (
   stacktrace: string[],
-): Effect.Effect<MaybeMappedSources[], FsError> =>
+): Effect.Effect<
+  MaybeMappedSources[],
+  PlatformError | JsonParsingError,
+  FileSystem
+> =>
   pipe(
     Effect.forEach(stacktrace, (stackLine) =>
       Effect.gen(function* () {

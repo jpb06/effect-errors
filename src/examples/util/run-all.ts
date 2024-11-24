@@ -16,8 +16,9 @@ import { runPromise } from '../../index.js';
 
       try {
         await runPromise(task.default as never);
-        // biome-ignore lint/suspicious/noEmptyBlockStatements: <explanation>
-      } catch (_) {}
+      } catch (_) {
+        //  console.error(error);
+      }
     }
   }
 })();

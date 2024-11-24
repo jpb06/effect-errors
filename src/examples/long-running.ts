@@ -2,8 +2,6 @@ import { fileURLToPath } from 'node:url';
 
 import { Effect, pipe } from 'effect';
 import fs from 'fs-extra';
-
-import { runPromise } from '../index.js';
 import { SchemaError } from './errors/schema-error.js';
 import { filename } from './util/filename.effect.js';
 
@@ -21,8 +19,6 @@ export const longRunningTask = pipe(
   Effect.all([filename(fileName), Effect.sleep('2 seconds'), readUser]),
   Effect.withSpan('longRunningTask'),
 );
-
-runPromise(longRunningTask);
 
 // biome-ignore lint/style/noDefaultExport: <explanation>
 export default longRunningTask;
