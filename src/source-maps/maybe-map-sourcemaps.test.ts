@@ -5,14 +5,14 @@ import { NodeFileSystem } from '@effect/platform-node';
 import { FileSystem } from '@effect/platform/FileSystem';
 import { Effect, Layer, Match, pipe } from 'effect';
 import { describe, expect, it, vi } from 'vitest';
+
+import { makeFsTestLayer } from '../tests/layers/file-system.test-layer.js';
 import {
   fromPromiseStack,
   fromPromiseTaskSources,
-} from '../tests/mock-data/from-promises-sources.mock-data.js';
-import {
   parallelErrorsStack,
   parallelErrorsTaskSources,
-} from '../tests/mock-data/parallel-errors.mock-data.js';
+} from '../tests/mock-data/index.js';
 import { execShellCommand } from '../tests/util/exec-shell-command.util.js';
 import { getExampleSources } from '../tests/util/get-example-sources.util.js';
 import type { RawErrorLocation } from './get-sources-from-map-file.js';
@@ -24,20 +24,14 @@ describe('maybeMapSourcemaps function', () => {
 
   it('should extract sources from a typescript file', async () => {
     const fromPromiseSources = await getExampleSources('from-promise');
-    const TestFileSystemlayer = Layer.succeed(
-      FileSystem,
-      FileSystem.of({
-        readFileString: () => Effect.succeed(fromPromiseSources),
-      } as unknown as FileSystem),
-    );
+    const { FsTestLayer } = makeFsTestLayer({
+      readFileString: Effect.succeed(fromPromiseSources),
+    });
 
     const { maybeMapSourcemaps } = await import('./maybe-map-sourcemaps.js');
 
     const result = await Effect.runPromise(
-      pipe(
-        maybeMapSourcemaps(fromPromiseStack),
-        Effect.provide(TestFileSystemlayer),
-      ),
+      pipe(maybeMapSourcemaps(fromPromiseStack), Effect.provide(FsTestLayer)),
     );
 
     expect(result).toStrictEqual(fromPromiseTaskSources);
@@ -45,20 +39,16 @@ describe('maybeMapSourcemaps function', () => {
 
   it('should extract sources from a parallel run', async () => {
     const parallelSources = await getExampleSources('parallel-errors');
-
-    const TestFileSystemlayer = Layer.succeed(
-      FileSystem,
-      FileSystem.of({
-        readFileString: () => Effect.succeed(parallelSources),
-      } as unknown as FileSystem),
-    );
+    const { FsTestLayer } = makeFsTestLayer({
+      readFileString: Effect.succeed(parallelSources),
+    });
 
     const { maybeMapSourcemaps } = await import('./maybe-map-sourcemaps.js');
 
     const result = await Effect.runPromise(
       pipe(
         maybeMapSourcemaps(parallelErrorsStack),
-        Effect.provide(TestFileSystemlayer),
+        Effect.provide(FsTestLayer),
       ),
     );
 
@@ -90,17 +80,14 @@ describe('maybeMapSourcemaps function', () => {
     const jsFile =
       'at /Users/jpb06/repos/perso/effect-errors/src/yolo.js:40:20';
 
-    const TestFileSystemlayer = Layer.succeed(
-      FileSystem,
-      FileSystem.of({
-        exists: () => Effect.succeed(false),
-      } as unknown as FileSystem),
-    );
+    const { FsTestLayer } = makeFsTestLayer({
+      exists: Effect.succeed(false),
+    });
 
     const { maybeMapSourcemaps } = await import('./maybe-map-sourcemaps.js');
 
     const result = await Effect.runPromise(
-      pipe(maybeMapSourcemaps([jsFile]), Effect.provide(TestFileSystemlayer)),
+      pipe(maybeMapSourcemaps([jsFile]), Effect.provide(FsTestLayer)),
     );
 
     expect(result).toHaveLength(1);
@@ -116,18 +103,15 @@ describe('maybeMapSourcemaps function', () => {
     const jsFile =
       'at /Users/jpb06/repos/perso/effect-errors/src/yolo.js:40:20';
 
-    const TestFileSystemlayer = Layer.succeed(
-      FileSystem,
-      FileSystem.of({
-        exists: () => Effect.succeed(true),
-        readFileString: () => Effect.succeed(`{ "version": 3 }`),
-      } as unknown as FileSystem),
-    );
+    const { FsTestLayer } = makeFsTestLayer({
+      exists: Effect.succeed(true),
+      readFileString: Effect.succeed(`{ "version": 3 }`),
+    });
 
     const { maybeMapSourcemaps } = await import('./maybe-map-sourcemaps.js');
 
     const result = await Effect.runPromise(
-      pipe(maybeMapSourcemaps([jsFile]), Effect.provide(TestFileSystemlayer)),
+      pipe(maybeMapSourcemaps([jsFile]), Effect.provide(FsTestLayer)),
     );
 
     expect(result).toStrictEqual([
@@ -149,33 +133,27 @@ describe('maybeMapSourcemaps function', () => {
     );
     const fromPromiseSources = await getExampleSources('from-promise');
 
-    const TestFileSystemlayer = Layer.succeed(
-      FileSystem,
-      FileSystem.of({
-        exists: () => Effect.succeed(true),
-        readFileString: (path: string) => {
-          return Match.value(path).pipe(
-            Match.when(
-              (path) => path.endsWith('from-promise.js.map'),
-              () => Effect.succeed(mapFile),
-            ),
-            Match.when(
-              (path) => path.endsWith('from-promise.ts'),
-              () => Effect.succeed(fromPromiseSources),
-            ),
-            Match.orElseAbsurd,
-          );
-        },
-      } as unknown as FileSystem),
-    );
+    const { FsTestLayer } = makeFsTestLayer({
+      exists: Effect.succeed(true),
+      readFileString: vi.fn().mockImplementation((path: string) => {
+        return Match.value(path).pipe(
+          Match.when(
+            (path) => path.endsWith('from-promise.js.map'),
+            () => Effect.succeed(mapFile),
+          ),
+          Match.when(
+            (path) => path.endsWith('from-promise.ts'),
+            () => Effect.succeed(fromPromiseSources),
+          ),
+          Match.orElseAbsurd,
+        );
+      }),
+    });
 
     const { maybeMapSourcemaps } = await import('./maybe-map-sourcemaps.js');
 
     const result = await Effect.runPromise(
-      pipe(
-        maybeMapSourcemaps([`at ${jsFile}`]),
-        Effect.provide(TestFileSystemlayer),
-      ),
+      pipe(maybeMapSourcemaps([`at ${jsFile}`]), Effect.provide(FsTestLayer)),
     );
 
     expect(result).toStrictEqual([

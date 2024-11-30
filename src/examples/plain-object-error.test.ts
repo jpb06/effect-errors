@@ -3,7 +3,6 @@ import { describe, expect, it, vi } from 'vitest';
 import { mockConsole } from '../tests/mocks/console.mock.js';
 import { durationRegex } from '../tests/regex/duration.regex.js';
 import { effectCause } from '../tests/runners/effect-cause.js';
-
 import { stripAnsiCodes } from '../tests/util/strip-ansi-codes.util.js';
 import { withPlainObjectErrorTask } from './plain-object-error.js';
 

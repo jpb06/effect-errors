@@ -2,7 +2,6 @@ import { describe, expect, it, vi } from 'vitest';
 
 import { mockConsole } from '../tests/mocks/console.mock.js';
 import { effectCause } from '../tests/runners/effect-cause.js';
-
 import { stripAnsiCodes } from '../tests/util/strip-ansi-codes.util.js';
 import { withoutSpansTask } from './without-spans.js';
 
