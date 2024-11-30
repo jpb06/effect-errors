@@ -1,5 +1,6 @@
 import { parse } from 'comment-json';
 import { Effect, pipe } from 'effect';
+
 import { JsonParsingError } from './json-parsing.error.js';
 
 export const parseJson = (data: string) =>

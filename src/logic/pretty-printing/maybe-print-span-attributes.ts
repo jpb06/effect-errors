@@ -2,7 +2,6 @@ import type { Span } from 'effect/Tracer';
 import color from 'picocolors';
 
 import type { PrettyPrintOptions } from '../../types/pretty-print-options.type.js';
-
 import { formatSpanAttributes } from './format-span-attributes.js';
 
 export const maybePrintSpanAttributes = (

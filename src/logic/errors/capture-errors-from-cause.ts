@@ -1,7 +1,6 @@
 import { type Cause, reduceWithContext } from 'effect/Cause';
 
 import type { PrettyError } from '../../types/pretty-error.type.js';
-
 import { parseError } from './parse-error.js';
 
 export const captureErrorsFrom = <E>(cause: Cause<E>): readonly PrettyError[] =>

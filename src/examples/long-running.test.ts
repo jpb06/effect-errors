@@ -1,9 +1,7 @@
 import { Duration, Effect, Fiber, TestClock, TestContext, pipe } from 'effect';
 import { describe, expect, it, vi } from 'vitest';
-
-import { mockConsole } from '../tests/mocks/console.mock.js';
+import { mockConsole } from '../tests/mocks/index.js';
 import { durationRegex } from '../tests/regex/duration.regex.js';
-
 import { stripAnsiCodes } from '../tests/util/strip-ansi-codes.util.js';
 
 mockConsole({
@@ -74,7 +72,7 @@ describe('long-running task', () => {
     expect(result).toContain('🚨 Node Stacktrace');
     expect(result).toContain('🚨 Spans Stacktrace');
     expect(result).toMatch(
-      /\/effect-errors\/src\/examples\/long-running.ts:13:19/,
+      /\/effect-errors\/src\/examples\/long-running.ts:14:19/,
     );
   });
 });

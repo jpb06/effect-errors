@@ -1,11 +1,12 @@
 import { NodeFileSystem } from '@effect/platform-node';
 import { Effect, pipe } from 'effect';
 import { describe, expect, it, vi } from 'vitest';
+
 import { captureErrors } from './capture-errors.js';
 import { fromPromiseTask } from './examples/from-promise.js';
 import { withParallelErrorsTask } from './examples/parallel-errors.js';
 import { checkParallelErrorsData } from './tests/assertions/check-parallel-errors-data.js';
-import { fromPromiseTaskSources } from './tests/mock-data/from-promises-sources.mock-data.js';
+import { fromPromiseTaskSources } from './tests/mock-data/index.js';
 import { mockConsole } from './tests/mocks/console.mock.js';
 import { effectCause } from './tests/runners/effect-cause.js';
 

@@ -1,10 +1,9 @@
+import type { PlatformError } from '@effect/platform/Error';
 import type { FileSystem } from '@effect/platform/FileSystem';
 import { Effect, pipe } from 'effect';
 
-import { stackAtRegex } from '../logic/stack/stack-regex.js';
-
-import type { PlatformError } from '@effect/platform/Error';
 import type { JsonParsingError } from '../logic/fs/read-json/index.js';
+import { stackAtRegex } from '../logic/stack/stack-regex.js';
 import { getErrorRelatedSources } from './get-error-related-sources.js';
 import type {
   ErrorRelatedSources,

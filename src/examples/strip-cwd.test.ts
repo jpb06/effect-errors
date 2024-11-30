@@ -4,7 +4,6 @@ import { mockConsole } from '../tests/mocks/console.mock.js';
 import { mockProcess } from '../tests/mocks/process.mock.js';
 import { durationRegex } from '../tests/regex/duration.regex.js';
 import { effectCause } from '../tests/runners/effect-cause.js';
-
 import { stripAnsiCodes } from '../tests/util/strip-ansi-codes.util.js';
 import { withCwdStrippingTask } from './strip-cwd.js';
 

@@ -2,7 +2,6 @@ import { describe, expect, it, vi } from 'vitest';
 
 import { mockConsole } from '../tests/mocks/console.mock.js';
 import { effectCause } from '../tests/runners/effect-cause.js';
-
 import { withStringErrorTask } from './with-string-error.js';
 
 mockConsole({
