@@ -53,16 +53,16 @@
     "bundle-example": "bun esbuild --bundle --platform=node --format=esm --sourcemap=external --minify --inject:./src/examples/bundling/cjs-shims.ts --outfile=./src/tests/bundle/from-promise.js ./src/examples/bundling/from-promise.bundle.ts"
   },
   "dependencies": {
-    "@effect/platform": "^0.70.3",
-    "@effect/platform-node": "^0.65.3",
+    "@effect/platform": "^0.70.4",
+    "@effect/platform-node": "^0.65.4",
     "@effect/schema": "^0.75.5",
     "comment-json": "^4.2.5",
-    "effect": "^3.11.2",
+    "effect": "^3.11.3",
     "picocolors": "^1.1.1",
     "source-map-js": "^1.2.1"
   },
   "devDependencies": {
-    "@babel/cli": "^7.25.9",
+    "@babel/cli": "^7.26.4",
     "@babel/core": "^7.26.0",
     "@babel/plugin-transform-export-namespace-from": "^7.25.9",
     "@babel/plugin-transform-modules-commonjs": "^7.26.3",
