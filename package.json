@@ -54,7 +54,7 @@
   },
   "dependencies": {
     "@effect/platform": "^0.70.7",
-    "@effect/platform-node": "^0.65.7",
+    "@effect/platform-node": "^0.66.0",
     "@effect/schema": "^0.75.5",
     "comment-json": "^4.2.5",
     "effect": "^3.11.5",
