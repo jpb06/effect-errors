@@ -9,17 +9,17 @@ const fileName = fileURLToPath(import.meta.url);
 
 const subTask = pipe(
   Effect.fail(new TaggedErrorWithMeta({ cause: 'Oh no! I failed!' })),
-  Effect.withSpan('subTask', {
+  Effect.withSpan('sub-task', {
     attributes: { cool: true, yolo: 'bro' },
   }),
 );
 
 export const withMetaTaggedErrorTask = pipe(
   Effect.all([filename(fileName), subTask]),
-  Effect.withSpan('withMetaTaggedErrorTask', {
+  Effect.withSpan('with-meta-tagged-error-task', {
     attributes: { struff: 'awoowoo' },
   }),
 );
 
-// biome-ignore lint/style/noDefaultExport: <explanation>
+// biome-ignore lint/style/noDefaultExport: run-example
 export default withMetaTaggedErrorTask;

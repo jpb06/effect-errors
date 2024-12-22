@@ -1,6 +1,8 @@
 # effect-errors
 
 [![Open in Visual Studio Code](https://img.shields.io/static/v1?logo=visualstudiocode&label=&message=Open%20in%20Visual%20Studio%20Code&labelColor=2c2c32&color=007acc&logoColor=007acc)](https://github.dev/jpb06/effect-errors)
+![Last commit](https://img.shields.io/github/last-commit/jpb06/effect-errors?logo=git)
+![npm downloads](https://img.shields.io/npm/dw/effect-errors?logo=npm&logoColor=red&label=npm%20downloads)
 ![npm bundle size](https://img.shields.io/bundlephobia/min/effect-errors)
 ![Github workflow](https://img.shields.io/github/actions/workflow/status/jpb06/effect-errors/ci.yml?branch=main&logo=github-actions&label=last%20workflow)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=jpb06_effect-errors&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=jpb06_effect-errors)
@@ -14,7 +16,6 @@
 [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=jpb06_effect-errors&metric=bugs)](https://sonarcloud.io/summary/new_code?id=jpb06_effect-errors)
 [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=jpb06_effect-errors&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=jpb06_effect-errors)
 [![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=jpb06_effect-errors&metric=duplicated_lines_density)](https://sonarcloud.io/dashboard?id=jpb06_effect-errors)
-![Last commit](https://img.shields.io/github/last-commit/jpb06/effect-errors?logo=git)
 
 Some sort of POC to improve the way [Effect](https://effect.website/) reports errors in a dev env 🤔
 
@@ -81,6 +82,65 @@ const prettyPrint: <E>(cause: Cause<E>, options?: PrettyPrintOptions) => string
 #### `reverseSpans` - Whether spans order should reversed (entry point first instead of inner callee first)
 
 > default: `true` (entry point first)
+
+#### `hideStackTrace` - Whether node stacktrace should be displayed
+
+> default: `true`
+
+## ⚡ Pretty printing from captured errors
+
+You can also use the function `prettyPrintFromCapturedErrors` to display errors from captured errors:
+
+```ts
+import { NodeFileSystem } from '@effect/platform-node';
+import { Effect, pipe } from 'effect';
+import { TaggedError } from 'effect/Data';
+
+import { captureErrors, prettyPrintFromCapturedErrors } from 'effect-errors';
+
+export class MyCustomError extends TaggedError('MyCustomError')<{
+  cause?: unknown;
+  message?: string;
+}> {}
+
+const task = pipe(
+  Effect.fail(
+    new MyCustomError({
+      cause: 'Well this sucks',
+    }),
+  ),
+  Effect.withSpan('task', {
+    attributes: { isCool: true },
+  }),
+);
+
+const program = pipe(
+  task,
+  Effect.sandbox,
+  Effect.catchAll((e) =>
+    Effect.gen(function* () {
+      const errors = yield* captureErrors(e);
+      const message = prettyPrintFromCapturedErrors(errors, {
+        stripCwd: true,
+        hideStackTrace: true,
+        reverseSpans: true,
+      });
+
+      console.error(message);
+
+      // Do something with the captured errors ...
+    }),
+  ),
+  Effect.provide(NodeFileSystem.layer),
+  Effect.withSpan('program', { attributes: { name: 'cool' } }),
+);
+
+Effect.runPromise(program);
+```
+
+The result would look like so:
+
+![example](./docs/pretty-print-from-captured-errors.png)
 
 ## ⚡ How should I raise errors?
 
@@ -189,6 +249,7 @@ import { NodeFileSystem } from '@effect/platform-node';
 await Effect.runPromise(
   pipe(
     effect,
+    Effect.sandbox,
     Effect.catchAll((e) =>
       Effect.gen(function* () {
         const errors = yield* captureErrors(e);
@@ -231,6 +292,7 @@ Capturing errors from the [`from-promise` bundle](./src/tests/bundle/from-promis
       ],
       "sources": [
         {
+          "name": "FetchError",
           "runPath": "/Users/jpb06/repos/perso/effect-errors/src/tests/bundle/from-promise.js:37:352",
           "sourcesPath": "/Users/jpb06/repos/perso/effect-errors/src/examples/from-promise.ts:30:13",
           "source": [
@@ -266,6 +328,7 @@ Capturing errors from the [`from-promise` bundle](./src/tests/bundle/from-promis
           ]
         },
         {
+          "name": "fetchTask",
           "runPath": "/Users/jpb06/repos/perso/effect-errors/src/tests/bundle/from-promise.js:37:213",
           "sourcesPath": "/Users/jpb06/repos/perso/effect-errors/src/examples/from-promise.ts:25:10",
           "source": [
@@ -283,7 +346,7 @@ Capturing errors from the [`from-promise` bundle](./src/tests/bundle/from-promis
             },
             {
               "line": 25,
-              "code": "  Effect.withSpan('fetchUser', { attributes: { userId } })(",
+              "code": "  Effect.withSpan('fetch-user', { attributes: { userId } })(",
               "column": 10
             },
             {
@@ -301,6 +364,7 @@ Capturing errors from the [`from-promise` bundle](./src/tests/bundle/from-promis
           ]
         },
         {
+          "name": "fromPromiseTask",
           "runPath": "/Users/jpb06/repos/perso/effect-errors/src/tests/bundle/from-promise.js:37:490",
           "sourcesPath": "/Users/jpb06/repos/perso/effect-errors/src/examples/from-promise.ts:44:39",
           "source": [
@@ -318,7 +382,7 @@ Capturing errors from the [`from-promise` bundle](./src/tests/bundle/from-promis
             },
             {
               "line": 44,
-              "code": "export const fromPromiseTask = Effect.withSpan('fromPromiseTask')(",
+              "code": "export const fromPromiseTask = Effect.withSpan('from-promise-task')(",
               "column": 39
             },
             {
@@ -357,8 +421,6 @@ Capturing errors from the [`from-promise` bundle](./src/tests/bundle/from-promis
 ```
 
 If no map file is found, a `location` array will be returned instead of `sources`:
-
-
 
 ```json
 {

@@ -13,13 +13,13 @@ const readUser = pipe(
     try: async () => await fs.readJson('cool.ts'),
     catch: (e) => new SchemaError({ cause: e }),
   }),
-  Effect.withSpan('readUser'),
+  Effect.withSpan('read-user'),
 );
 
 export const longRunningTask = pipe(
   Effect.all([filename(fileName), Effect.sleep('2 seconds'), readUser]),
-  Effect.withSpan('longRunningTask'),
+  Effect.withSpan('long-running-task'),
 );
 
-// biome-ignore lint/style/noDefaultExport: <explanation>
+// biome-ignore lint/style/noDefaultExport: run-example
 export default longRunningTask;

@@ -1,5 +1,6 @@
 import type { SpanStatus } from 'effect/Tracer';
-import color from 'picocolors';
+
+import { formatSpanDuration } from '../../../common/index.js';
 
 export const getSpanDuration = (status: SpanStatus, isLastEntry: boolean) => {
   if (status._tag !== 'Ended') {
@@ -8,5 +9,5 @@ export const getSpanDuration = (status: SpanStatus, isLastEntry: boolean) => {
 
   const duration = (status.endTime - status.startTime) / BigInt(1000000);
 
-  return `\r\n${isLastEntry ? ' ' : color.gray('│')}     ~ ${duration}ms`;
+  return formatSpanDuration(duration, isLastEntry);
 };

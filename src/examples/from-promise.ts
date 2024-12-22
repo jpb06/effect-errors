@@ -19,7 +19,7 @@ const readUser = pipe(
     try: async () => await fs.readJson('./src/examples/data/user.json'),
     catch: (e) => new FileError({ cause: e }),
   }),
-  Effect.withSpan('readUser'),
+  Effect.withSpan('read-user'),
 );
 
 const fetchTask = (userId: string) =>
@@ -32,7 +32,7 @@ const fetchTask = (userId: string) =>
           cause: e,
         }),
     }),
-    Effect.withSpan('fetchUser', { attributes: { userId } }),
+    Effect.withSpan('fetch-user', { attributes: { userId } }),
   );
 
 const unwrapResponseTask = (response: Response) =>
@@ -41,7 +41,7 @@ const unwrapResponseTask = (response: Response) =>
       try: async () => await response.json(),
       catch: (e) => new FetchError({ cause: e }),
     }),
-    Effect.withSpan('unwrapFetchUserResponse'),
+    Effect.withSpan('unwrap-fetch-user-response'),
   );
 
 export const fromPromiseTask = pipe(
@@ -53,8 +53,8 @@ export const fromPromiseTask = pipe(
 
     return yield* unwrapResponseTask(response);
   }),
-  Effect.withSpan('fromPromiseTask'),
+  Effect.withSpan('from-promise-task'),
 );
 
-// biome-ignore lint/style/noDefaultExport: <explanation>
+// biome-ignore lint/style/noDefaultExport: run-example
 export default fromPromiseTask;

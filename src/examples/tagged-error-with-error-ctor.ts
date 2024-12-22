@@ -18,13 +18,13 @@ const readUser = pipe(
     try: async () => await fs.readJson('./src/examples/data/yolo.json'),
     catch: (e) => new TaggedErrorWithErrorCtor(e),
   }),
-  Effect.withSpan('readUser'),
+  Effect.withSpan('read-user'),
 );
 
 export const withTaggedErrorTask = pipe(
   Effect.all([filename(fileName), readUser]),
-  Effect.withSpan('withTaggedErrorTask'),
+  Effect.withSpan('with-tagged-error-task'),
 );
 
-// biome-ignore lint/style/noDefaultExport: <explanation>
+// biome-ignore lint/style/noDefaultExport: run-example
 export default withTaggedErrorTask;

@@ -21,6 +21,7 @@ export type MaybeMappedSources =
   | StackEntry;
 
 export const maybeMapSourcemaps = (
+  name: string,
   stacktrace: string[],
 ): Effect.Effect<
   MaybeMappedSources[],
@@ -36,7 +37,10 @@ export const maybeMapSourcemaps = (
             ? chunks[1]
             : chunks[chunks.length - 1].slice(1, -1);
 
-        const details = yield* getErrorRelatedSources(mapFileReportedPath);
+        const details = yield* getErrorRelatedSources(
+          name,
+          mapFileReportedPath,
+        );
         if (details === undefined) {
           return {
             _tag: 'stack-entry' as const,

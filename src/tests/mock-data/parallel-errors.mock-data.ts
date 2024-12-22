@@ -10,6 +10,7 @@ export const parallelErrorsStack = [
 export const parallelErrorsTaskSources: ErrorRelatedSources[] = [
   {
     _tag: 'sources',
+    name: 'readUser',
     runPath: 'effect-errors/src/examples/parallel-errors.ts:14:21',
     sourcesPath: undefined,
     source: [
@@ -28,7 +29,7 @@ export const parallelErrorsTaskSources: ErrorRelatedSources[] = [
       { line: 15, code: '    }),', column: undefined },
       {
         line: 16,
-        code: "    Effect.withSpan('readUser', {",
+        code: "    Effect.withSpan('read-user', {",
         column: undefined,
       },
       { line: 17, code: '      attributes: { name },', column: undefined },
@@ -36,6 +37,7 @@ export const parallelErrorsTaskSources: ErrorRelatedSources[] = [
   },
   {
     _tag: 'sources',
+    name: 'readUser',
     runPath: 'effect-errors/src/examples/parallel-errors.ts:16:12',
     sourcesPath: undefined,
     source: [
@@ -52,7 +54,7 @@ export const parallelErrorsTaskSources: ErrorRelatedSources[] = [
       { line: 15, code: '    }),', column: undefined },
       {
         line: 16,
-        code: "    Effect.withSpan('readUser', {",
+        code: "    Effect.withSpan('read-user', {",
         column: 12,
       },
       { line: 17, code: '      attributes: { name },', column: undefined },
@@ -62,6 +64,7 @@ export const parallelErrorsTaskSources: ErrorRelatedSources[] = [
   },
   {
     _tag: 'sources',
+    name: 'readUser',
     runPath: 'effect-errors/src/examples/parallel-errors.ts:26:12',
     sourcesPath: undefined,
     source: [
@@ -72,7 +75,7 @@ export const parallelErrorsTaskSources: ErrorRelatedSources[] = [
       },
       { line: 24, code: "      concurrency: 'unbounded',", column: undefined },
       { line: 25, code: '    }),', column: undefined },
-      { line: 26, code: "    Effect.withSpan('parallelGet', {", column: 12 },
+      { line: 26, code: "    Effect.withSpan('parallel-get', {", column: 12 },
       { line: 27, code: '      attributes: { names },', column: undefined },
       { line: 28, code: '    }),', column: undefined },
       { line: 29, code: '  );', column: undefined },
@@ -80,6 +83,7 @@ export const parallelErrorsTaskSources: ErrorRelatedSources[] = [
   },
   {
     _tag: 'sources',
+    name: 'readUser',
     runPath: 'effect-errors/src/examples/parallel-errors.ts:33:10',
     sourcesPath: undefined,
     source: [
@@ -96,14 +100,14 @@ export const parallelErrorsTaskSources: ErrorRelatedSources[] = [
       },
       {
         line: 33,
-        code: "  Effect.withSpan('withParallelErrorsTask'),",
+        code: "  Effect.withSpan('with-parallel-errors-task'),",
         column: 10,
       },
       { line: 34, code: ');', column: undefined },
       { line: 35, code: '', column: undefined },
       {
         line: 36,
-        code: '// biome-ignore lint/style/noDefaultExport: <explanation>',
+        code: '// biome-ignore lint/style/noDefaultExport: run-example',
         column: undefined,
       },
     ],

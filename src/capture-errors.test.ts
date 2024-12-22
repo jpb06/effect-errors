@@ -1,22 +1,20 @@
 import { NodeFileSystem } from '@effect/platform-node';
 import { Effect, pipe } from 'effect';
-import { describe, expect, it, vi } from 'vitest';
+import { describe, expect, it } from 'vitest';
 
 import { captureErrors } from './capture-errors.js';
 import { fromPromiseTask } from './examples/from-promise.js';
 import { withParallelErrorsTask } from './examples/parallel-errors.js';
 import { checkParallelErrorsData } from './tests/assertions/check-parallel-errors-data.js';
+import { makeLoggerTestLayer } from './tests/layers/logger.test-layer.js';
 import { fromPromiseTaskSources } from './tests/mock-data/index.js';
-import { mockConsole } from './tests/mocks/console.mock.js';
 import { effectCause } from './tests/runners/effect-cause.js';
-
-mockConsole({
-  info: vi.fn(),
-});
 
 describe('captureErrors function', () => {
   it('should capture errors from promises', async () => {
-    const cause = await effectCause(fromPromiseTask);
+    const { LoggerTestLayer } = makeLoggerTestLayer({});
+    const task = pipe(fromPromiseTask, Effect.provide(LoggerTestLayer));
+    const cause = await effectCause(task);
 
     const result = await Effect.runPromise(
       pipe(
@@ -40,7 +38,7 @@ describe('captureErrors function', () => {
       'TypeError: fetch failed',
     );
     expect(spans).toHaveLength(2);
-    expect(spans?.[0].name).toBe('fetchUser');
+    expect(spans?.[0].name).toBe('fetch-user');
 
     expect(spans?.[0].attributes).toStrictEqual({ userId: '123' });
     expect(spans?.[1].attributes).toStrictEqual({});
@@ -57,7 +55,9 @@ describe('captureErrors function', () => {
   });
 
   it('should capture parallel errors', async () => {
-    const cause = await effectCause(withParallelErrorsTask);
+    const { LoggerTestLayer } = makeLoggerTestLayer({});
+    const task = pipe(withParallelErrorsTask, Effect.provide(LoggerTestLayer));
+    const cause = await effectCause(task);
 
     const result = await Effect.runPromise(
       pipe(

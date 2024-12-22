@@ -25,5 +25,5 @@ export const withCwdStrippingTask = pipe(
   ),
 );
 
-// biome-ignore lint/style/noDefaultExport: <explanation>
+// biome-ignore lint/style/noDefaultExport: run-example
 export default withCwdStrippingTask;

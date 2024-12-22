@@ -1,11 +1,11 @@
 import color from 'picocolors';
 
-export const formatFailuresTitle = (
+export const formatErrorTitle = (
   errorType: unknown,
   message: unknown,
   failuresLength: number,
   failureIndex: number,
-) => {
+): string[] => {
   const failuresCount =
     failuresLength > 1
       ? color.bgRed(color.white(` #${failureIndex + 1} -`))
@@ -15,5 +15,5 @@ export const formatFailuresTitle = (
   );
   const formattedMessage = color.bold(color.white(` • ${message as string}`));
 
-  return `💥 ${failuresCount}${type}${formattedMessage}\r\n`;
+  return [`💥 ${failuresCount}${type}${formattedMessage}`];
 };
