@@ -36,8 +36,7 @@ export const getSourcesFromSpan = ({
         const { attributes, stacktrace } =
           splitSpansAttributesByTypes(allAttributes);
 
-        const sourcesOrLocation = yield* maybeMapSourcemaps(stacktrace);
-
+        const sourcesOrLocation = yield* maybeMapSourcemaps(name, stacktrace);
         const duration =
           status._tag === 'Ended'
             ? +`${(status.endTime - status.startTime) / BigInt(1000000)}`

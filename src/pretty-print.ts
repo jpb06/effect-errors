@@ -1,13 +1,11 @@
 import { type Cause, isInterruptedOnly } from 'effect/Cause';
-import color from 'picocolors';
 
 import { captureErrorsFrom } from './logic/errors/capture-errors-from-cause.js';
-import { formatFailuresTitle } from './logic/pretty-printing/format-failures-title.js';
-import { maybePrintNodeStacktrace } from './logic/pretty-printing/maybe-print-node-stacktrace.js';
-import { maybePrintSpanAttributes } from './logic/pretty-printing/maybe-print-span-attributes.js';
-import { maybeWarnAboutPlainStrings } from './logic/pretty-printing/maybe-warn-about-plain-strings.js';
-import { printEffectStacktrace } from './logic/pretty-printing/print-effect-stacktrace.js';
-import { maybeAddErrorToSpansStack } from './logic/spans/maybe-add-error-to-spans-stack.js';
+import {
+  formatFailure,
+  formatTitle,
+  interruptedMessage,
+} from './logic/pretty-printing/index.js';
 import {
   type PrettyPrintOptions,
   prettyPrintOptionsDefault,
@@ -18,56 +16,15 @@ export const prettyPrint = <E>(
   options: PrettyPrintOptions = prettyPrintOptionsDefault,
 ): string => {
   if (isInterruptedOnly(cause)) {
-    return 'All fibers interrupted without errors.';
+    return interruptedMessage;
   }
 
   const failures = captureErrorsFrom<E>(cause);
 
-  const title = `\r\n🫠  ${color.bold(
-    color.yellow(
-      color.underline(
-        `${failures.length} error${failures.length > 1 ? 's' : ''} occured`,
-      ),
-    ),
-  )}\r\n\r\n`;
-
-  return (
-    title +
-    failures
-      .map(
-        (
-          { errorType, message: errorMessage, stack, span, isPlainString },
-          failureIndex,
-        ) => {
-          const d: string[] = [
-            formatFailuresTitle(
-              errorType,
-              errorMessage,
-              failures.length,
-              failureIndex,
-            ),
-          ];
-
-          maybeWarnAboutPlainStrings(d, isPlainString);
-
-          const spanAttributesStack = maybePrintSpanAttributes(
-            d,
-            span,
-            isPlainString,
-            options,
-          );
-
-          const effectStack = maybeAddErrorToSpansStack(
-            stack,
-            spanAttributesStack,
-          );
-
-          printEffectStacktrace(d, span, effectStack, options);
-          maybePrintNodeStacktrace(d, span, stack, isPlainString, options);
-
-          return [...d, '\r\n'].join('');
-        },
-      )
-      .join('\r\n')
+  const title = formatTitle(failures.length);
+  const formattedFailures = failures.map(
+    formatFailure(failures.length, options),
   );
+
+  return [...title, ...formattedFailures].join('\r\n');
 };

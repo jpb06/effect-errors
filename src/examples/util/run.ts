@@ -1,5 +1,7 @@
 import path from 'node:path';
 
+import { Effect, pipe } from 'effect';
+import { type Logger, LoggerConsoleLive } from '../../logic/logger/index.js';
 import { runPromise } from '../../runners/run-promise.js';
 
 (async () => {
@@ -10,10 +12,13 @@ import { runPromise } from '../../runners/run-promise.js';
 
   const file = process.argv[2];
   const stripCwd = process.argv[3] === 'strip';
+  const hideStackTrace = process.argv[4] === 'noStackTrace';
 
-  const task = await import(path.join('..', file));
+  const task: { default: Effect.Effect<unknown, unknown, Logger> } =
+    await import(path.join('..', file));
 
-  await runPromise(task.default as never, {
+  await runPromise(pipe(task.default, Effect.provide(LoggerConsoleLive)), {
     stripCwd,
+    hideStackTrace,
   });
 })();

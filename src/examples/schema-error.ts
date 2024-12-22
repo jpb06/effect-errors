@@ -13,13 +13,13 @@ const readUser = pipe(
     try: async () => await fs.readJson('cool.ts'),
     catch: (e) => new SchemaError({ cause: e }),
   }),
-  Effect.withSpan('readUser'),
+  Effect.withSpan('read-user'),
 );
 
 export const withSchemaErrorTask = pipe(
   Effect.all([filename(fileName), readUser]),
-  Effect.withSpan('withSchemaErrorTask'),
+  Effect.withSpan('with-schema-error-task'),
 );
 
-// biome-ignore lint/style/noDefaultExport: <explanation>
+// biome-ignore lint/style/noDefaultExport: run-example
 export default withSchemaErrorTask;

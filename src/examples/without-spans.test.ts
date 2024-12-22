@@ -1,60 +1,129 @@
-import { describe, expect, it, vi } from 'vitest';
+import { Effect, pipe } from 'effect';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { mockConsole } from '../tests/mocks/console.mock.js';
+import { runPromise } from '../runners/run-promise.js';
+import { makeLoggerTestLayer } from '../tests/layers/logger.test-layer.js';
 import { effectCause } from '../tests/runners/effect-cause.js';
+import { makeTaskWithCollectedErrors } from '../tests/util/make-task-with-collected-errors.js';
 import { stripAnsiCodes } from '../tests/util/strip-ansi-codes.util.js';
 import { withoutSpansTask } from './without-spans.js';
 
-mockConsole({
-  info: vi.fn(),
-  error: vi.fn(),
-});
-
 describe('without-spans task', () => {
-  it('should report one error', async () => {
-    const cause = await effectCause(withoutSpansTask);
-
-    const { prettyPrint } = await import('./../pretty-print.js');
-    const result = prettyPrint(cause);
-
-    expect(result).toContain('1 error occured');
+  beforeEach(() => {
+    vi.clearAllMocks();
   });
 
-  it('should display the error', async () => {
-    const cause = await effectCause(withoutSpansTask);
+  describe('pretty-print', () => {
+    const { LoggerTestLayer } = makeLoggerTestLayer({});
+    const task = pipe(withoutSpansTask, Effect.provide(LoggerTestLayer));
 
-    const { prettyPrint } = await import('./../pretty-print.js');
-    const result = prettyPrint(cause);
+    it('should display the error', async () => {
+      const cause = await effectCause(task);
 
-    expect(result).toContain(' FileError ');
-    expect(result).toContain(
-      " • Error: ENOENT: no such file or directory, open 'cool.ts'",
-    );
+      const { prettyPrint } = await import('./../pretty-print.js');
+      const result = prettyPrint(cause);
+
+      expect(result).toContain(' FileError ');
+      expect(result).toContain(
+        " • Error: ENOENT: no such file or directory, open 'cool.ts'",
+      );
+    });
+
+    it('should not display any span', async () => {
+      const cause = await effectCause(task);
+
+      const { prettyPrint } = await import('./../pretty-print.js');
+      const result = prettyPrint(cause);
+      const raw = stripAnsiCodes(result);
+
+      expect(raw).not.toContain(/◯/);
+      expect(raw).not.toContain(/│ {2}/);
+      expect(raw).not.toContain(/├/);
+      expect(raw).not.toContain(/╰/);
+    });
+
+    it('should not display sources', async () => {
+      const cause = await effectCause(task);
+
+      const { prettyPrint } = await import('./../pretty-print.js');
+      const result = prettyPrint(cause);
+      const raw = stripAnsiCodes(result);
+
+      expect(raw).not.toContain('Sources 🕵️');
+      expect(raw).toContain('Consider using spans to improve errors reporting');
+    });
+
+    it('should display the stack', async () => {
+      const cause = await effectCause(task);
+
+      const { prettyPrint } = await import('./../pretty-print.js');
+      const result = prettyPrint(cause, { hideStackTrace: false });
+      const raw = stripAnsiCodes(result);
+
+      expect(raw).not.toContain('Sources 🕵️');
+      expect(raw).toContain('Node Stacktrace 🚨');
+      expect(result).toMatch(
+        /│ at catcher (.*\/effect-errors\/src\/examples\/without-spans.ts:14:17)/,
+      );
+    });
   });
 
-  it('should not display any span', async () => {
-    const cause = await effectCause(withoutSpansTask);
+  describe('pretty-print from captured errors', () => {
+    it('should display the error', async () => {
+      const { task, errorMock } = makeTaskWithCollectedErrors(withoutSpansTask);
+      await runPromise(task);
 
-    const { prettyPrint } = await import('./../pretty-print.js');
-    const result = prettyPrint(cause);
-    const raw = stripAnsiCodes(result);
+      expect(errorMock).toHaveBeenCalledTimes(1);
+      const message = errorMock.mock.calls[0][0];
 
-    expect(raw).not.toContain(/◯/);
-    expect(raw).not.toContain(/│ {2}/);
-    expect(raw).not.toContain(/├/);
-    expect(raw).not.toContain(/╰/);
-  });
+      expect(message).toContain(' FileError ');
+      expect(message).toContain(
+        " • Error: ENOENT: no such file or directory, open 'cool.ts'",
+      );
+    });
 
-  it('should display the stack', async () => {
-    const cause = await effectCause(withoutSpansTask);
+    it('should not display any span', async () => {
+      const { task, errorMock } = makeTaskWithCollectedErrors(withoutSpansTask);
+      await runPromise(task);
 
-    const { prettyPrint } = await import('./../pretty-print.js');
-    const result = prettyPrint(cause);
+      expect(errorMock).toHaveBeenCalledTimes(1);
+      const message = errorMock.mock.calls[0][0];
+      const raw = stripAnsiCodes(message);
 
-    expect(result).not.toContain('🚨 Spans Stacktrace');
-    expect(result).toContain('🚨 Node Stacktrace');
-    expect(result).toMatch(
-      /│ at catcher (.*\/effect-errors\/src\/examples\/without-spans.ts:14:17)/,
-    );
+      expect(raw).not.toContain(/◯/);
+      expect(raw).not.toContain(/│ {2}/);
+      expect(raw).not.toContain(/├/);
+      expect(raw).not.toContain(/╰/);
+    });
+
+    it('should not display sources', async () => {
+      const { task, errorMock } = makeTaskWithCollectedErrors(withoutSpansTask);
+      await runPromise(task);
+
+      expect(errorMock).toHaveBeenCalledTimes(1);
+      const message = errorMock.mock.calls[0][0];
+      const raw = stripAnsiCodes(message);
+
+      expect(raw).not.toContain('Sources 🕵️');
+      expect(raw).toContain('Consider using spans to improve errors reporting');
+    });
+
+    it('should display the stack', async () => {
+      const { task, errorMock } = makeTaskWithCollectedErrors(
+        withoutSpansTask,
+        { hideStackTrace: false },
+      );
+      await runPromise(task);
+
+      expect(errorMock).toHaveBeenCalledTimes(1);
+      const message = errorMock.mock.calls[0][0];
+      const raw = stripAnsiCodes(message);
+
+      expect(raw).not.toContain('Sources 🕵️');
+      expect(raw).toContain('Node Stacktrace 🚨');
+      expect(message).toMatch(
+        /│ at catcher (.*\/effect-errors\/src\/examples\/without-spans.ts:14:17)/,
+      );
+    });
   });
 });

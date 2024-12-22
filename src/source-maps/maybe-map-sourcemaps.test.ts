@@ -31,7 +31,10 @@ describe('maybeMapSourcemaps function', () => {
     const { maybeMapSourcemaps } = await import('./maybe-map-sourcemaps.js');
 
     const result = await Effect.runPromise(
-      pipe(maybeMapSourcemaps(fromPromiseStack), Effect.provide(FsTestLayer)),
+      pipe(
+        maybeMapSourcemaps('fetchTask', fromPromiseStack),
+        Effect.provide(FsTestLayer),
+      ),
     );
 
     expect(result).toStrictEqual(fromPromiseTaskSources);
@@ -47,7 +50,7 @@ describe('maybeMapSourcemaps function', () => {
 
     const result = await Effect.runPromise(
       pipe(
-        maybeMapSourcemaps(parallelErrorsStack),
+        maybeMapSourcemaps('readUser', parallelErrorsStack),
         Effect.provide(FsTestLayer),
       ),
     );
@@ -60,7 +63,7 @@ describe('maybeMapSourcemaps function', () => {
 
     const result = await Effect.runPromise(
       pipe(
-        maybeMapSourcemaps([
+        maybeMapSourcemaps('readUser', [
           'at /Users/jpb06/repos/perso/effect-errors/src/examples/parallel-errors.ts',
         ]),
         Effect.provide(NodeFileSystem.layer),
@@ -87,7 +90,7 @@ describe('maybeMapSourcemaps function', () => {
     const { maybeMapSourcemaps } = await import('./maybe-map-sourcemaps.js');
 
     const result = await Effect.runPromise(
-      pipe(maybeMapSourcemaps([jsFile]), Effect.provide(FsTestLayer)),
+      pipe(maybeMapSourcemaps('yolo', [jsFile]), Effect.provide(FsTestLayer)),
     );
 
     expect(result).toHaveLength(1);
@@ -111,7 +114,7 @@ describe('maybeMapSourcemaps function', () => {
     const { maybeMapSourcemaps } = await import('./maybe-map-sourcemaps.js');
 
     const result = await Effect.runPromise(
-      pipe(maybeMapSourcemaps([jsFile]), Effect.provide(FsTestLayer)),
+      pipe(maybeMapSourcemaps('ono', [jsFile]), Effect.provide(FsTestLayer)),
     );
 
     expect(result).toStrictEqual([
@@ -153,7 +156,10 @@ describe('maybeMapSourcemaps function', () => {
     const { maybeMapSourcemaps } = await import('./maybe-map-sourcemaps.js');
 
     const result = await Effect.runPromise(
-      pipe(maybeMapSourcemaps([`at ${jsFile}`]), Effect.provide(FsTestLayer)),
+      pipe(
+        maybeMapSourcemaps('fetchTask', [`at ${jsFile}`]),
+        Effect.provide(FsTestLayer),
+      ),
     );
 
     expect(result).toStrictEqual([
@@ -238,7 +244,7 @@ describe('maybeMapSourcemaps function', () => {
 
     const result = await Effect.runPromise(
       pipe(
-        maybeMapSourcemaps([`    at file://${jsFile}`]),
+        maybeMapSourcemaps('fetchTask', [`    at file://${jsFile}`]),
         Effect.provide(TestFileSystemlayer),
       ),
     );

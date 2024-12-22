@@ -8,13 +8,13 @@ const fileName = fileURLToPath(import.meta.url);
 
 const readUser = pipe(
   Effect.fail({ _tag: 'BigBadError', message: 'Oh no!' }),
-  Effect.withSpan('readUser'),
+  Effect.withSpan('read-user'),
 );
 
 export const withPlainObjectErrorTask = pipe(
   Effect.all([filename(fileName), readUser]),
-  Effect.withSpan('withPlainObjectErrorTask'),
+  Effect.withSpan('with-plain-object-error-task'),
 );
 
-// biome-ignore lint/style/noDefaultExport: <explanation>
+// biome-ignore lint/style/noDefaultExport: run-example
 export default withPlainObjectErrorTask;

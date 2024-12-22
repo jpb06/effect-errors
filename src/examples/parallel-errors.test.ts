@@ -1,76 +1,193 @@
-import { describe, expect, it, vi } from 'vitest';
+import { Effect, pipe } from 'effect';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { mockConsole } from '../tests/mocks/console.mock.js';
+import { runPromise } from '../runners/run-promise.js';
+import { makeLoggerTestLayer } from '../tests/layers/logger.test-layer.js';
 import { durationRegex } from '../tests/regex/duration.regex.js';
 import { effectCause } from '../tests/runners/effect-cause.js';
+import { makeTaskWithCollectedErrors } from '../tests/util/make-task-with-collected-errors.js';
 import { stripAnsiCodes } from '../tests/util/strip-ansi-codes.util.js';
 import { withParallelErrorsTask } from './parallel-errors.js';
 
-mockConsole({
-  info: vi.fn(),
-  error: vi.fn(),
-});
-
 describe('parallel-errors task', () => {
-  it('should report three errors', async () => {
-    const cause = await effectCause(withParallelErrorsTask);
-
-    const { prettyPrint } = await import('./../pretty-print.js');
-    const result = prettyPrint(cause);
-
-    expect(result).toContain('3 errors occured');
+  beforeEach(() => {
+    vi.clearAllMocks();
   });
 
-  it('should display the error', async () => {
-    const cause = await effectCause(withParallelErrorsTask);
+  describe('pretty-print', () => {
+    const { LoggerTestLayer } = makeLoggerTestLayer({});
+    const task = pipe(withParallelErrorsTask, Effect.provide(LoggerTestLayer));
 
-    const { prettyPrint } = await import('./../pretty-print.js');
-    const result = prettyPrint(cause);
-    const raw = stripAnsiCodes(result);
+    it('should report three errors', async () => {
+      const cause = await effectCause(task);
 
-    expect(raw).toContain('#1 - UserNotFound');
-    expect(raw).toContain('#2 - UserNotFound');
-    expect(raw).toContain('#3 - UserNotFound');
+      const { prettyPrint } = await import('./../pretty-print.js');
+      const result = prettyPrint(cause);
 
-    expect(result).toContain(' • Oh no, this user does no exist!');
+      expect(result).toContain('3 errors occured');
+    });
+
+    it('should display the errors', async () => {
+      const cause = await effectCause(task);
+
+      const { prettyPrint } = await import('./../pretty-print.js');
+      const result = prettyPrint(cause);
+      const raw = stripAnsiCodes(result);
+
+      expect(raw).toContain('#1 - UserNotFound');
+      expect(raw).toContain('#2 - UserNotFound');
+      expect(raw).toContain('#3 - UserNotFound');
+
+      expect(result).toContain(' • Oh no, this user does no exist!');
+    });
+
+    it('should display spans', async () => {
+      const cause = await effectCause(task);
+
+      const { prettyPrint } = await import('./../pretty-print.js');
+      const result = prettyPrint(cause);
+      const raw = stripAnsiCodes(result);
+
+      expect(result).toContain('◯');
+      expect(raw).toContain('├─ with-parallel-errors-task');
+      expect(raw).toContain('├─ parallel-get');
+      expect(raw).toContain('╰─ read-user');
+      expect(raw.match(durationRegex)).toHaveLength(9);
+    });
+
+    it('should display span attributes', async () => {
+      const cause = await effectCause(task);
+
+      const { prettyPrint } = await import('./../pretty-print.js');
+      const result = prettyPrint(cause);
+      const raw = stripAnsiCodes(result);
+
+      expect(raw).toContain('│    names: yolo,bro,cool');
+      expect(raw).toContain('     name: yolo');
+      expect(raw).toContain('     name: bro');
+      expect(raw).toContain('     name: cool');
+    });
+
+    it('should display sources by default', async () => {
+      const cause = await effectCause(task);
+
+      const { prettyPrint } = await import('./../pretty-print.js');
+      const result = prettyPrint(cause);
+      const raw = stripAnsiCodes(result);
+
+      expect(raw).toContain('Sources 🕵️');
+      expect(raw).not.toContain('Node Stacktrace 🚨');
+      expect(result).toContain('│ at parallelGet');
+      expect(result).toContain('│ at readUser');
+    });
+
+    it('should display node stack', async () => {
+      const cause = await effectCause(task);
+
+      const { prettyPrint } = await import('./../pretty-print.js');
+      const result = prettyPrint(cause, { hideStackTrace: false });
+      const raw = stripAnsiCodes(result);
+
+      expect(raw).toContain('Sources 🕵️');
+      expect(raw).toContain('Node Stacktrace 🚨');
+      expect(result).toContain('│ at parallelGet');
+      expect(result).toContain('│ at readUser');
+    });
   });
 
-  it('should display spans', async () => {
-    const cause = await effectCause(withParallelErrorsTask);
+  describe('pretty-print from captured errors', () => {
+    it('should report three errors', async () => {
+      const { task, errorMock } = makeTaskWithCollectedErrors(
+        withParallelErrorsTask,
+      );
+      await runPromise(task);
 
-    const { prettyPrint } = await import('./../pretty-print.js');
-    const result = prettyPrint(cause);
-    const raw = stripAnsiCodes(result);
+      expect(errorMock).toHaveBeenCalledTimes(1);
+      const message = errorMock.mock.calls[0][0];
 
-    expect(result).toContain('◯');
-    expect(raw).toContain('├─ at withParallelErrorsTask');
-    expect(raw).toContain('├─ at parallelGet');
-    expect(raw).toContain('╰─ at readUser');
-    expect(raw.match(durationRegex)).toHaveLength(9);
-  });
+      expect(message).toContain('3 errors occured');
+    });
 
-  it('should display span attributes', async () => {
-    const cause = await effectCause(withParallelErrorsTask);
+    it('should display the errors', async () => {
+      const { task, errorMock } = makeTaskWithCollectedErrors(
+        withParallelErrorsTask,
+      );
+      await runPromise(task);
 
-    const { prettyPrint } = await import('./../pretty-print.js');
-    const result = prettyPrint(cause);
-    const raw = stripAnsiCodes(result);
+      expect(errorMock).toHaveBeenCalledTimes(1);
+      const message = errorMock.mock.calls[0][0];
+      const raw = stripAnsiCodes(message);
 
-    expect(raw).toContain('│     names: yolo,bro,cool');
-    expect(raw).toContain('      name: yolo');
-    expect(raw).toContain('      name: bro');
-    expect(raw).toContain('      name: cool');
-  });
+      expect(raw).toContain(' #1 - UserNotFound ');
+      expect(raw).toContain(' #2 - UserNotFound ');
+      expect(raw).toContain(' #3 - UserNotFound ');
+      expect(raw).toContain(' • Oh no, this user does no exist!');
+    });
 
-  it('should display the stack', async () => {
-    const cause = await effectCause(withParallelErrorsTask);
+    it('should display spans', async () => {
+      const { task, errorMock } = makeTaskWithCollectedErrors(
+        withParallelErrorsTask,
+      );
+      await runPromise(task);
 
-    const { prettyPrint } = await import('./../pretty-print.js');
-    const result = prettyPrint(cause);
+      expect(errorMock).toHaveBeenCalledTimes(1);
+      const message = errorMock.mock.calls[0][0];
+      const raw = stripAnsiCodes(message);
 
-    expect(result).toContain('🚨 Node Stacktrace');
-    expect(result).toContain('🚨 Spans Stacktrace');
-    expect(result).toContain('│ at parallelGet');
-    expect(result).toContain('│ at readUser');
+      expect(raw).toContain('◯');
+      expect(raw).toContain('├─ with-parallel-errors-task');
+      expect(raw).toContain('├─ parallel-get');
+      expect(raw).toContain('╰─ read-user');
+      expect(raw.match(durationRegex)).toHaveLength(9);
+    });
+
+    it('should display span attributes', async () => {
+      const { task, errorMock } = makeTaskWithCollectedErrors(
+        withParallelErrorsTask,
+      );
+      await runPromise(task);
+
+      expect(errorMock).toHaveBeenCalledTimes(1);
+      const message = errorMock.mock.calls[0][0];
+      const raw = stripAnsiCodes(message);
+
+      expect(raw).toContain('│    names: yolo,bro,cool');
+      expect(raw).toContain('     name: yolo');
+      expect(raw).toContain('     name: bro');
+      expect(raw).toContain('     name: cool');
+    });
+
+    it('should display sources by default', async () => {
+      const { task, errorMock } = makeTaskWithCollectedErrors(
+        withParallelErrorsTask,
+      );
+      await runPromise(task);
+
+      expect(errorMock).toHaveBeenCalledTimes(1);
+      const message = errorMock.mock.calls[0][0];
+      const raw = stripAnsiCodes(message);
+
+      expect(raw).toContain('Sources 🕵️');
+      expect(raw).not.toContain('Node Stacktrace 🚨');
+      expect(raw).toContain('│ at parallel-get');
+      expect(raw).toContain('│ at read-user');
+    });
+
+    it('should display node stack', async () => {
+      const { task, errorMock } = makeTaskWithCollectedErrors(
+        withParallelErrorsTask,
+        { hideStackTrace: false },
+      );
+      await runPromise(task);
+
+      expect(errorMock).toHaveBeenCalledTimes(1);
+      const message = errorMock.mock.calls[0][0];
+      const raw = stripAnsiCodes(message);
+
+      expect(raw).toContain('Sources 🕵️');
+      expect(raw).toContain('Node Stacktrace 🚨');
+      expect(raw).toContain('│ at parallel-get');
+      expect(raw).toContain('│ at read-user');
+    });
   });
 });

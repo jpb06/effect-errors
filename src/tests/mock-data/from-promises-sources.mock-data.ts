@@ -9,6 +9,7 @@ export const fromPromiseStack = [
 export const fromPromiseTaskSources: ErrorRelatedSources[] = [
   {
     _tag: 'sources',
+    name: 'fetchTask',
     runPath: 'effect-errors/src/examples/from-promise.ts:31:9',
     sourcesPath: undefined,
     source: [
@@ -27,6 +28,7 @@ export const fromPromiseTaskSources: ErrorRelatedSources[] = [
   },
   {
     _tag: 'sources',
+    name: 'fetchTask',
     runPath: 'effect-errors/src/examples/from-promise.ts:35:12',
     sourcesPath: undefined,
     source: [
@@ -35,7 +37,7 @@ export const fromPromiseTaskSources: ErrorRelatedSources[] = [
       { line: 34, code: '    }),', column: undefined },
       {
         line: 35,
-        code: "    Effect.withSpan('fetchUser', { attributes: { userId } }),",
+        code: "    Effect.withSpan('fetch-user', { attributes: { userId } }),",
         column: 12,
       },
       { line: 36, code: '  );', column: undefined },
@@ -49,6 +51,7 @@ export const fromPromiseTaskSources: ErrorRelatedSources[] = [
   },
   {
     _tag: 'sources',
+    name: 'fetchTask',
     runPath: 'effect-errors/src/examples/from-promise.ts:56:10',
     sourcesPath: undefined,
     source: [
@@ -59,12 +62,12 @@ export const fromPromiseTaskSources: ErrorRelatedSources[] = [
         column: undefined,
       },
       { line: 55, code: '  }),', column: undefined },
-      { line: 56, code: "  Effect.withSpan('fromPromiseTask'),", column: 10 },
+      { line: 56, code: "  Effect.withSpan('from-promise-task'),", column: 10 },
       { line: 57, code: ');', column: undefined },
       { line: 58, code: '', column: undefined },
       {
         line: 59,
-        code: '// biome-ignore lint/style/noDefaultExport: <explanation>',
+        code: '// biome-ignore lint/style/noDefaultExport: run-example',
         column: undefined,
       },
     ],

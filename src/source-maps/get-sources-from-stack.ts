@@ -15,7 +15,10 @@ export const getSourcesFromStack = (maybeStack: string | undefined) =>
 
       const relevantStackEntries =
         removeNodeModulesEntriesFromStack(maybeStack);
-      const sourcesOrLocation = yield* maybeMapSourcemaps(relevantStackEntries);
+      const sourcesOrLocation = yield* maybeMapSourcemaps(
+        '',
+        relevantStackEntries,
+      );
 
       return {
         sources: sourcesOrLocation.filter((el) => el._tag === 'sources'),

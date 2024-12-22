@@ -12,6 +12,7 @@ import {
 } from './get-sources-from-map-file.js';
 
 export const getErrorRelatedSources = (
+  name: string,
   sourceFile: string,
 ): Effect.Effect<
   ErrorRelatedSources | RawErrorLocation | undefined,
@@ -33,11 +34,12 @@ export const getErrorRelatedSources = (
 
       return {
         _tag: 'sources' as const,
+        name,
         runPath: `${filePath}:${line}:${column}`,
         sourcesPath: undefined,
         source,
       };
     }
 
-    return yield* getSourcesFromMapFile(location);
+    return yield* getSourcesFromMapFile(name, location);
   });

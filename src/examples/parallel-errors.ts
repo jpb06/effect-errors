@@ -13,7 +13,7 @@ const readUser = (name: string) =>
       try: async () => await Promise.reject('Oh no, this user does no exist!'),
       catch: (e) => new UserNotFoundError({ cause: e }),
     }),
-    Effect.withSpan('readUser', {
+    Effect.withSpan('read-user', {
       attributes: { name },
     }),
   );
@@ -23,15 +23,15 @@ const parallelGet = (names: string[]) =>
     Effect.all(names.map(readUser), {
       concurrency: 'unbounded',
     }),
-    Effect.withSpan('parallelGet', {
+    Effect.withSpan('parallel-get', {
       attributes: { names },
     }),
   );
 
 export const withParallelErrorsTask = pipe(
   Effect.all([filename(fileName), parallelGet(['yolo', 'bro', 'cool'])]),
-  Effect.withSpan('withParallelErrorsTask'),
+  Effect.withSpan('with-parallel-errors-task'),
 );
 
-// biome-ignore lint/style/noDefaultExport: <explanation>
+// biome-ignore lint/style/noDefaultExport: run-example
 export default withParallelErrorsTask;

@@ -14,6 +14,7 @@ import { type SourceCode, getSourceCode } from './get-source-code.js';
 
 export interface ErrorRelatedSources {
   _tag: 'sources';
+  name: string;
   source: SourceCode[];
   runPath: string;
   sourcesPath: string | undefined;
@@ -21,9 +22,11 @@ export interface ErrorRelatedSources {
 
 export interface RawErrorLocation extends ErrorLocation {
   _tag: 'location';
+  name: string;
 }
 
 export const getSourcesFromMapFile = (
+  name: string,
   location: ErrorLocation,
 ): Effect.Effect<
   ErrorRelatedSources | RawErrorLocation | undefined,
@@ -37,6 +40,7 @@ export const getSourcesFromMapFile = (
       if (!fileExists) {
         return {
           _tag: 'location' as const,
+          name,
           ...location,
           filePath: location.filePath.replace(process.cwd(), ''),
         };
@@ -77,6 +81,7 @@ export const getSourcesFromMapFile = (
 
       return {
         _tag: 'sources' as const,
+        name,
         runPath: `${location.filePath}:${location.line}:${location.column}`,
         sourcesPath: `${absolutePath}:${sources.line}:${sources.column + 1}`,
         source,

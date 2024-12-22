@@ -10,7 +10,7 @@ const fileName = fileURLToPath(import.meta.url);
 
 const readUser = pipe(
   Effect.tryPromise(async () => await fs.readJson('cool.ts')),
-  Effect.withSpan('readUser'),
+  Effect.withSpan('read-user'),
 );
 
 const fetchTask = (userId: string) =>
@@ -20,7 +20,7 @@ const fetchTask = (userId: string) =>
         await fetch(`https://yolo-bro-oh-no.org/users/${userId}`),
       catch: (e) => new FetchError({ cause: e }),
     }),
-    Effect.withSpan('fetchUser', {
+    Effect.withSpan('fetch-user', {
       attributes: { userId },
     }),
   );
@@ -31,7 +31,7 @@ const unwrapResponseTask = (response: Response) =>
       try: async () => await response.json(),
       catch: (e) => new FetchError({ cause: e }),
     }),
-    Effect.withSpan('unwrapFetchUserResponse'),
+    Effect.withSpan('unwrap-fetch-user-response'),
   );
 
 export const unknownErrorTask = pipe(
@@ -43,8 +43,8 @@ export const unknownErrorTask = pipe(
 
     return yield* unwrapResponseTask(response);
   }),
-  Effect.withSpan('unknownErrorTask'),
+  Effect.withSpan('unknown-error-task'),
 );
 
-// biome-ignore lint/style/noDefaultExport: <explanation>
+// biome-ignore lint/style/noDefaultExport: run-example
 export default unknownErrorTask;

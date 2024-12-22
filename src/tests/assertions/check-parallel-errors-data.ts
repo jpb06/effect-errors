@@ -12,15 +12,15 @@ export const checkParallelErrorsData = (
   expect(message).toStrictEqual('Oh no, this user does no exist!');
 
   expect(spans).toHaveLength(3);
-  expect(spans?.[0].name).toBe('readUser');
+  expect(spans?.[0].name).toBe('read-user');
   expect(spans?.[0].attributes).toStrictEqual({
     name: readUserSpanName,
   });
-  expect(spans?.[1].name).toBe('parallelGet');
+  expect(spans?.[1].name).toBe('parallel-get');
   expect(spans?.[1].attributes).toStrictEqual({
     names: ['yolo', 'bro', 'cool'],
   });
-  expect(spans?.[2].name).toBe('withParallelErrorsTask');
+  expect(spans?.[2].name).toBe('with-parallel-errors-task');
   expect(spans?.[2].attributes).toStrictEqual({});
 
   const sources0 = sources?.at(0);
