@@ -22,7 +22,7 @@ export const printEffectStacktrace = (
   }
 
   const paths = sources.map(({ name, runPath, sourcesPath }) => {
-    const path = sourcesPath !== undefined ? sourcesPath : runPath;
+    const path = sourcesPath ?? runPath;
     return { path: stripCwd ? stripCwdPath(path) : path, name };
   });
 
