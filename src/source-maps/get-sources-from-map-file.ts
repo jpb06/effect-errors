@@ -70,6 +70,12 @@ export const getSourcesFromMapFile = (
         location.filePath.substring(0, location.filePath.lastIndexOf('/')),
         sources.source,
       );
+      const isNodeModules = absolutePath.startsWith(
+        `${process.cwd()}/node_modules`,
+      );
+      if (isNodeModules) {
+        return;
+      }
       const source = yield* getSourceCode(
         {
           filePath: absolutePath,
@@ -87,5 +93,7 @@ export const getSourcesFromMapFile = (
         source,
       };
     }),
-    Effect.withSpan('get-sources-from-map-file', { attributes: { location } }),
+    Effect.withSpan('get-sources-from-map-file', {
+      attributes: { location: JSON.stringify(location) },
+    }),
   );
