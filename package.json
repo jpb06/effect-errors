@@ -77,7 +77,7 @@
     "fs-extra": "11.2.0",
     "globals": "15.14.0",
     "readme-package-icons": "1.1.16",
-    "taze": "0.18.0",
+    "taze": "18.1.0",
     "ts-node": "10.9.2",
     "tsx": "4.19.2",
     "typescript": "5.7.3",
