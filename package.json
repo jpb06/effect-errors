@@ -28,7 +28,7 @@
     "node": ">=20.x"
   },
   "scripts": {
-    "update-deps": "taze -f -I",
+    "update-deps": "bun npm-check-updates --root --format group -i",
     "copy-package": "copyfiles package.json ./dist/",
     "copy-readme": "copyfiles README.md ./dist/",
     "build": "del-cli ./dist && bun build-esm && bun build-cjs",
@@ -76,8 +76,8 @@
     "esbuild": "0.24.2",
     "fs-extra": "11.2.0",
     "globals": "15.14.0",
+    "npm-check-updates": "^17.1.13",
     "readme-package-icons": "1.1.16",
-    "taze": "0.18.0",
     "ts-node": "10.9.2",
     "tsx": "4.19.2",
     "typescript": "5.7.3",
