@@ -76,7 +76,7 @@
     "esbuild": "0.24.2",
     "fs-extra": "11.3.0",
     "globals": "15.14.0",
-    "npm-check-updates": "^17.1.13",
+    "npm-check-updates": "^17.1.14",
     "readme-package-icons": "1.1.16",
     "ts-node": "10.9.2",
     "tsx": "4.19.2",
