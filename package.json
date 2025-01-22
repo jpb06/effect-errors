@@ -7,12 +7,12 @@
   "exports": {
     ".": {
       "require": {
-        "default": "./cjs/index.js",
-        "types": "./dts/index.d.ts"
+        "types": "./dts/index.d.ts",
+        "default": "./cjs/index.js"
       },
       "import": {
-        "default": "./esm/index.js",
-        "types": "./dts/index.d.ts"
+        "types": "./dts/index.d.ts",
+        "default": "./esm/index.js"
       }
     }
   },
