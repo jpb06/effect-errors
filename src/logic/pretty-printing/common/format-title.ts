@@ -9,7 +9,7 @@ export const formatTitle = (errorsCount: number): string[] => {
     `${color.underline(color.redBright('effect-errors'))}`,
   );
   const title = color.bold(
-    color.yellowBright(
+    color.cyanBright(
       `${errorsCount} error${errorsCount > 1 ? 's' : ''} occurred`,
     ),
   );
