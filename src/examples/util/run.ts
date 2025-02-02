@@ -17,8 +17,11 @@ import { runPromise } from '../../runners/run-promise.js';
   const task: { default: Effect.Effect<unknown, unknown, Logger> } =
     await import(path.join('..', file));
 
-  await runPromise(pipe(task.default, Effect.provide(LoggerConsoleLive)), {
-    stripCwd,
-    hideStackTrace,
-  });
+  try {
+    await runPromise(pipe(task.default, Effect.provide(LoggerConsoleLive)), {
+      stripCwd,
+      hideStackTrace,
+    });
+    // biome-ignore lint/suspicious/noEmptyBlockStatements: /
+  } catch (_) {}
 })();
