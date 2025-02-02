@@ -5,14 +5,14 @@ export const formatTitle = (errorsCount: number): string[] => {
     return [''];
   }
 
-  const libName = color.cyanBright(
-    `${color.underline(color.bold('effect-errors'))}`,
+  const libName = color.bold(
+    `${color.underline(color.redBright('effect-errors'))}`,
   );
   const title = color.bold(
-    color.redBright(
-      `${errorsCount} error${errorsCount > 1 ? 's' : ''} occured`,
+    color.yellowBright(
+      `${errorsCount} error${errorsCount > 1 ? 's' : ''} occurred`,
     ),
   );
 
-  return ['', `${libName} ❌ - ${title}`, '', ''];
+  return ['', `❌ ${libName} ❌ ${title}`, '', ''];
 };

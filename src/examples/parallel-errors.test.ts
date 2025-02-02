@@ -24,7 +24,7 @@ describe('parallel-errors task', () => {
       const { prettyPrint } = await import('./../pretty-print.js');
       const result = prettyPrint(cause);
 
-      expect(result).toContain('3 errors occured');
+      expect(result).toContain('3 errors occurred');
     });
 
     it('should display the errors', async () => {
@@ -105,7 +105,7 @@ describe('parallel-errors task', () => {
       expect(errorMock).toHaveBeenCalledTimes(1);
       const message = errorMock.mock.calls[0][0];
 
-      expect(message).toContain('3 errors occured');
+      expect(message).toContain('3 errors occurred');
     });
 
     it('should display the errors', async () => {
