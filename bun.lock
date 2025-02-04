@@ -8,7 +8,7 @@
         "@effect/platform-node": "0.71.1",
         "@effect/schema": "0.75.5",
         "comment-json": "4.2.5",
-        "effect": "3.12.7",
+        "effect": "3.12.9",
         "picocolors": "1.1.1",
         "source-map-js": "1.2.1",
       },
@@ -356,7 +356,7 @@
 
     "eastasianwidth": ["eastasianwidth@0.2.0", "", {}, "sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA=="],
 
-    "effect": ["effect@3.12.7", "", { "dependencies": { "fast-check": "^3.23.1" } }, "sha512-BsDTgSjLbL12g0+vGn5xkOgOVhRSaR3VeHmjcUb0gLvpXACJ9OgmlfeH+/FaAZwM5+omIF3I/j1gC5KJrbK1Aw=="],
+    "effect": ["effect@3.12.9", "", { "dependencies": { "fast-check": "^3.23.1" } }, "sha512-u3PsO0KWtCTO56yGGYaa8RLOccE6Kbeb4UotS/ArAG/tqAyf0x3JF3WaaklhnxJtt67P6SktLmwRPT4hiuhKEA=="],
 
     "electron-to-chromium": ["electron-to-chromium@1.5.90", "", {}, "sha512-C3PN4aydfW91Natdyd449Kw+BzhLmof6tzy5W1pFC5SpQxVXT+oyiyOG9AgYYSN9OdA/ik3YkCrpwqI8ug5Tug=="],
 
