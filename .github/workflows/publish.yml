@@ -39,7 +39,7 @@ jobs:
           major-keywords: BREAKING CHANGE
           minor-keywords: feat,minor
           patch-keywords: fix,chore
-          should-default-to-patch: false
+          should-default-to-patch: true
           commit-user: jpb06
           commit-user-email: jpb.06@outlook.com
 
