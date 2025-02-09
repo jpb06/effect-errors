@@ -1,5 +1,8 @@
 {
-  "repository": "https://github.com/jpb06/effect-errors.git",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jpb06/effect-errors.git"
+  },
   "type": "module",
   "main": "./cjs/index.js",
   "module": "./esm/index.js",
