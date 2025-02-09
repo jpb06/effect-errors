@@ -7,15 +7,16 @@ on:
     types:
       - completed
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   publish:
     name: 🛩️ Publish
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - name: 🛑 Cancel Previous Runs
-        uses: styfle/cancel-workflow-action@0.12.1
-
       - name: ⬇️ Checkout repo
         uses: actions/checkout@v4
 
@@ -26,9 +27,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version-file: '.node-version'
-          registry-url: 'https://registry.npmjs.org'
-          # cache: 'bun'
-          cache-dependency-path: ./package.json
+          registry-url: 'https://npm.pkg.github.com'
 
       - name: 📥 Install deps
         run: bun install --frozen-lockfile
@@ -40,7 +39,7 @@ jobs:
           major-keywords: BREAKING CHANGE
           minor-keywords: feat,minor
           patch-keywords: fix,chore
-          should-default-to-patch: true
+          should-default-to-patch: false
           commit-user: jpb06
           commit-user-email: jpb.06@outlook.com
 
@@ -48,7 +47,8 @@ jobs:
         run: bun run build
 
       - name: 🚀 Publish package
+        id: publish
         if: steps.bumping-version.outputs.bump-performed == 'true'
         run: npm publish ./dist --access public
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
