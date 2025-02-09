@@ -1,4 +1,4 @@
-name: ⚡ Publish
+name: ⚡ Release
 
 on:
   workflow_run:
@@ -11,44 +11,48 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+permissions:
+  contents: write
+  pull-requests: write
+
 jobs:
   publish:
-    name: 🛩️ Publish
+    name: 🛩️ Release & Publish
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
+      - name: 🛰️ Release please
+        uses: googleapis/release-please-action@v4
+        id: release
+        with:
+          release-type: node
+
       - name: ⬇️ Checkout repo
         uses: actions/checkout@v4
+        if: ${{ steps.release.outputs.release_created }}
 
       - name: 📦 Setup bun
         uses: oven-sh/setup-bun@v2
+        if: ${{ steps.release.outputs.release_created }}
 
       - name: ⎔ Setup node
         uses: actions/setup-node@v4
+        if: ${{ steps.release.outputs.release_created }}
         with:
           node-version-file: '.node-version'
           registry-url: 'https://npm.pkg.github.com'
 
       - name: 📥 Install deps
+        if: ${{ steps.release.outputs.release_created }}
         run: bun install --frozen-lockfile
 
-      - name: ✏️ Bump package version
-        id: bumping-version
-        uses: jpb06/bump-package@latest
-        with:
-          major-keywords: BREAKING CHANGE
-          minor-keywords: feat,minor
-          patch-keywords: fix,chore
-          should-default-to-patch: true
-          commit-user: jpb06
-          commit-user-email: jpb.06@outlook.com
-
       - name: ⚙️ Building package
+        if: ${{ steps.release.outputs.release_created }}
         run: bun run build
 
       - name: 🚀 Publish package
         id: publish
-        if: steps.bumping-version.outputs.bump-performed == 'true'
+        if: ${{ steps.release.outputs.release_created }}
         run: npm publish ./dist --access public
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.PUBLISH_TOKEN }}
