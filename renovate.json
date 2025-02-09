@@ -4,5 +4,6 @@
   "schedule": "after 6am and before 6pm",
   "automerge": false,
   "rebaseWhen": "conflicted",
-  "semanticCommits": "enabled"
+  "semanticCommits": "enabled",
+  "commitMessagePrefix": "build(deps):"
 }
