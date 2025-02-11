@@ -60,7 +60,7 @@
     "@effect/platform-node": "0.71.4",
     "@effect/schema": "0.75.5",
     "comment-json": "4.2.5",
-    "effect": "3.12.10",
+    "effect": "3.12.11",
     "picocolors": "1.1.1",
     "source-map-js": "1.2.1"
   },
