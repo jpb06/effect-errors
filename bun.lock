@@ -4,7 +4,7 @@
     "": {
       "name": "effect-errors",
       "dependencies": {
-        "@effect/platform": "0.75.4",
+        "@effect/platform": "0.76.0",
         "@effect/platform-node": "0.71.4",
         "@effect/schema": "0.75.5",
         "comment-json": "4.2.5",
@@ -100,7 +100,7 @@
 
     "@cspotcode/source-map-support": ["@cspotcode/source-map-support@0.8.1", "", { "dependencies": { "@jridgewell/trace-mapping": "0.3.9" } }, "sha512-IchNf6dN4tHoMFIn/7OE8LWZ19Y6q/67Bmf6vnGREv8RSbBVb9LPJxEcnwrcwX6ixSvaiGoomAUvu4YSxXrVgw=="],
 
-    "@effect/platform": ["@effect/platform@0.75.4", "", { "dependencies": { "find-my-way-ts": "^0.1.5", "multipasta": "^0.2.5" }, "peerDependencies": { "effect": "^3.12.10" } }, "sha512-G+kUKGI9zR8vsMu05lR4KWURm0x4Z6wG24uVnj0O0j/stAh8gabVy+xpg2g0T3BNyam0uzfXCJJ+ZJJNbkTYcA=="],
+    "@effect/platform": ["@effect/platform@0.76.0", "", { "dependencies": { "find-my-way-ts": "^0.1.5", "multipasta": "^0.2.5" }, "peerDependencies": { "effect": "^3.12.11" } }, "sha512-PT1Hq5yrtIOKp3D55LRcipgpPh41+XuUD2/KUnas7eyyUC1AVjaIyC84mOHmUWMkv82o0l2zaj8CnbfIlzq1Ow=="],
 
     "@effect/platform-node": ["@effect/platform-node@0.71.4", "", { "dependencies": { "@effect/platform-node-shared": "^0.25.4", "mime": "^3.0.0", "undici": "^7.1.0", "ws": "^8.18.0" }, "peerDependencies": { "@effect/platform": "^0.75.4", "effect": "^3.12.10" } }, "sha512-1YzQf4ad41RCeOoyGDVxVsivuWk5sVbq75mO9n4DVPbdIqwelPvpsYwtjBHcpzxO3bsRxKq4aILSzNOqJ63q5Q=="],
 
