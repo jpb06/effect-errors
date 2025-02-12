@@ -5,7 +5,7 @@
       "name": "effect-errors",
       "dependencies": {
         "@effect/platform": "0.76.0",
-        "@effect/platform-node": "0.71.4",
+        "@effect/platform-node": "0.72.0",
         "@effect/schema": "0.75.5",
         "comment-json": "4.2.5",
         "effect": "3.12.11",
@@ -102,9 +102,9 @@
 
     "@effect/platform": ["@effect/platform@0.76.0", "", { "dependencies": { "find-my-way-ts": "^0.1.5", "multipasta": "^0.2.5" }, "peerDependencies": { "effect": "^3.12.11" } }, "sha512-PT1Hq5yrtIOKp3D55LRcipgpPh41+XuUD2/KUnas7eyyUC1AVjaIyC84mOHmUWMkv82o0l2zaj8CnbfIlzq1Ow=="],
 
-    "@effect/platform-node": ["@effect/platform-node@0.71.4", "", { "dependencies": { "@effect/platform-node-shared": "^0.25.4", "mime": "^3.0.0", "undici": "^7.1.0", "ws": "^8.18.0" }, "peerDependencies": { "@effect/platform": "^0.75.4", "effect": "^3.12.10" } }, "sha512-1YzQf4ad41RCeOoyGDVxVsivuWk5sVbq75mO9n4DVPbdIqwelPvpsYwtjBHcpzxO3bsRxKq4aILSzNOqJ63q5Q=="],
+    "@effect/platform-node": ["@effect/platform-node@0.72.0", "", { "dependencies": { "@effect/platform-node-shared": "^0.26.0", "mime": "^3.0.0", "undici": "^7.1.0", "ws": "^8.18.0" }, "peerDependencies": { "@effect/platform": "^0.76.0", "effect": "^3.12.11" } }, "sha512-aB/cwhanwvqIetGcF/guLAMkTUMIgf8GCLFviwX+5Nmk0zhFdb9WycJJhIGSkM9kxJzMrQsCVGLrYd2OjhswUg=="],
 
-    "@effect/platform-node-shared": ["@effect/platform-node-shared@0.25.4", "", { "dependencies": { "@parcel/watcher": "^2.4.1", "multipasta": "^0.2.5" }, "peerDependencies": { "@effect/platform": "^0.75.4", "effect": "^3.12.10" } }, "sha512-HQEYnNV5iXoqbcZ8gmO4HcSSq/TuoDKQADFVfzDSkI50xUaPpq8kz0oIN/R4VfZoGjYZE4NbX+0D749pNtMxCQ=="],
+    "@effect/platform-node-shared": ["@effect/platform-node-shared@0.26.0", "", { "dependencies": { "@parcel/watcher": "^2.4.1", "multipasta": "^0.2.5" }, "peerDependencies": { "@effect/platform": "^0.76.0", "effect": "^3.12.11" } }, "sha512-prGJ9lRUh02uLir/uxF2hP8TsMnP4w8zxeLNfnaK6N1K8+sCd/uVgcHS9EUmc6LWn/iaqHyKiaFZTQ+gYqkHFA=="],
 
     "@effect/schema": ["@effect/schema@0.75.5", "", { "dependencies": { "fast-check": "^3.21.0" }, "peerDependencies": { "effect": "^3.9.2" } }, "sha512-TQInulTVCuF+9EIbJpyLP6dvxbQJMphrnRqgexm/Ze39rSjfhJuufF7XvU3SxTgg3HnL7B/kpORTJbHhlE6thw=="],
 
