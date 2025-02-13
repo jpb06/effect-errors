@@ -78,7 +78,7 @@
     "del-cli": "6.0.0",
     "esbuild": "0.25.0",
     "fs-extra": "11.3.0",
-    "globals": "15.14.0",
+    "globals": "15.15.0",
     "npm-check-updates": "17.1.14",
     "readme-package-icons": "1.2.0",
     "ts-node": "10.9.2",
