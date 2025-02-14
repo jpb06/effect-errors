@@ -6,15 +6,15 @@ import { FileSystem } from '@effect/platform/FileSystem';
 import { Effect, Layer, Match, pipe } from 'effect';
 import { describe, expect, it, vi } from 'vitest';
 
-import { makeFsTestLayer } from '../tests/layers/file-system.test-layer.js';
+import { makeFsTestLayer } from '@tests/layers';
 import {
   fromPromiseStack,
   fromPromiseTaskSources,
   parallelErrorsStack,
   parallelErrorsTaskSources,
-} from '../tests/mock-data/index.js';
-import { execShellCommand } from '../tests/util/exec-shell-command.util.js';
-import { getExampleSources } from '../tests/util/get-example-sources.util.js';
+} from '@tests/mock-data';
+import { execShellCommand, getExampleSources } from '@tests/util';
+
 import type { RawErrorLocation } from './get-sources-from-map-file.js';
 
 describe('maybeMapSourcemaps function', () => {
@@ -127,7 +127,7 @@ describe('maybeMapSourcemaps function', () => {
 
   it('should return sources from the map file associated with a js file', async () => {
     const jsFile =
-      '/Users/jpb06/repos/perso/effect-errors/src/tests/bundle/from-promise.js:37:326';
+      '/Users/jpb06/repos/perso/effect-errors/src/tests/bundle/from-promise.js:168:388';
     const mapFile = await fs.promises.readFile(
       './src/tests/bundle/from-promise.js.map',
       {
@@ -188,9 +188,9 @@ describe('maybeMapSourcemaps function', () => {
     const effectError = parsedError.errors.at(0);
 
     const runPaths = [
-      'effect-errors/src/tests/bundle/from-promise.js:37:304',
-      'effect-errors/src/tests/bundle/from-promise.js:37:326',
-      'effect-errors/src/tests/bundle/from-promise.js:37:583',
+      'effect-errors/src/tests/bundle/from-promise.js:168:366',
+      'effect-errors/src/tests/bundle/from-promise.js:168:388',
+      'effect-errors/src/tests/bundle/from-promise.js:168:655',
     ];
 
     expect(effectError.sources?.length).toBe(3);
@@ -211,7 +211,7 @@ describe('maybeMapSourcemaps function', () => {
 
   it('should handle stacktraces with trailing spaces', async () => {
     const jsFile =
-      '/Users/jpb06/repos/perso/effect-errors/src/tests/bundle/from-promise.js:37:326';
+      '/Users/jpb06/repos/perso/effect-errors/src/tests/bundle/from-promise.js:168:388';
 
     const mapFile = await fs.promises.readFile(
       './src/tests/bundle/from-promise.js.map',

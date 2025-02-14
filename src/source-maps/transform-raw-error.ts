@@ -1,8 +1,9 @@
 import { Effect, pipe } from 'effect';
 
+import { stripCwdPath } from '@logic/path';
+import { stackAtRegex } from '@logic/stack';
+
 import type { CaptureErrorsOptions } from '../capture-errors.js';
-import { stackAtRegex } from '../logic/stack/stack-regex.js';
-import { stripCwdPath } from '../logic/strip-cwd-path.js';
 import type { PrettyError } from '../types/pretty-error.type.js';
 import { getSourcesFromSpan } from './get-sources-from-span.js';
 import { getSourcesFromStack } from './get-sources-from-stack.js';

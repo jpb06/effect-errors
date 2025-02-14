@@ -1,11 +1,11 @@
+import { NodeFileSystem } from '@effect/platform-node';
 import { Effect, Layer, pipe } from 'effect';
 
-import { NodeFileSystem } from '@effect/platform-node';
+import { LoggerConsoleLive } from '@dependencies/logger';
 
 import { captureErrors } from '../../capture-errors.js';
-import { LoggerConsoleLive } from '../../logic/logger/index.js';
-import { bigIntReplacer } from '../../logic/util/big-int-replacer.js';
 import fromPromiseTask from '../from-promise.js';
+import { bigIntReplacer } from './big-int-replacer.js';
 
 Effect.runPromise(
   pipe(

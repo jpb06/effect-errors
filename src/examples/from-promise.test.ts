@@ -1,12 +1,12 @@
 import { Effect, pipe } from 'effect';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
+import { makeLoggerTestLayer } from '@tests/layers';
+import { durationRegex } from '@tests/regex';
+import { effectCause } from '@tests/runners';
+import { makeTaskWithCollectedErrors, stripAnsiCodes } from '@tests/util';
+
 import { runPromise } from '../runners/run-promise.js';
-import { makeLoggerTestLayer } from '../tests/layers/logger.test-layer.js';
-import { durationRegex } from '../tests/regex/duration.regex.js';
-import { effectCause } from '../tests/runners/effect-cause.js';
-import { makeTaskWithCollectedErrors } from '../tests/util/make-task-with-collected-errors.js';
-import { stripAnsiCodes } from '../tests/util/strip-ansi-codes.util.js';
 import { fromPromiseTask } from './from-promise.js';
 
 describe('from-promise task', () => {
@@ -123,11 +123,11 @@ describe('from-promise task', () => {
 
       expect(raw).toContain('Sources 🕵️');
       expect(raw).toContain('│ at module code');
-      expect(raw).toContain('/from-promise.ts:31:9');
+      expect(raw).toContain('/from-promise.ts:38:9');
       expect(raw).toContain('│ at fetch-user');
-      expect(raw).toContain('/from-promise.ts:35:12');
+      expect(raw).toContain('/from-promise.ts:42:12');
       expect(raw).toContain('│ at from-promise-task');
-      expect(raw).toContain('/from-promise.ts:56:10');
+      expect(raw).toContain('/from-promise.ts:63:10');
 
       expect(raw).not.toContain('Node Stacktrace 🚨');
     });

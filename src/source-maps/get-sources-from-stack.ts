@@ -1,6 +1,7 @@
 import { Effect, pipe } from 'effect';
 
-import { removeNodeModulesEntriesFromStack } from '../logic/spans/maybe-add-error-to-spans-stack.js';
+import { removeNodeModulesEntriesFromStack } from '@logic/spans';
+
 import { maybeMapSourcemaps } from './maybe-map-sourcemaps.js';
 
 export const getSourcesFromStack = (maybeStack: string | undefined) =>

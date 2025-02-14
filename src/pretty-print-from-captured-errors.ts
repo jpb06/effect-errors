@@ -1,13 +1,11 @@
-import type { CapturedErrors } from './capture-errors.js';
 import {
   formatCapturedError,
   formatTitle,
   interruptedMessage,
-} from './logic/pretty-printing/index.js';
-import {
-  type PrettyPrintOptions,
-  prettyPrintOptionsDefault,
-} from './types/pretty-print-options.type.js';
+} from '@pretty-print';
+import { type PrettyPrintOptions, prettyPrintOptionsDefault } from '@type';
+
+import type { CapturedErrors } from './capture-errors.js';
 
 export const prettyPrintFromCapturedErrors = (
   { errors, interrupted }: CapturedErrors,

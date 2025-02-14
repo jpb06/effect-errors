@@ -2,13 +2,14 @@ import { NodeFileSystem } from '@effect/platform-node';
 import { Effect, pipe } from 'effect';
 import { describe, expect, it } from 'vitest';
 
+import { checkParallelErrorsData } from '@tests/assertions';
+import { makeLoggerTestLayer } from '@tests/layers';
+import { fromPromiseTaskSources } from '@tests/mock-data';
+import { effectCause } from '@tests/runners';
+
 import { captureErrors } from './capture-errors.js';
 import { fromPromiseTask } from './examples/from-promise.js';
 import { withParallelErrorsTask } from './examples/parallel-errors.js';
-import { checkParallelErrorsData } from './tests/assertions/check-parallel-errors-data.js';
-import { makeLoggerTestLayer } from './tests/layers/logger.test-layer.js';
-import { fromPromiseTaskSources } from './tests/mock-data/index.js';
-import { effectCause } from './tests/runners/effect-cause.js';
 
 describe('captureErrors function', () => {
   it('should capture errors from promises', async () => {

@@ -22,24 +22,26 @@ jobs:
       - name: ⬇️ Checkout repo
         uses: actions/checkout@v4
 
-      - name: 📦 Setup bun
-        uses: oven-sh/setup-bun@v2
+      - name: 📦 Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.3
 
       - name: ⎔ Setup node
         uses: actions/setup-node@v4
         with:
           node-version-file: '.node-version'
-          # cache: 'bun'
+          cache: 'pnpm'
           cache-dependency-path: ./package.json
 
       - name: 📥 Install deps
-        run: bun install --frozen-lockfile
+        run: pnpm install --frozen-lockfile
 
       - name: 📓 Format
-        run: bun run format-ci
+        run: pnpm format-ci
 
       - name: 🔬 Lint
-        run: bun run lint
+        run: pnpm lint
 
   typecheck:
     name: ʦ TypeScript
@@ -48,21 +50,23 @@ jobs:
       - name: ⬇️ Checkout repo
         uses: actions/checkout@v4
 
-      - name: 📦 Setup bun
-        uses: oven-sh/setup-bun@v2
+      - name: 📦 Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.3
 
       - name: ⎔ Setup node
         uses: actions/setup-node@v4
         with:
           node-version-file: '.node-version'
-          # cache: 'bun'
+          cache: 'pnpm'
           cache-dependency-path: ./package.json
 
       - name: 📥 Install deps
-        run: bun install --frozen-lockfile
+        run: pnpm install --frozen-lockfile
 
       - name: 🔎 Type check
-        run: bun run type-check
+        run: pnpm type-check
 
   test:
     name: 🎯 Tests
@@ -71,21 +75,23 @@ jobs:
       - name: ⬇️ Checkout repo
         uses: actions/checkout@v4
 
-      - name: 📦 Setup bun
-        uses: oven-sh/setup-bun@v2
+      - name: 📦 Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.3
 
       - name: ⎔ Setup node
         uses: actions/setup-node@v4
         with:
           node-version-file: '.node-version'
-          # cache: 'bun'
+          cache: 'pnpm'
           cache-dependency-path: ./package.json
 
       - name: 📥 Install deps
-        run: bun install --frozen-lockfile
+        run: pnpm install --frozen-lockfile
 
       - name: 🧪 Tests
-        run: bun run test-ci
+        run: pnpm test-ci
 
       - name: 💾 Uploading coverage artifact
         uses: actions/upload-artifact@v4

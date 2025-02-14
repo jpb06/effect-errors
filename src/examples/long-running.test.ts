@@ -1,9 +1,9 @@
 import { Duration, Effect, Fiber, TestClock, TestContext, pipe } from 'effect';
 import { describe, expect, it } from 'vitest';
 
-import { makeLoggerTestLayer } from '../tests/layers/logger.test-layer.js';
-import { durationRegex } from '../tests/regex/duration.regex.js';
-import { stripAnsiCodes } from '../tests/util/strip-ansi-codes.util.js';
+import { makeLoggerTestLayer } from '@tests/layers';
+import { durationRegex } from '@tests/regex';
+import { stripAnsiCodes } from '@tests/util';
 
 describe('long-running task', () => {
   const longRunningTaskEffect = async () => {
@@ -46,7 +46,7 @@ describe('long-running task', () => {
 
     expect(result).toContain('◯');
     expect(raw).toContain('├─ long-running-task');
-    expect(raw).toContain('╰─ read-user');
+    expect(raw).toContain('╰─ read-file');
     expect(raw.match(durationRegex)).toHaveLength(2);
   });
 

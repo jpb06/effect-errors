@@ -1,6 +1,7 @@
 import { Match } from 'effect';
 
-import { stripCwdPath } from '../strip-cwd-path.js';
+import { stripCwdPath } from '@logic/path';
+
 import { stackAtRegex } from './stack-regex.js';
 
 const match = Match.type<'node' | 'effect'>().pipe(

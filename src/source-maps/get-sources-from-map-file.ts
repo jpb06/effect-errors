@@ -5,10 +5,8 @@ import { FileSystem } from '@effect/platform/FileSystem';
 import { Effect, pipe } from 'effect';
 import { type RawSourceMap, SourceMapConsumer } from 'source-map-js';
 
-import {
-  type JsonParsingError,
-  readJsonEffect,
-} from '../logic/fs/read-json/index.js';
+import { type JsonParsingError, readJsonEffect } from '@dependencies/fs';
+
 import type { ErrorLocation } from './get-error-location-from-file-path.js';
 import { type SourceCode, getSourceCode } from './get-source-code.js';
 
@@ -49,7 +47,9 @@ export const getSourcesFromMapFile = (
       const data = yield* readJsonEffect<RawSourceMap>(
         `${location.filePath}.map`,
       );
-      if (data.version === undefined || data.sources === undefined) {
+      const hasNoData =
+        data?.version === undefined || data?.sources === undefined;
+      if (hasNoData) {
         return;
       }
 

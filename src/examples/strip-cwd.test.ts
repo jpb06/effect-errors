@@ -1,11 +1,12 @@
+import { Effect, pipe } from 'effect';
 import { describe, expect, it, vi } from 'vitest';
 
-import { Effect, pipe } from 'effect';
-import { makeLoggerTestLayer } from '../tests/layers/logger.test-layer.js';
-import { mockProcess } from '../tests/mocks/process.mock.js';
-import { durationRegex } from '../tests/regex/duration.regex.js';
-import { effectCause } from '../tests/runners/effect-cause.js';
-import { stripAnsiCodes } from '../tests/util/strip-ansi-codes.util.js';
+import { makeLoggerTestLayer } from '@tests/layers';
+import { mockProcess } from '@tests/mocks';
+import { durationRegex } from '@tests/regex';
+import { effectCause } from '@tests/runners';
+import { stripAnsiCodes } from '@tests/util';
+
 import { withCwdStrippingTask } from './strip-cwd.js';
 
 mockProcess({

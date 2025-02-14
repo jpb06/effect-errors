@@ -1,15 +1,8 @@
 import { type Cause, isInterruptedOnly } from 'effect/Cause';
 
-import { captureErrorsFrom } from './logic/errors/capture-errors-from-cause.js';
-import {
-  formatFailure,
-  formatTitle,
-  interruptedMessage,
-} from './logic/pretty-printing/index.js';
-import {
-  type PrettyPrintOptions,
-  prettyPrintOptionsDefault,
-} from './types/pretty-print-options.type.js';
+import { captureErrorsFrom } from '@logic/errors';
+import { formatFailure, formatTitle, interruptedMessage } from '@pretty-print';
+import { type PrettyPrintOptions, prettyPrintOptionsDefault } from '@type';
 
 export const prettyPrint = <E>(
   cause: Cause<E>,

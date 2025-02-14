@@ -1,10 +1,13 @@
+export * from './capture-errors.js';
 export * from './pretty-print.js';
 export * from './pretty-print-from-captured-errors.js';
 export * from './runners/run-promise.js';
 export * from './runners/run-sync.js';
 export * from './types/pretty-print-options.type.js';
-export * from './capture-errors.js';
-export * from './logic/util/big-int-replacer.js';
-export type { ErrorRelatedSources } from './source-maps/get-sources-from-map-file.js';
-export type { SourceCode } from './source-maps/get-source-code.ts';
-export type { ErrorLocation } from './source-maps/get-error-location-from-file-path.js';
+
+export type {
+  ErrorRelatedSources,
+  SourceCode,
+  ErrorLocation,
+} from './source-maps/index.js';
+export type { ErrorSpan } from './types/index.js';

@@ -1,5 +1,4 @@
 {
-	"include": ["./src"],
 	"exclude": ["node_modules", "dist", "./vite.config.mts"],
 	"compilerOptions": {
 		// Enable latest features
@@ -35,9 +34,28 @@
 		"noUncheckedIndexedAccess": false,
 		"strictNullChecks": true,
 		"exactOptionalPropertyTypes": true,
-		"noPropertyAccessFromIndexSignature": true,
+		"noPropertyAccessFromIndexSignature": false,
 
 		// alias
-		"rootDir": "./src"
+		"rootDir": "./src",
+		"paths": {
+			"@dependencies/fs": ["./src/dependencies/fs/index.ts"],
+			"@dependencies/logger": ["./src/dependencies/logger/index.ts"],
+			"@logic/errors": ["./src/logic/errors/index.ts"],
+			"@logic/path": ["./src/logic/path/index.ts"],
+			"@logic/spans": ["./src/logic/spans/index.ts"],
+			"@logic/stack": ["./src/logic/stack/index.ts"],
+			"@pretty-print": ["./src/pretty-printing/index.ts"],
+			"@pretty-print/common": ["./src/pretty-printing/common/index.ts"],
+			"@sourcemaps": ["./src/source-maps/index.ts"],
+			"@tests/assertions": ["./src/tests/assertions/index.ts"],
+			"@tests/mocks": ["./src/tests/mocks/index.ts"],
+			"@tests/mock-data": ["./src/tests/mock-data/index.ts"],
+			"@tests/layers": ["./src/tests/layers/index.ts"],
+			"@tests/regex": ["./src/tests/regex/index.ts"],
+			"@tests/runners": ["./src/tests/runners/index.ts"],
+			"@tests/util": ["./src/tests/util/index.ts"],
+			"@type": ["./src/types/index.ts"]
+		}
 	}
 }

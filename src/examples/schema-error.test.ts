@@ -1,10 +1,11 @@
 import { Effect, pipe } from 'effect';
 import { describe, expect, it } from 'vitest';
 
-import { makeLoggerTestLayer } from '../tests/layers/logger.test-layer.js';
-import { durationRegex } from '../tests/regex/duration.regex.js';
-import { effectCause } from '../tests/runners/effect-cause.js';
-import { stripAnsiCodes } from '../tests/util/strip-ansi-codes.util.js';
+import { makeLoggerTestLayer } from '@tests/layers';
+import { durationRegex } from '@tests/regex';
+import { effectCause } from '@tests/runners';
+import { stripAnsiCodes } from '@tests/util';
+
 import { withSchemaErrorTask } from './schema-error.js';
 
 describe('schema-error task', () => {
@@ -32,7 +33,7 @@ describe('schema-error task', () => {
 
     expect(result).toContain('◯');
     expect(raw).toContain('├─ with-schema-error-task');
-    expect(raw).toContain('╰─ read-user');
+    expect(raw).toContain('╰─ read-file');
     expect(raw.match(durationRegex)).toHaveLength(2);
   });
 

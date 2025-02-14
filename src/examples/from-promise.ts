@@ -1,7 +1,7 @@
+import { readFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 
 import { Effect, pipe } from 'effect';
-import fs from 'fs-extra';
 
 import { FetchError } from './errors/fetch-error.js';
 import { FileError } from './errors/file-error.js';
@@ -15,9 +15,16 @@ interface User {
 }
 
 const readUser = pipe(
-  Effect.tryPromise<User, FileError>({
-    try: async () => await fs.readJson('./src/examples/data/user.json'),
-    catch: (e) => new FileError({ cause: e }),
+  Effect.gen(function* () {
+    const data = yield* Effect.tryPromise<string, FileError>({
+      try: async () =>
+        await readFile('./src/examples/data/user.json', { encoding: 'utf-8' }),
+      catch: (e) => new FileError({ cause: e }),
+    });
+
+    const userData: User = JSON.parse(data);
+
+    return userData;
   }),
   Effect.withSpan('read-user'),
 );

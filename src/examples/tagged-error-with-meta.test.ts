@@ -1,10 +1,11 @@
+import { Effect, pipe } from 'effect';
 import { describe, expect, it } from 'vitest';
 
-import { Effect, pipe } from 'effect';
-import { makeLoggerTestLayer } from '../tests/layers/logger.test-layer.js';
-import { durationRegex } from '../tests/regex/duration.regex.js';
-import { effectCause } from '../tests/runners/effect-cause.js';
-import { stripAnsiCodes } from '../tests/util/strip-ansi-codes.util.js';
+import { makeLoggerTestLayer } from '@tests/layers';
+import { durationRegex } from '@tests/regex';
+import { effectCause } from '@tests/runners';
+import { stripAnsiCodes } from '@tests/util';
+
 import { withMetaTaggedErrorTask } from './tagged-error-with-meta.js';
 
 describe('tagged-error-with-meta task', () => {

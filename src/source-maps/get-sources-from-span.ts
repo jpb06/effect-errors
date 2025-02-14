@@ -1,7 +1,8 @@
 import { Effect, Option, pipe } from 'effect';
 import type { AnySpan, Span } from 'effect/Tracer';
 
-import { splitSpansAttributesByTypes } from '../logic/spans/split-spans-attributes-by-type.js';
+import { splitSpansAttributesByTypes } from '@logic/spans';
+
 import type {
   ErrorRelatedSources,
   RawErrorLocation,

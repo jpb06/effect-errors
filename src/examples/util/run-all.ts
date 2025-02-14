@@ -1,13 +1,14 @@
+import { readdir } from 'node:fs/promises';
 import path from 'node:path';
 
 import { Effect, pipe } from 'effect';
-import fs from 'fs-extra';
+
+import { type Logger, LoggerConsoleLive } from '@dependencies/logger';
 
 import { runPromise } from '../../index.js';
-import { type Logger, LoggerConsoleLive } from '../../logic/logger/index.js';
 
 (async () => {
-  const files = await fs.readdir('./src/examples');
+  const files = await readdir('./src/examples');
   for (const file of files) {
     if (
       file.endsWith('.ts') &&
