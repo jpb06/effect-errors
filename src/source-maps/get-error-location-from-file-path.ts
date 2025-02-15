@@ -1,4 +1,4 @@
-import { sourceFileWithMapPointerRegex } from '../logic/stack/stack-regex.js';
+import { sourceFileWithMapPointerRegex } from '@logic/stack';
 
 export interface ErrorLocation {
   filePath: string;

@@ -14,6 +14,7 @@
 		"./src/examples",
 		"./src/tests/**/*",
 		"./src/**/*.test.ts",
-		"./src/temp/**/*"
+		"./src/temp/**/*",
+		"./vite.config.mts"
 	]
 }

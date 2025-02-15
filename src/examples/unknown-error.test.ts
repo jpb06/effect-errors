@@ -1,10 +1,11 @@
 import { Effect, pipe } from 'effect';
 import { describe, expect, it } from 'vitest';
 
-import { makeLoggerTestLayer } from '../tests/layers/logger.test-layer.js';
-import { durationRegex } from '../tests/regex/duration.regex.js';
-import { effectCause } from '../tests/runners/effect-cause.js';
-import { stripAnsiCodes } from '../tests/util/strip-ansi-codes.util.js';
+import { makeLoggerTestLayer } from '@tests/layers';
+import { durationRegex } from '@tests/regex';
+import { effectCause } from '@tests/runners';
+import { stripAnsiCodes } from '@tests/util';
+
 import { unknownErrorTask } from './unknown-error.js';
 
 describe('unknown-error task', () => {
@@ -18,9 +19,7 @@ describe('unknown-error task', () => {
     const result = prettyPrint(cause);
 
     expect(result).toContain(' UnknownException ');
-    expect(result).toContain(
-      " • Error: ENOENT: no such file or directory, open 'cool.ts'",
-    );
+    expect(result).toContain(' • TypeError: fetch failed');
   });
 
   it('should display spans', async () => {
@@ -32,7 +31,7 @@ describe('unknown-error task', () => {
 
     expect(result).toContain('◯');
     expect(raw).toContain('├─ unknown-error-task');
-    expect(raw).toContain('╰─ read-user');
+    expect(raw).toContain('╰─ fetch-user');
     expect(raw.match(durationRegex)).toHaveLength(2);
   });
 
@@ -45,10 +44,10 @@ describe('unknown-error task', () => {
 
     expect(raw).toContain('Sources 🕵️');
     expect(result).toMatch(
-      /│ at .*\/effect-errors\/src\/examples\/unknown-error\.ts:46:10/,
+      /│ at .*\/effect-errors\/src\/examples\/unknown-error\.ts:53:10/,
     );
     expect(result).toMatch(
-      /│ at .*\/effect-errors\/src\/examples\/unknown-error\.ts:13:10/,
+      /│ at .*\/effect-errors\/src\/examples\/unknown-error\.ts:30:12/,
     );
   });
 });

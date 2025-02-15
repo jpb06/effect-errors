@@ -1,10 +1,11 @@
 import { Effect, pipe } from 'effect';
 import { describe, expect, it } from 'vitest';
 
-import { makeLoggerTestLayer } from '../tests/layers/logger.test-layer.js';
-import { durationRegex } from '../tests/regex/duration.regex.js';
-import { effectCause } from '../tests/runners/effect-cause.js';
-import { stripAnsiCodes } from '../tests/util/strip-ansi-codes.util.js';
+import { makeLoggerTestLayer } from '@tests/layers';
+import { durationRegex } from '@tests/regex';
+import { effectCause } from '@tests/runners';
+import { stripAnsiCodes } from '@tests/util';
+
 import { withTaggedErrorTask } from './tagged-error-with-error-ctor.js';
 
 describe('tagged-error-with-error-ctor task', () => {
@@ -32,7 +33,7 @@ describe('tagged-error-with-error-ctor task', () => {
 
     expect(result).toContain('◯');
     expect(raw).toContain('├─ with-tagged-error-task');
-    expect(raw).toContain('╰─ read-user');
+    expect(raw).toContain('╰─ read-file');
     expect(raw.match(durationRegex)).toHaveLength(2);
   });
 
@@ -45,13 +46,13 @@ describe('tagged-error-with-error-ctor task', () => {
 
     expect(raw).toContain('Sources 🕵️');
     expect(result).toMatch(
-      /│ at .*\/effect-errors\/src\/examples\/tagged-error-with-error-ctor\.ts:19:19/,
+      /│ at .*\/effect-errors\/src\/examples\/tagged-error-with-error-ctor\.ts:15:19/,
     );
     expect(result).toMatch(
-      /│ at .*\/effect-errors\/src\/examples\/tagged-error-with-error-ctor\.ts:26:10/,
+      /│ at .*\/effect-errors\/src\/examples\/tagged-error-with-error-ctor\.ts:22:10/,
     );
     expect(result).toMatch(
-      /│ at .*\/effect-errors\/src\/examples\/tagged-error-with-error-ctor\.ts:21:10/,
+      /│ at .*\/effect-errors\/src\/examples\/tagged-error-with-error-ctor\.ts:17:10/,
     );
   });
 });

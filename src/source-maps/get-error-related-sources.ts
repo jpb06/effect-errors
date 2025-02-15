@@ -2,7 +2,8 @@ import type { PlatformError } from '@effect/platform/Error';
 import type { FileSystem } from '@effect/platform/FileSystem';
 import { Effect } from 'effect';
 
-import type { JsonParsingError } from '../logic/fs/read-json/index.js';
+import type { JsonParsingError } from '@dependencies/fs';
+
 import { getErrorLocationFrom } from './get-error-location-from-file-path.js';
 import { getSourceCode } from './get-source-code.js';
 import {

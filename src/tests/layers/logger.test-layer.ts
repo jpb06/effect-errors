@@ -1,7 +1,7 @@
 import { type Effect, Layer } from 'effect';
 import { vi } from 'vitest';
 
-import { Logger, type LoggerLayer } from '../../logic/logger/index.js';
+import { Logger, type LoggerLayer } from '@dependencies/logger';
 
 type LoggerTestLayerInput = {
   info?: Effect.Effect<void>;

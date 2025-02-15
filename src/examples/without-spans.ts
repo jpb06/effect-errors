@@ -1,7 +1,7 @@
+import { readFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 
 import { Effect } from 'effect';
-import fs from 'fs-extra';
 
 import { FetchError } from './errors/fetch-error.js';
 import { FileError } from './errors/file-error.js';
@@ -9,8 +9,8 @@ import { filename } from './util/filename.effect.js';
 
 const fileName = fileURLToPath(import.meta.url);
 
-const readUser = Effect.tryPromise({
-  try: async () => await fs.readJson('cool.ts'),
+const readFileEffect = Effect.tryPromise({
+  try: async () => await readFile('cool.ts', { encoding: 'utf-8' }),
   catch: (e) => new FileError({ cause: e }),
 });
 
@@ -29,8 +29,8 @@ const unwrapResponseTask = (response: Response) =>
 export const withoutSpansTask = Effect.gen(function* () {
   yield* filename(fileName);
 
-  const { id } = yield* readUser;
-  const response = yield* fetchTask(id as never);
+  yield* readFileEffect;
+  const response = yield* fetchTask('1');
 
   return yield* unwrapResponseTask(response);
 });

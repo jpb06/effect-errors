@@ -1,13 +1,14 @@
 import { hasProperty } from 'effect/Predicate';
 import type { Span } from 'effect/Tracer';
 
-import { PrettyError } from '../../types/pretty-error.type.js';
+import { PrettyError } from '@type';
+
 import { extractErrorDetails } from './extract-error-details.js';
 
 const spanSymbol = Symbol.for('effect/SpanAnnotation');
 
 export const parseError = (error: unknown): PrettyError => {
-  const span = hasProperty(error, spanSymbol)
+  const maybeSpan = hasProperty(error, spanSymbol)
     ? (error[spanSymbol] as Span)
     : undefined;
   const { message, type, isPlainString } = extractErrorDetails(error);
@@ -19,11 +20,11 @@ export const parseError = (error: unknown): PrettyError => {
         ?.split('\n')
         .filter((el) => /at (.*)/.exec(el))
         .join('\r\n'),
-      span,
+      maybeSpan,
       false,
       type,
     );
   }
 
-  return new PrettyError(message, undefined, span, isPlainString, type);
+  return new PrettyError(message, undefined, maybeSpan, isPlainString, type);
 };

@@ -1,7 +1,9 @@
 import path from 'node:path';
 
 import { Effect, pipe } from 'effect';
-import { type Logger, LoggerConsoleLive } from '../../logic/logger/index.js';
+
+import { type Logger, LoggerConsoleLive } from '@dependencies/logger';
+
 import { runPromise } from '../../runners/run-promise.js';
 
 (async () => {

@@ -1,10 +1,11 @@
 import { Effect, pipe } from 'effect';
 import type { Cause } from 'effect/Cause';
 
+import { Logger } from '@dependencies/logger';
+import type { PrettyPrintOptions } from '@type';
+
 import { captureErrors } from '../../capture-errors.js';
-import { Logger } from '../../logic/logger/index.js';
 import { prettyPrintFromCapturedErrors } from '../../pretty-print-from-captured-errors.js';
-import type { PrettyPrintOptions } from '../../types/pretty-print-options.type.js';
 
 export const collectErrorDetails =
   <E>(options: PrettyPrintOptions) =>

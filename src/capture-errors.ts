@@ -3,19 +3,14 @@ import type { FileSystem } from '@effect/platform/FileSystem';
 import { Effect } from 'effect';
 import { type Cause, isInterruptedOnly } from 'effect/Cause';
 
-import { captureErrorsFrom } from './logic/errors/capture-errors-from-cause.js';
-import type { JsonParsingError } from './logic/fs/read-json/index.js';
-import type { ErrorLocation } from './source-maps/get-error-location-from-file-path.js';
-import type { ErrorRelatedSources } from './source-maps/get-sources-from-map-file.js';
-import { transformRawError } from './source-maps/transform-raw-error.js';
-
-export interface ErrorSpan {
-  name: string;
-  attributes: Record<string, unknown>;
-  durationInMilliseconds: number | undefined;
-  startTime: bigint;
-  endTime: bigint | undefined;
-}
+import type { JsonParsingError } from '@dependencies/fs';
+import { captureErrorsFrom } from '@logic/errors';
+import {
+  type ErrorLocation,
+  type ErrorRelatedSources,
+  transformRawError,
+} from '@sourcemaps';
+import type { ErrorSpan } from '@type';
 
 export interface ErrorData {
   errorType: unknown;

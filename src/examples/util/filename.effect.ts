@@ -1,5 +1,6 @@
 import { Effect } from 'effect';
-import { Logger } from '../../logic/logger/index.js';
+
+import { Logger } from '@dependencies/logger';
 
 const cwdRegex = new RegExp(process.cwd(), 'g');
 

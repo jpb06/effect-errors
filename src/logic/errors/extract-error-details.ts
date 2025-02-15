@@ -15,12 +15,11 @@ export const extractErrorDetails = (error: unknown): ErrorDetails => {
     };
   }
 
-  // TaggedError with cause
-  if (
+  const isTaggedErrorWithCause =
     error instanceof Error &&
     hasProperty(error, 'cause') &&
-    hasProperty(error, '_tag')
-  ) {
+    hasProperty(error, '_tag');
+  if (isTaggedErrorWithCause) {
     return {
       isPlainString: false,
       type: error._tag,
@@ -28,8 +27,9 @@ export const extractErrorDetails = (error: unknown): ErrorDetails => {
     };
   }
 
-  // TaggedError with error ctor
-  if (error instanceof Error && hasProperty(error, 'error')) {
+  const isTaggedErrorWithErrorCtor =
+    error instanceof Error && hasProperty(error, 'error');
+  if (isTaggedErrorWithErrorCtor) {
     return {
       isPlainString: false,
       type: error.name,
@@ -37,8 +37,9 @@ export const extractErrorDetails = (error: unknown): ErrorDetails => {
     };
   }
 
-  // Plain objects with tag attribute
-  if (hasProperty(error, '_tag') && hasProperty(error, 'message')) {
+  const isPlainObjectsWithTagAttribute =
+    hasProperty(error, '_tag') && hasProperty(error, 'message');
+  if (isPlainObjectsWithTagAttribute) {
     return {
       isPlainString: false,
       type: error._tag,
@@ -46,14 +47,13 @@ export const extractErrorDetails = (error: unknown): ErrorDetails => {
     };
   }
 
-  // Plain objects with toString impl
-  if (
+  const isPlainObjectsWithToStringImpl =
     hasProperty(error, 'toString') &&
     isFunction(error.toString) &&
     error.toString !== Object.prototype.toString &&
-    error.toString !== Array.prototype.toString
-  ) {
-    const message = error.toString();
+    error.toString !== Array.prototype.toString;
+  if (isPlainObjectsWithToStringImpl) {
+    const message = (error as { toString: () => string }).toString();
     const maybeWithUnderlyingType = message.split(': ');
 
     if (maybeWithUnderlyingType.length > 1) {

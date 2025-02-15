@@ -1,10 +1,11 @@
 import { Effect, pipe } from 'effect';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
+import { makeLoggerTestLayer } from '@tests/layers';
+import { effectCause } from '@tests/runners';
+import { makeTaskWithCollectedErrors } from '@tests/util';
+
 import { runPromise } from '../runners/run-promise.js';
-import { makeLoggerTestLayer } from '../tests/layers/logger.test-layer.js';
-import { effectCause } from '../tests/runners/effect-cause.js';
-import { makeTaskWithCollectedErrors } from '../tests/util/make-task-with-collected-errors.js';
 import { withStringErrorTask } from './with-string-error.js';
 
 describe('with-string-error task', () => {

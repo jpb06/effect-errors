@@ -1,11 +1,12 @@
+import { Effect, pipe } from 'effect';
 import { describe, expect, it, vi } from 'vitest';
 
-import { Effect, pipe } from 'effect';
-import { makeLoggerTestLayer } from '../tests/layers/logger.test-layer.js';
-import { mockProcess } from '../tests/mocks/process.mock.js';
-import { durationRegex } from '../tests/regex/duration.regex.js';
-import { effectCause } from '../tests/runners/effect-cause.js';
-import { stripAnsiCodes } from '../tests/util/strip-ansi-codes.util.js';
+import { makeLoggerTestLayer } from '@tests/layers';
+import { mockProcess } from '@tests/mocks';
+import { durationRegex } from '@tests/regex';
+import { effectCause } from '@tests/runners';
+import { stripAnsiCodes } from '@tests/util';
+
 import { withCwdStrippingTask } from './strip-cwd.js';
 
 mockProcess({
@@ -51,7 +52,7 @@ describe('strip-cwd task', () => {
     expect(raw).toContain('Sources 🕵️');
     expect(raw).toContain('Node Stacktrace 🚨');
     expect(raw).toMatch(/│ at .*\/src\/examples\/strip-cwd\.ts:14:19/);
-    expect(raw).toMatch(/│ at .*\/src\/examples\/strip-cwd\.ts:23:10/);
+    expect(raw).toMatch(/│ at .*\/src\/examples\/strip-cwd\.ts:21:10/);
     expect(raw).toMatch(/│ at .*\/src\/examples\/strip-cwd\.ts:16:10/);
   });
 });
