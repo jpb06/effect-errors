@@ -1,5 +1,4 @@
 import fs from 'node:fs';
-import { beforeEach } from 'node:test';
 
 import { NodeFileSystem } from '@effect/platform-node';
 import { FileSystem } from '@effect/platform/FileSystem';
@@ -18,10 +17,6 @@ import { execShellCommand, getExampleSources } from '@tests/util';
 import type { RawErrorLocation } from './get-sources-from-map-file.js';
 
 describe('maybeMapSourcemaps function', () => {
-  beforeEach(() => {
-    vi.clearAllMocks();
-  });
-
   it('should extract sources from a typescript file', async () => {
     const fromPromiseSources = await getExampleSources('from-promise');
     const { FsTestLayer } = makeFsTestLayer({
