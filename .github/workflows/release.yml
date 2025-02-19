@@ -26,6 +26,7 @@ jobs:
         id: release
         with:
           release-type: node
+          config-file: release-please-config.json
 
       - name: ⬇️ Checkout repo
         uses: actions/checkout@v4
