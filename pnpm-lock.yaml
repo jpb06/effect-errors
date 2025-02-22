@@ -67,8 +67,8 @@ importers:
         specifier: 3.0.6
         version: 3.0.6(@types/node@22.13.4)(tsx@4.19.3)
       vitest-mock-extended:
-        specifier: 2.0.2
-        version: 2.0.2(typescript@5.7.3)(vitest@3.0.6(@types/node@22.13.4)(tsx@4.19.3))
+        specifier: 3.0.1
+        version: 3.0.1(typescript@5.7.3)(vitest@3.0.6(@types/node@22.13.4)(tsx@4.19.3))
 
 packages:
 
@@ -1416,11 +1416,11 @@ packages:
       yaml:
         optional: true
 
-  vitest-mock-extended@2.0.2:
-    resolution: {integrity: sha512-n3MBqVITKyclZ0n0y66hkT4UiiEYFQn9tteAnIxT0MPz1Z8nFcPUG3Cf0cZOyoPOj/cq6Ab1XFw2lM/qM5EDWQ==}
+  vitest-mock-extended@3.0.1:
+    resolution: {integrity: sha512-VI7CRRvIi+MbAsqdGTxp3K+eiY7BR1zrVflZ5DBrFUXPjRZRgxXajlYdNyIu3v1bb5ZfdLANXwZ9i/RfVMfS6A==}
     peerDependencies:
       typescript: 3.x || 4.x || 5.x
-      vitest: '>=2.0.0'
+      vitest: '>=3.0.0'
 
   vitest@3.0.6:
     resolution: {integrity: sha512-/iL1Sc5VeDZKPDe58oGK4HUFLhw6b5XdY1MYawjuSaDA4sEfYlY9HnS6aCEG26fX+MgUi7MwlduTBHHAI/OvMA==}
@@ -2679,7 +2679,7 @@ snapshots:
       fsevents: 2.3.3
       tsx: 4.19.3
 
-  vitest-mock-extended@2.0.2(typescript@5.7.3)(vitest@3.0.6(@types/node@22.13.4)(tsx@4.19.3)):
+  vitest-mock-extended@3.0.1(typescript@5.7.3)(vitest@3.0.6(@types/node@22.13.4)(tsx@4.19.3)):
     dependencies:
       ts-essentials: 10.0.4(typescript@5.7.3)
       typescript: 5.7.3
