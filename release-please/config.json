@@ -1,0 +1,5 @@
+{
+  "pull-request-title-pattern": "chore(main): 🚀 Release v${version}",
+  "pull-request-header": "# 🚀 Release pull request",
+  "commit-search-depth": 100
+}
