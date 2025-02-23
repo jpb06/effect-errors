@@ -52,8 +52,8 @@ importers:
         specifier: 1.2.0
         version: 1.2.0
       ts-paths-resolver:
-        specifier: 1.2.31
-        version: 1.2.31(typescript@5.7.3)
+        specifier: 1.2.32
+        version: 1.2.32(typescript@5.7.3)
       tsx:
         specifier: 4.19.3
         version: 4.19.3
@@ -150,34 +150,17 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@effect/platform-node-shared@0.27.1':
-    resolution: {integrity: sha512-z3zQTwLiH3S/TcFv736F7ncAwqHU/PGW4VJeHy3ptwgaXq4QZGabn7pdE1Plx3eTcQaFNqVgeSgLoGlEKAo4rw==}
-    peerDependencies:
-      '@effect/platform': ^0.77.1
-      effect: ^3.13.1
-
   '@effect/platform-node-shared@0.27.2':
     resolution: {integrity: sha512-U6eXYCOEFTrQSShnzftzLcG4ybauDMLL8uwU7kKS3s6Wzaz7ivALFSVyxgQnaxO3t2QQBePWdd9b3DVsLgiBFw==}
     peerDependencies:
       '@effect/platform': ^0.77.2
       effect: ^3.13.2
 
-  '@effect/platform-node@0.73.1':
-    resolution: {integrity: sha512-gQQDb8vPBBPl7QEtzYvvD+DDj7dfkMzkP4jaekCB+LezwcwITRexSZdNglFyeOk+0wbzYle1JwJiXQkoVut6Bw==}
-    peerDependencies:
-      '@effect/platform': ^0.77.1
-      effect: ^3.13.1
-
   '@effect/platform-node@0.73.2':
     resolution: {integrity: sha512-lO9SlcN7/Fpzu5VE/EKMxkmXt0n0vQ+rCirfGL1cNFcax9klw0A6uAJj2UvDRnX+o5YRlWNAgg5AN5uiGDUy0g==}
     peerDependencies:
       '@effect/platform': ^0.77.2
       effect: ^3.13.2
-
-  '@effect/platform@0.77.1':
-    resolution: {integrity: sha512-3oHbKiOLN7AIjyucZW+kH5ebG1PhEEBrsdd+HWbDQbAG0gVZfgOUmXR9cyM6M9L+9oVPgOW5mIgcEi6RvD02Cw==}
-    peerDependencies:
-      effect: ^3.13.1
 
   '@effect/platform@0.77.2':
     resolution: {integrity: sha512-stvroKHJVfjd3XhZJEPUAOgzqu9DH1vnGHIAjfs2ma6Z4qcjVpFXrxa0ZYmwRaWVIFsiADMenkN0I7XrRdAgLw==}
@@ -869,12 +852,9 @@ packages:
   eastasianwidth@0.2.0:
     resolution: {integrity: sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==}
 
-  effect-errors@1.8.36:
-    resolution: {integrity: sha512-LWzXz9H7nqkc/akWN72fzHfeLNJHIsXTxCgn6qtRH7Zf57ari6OyzwH/pPsvcC4emZi6kiqqjBAOKmoUaeKZlw==}
+  effect-errors@1.8.37:
+    resolution: {integrity: sha512-EMyP7hKWQslYaKOizwY2L2plFBRNHTbuv04oE22XFM5KwDDexehhCODzoFiSVkuAe8ynS212Ey9ncHImh98GGg==}
     engines: {node: '>=20.x'}
-
-  effect@3.13.1:
-    resolution: {integrity: sha512-YbA45m51eZapqy/ptZvIIZi+XBj13fPCzbiDRLgxZTEUhKuf4xLzuuSsKc61Y3SIscMM2o+VPht2ty+bVEQHQQ==}
 
   effect@3.13.2:
     resolution: {integrity: sha512-/w+CPqHDJ33Wq7xC4YKAchrEEPtjvxh563xH9kDTZp99seNYBoBs87vl8DJwartEjj+KLQLP8PzoDne+XmGT2A==}
@@ -1318,8 +1298,8 @@ packages:
       typescript:
         optional: true
 
-  ts-paths-resolver@1.2.31:
-    resolution: {integrity: sha512-IH1JcCMJQYf1BpR+CY48DY6Oz5Csz20Fak+3f5Y8CXej5Ky8j2Y9j4R97NqfrHAt4dOOuRv4rKg8XibBiUuZHw==}
+  ts-paths-resolver@1.2.32:
+    resolution: {integrity: sha512-8aweGEdqVyTCrqwZf25uwjp6bWUgr0+rQgE1yiTp9D5jcIbOpcxWaDIlrFXv7XxFQwLTYYH6iJz7jVd1a2BEZQ==}
     engines: {node: '>=20.x'}
     hasBin: true
     peerDependencies:
@@ -1564,31 +1544,12 @@ snapshots:
   '@biomejs/cli-win32-x64@1.9.4':
     optional: true
 
-  '@effect/platform-node-shared@0.27.1(@effect/platform@0.77.1(effect@3.13.1))(effect@3.13.1)':
-    dependencies:
-      '@effect/platform': 0.77.1(effect@3.13.1)
-      '@parcel/watcher': 2.5.1
-      effect: 3.13.1
-      multipasta: 0.2.5
-
   '@effect/platform-node-shared@0.27.2(@effect/platform@0.77.2(effect@3.13.2))(effect@3.13.2)':
     dependencies:
       '@effect/platform': 0.77.2(effect@3.13.2)
       '@parcel/watcher': 2.5.1
       effect: 3.13.2
       multipasta: 0.2.5
-
-  '@effect/platform-node@0.73.1(@effect/platform@0.77.1(effect@3.13.1))(effect@3.13.1)':
-    dependencies:
-      '@effect/platform': 0.77.1(effect@3.13.1)
-      '@effect/platform-node-shared': 0.27.1(@effect/platform@0.77.1(effect@3.13.1))(effect@3.13.1)
-      effect: 3.13.1
-      mime: 3.0.0
-      undici: 7.3.0
-      ws: 8.18.0
-    transitivePeerDependencies:
-      - bufferutil
-      - utf-8-validate
 
   '@effect/platform-node@0.73.2(@effect/platform@0.77.2(effect@3.13.2))(effect@3.13.2)':
     dependencies:
@@ -1602,22 +1563,11 @@ snapshots:
       - bufferutil
       - utf-8-validate
 
-  '@effect/platform@0.77.1(effect@3.13.1)':
-    dependencies:
-      effect: 3.13.1
-      find-my-way-ts: 0.1.5
-      multipasta: 0.2.5
-
   '@effect/platform@0.77.2(effect@3.13.2)':
     dependencies:
       effect: 3.13.2
       find-my-way-ts: 0.1.5
       multipasta: 0.2.5
-
-  '@effect/schema@0.75.5(effect@3.13.1)':
-    dependencies:
-      effect: 3.13.1
-      fast-check: 3.23.2
 
   '@effect/schema@0.75.5(effect@3.13.2)':
     dependencies:
@@ -2113,23 +2063,18 @@ snapshots:
 
   eastasianwidth@0.2.0: {}
 
-  effect-errors@1.8.36:
+  effect-errors@1.8.37:
     dependencies:
-      '@effect/platform': 0.77.1(effect@3.13.1)
-      '@effect/platform-node': 0.73.1(@effect/platform@0.77.1(effect@3.13.1))(effect@3.13.1)
-      '@effect/schema': 0.75.5(effect@3.13.1)
+      '@effect/platform': 0.77.2(effect@3.13.2)
+      '@effect/platform-node': 0.73.2(@effect/platform@0.77.2(effect@3.13.2))(effect@3.13.2)
+      '@effect/schema': 0.75.5(effect@3.13.2)
       comment-json: 4.2.5
-      effect: 3.13.1
+      effect: 3.13.2
       picocolors: 1.1.1
       source-map-js: 1.2.1
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
-
-  effect@3.13.1:
-    dependencies:
-      '@standard-schema/spec': 1.0.0
-      fast-check: 3.23.2
 
   effect@3.13.2:
     dependencies:
@@ -2599,13 +2544,13 @@ snapshots:
     optionalDependencies:
       typescript: 5.7.3
 
-  ts-paths-resolver@1.2.31(typescript@5.7.3):
+  ts-paths-resolver@1.2.32(typescript@5.7.3):
     dependencies:
-      '@effect/platform': 0.77.1(effect@3.13.1)
-      '@effect/platform-node': 0.73.1(@effect/platform@0.77.1(effect@3.13.1))(effect@3.13.1)
+      '@effect/platform': 0.77.2(effect@3.13.2)
+      '@effect/platform-node': 0.73.2(@effect/platform@0.77.2(effect@3.13.2))(effect@3.13.2)
       comment-json: 4.2.5
-      effect: 3.13.1
-      effect-errors: 1.8.36
+      effect: 3.13.2
+      effect-errors: 1.8.37
       glob: 11.0.1
       picocolors: 1.1.1
       typescript: 5.7.3
