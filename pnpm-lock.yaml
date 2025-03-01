@@ -53,22 +53,22 @@ importers:
         version: 1.2.0
       ts-paths-resolver:
         specifier: 1.2.32
-        version: 1.2.32(typescript@5.7.3)
+        version: 1.2.32(typescript@5.8.2)
       tsx:
         specifier: 4.19.3
         version: 4.19.3
       typescript:
-        specifier: 5.7.3
-        version: 5.7.3
+        specifier: 5.8.2
+        version: 5.8.2
       vite-tsconfig-paths:
         specifier: 5.1.4
-        version: 5.1.4(typescript@5.7.3)(vite@6.2.0(@types/node@22.13.5)(tsx@4.19.3))
+        version: 5.1.4(typescript@5.8.2)(vite@6.2.0(@types/node@22.13.5)(tsx@4.19.3))
       vitest:
         specifier: 3.0.7
         version: 3.0.7(@types/node@22.13.5)(tsx@4.19.3)
       vitest-mock-extended:
         specifier: 3.0.1
-        version: 3.0.1(typescript@5.7.3)(vitest@3.0.7(@types/node@22.13.5)(tsx@4.19.3))
+        version: 3.0.1(typescript@5.8.2)(vitest@3.0.7(@types/node@22.13.5)(tsx@4.19.3))
 
 packages:
 
@@ -1180,8 +1180,8 @@ packages:
     engines: {node: '>=18.0.0'}
     hasBin: true
 
-  typescript@5.7.3:
-    resolution: {integrity: sha512-84MVSjMEHP+FQRPy3pX9sTVV/INIex71s9TL2Gm5FG/WG1SqXeKyZ0k7/blY/4FdOzI12CBy1vGc4og/eus0fw==}
+  typescript@5.8.2:
+    resolution: {integrity: sha512-aJn6wq13/afZp/jT9QZmwEjDqqvSGp1VT5GVg+f/t6/oVyrgXM6BY1h9BRh/O5p3PlUPAe+WuiEZOmb/49RqoQ==}
     engines: {node: '>=14.17'}
     hasBin: true
 
@@ -2332,11 +2332,11 @@ snapshots:
     dependencies:
       is-number: 7.0.0
 
-  ts-essentials@10.0.4(typescript@5.7.3):
+  ts-essentials@10.0.4(typescript@5.8.2):
     optionalDependencies:
-      typescript: 5.7.3
+      typescript: 5.8.2
 
-  ts-paths-resolver@1.2.32(typescript@5.7.3):
+  ts-paths-resolver@1.2.32(typescript@5.8.2):
     dependencies:
       '@effect/platform': 0.77.2(effect@3.13.2)
       '@effect/platform-node': 0.73.2(@effect/platform@0.77.2(effect@3.13.2))(effect@3.13.2)
@@ -2345,15 +2345,15 @@ snapshots:
       effect-errors: 1.8.37
       glob: 11.0.1
       picocolors: 1.1.1
-      typescript: 5.7.3
+      typescript: 5.8.2
       yargs: 17.7.2
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
 
-  tsconfck@3.1.5(typescript@5.7.3):
+  tsconfck@3.1.5(typescript@5.8.2):
     optionalDependencies:
-      typescript: 5.7.3
+      typescript: 5.8.2
 
   tsx@4.19.3:
     dependencies:
@@ -2362,7 +2362,7 @@ snapshots:
     optionalDependencies:
       fsevents: 2.3.3
 
-  typescript@5.7.3: {}
+  typescript@5.8.2: {}
 
   undici-types@6.20.0: {}
 
@@ -2395,11 +2395,11 @@ snapshots:
       - tsx
       - yaml
 
-  vite-tsconfig-paths@5.1.4(typescript@5.7.3)(vite@6.2.0(@types/node@22.13.5)(tsx@4.19.3)):
+  vite-tsconfig-paths@5.1.4(typescript@5.8.2)(vite@6.2.0(@types/node@22.13.5)(tsx@4.19.3)):
     dependencies:
       debug: 4.4.0
       globrex: 0.1.2
-      tsconfck: 3.1.5(typescript@5.7.3)
+      tsconfck: 3.1.5(typescript@5.8.2)
     optionalDependencies:
       vite: 6.2.0(@types/node@22.13.5)(tsx@4.19.3)
     transitivePeerDependencies:
@@ -2416,10 +2416,10 @@ snapshots:
       fsevents: 2.3.3
       tsx: 4.19.3
 
-  vitest-mock-extended@3.0.1(typescript@5.7.3)(vitest@3.0.7(@types/node@22.13.5)(tsx@4.19.3)):
+  vitest-mock-extended@3.0.1(typescript@5.8.2)(vitest@3.0.7(@types/node@22.13.5)(tsx@4.19.3)):
     dependencies:
-      ts-essentials: 10.0.4(typescript@5.7.3)
-      typescript: 5.7.3
+      ts-essentials: 10.0.4(typescript@5.8.2)
+      typescript: 5.8.2
       vitest: 3.0.7(@types/node@22.13.5)(tsx@4.19.3)
 
   vitest@3.0.7(@types/node@22.13.5)(tsx@4.19.3):
