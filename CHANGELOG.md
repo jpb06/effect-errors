@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.8.39](https://github.com/jpb06/effect-errors/compare/v1.8.38...v1.8.39) (2025-03-01)
+
+
+### Bug Fixes
+
+* release please config ([#190](https://github.com/jpb06/effect-errors/issues/190)) ([d513b9b](https://github.com/jpb06/effect-errors/commit/d513b9b1e12e73caa9cbfcb54df425ee3d22d063))
+
 ## [1.8.38](https://github.com/jpb06/effect-errors/compare/v1.8.37...v1.8.38) (2025-03-01)
 
 
