@@ -10,19 +10,19 @@ importers:
     dependencies:
       '@effect/platform':
         specifier: 0.77.4
-        version: 0.77.4(effect@3.13.4)
+        version: 0.77.4(effect@3.13.6)
       '@effect/platform-node':
         specifier: 0.73.4
-        version: 0.73.4(@effect/platform@0.77.4(effect@3.13.4))(effect@3.13.4)
+        version: 0.73.4(@effect/platform@0.77.4(effect@3.13.6))(effect@3.13.6)
       '@effect/schema':
         specifier: 0.75.5
-        version: 0.75.5(effect@3.13.4)
+        version: 0.75.5(effect@3.13.6)
       comment-json:
         specifier: 4.2.5
         version: 4.2.5
       effect:
-        specifier: 3.13.4
-        version: 3.13.4
+        specifier: 3.13.6
+        version: 3.13.6
       picocolors:
         specifier: 1.1.1
         version: 1.1.1
@@ -710,6 +710,9 @@ packages:
   effect@3.13.4:
     resolution: {integrity: sha512-XZgCImyBpONuKdsBRk37JfV7242yxTu8r/TcL5ZELIyqRbMYa+Prr86cz1INxXi7iFXfU0havZkCJGyYp1BsiA==}
 
+  effect@3.13.6:
+    resolution: {integrity: sha512-NKmzyIuOb2UuHFPRz9EYScbhMBxXkzjPRuu+4axE+hMk1f0U7TZxzi2CP3TVVxA2kzvh00aBQEbyH7Opq4PnWg==}
+
   emoji-regex@8.0.0:
     resolution: {integrity: sha512-MSjYzcWNOA0ewAHpz0MxpYFvwg6yjy1NG3xteoqz644VCo/RPgnr1/GGt+ic3iJTzQ8Eu3TdM14SawnVUmGE6A==}
 
@@ -1390,18 +1393,37 @@ snapshots:
   '@biomejs/cli-win32-x64@1.9.4':
     optional: true
 
-  '@effect/platform-node-shared@0.27.4(@effect/platform@0.77.4(effect@3.13.4))(effect@3.13.4)':
+  '@effect/platform-node-shared@0.27.4(@effect/platform@0.77.4(effect@3.13.6))(effect@3.13.4)':
     dependencies:
-      '@effect/platform': 0.77.4(effect@3.13.4)
+      '@effect/platform': 0.77.4(effect@3.13.6)
       '@parcel/watcher': 2.5.1
       effect: 3.13.4
       multipasta: 0.2.5
 
-  '@effect/platform-node@0.73.4(@effect/platform@0.77.4(effect@3.13.4))(effect@3.13.4)':
+  '@effect/platform-node-shared@0.27.4(@effect/platform@0.77.4(effect@3.13.6))(effect@3.13.6)':
     dependencies:
-      '@effect/platform': 0.77.4(effect@3.13.4)
-      '@effect/platform-node-shared': 0.27.4(@effect/platform@0.77.4(effect@3.13.4))(effect@3.13.4)
+      '@effect/platform': 0.77.4(effect@3.13.6)
+      '@parcel/watcher': 2.5.1
+      effect: 3.13.6
+      multipasta: 0.2.5
+
+  '@effect/platform-node@0.73.4(@effect/platform@0.77.4(effect@3.13.6))(effect@3.13.4)':
+    dependencies:
+      '@effect/platform': 0.77.4(effect@3.13.6)
+      '@effect/platform-node-shared': 0.27.4(@effect/platform@0.77.4(effect@3.13.6))(effect@3.13.4)
       effect: 3.13.4
+      mime: 3.0.0
+      undici: 7.4.0
+      ws: 8.18.1
+    transitivePeerDependencies:
+      - bufferutil
+      - utf-8-validate
+
+  '@effect/platform-node@0.73.4(@effect/platform@0.77.4(effect@3.13.6))(effect@3.13.6)':
+    dependencies:
+      '@effect/platform': 0.77.4(effect@3.13.6)
+      '@effect/platform-node-shared': 0.27.4(@effect/platform@0.77.4(effect@3.13.6))(effect@3.13.6)
+      effect: 3.13.6
       mime: 3.0.0
       undici: 7.4.0
       ws: 8.18.1
@@ -1415,9 +1437,20 @@ snapshots:
       find-my-way-ts: 0.1.5
       multipasta: 0.2.5
 
+  '@effect/platform@0.77.4(effect@3.13.6)':
+    dependencies:
+      effect: 3.13.6
+      find-my-way-ts: 0.1.5
+      multipasta: 0.2.5
+
   '@effect/schema@0.75.5(effect@3.13.4)':
     dependencies:
       effect: 3.13.4
+      fast-check: 3.23.2
+
+  '@effect/schema@0.75.5(effect@3.13.6)':
+    dependencies:
+      effect: 3.13.6
       fast-check: 3.23.2
 
   '@esbuild/aix-ppc64@0.25.0':
@@ -1837,7 +1870,7 @@ snapshots:
   effect-errors@1.8.38:
     dependencies:
       '@effect/platform': 0.77.4(effect@3.13.4)
-      '@effect/platform-node': 0.73.4(@effect/platform@0.77.4(effect@3.13.4))(effect@3.13.4)
+      '@effect/platform-node': 0.73.4(@effect/platform@0.77.4(effect@3.13.6))(effect@3.13.4)
       '@effect/schema': 0.75.5(effect@3.13.4)
       comment-json: 4.2.5
       effect: 3.13.4
@@ -1848,6 +1881,11 @@ snapshots:
       - utf-8-validate
 
   effect@3.13.4:
+    dependencies:
+      '@standard-schema/spec': 1.0.0
+      fast-check: 3.23.2
+
+  effect@3.13.6:
     dependencies:
       '@standard-schema/spec': 1.0.0
       fast-check: 3.23.2
@@ -2290,7 +2328,7 @@ snapshots:
   ts-paths-resolver@1.2.34(typescript@5.8.2):
     dependencies:
       '@effect/platform': 0.77.4(effect@3.13.4)
-      '@effect/platform-node': 0.73.4(@effect/platform@0.77.4(effect@3.13.4))(effect@3.13.4)
+      '@effect/platform-node': 0.73.4(@effect/platform@0.77.4(effect@3.13.6))(effect@3.13.4)
       comment-json: 4.2.5
       effect: 3.13.4
       effect-errors: 1.8.38
