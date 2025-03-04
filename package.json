@@ -58,7 +58,7 @@
     "@effect/platform-node": "0.73.4",
     "@effect/schema": "0.75.5",
     "comment-json": "4.2.5",
-    "effect": "3.13.4",
+    "effect": "3.13.6",
     "picocolors": "1.1.1",
     "source-map-js": "1.2.1"
   },
