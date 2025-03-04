@@ -12,8 +12,8 @@ importers:
         specifier: 0.77.4
         version: 0.77.4(effect@3.13.6)
       '@effect/platform-node':
-        specifier: 0.73.4
-        version: 0.73.4(@effect/platform@0.77.4(effect@3.13.6))(effect@3.13.6)
+        specifier: 0.73.6
+        version: 0.73.6(@effect/platform@0.77.4(effect@3.13.6))(effect@3.13.6)
       '@effect/schema':
         specifier: 0.75.5
         version: 0.75.5(effect@3.13.6)
@@ -156,11 +156,23 @@ packages:
       '@effect/platform': ^0.77.4
       effect: ^3.13.4
 
+  '@effect/platform-node-shared@0.27.6':
+    resolution: {integrity: sha512-OqWm0OQFeIQ+49oel3rX+tKOhrA7uKZPrRgyD5fupNfXtXRRu15Q/Jnaeq+5H3PUOIi03DR+CqD+JZnq52/NjA==}
+    peerDependencies:
+      '@effect/platform': ^0.77.6
+      effect: ^3.13.6
+
   '@effect/platform-node@0.73.4':
     resolution: {integrity: sha512-mIsOxD3mmbwDjSrsRbxYYCzmSztQSRk4Bu/wej2E3c3pKQq5nwBtob8+H+idC1ugtTyuzJs7lJGSSuACiDjTnA==}
     peerDependencies:
       '@effect/platform': ^0.77.4
       effect: ^3.13.4
+
+  '@effect/platform-node@0.73.6':
+    resolution: {integrity: sha512-/j30syUUOnFzydA5Nb2Whdo4ZkotzlsEmM0ZbpBp0jQSYoQy3tdWRHtdJZYaFq8VVhWT5KIINu5jJbsGR0mjsg==}
+    peerDependencies:
+      '@effect/platform': ^0.77.6
+      effect: ^3.13.6
 
   '@effect/platform@0.77.4':
     resolution: {integrity: sha512-3jBDn4bAWqRSKARmoMY2NmMxIMM5Py5BqJdUuYJqPyI6jbz7qkOMwgeaF62rWqiqhQLHLTgU4QL/cPwyZl7mVg==}
@@ -1400,7 +1412,7 @@ snapshots:
       effect: 3.13.4
       multipasta: 0.2.5
 
-  '@effect/platform-node-shared@0.27.4(@effect/platform@0.77.4(effect@3.13.6))(effect@3.13.6)':
+  '@effect/platform-node-shared@0.27.6(@effect/platform@0.77.4(effect@3.13.6))(effect@3.13.6)':
     dependencies:
       '@effect/platform': 0.77.4(effect@3.13.6)
       '@parcel/watcher': 2.5.1
@@ -1419,10 +1431,10 @@ snapshots:
       - bufferutil
       - utf-8-validate
 
-  '@effect/platform-node@0.73.4(@effect/platform@0.77.4(effect@3.13.6))(effect@3.13.6)':
+  '@effect/platform-node@0.73.6(@effect/platform@0.77.4(effect@3.13.6))(effect@3.13.6)':
     dependencies:
       '@effect/platform': 0.77.4(effect@3.13.6)
-      '@effect/platform-node-shared': 0.27.4(@effect/platform@0.77.4(effect@3.13.6))(effect@3.13.6)
+      '@effect/platform-node-shared': 0.27.6(@effect/platform@0.77.4(effect@3.13.6))(effect@3.13.6)
       effect: 3.13.6
       mime: 3.0.0
       undici: 7.4.0
