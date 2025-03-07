@@ -10,19 +10,19 @@ importers:
     dependencies:
       '@effect/platform':
         specifier: 0.77.6
-        version: 0.77.6(effect@3.13.6)
+        version: 0.77.6(effect@3.13.7)
       '@effect/platform-node':
         specifier: 0.73.6
-        version: 0.73.6(@effect/platform@0.77.6(effect@3.13.6))(effect@3.13.6)
+        version: 0.73.6(@effect/platform@0.77.6(effect@3.13.7))(effect@3.13.7)
       '@effect/schema':
         specifier: 0.75.5
-        version: 0.75.5(effect@3.13.6)
+        version: 0.75.5(effect@3.13.7)
       comment-json:
         specifier: 4.2.5
         version: 4.2.5
       effect:
-        specifier: 3.13.6
-        version: 3.13.6
+        specifier: 3.13.7
+        version: 3.13.7
       picocolors:
         specifier: 1.1.1
         version: 1.1.1
@@ -727,8 +727,8 @@ packages:
   effect@3.13.4:
     resolution: {integrity: sha512-XZgCImyBpONuKdsBRk37JfV7242yxTu8r/TcL5ZELIyqRbMYa+Prr86cz1INxXi7iFXfU0havZkCJGyYp1BsiA==}
 
-  effect@3.13.6:
-    resolution: {integrity: sha512-NKmzyIuOb2UuHFPRz9EYScbhMBxXkzjPRuu+4axE+hMk1f0U7TZxzi2CP3TVVxA2kzvh00aBQEbyH7Opq4PnWg==}
+  effect@3.13.7:
+    resolution: {integrity: sha512-yjDuWX5M34kB38Pwilv8QU956nA2m1a6ws0i+04VQkQJEBPI4GfVhUhtNNFRaqKIOlkqdqzJHCDOwARmaf2XzA==}
 
   emoji-regex@8.0.0:
     resolution: {integrity: sha512-MSjYzcWNOA0ewAHpz0MxpYFvwg6yjy1NG3xteoqz644VCo/RPgnr1/GGt+ic3iJTzQ8Eu3TdM14SawnVUmGE6A==}
@@ -1417,11 +1417,11 @@ snapshots:
       effect: 3.13.4
       multipasta: 0.2.5
 
-  '@effect/platform-node-shared@0.27.6(@effect/platform@0.77.6(effect@3.13.6))(effect@3.13.6)':
+  '@effect/platform-node-shared@0.27.6(@effect/platform@0.77.6(effect@3.13.7))(effect@3.13.7)':
     dependencies:
-      '@effect/platform': 0.77.6(effect@3.13.6)
+      '@effect/platform': 0.77.6(effect@3.13.7)
       '@parcel/watcher': 2.5.1
-      effect: 3.13.6
+      effect: 3.13.7
       multipasta: 0.2.5
 
   '@effect/platform-node@0.73.4(@effect/platform@0.77.4(effect@3.13.4))(effect@3.13.4)':
@@ -1436,11 +1436,11 @@ snapshots:
       - bufferutil
       - utf-8-validate
 
-  '@effect/platform-node@0.73.6(@effect/platform@0.77.6(effect@3.13.6))(effect@3.13.6)':
+  '@effect/platform-node@0.73.6(@effect/platform@0.77.6(effect@3.13.7))(effect@3.13.7)':
     dependencies:
-      '@effect/platform': 0.77.6(effect@3.13.6)
-      '@effect/platform-node-shared': 0.27.6(@effect/platform@0.77.6(effect@3.13.6))(effect@3.13.6)
-      effect: 3.13.6
+      '@effect/platform': 0.77.6(effect@3.13.7)
+      '@effect/platform-node-shared': 0.27.6(@effect/platform@0.77.6(effect@3.13.7))(effect@3.13.7)
+      effect: 3.13.7
       mime: 3.0.0
       undici: 7.4.0
       ws: 8.18.1
@@ -1454,9 +1454,9 @@ snapshots:
       find-my-way-ts: 0.1.5
       multipasta: 0.2.5
 
-  '@effect/platform@0.77.6(effect@3.13.6)':
+  '@effect/platform@0.77.6(effect@3.13.7)':
     dependencies:
-      effect: 3.13.6
+      effect: 3.13.7
       find-my-way-ts: 0.1.5
       multipasta: 0.2.5
 
@@ -1465,9 +1465,9 @@ snapshots:
       effect: 3.13.4
       fast-check: 3.23.2
 
-  '@effect/schema@0.75.5(effect@3.13.6)':
+  '@effect/schema@0.75.5(effect@3.13.7)':
     dependencies:
-      effect: 3.13.6
+      effect: 3.13.7
       fast-check: 3.23.2
 
   '@esbuild/aix-ppc64@0.25.0':
@@ -1902,7 +1902,7 @@ snapshots:
       '@standard-schema/spec': 1.0.0
       fast-check: 3.23.2
 
-  effect@3.13.6:
+  effect@3.13.7:
     dependencies:
       '@standard-schema/spec': 1.0.0
       fast-check: 3.23.2
