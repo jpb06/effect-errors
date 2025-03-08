@@ -151,7 +151,7 @@ The best way is to use either `SchemaError` or `TaggedError`.
 Declaring the error could look like this:
 
 ```typescript
-import { Schema } from '@effect/schema';
+import { Schema } from 'effect';
 
 export class FileNotFoundError extends Schema.TaggedError<SchemaError>()(
   'FileNotFound',
