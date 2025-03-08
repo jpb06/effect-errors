@@ -56,11 +56,12 @@
   "dependencies": {
     "@effect/platform": "0.78.0",
     "@effect/platform-node": "0.74.0",
-    "@effect/schema": "0.75.5",
     "comment-json": "4.2.5",
-    "effect": "3.13.7",
     "picocolors": "1.1.1",
     "source-map-js": "1.2.1"
+  },
+  "peerDependencies": {
+    "effect": "3.13.7"
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
@@ -70,7 +71,7 @@
     "del-cli": "6.0.0",
     "esbuild": "0.25.0",
     "readme-package-icons": "1.2.0",
-    "ts-paths-resolver": "1.2.34",
+    "ts-paths-resolver": "1.2.35",
     "tsx": "4.19.3",
     "typescript": "5.8.2",
     "vite-tsconfig-paths": "5.1.4",
