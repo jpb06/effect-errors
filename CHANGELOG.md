@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.8.42](https://github.com/jpb06/effect-errors/compare/v1.8.41...v1.8.42) (2025-03-08)
+
+
+### Bug Fixes
+
+* move effect to peer dependencies ([#205](https://github.com/jpb06/effect-errors/issues/205)) ([5f32eab](https://github.com/jpb06/effect-errors/commit/5f32eabc5c02265b924bdccbc0f1744ed9440292))
+
 ## [1.8.41](https://github.com/jpb06/effect-errors/compare/v1.8.40...v1.8.41) (2025-03-08)
 
 
