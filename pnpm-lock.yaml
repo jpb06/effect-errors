@@ -10,16 +10,16 @@ importers:
     dependencies:
       '@effect/platform':
         specifier: 0.78.0
-        version: 0.78.0(effect@3.13.4)
+        version: 0.78.0(effect@3.13.7)
       '@effect/platform-node':
         specifier: 0.74.0
-        version: 0.74.0(@effect/platform@0.78.0(effect@3.13.4))(effect@3.13.4)
+        version: 0.74.0(@effect/platform@0.78.0(effect@3.13.7))(effect@3.13.7)
       comment-json:
         specifier: 4.2.5
         version: 4.2.5
       effect:
-        specifier: 3.13.4
-        version: 3.13.4
+        specifier: 3.13.7
+        version: 3.13.7
       picocolors:
         specifier: 1.1.1
         version: 1.1.1
@@ -704,9 +704,6 @@ packages:
     resolution: {integrity: sha512-hetPUYRq+gFqAErJQ3DMs48ZJgbIOkU7baUE6/XhgKb2Ka6FR8n0shTCpJOrjCdXua5urD0Wen4JTx3qEWxJNw==}
     engines: {node: '>=20.x'}
 
-  effect@3.13.4:
-    resolution: {integrity: sha512-XZgCImyBpONuKdsBRk37JfV7242yxTu8r/TcL5ZELIyqRbMYa+Prr86cz1INxXi7iFXfU0havZkCJGyYp1BsiA==}
-
   effect@3.13.7:
     resolution: {integrity: sha512-yjDuWX5M34kB38Pwilv8QU956nA2m1a6ws0i+04VQkQJEBPI4GfVhUhtNNFRaqKIOlkqdqzJHCDOwARmaf2XzA==}
 
@@ -1390,36 +1387,17 @@ snapshots:
   '@biomejs/cli-win32-x64@1.9.4':
     optional: true
 
-  '@effect/platform-node-shared@0.28.0(@effect/platform@0.78.0(effect@3.13.4))(effect@3.13.4)':
+  '@effect/platform-node-shared@0.28.0(@effect/platform@0.78.0(effect@3.13.7))(effect@3.13.7)':
     dependencies:
-      '@effect/platform': 0.78.0(effect@3.13.4)
-      '@parcel/watcher': 2.5.1
-      effect: 3.13.4
-      multipasta: 0.2.5
-
-  '@effect/platform-node-shared@0.28.0(@effect/platform@0.78.0(effect@3.13.4))(effect@3.13.7)':
-    dependencies:
-      '@effect/platform': 0.78.0(effect@3.13.4)
+      '@effect/platform': 0.78.0(effect@3.13.7)
       '@parcel/watcher': 2.5.1
       effect: 3.13.7
       multipasta: 0.2.5
 
-  '@effect/platform-node@0.74.0(@effect/platform@0.78.0(effect@3.13.4))(effect@3.13.4)':
+  '@effect/platform-node@0.74.0(@effect/platform@0.78.0(effect@3.13.7))(effect@3.13.7)':
     dependencies:
-      '@effect/platform': 0.78.0(effect@3.13.4)
-      '@effect/platform-node-shared': 0.28.0(@effect/platform@0.78.0(effect@3.13.4))(effect@3.13.4)
-      effect: 3.13.4
-      mime: 3.0.0
-      undici: 7.4.0
-      ws: 8.18.1
-    transitivePeerDependencies:
-      - bufferutil
-      - utf-8-validate
-
-  '@effect/platform-node@0.74.0(@effect/platform@0.78.0(effect@3.13.4))(effect@3.13.7)':
-    dependencies:
-      '@effect/platform': 0.78.0(effect@3.13.4)
-      '@effect/platform-node-shared': 0.28.0(@effect/platform@0.78.0(effect@3.13.4))(effect@3.13.7)
+      '@effect/platform': 0.78.0(effect@3.13.7)
+      '@effect/platform-node-shared': 0.28.0(@effect/platform@0.78.0(effect@3.13.7))(effect@3.13.7)
       effect: 3.13.7
       mime: 3.0.0
       undici: 7.4.0
@@ -1427,12 +1405,6 @@ snapshots:
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
-
-  '@effect/platform@0.78.0(effect@3.13.4)':
-    dependencies:
-      effect: 3.13.4
-      find-my-way-ts: 0.1.5
-      multipasta: 0.2.5
 
   '@effect/platform@0.78.0(effect@3.13.7)':
     dependencies:
@@ -1862,7 +1834,7 @@ snapshots:
   effect-errors@1.8.41:
     dependencies:
       '@effect/platform': 0.78.0(effect@3.13.7)
-      '@effect/platform-node': 0.74.0(@effect/platform@0.78.0(effect@3.13.4))(effect@3.13.7)
+      '@effect/platform-node': 0.74.0(@effect/platform@0.78.0(effect@3.13.7))(effect@3.13.7)
       '@effect/schema': 0.75.5(effect@3.13.7)
       comment-json: 4.2.5
       effect: 3.13.7
@@ -1871,11 +1843,6 @@ snapshots:
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
-
-  effect@3.13.4:
-    dependencies:
-      '@standard-schema/spec': 1.0.0
-      fast-check: 3.23.2
 
   effect@3.13.7:
     dependencies:
@@ -2320,7 +2287,7 @@ snapshots:
   ts-paths-resolver@1.2.35(typescript@5.8.2):
     dependencies:
       '@effect/platform': 0.78.0(effect@3.13.7)
-      '@effect/platform-node': 0.74.0(@effect/platform@0.78.0(effect@3.13.4))(effect@3.13.7)
+      '@effect/platform-node': 0.74.0(@effect/platform@0.78.0(effect@3.13.7))(effect@3.13.7)
       comment-json: 4.2.5
       effect: 3.13.7
       effect-errors: 1.8.41
