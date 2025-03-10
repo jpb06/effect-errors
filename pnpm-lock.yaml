@@ -9,11 +9,11 @@ importers:
   .:
     dependencies:
       '@effect/platform':
-        specifier: 0.78.0
-        version: 0.78.0(effect@3.13.7)
+        specifier: 0.78.1
+        version: 0.78.1(effect@3.13.7)
       '@effect/platform-node':
         specifier: 0.74.0
-        version: 0.74.0(@effect/platform@0.78.0(effect@3.13.7))(effect@3.13.7)
+        version: 0.74.0(@effect/platform@0.78.1(effect@3.13.7))(effect@3.13.7)
       comment-json:
         specifier: 4.2.5
         version: 4.2.5
@@ -163,6 +163,11 @@ packages:
     resolution: {integrity: sha512-2vGIfBtPO7zPioVy4wmSbeF0VWfj3GLpB9+6JT7K0lZVeYogHF2GTuPDB87xMILw86Ecz9iR98JuA9Co7PgxKQ==}
     peerDependencies:
       effect: ^3.13.7
+
+  '@effect/platform@0.78.1':
+    resolution: {integrity: sha512-QJDGYLyYwH/K/LsCC0Ogx5bmjdC9NCzfrteT3GElQau6YK7TohcFmCxc4GVvukHEyuWWgHeWYAkl9LNMGyci0A==}
+    peerDependencies:
+      effect: ^3.13.8
 
   '@effect/schema@0.75.5':
     resolution: {integrity: sha512-TQInulTVCuF+9EIbJpyLP6dvxbQJMphrnRqgexm/Ze39rSjfhJuufF7XvU3SxTgg3HnL7B/kpORTJbHhlE6thw==}
@@ -1394,6 +1399,13 @@ snapshots:
       effect: 3.13.7
       multipasta: 0.2.5
 
+  '@effect/platform-node-shared@0.28.0(@effect/platform@0.78.1(effect@3.13.7))(effect@3.13.7)':
+    dependencies:
+      '@effect/platform': 0.78.1(effect@3.13.7)
+      '@parcel/watcher': 2.5.1
+      effect: 3.13.7
+      multipasta: 0.2.5
+
   '@effect/platform-node@0.74.0(@effect/platform@0.78.0(effect@3.13.7))(effect@3.13.7)':
     dependencies:
       '@effect/platform': 0.78.0(effect@3.13.7)
@@ -1406,7 +1418,25 @@ snapshots:
       - bufferutil
       - utf-8-validate
 
+  '@effect/platform-node@0.74.0(@effect/platform@0.78.1(effect@3.13.7))(effect@3.13.7)':
+    dependencies:
+      '@effect/platform': 0.78.1(effect@3.13.7)
+      '@effect/platform-node-shared': 0.28.0(@effect/platform@0.78.1(effect@3.13.7))(effect@3.13.7)
+      effect: 3.13.7
+      mime: 3.0.0
+      undici: 7.4.0
+      ws: 8.18.1
+    transitivePeerDependencies:
+      - bufferutil
+      - utf-8-validate
+
   '@effect/platform@0.78.0(effect@3.13.7)':
+    dependencies:
+      effect: 3.13.7
+      find-my-way-ts: 0.1.5
+      multipasta: 0.2.5
+
+  '@effect/platform@0.78.1(effect@3.13.7)':
     dependencies:
       effect: 3.13.7
       find-my-way-ts: 0.1.5
