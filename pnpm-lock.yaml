@@ -49,8 +49,8 @@ importers:
         specifier: 1.2.0
         version: 1.2.0
       ts-paths-resolver:
-        specifier: 1.2.37
-        version: 1.2.37(effect@3.13.10)(typescript@5.8.2)
+        specifier: 1.2.38
+        version: 1.2.38(effect@3.13.10)(typescript@5.8.2)
       tsx:
         specifier: 4.19.3
         version: 4.19.3
@@ -147,34 +147,17 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@effect/platform-node-shared@0.28.0':
-    resolution: {integrity: sha512-Pxf7i8oKr4yDkOnzhxgQ96so0/joFDXOlbjBCOBBA6wn2ZPj+ycbk/6/B6E4cLURp/Mt9VAEr5Dxn8bj+5PLew==}
-    peerDependencies:
-      '@effect/platform': ^0.78.0
-      effect: ^3.13.7
-
   '@effect/platform-node-shared@0.29.1':
     resolution: {integrity: sha512-UQnYe4cfgMlk0FCx0a/IibF8iJ+o4VlsaDOOZUhhRZiAoht74HFsRN3UALybcP0q/i6GHwKdzK84H/AM8J2ajQ==}
     peerDependencies:
       '@effect/platform': ^0.79.1
       effect: ^3.13.10
 
-  '@effect/platform-node@0.74.0':
-    resolution: {integrity: sha512-gPUcLaqAdMvV+QhkQnqjxxEUcvPvamnpRue2n6b2TMqy00XJAtOdtjYoUaT1ILPEL/3ZYfUSKswivZehV9nEnQ==}
-    peerDependencies:
-      '@effect/platform': ^0.78.0
-      effect: ^3.13.7
-
   '@effect/platform-node@0.75.1':
     resolution: {integrity: sha512-p+H239RIDpOI8Y0JRt7MW9pqhNZeuJ48C12NMWLv0fUwtQhMf5t6MDcCVNpLpxwcTojbAmVfaHO8Olj4nLGxqA==}
     peerDependencies:
       '@effect/platform': ^0.79.1
       effect: ^3.13.10
-
-  '@effect/platform@0.78.0':
-    resolution: {integrity: sha512-2vGIfBtPO7zPioVy4wmSbeF0VWfj3GLpB9+6JT7K0lZVeYogHF2GTuPDB87xMILw86Ecz9iR98JuA9Co7PgxKQ==}
-    peerDependencies:
-      effect: ^3.13.7
 
   '@effect/platform@0.79.1':
     resolution: {integrity: sha512-kCoeBuQrdMuEigcuXk9eDoL9WiFIlLlLZeQZj/LapxC3kgnw/6BViJsRQm+Iqei7Z+zRr930suMpdX75CujCXA==}
@@ -711,11 +694,11 @@ packages:
   eastasianwidth@0.2.0:
     resolution: {integrity: sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==}
 
-  effect-errors@1.8.42:
-    resolution: {integrity: sha512-zAtKTA3vNgK12kZP7jFgIuCpDBem/vQR8NWlPUIHKVCd/Yjdu/e9J43YVrr2tMpQ8YjNhifYatd8w2/d8SVhHw==}
+  effect-errors@1.8.43:
+    resolution: {integrity: sha512-QDHMbytL6HpZuDZQgPgSfjrrrlMmRn1+hRFXJdUlkZQn3WXwsJMoWYMfq+FKzD0x+nurlJMJJI7WnuH5HnvCIA==}
     engines: {node: '>=20.x'}
     peerDependencies:
-      effect: 3.13.7
+      effect: 3.13.10
 
   effect@3.13.10:
     resolution: {integrity: sha512-f2n51BJJ25G9rb/C1ClkgsVFXH6YTkCHmd6ebpu6cAkwQxfhnfbkVWKgkn3nyW9YnC9z4K8bGohRYaZ+HyWtLg==}
@@ -1154,8 +1137,8 @@ packages:
       typescript:
         optional: true
 
-  ts-paths-resolver@1.2.37:
-    resolution: {integrity: sha512-UjtdQyZkz59Ik5ZPhD1UR+hRnGFfNWwXowEdoRnXyTaNLS7nRqS7a3iXWlUrJCAJLx4SbrHcPgUmCW6+xW2VNQ==}
+  ts-paths-resolver@1.2.38:
+    resolution: {integrity: sha512-T0aiHwa2MfF0TxCX1Prc29UGKawI2OplNetl13Nld0d/Bv2b4qBPswBdQeXCWvrgTfOo4FMUWtu/DUcIWDaEjQ==}
     engines: {node: '>=20.x'}
     hasBin: true
     peerDependencies:
@@ -1401,31 +1384,12 @@ snapshots:
   '@biomejs/cli-win32-x64@1.9.4':
     optional: true
 
-  '@effect/platform-node-shared@0.28.0(@effect/platform@0.78.0(effect@3.13.10))(effect@3.13.10)':
-    dependencies:
-      '@effect/platform': 0.78.0(effect@3.13.10)
-      '@parcel/watcher': 2.5.1
-      effect: 3.13.10
-      multipasta: 0.2.5
-
   '@effect/platform-node-shared@0.29.1(@effect/platform@0.79.1(effect@3.13.10))(effect@3.13.10)':
     dependencies:
       '@effect/platform': 0.79.1(effect@3.13.10)
       '@parcel/watcher': 2.5.1
       effect: 3.13.10
       multipasta: 0.2.5
-
-  '@effect/platform-node@0.74.0(@effect/platform@0.78.0(effect@3.13.10))(effect@3.13.10)':
-    dependencies:
-      '@effect/platform': 0.78.0(effect@3.13.10)
-      '@effect/platform-node-shared': 0.28.0(@effect/platform@0.78.0(effect@3.13.10))(effect@3.13.10)
-      effect: 3.13.10
-      mime: 3.0.0
-      undici: 7.4.0
-      ws: 8.18.1
-    transitivePeerDependencies:
-      - bufferutil
-      - utf-8-validate
 
   '@effect/platform-node@0.75.1(@effect/platform@0.79.1(effect@3.13.10))(effect@3.13.10)':
     dependencies:
@@ -1438,12 +1402,6 @@ snapshots:
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
-
-  '@effect/platform@0.78.0(effect@3.13.10)':
-    dependencies:
-      effect: 3.13.10
-      find-my-way-ts: 0.1.5
-      multipasta: 0.2.5
 
   '@effect/platform@0.79.1(effect@3.13.10)':
     dependencies:
@@ -1865,10 +1823,10 @@ snapshots:
 
   eastasianwidth@0.2.0: {}
 
-  effect-errors@1.8.42(effect@3.13.10):
+  effect-errors@1.8.43(effect@3.13.10):
     dependencies:
-      '@effect/platform': 0.78.0(effect@3.13.10)
-      '@effect/platform-node': 0.74.0(@effect/platform@0.78.0(effect@3.13.10))(effect@3.13.10)
+      '@effect/platform': 0.79.1(effect@3.13.10)
+      '@effect/platform-node': 0.75.1(@effect/platform@0.79.1(effect@3.13.10))(effect@3.13.10)
       comment-json: 4.2.5
       effect: 3.13.10
       picocolors: 1.1.1
@@ -2317,13 +2275,13 @@ snapshots:
     optionalDependencies:
       typescript: 5.8.2
 
-  ts-paths-resolver@1.2.37(effect@3.13.10)(typescript@5.8.2):
+  ts-paths-resolver@1.2.38(effect@3.13.10)(typescript@5.8.2):
     dependencies:
       '@effect/platform': 0.79.1(effect@3.13.10)
       '@effect/platform-node': 0.75.1(@effect/platform@0.79.1(effect@3.13.10))(effect@3.13.10)
       comment-json: 4.2.5
       effect: 3.13.10
-      effect-errors: 1.8.42(effect@3.13.10)
+      effect-errors: 1.8.43(effect@3.13.10)
       glob: 11.0.1
       picocolors: 1.1.1
       typescript: 5.8.2
