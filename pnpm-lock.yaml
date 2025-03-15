@@ -12,8 +12,8 @@ importers:
         specifier: 0.79.1
         version: 0.79.1(effect@3.13.10)
       '@effect/platform-node':
-        specifier: 0.75.1
-        version: 0.75.1(@effect/platform@0.79.1(effect@3.13.10))(effect@3.13.10)
+        specifier: 0.75.2
+        version: 0.75.2(@effect/platform@0.79.1(effect@3.13.10))(effect@3.13.10)
       comment-json:
         specifier: 4.2.5
         version: 4.2.5
@@ -153,11 +153,23 @@ packages:
       '@effect/platform': ^0.79.1
       effect: ^3.13.10
 
+  '@effect/platform-node-shared@0.29.2':
+    resolution: {integrity: sha512-C6BOxC9F/7lVFTTQ9jXNa6I8Gio9HMsVUvJButPNd2XiHKURXmSK41Z0QwjG2Km2MVSyCGeqqsQzbWDJ2DDMKg==}
+    peerDependencies:
+      '@effect/platform': ^0.79.2
+      effect: ^3.13.11
+
   '@effect/platform-node@0.75.1':
     resolution: {integrity: sha512-p+H239RIDpOI8Y0JRt7MW9pqhNZeuJ48C12NMWLv0fUwtQhMf5t6MDcCVNpLpxwcTojbAmVfaHO8Olj4nLGxqA==}
     peerDependencies:
       '@effect/platform': ^0.79.1
       effect: ^3.13.10
+
+  '@effect/platform-node@0.75.2':
+    resolution: {integrity: sha512-zwnarHHtHGtE3665q1kCcgcWvtmI288NENHyDRqiNMEE08kQIOHfWpzz5pmdtV5lb0sLRVu3eCC9RUpn+sxsyA==}
+    peerDependencies:
+      '@effect/platform': ^0.79.2
+      effect: ^3.13.11
 
   '@effect/platform@0.79.1':
     resolution: {integrity: sha512-kCoeBuQrdMuEigcuXk9eDoL9WiFIlLlLZeQZj/LapxC3kgnw/6BViJsRQm+Iqei7Z+zRr930suMpdX75CujCXA==}
@@ -1391,10 +1403,29 @@ snapshots:
       effect: 3.13.10
       multipasta: 0.2.5
 
+  '@effect/platform-node-shared@0.29.2(@effect/platform@0.79.1(effect@3.13.10))(effect@3.13.10)':
+    dependencies:
+      '@effect/platform': 0.79.1(effect@3.13.10)
+      '@parcel/watcher': 2.5.1
+      effect: 3.13.10
+      multipasta: 0.2.5
+
   '@effect/platform-node@0.75.1(@effect/platform@0.79.1(effect@3.13.10))(effect@3.13.10)':
     dependencies:
       '@effect/platform': 0.79.1(effect@3.13.10)
       '@effect/platform-node-shared': 0.29.1(@effect/platform@0.79.1(effect@3.13.10))(effect@3.13.10)
+      effect: 3.13.10
+      mime: 3.0.0
+      undici: 7.4.0
+      ws: 8.18.1
+    transitivePeerDependencies:
+      - bufferutil
+      - utf-8-validate
+
+  '@effect/platform-node@0.75.2(@effect/platform@0.79.1(effect@3.13.10))(effect@3.13.10)':
+    dependencies:
+      '@effect/platform': 0.79.1(effect@3.13.10)
+      '@effect/platform-node-shared': 0.29.2(@effect/platform@0.79.1(effect@3.13.10))(effect@3.13.10)
       effect: 3.13.10
       mime: 3.0.0
       undici: 7.4.0
