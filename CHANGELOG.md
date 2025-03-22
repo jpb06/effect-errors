@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.8.48](https://github.com/jpb06/effect-errors/compare/v1.8.47...v1.8.48) (2025-03-22)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @effect/platform-node to v0.76.2 ([#240](https://github.com/jpb06/effect-errors/issues/240)) ([05f4bae](https://github.com/jpb06/effect-errors/commit/05f4bae32417ce6294bc5cc37b80fa8b4f02120f))
+
 ## [1.8.47](https://github.com/jpb06/effect-errors/compare/v1.8.46...v1.8.47) (2025-03-21)
 
 
