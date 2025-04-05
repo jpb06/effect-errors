@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.8.53](https://github.com/jpb06/effect-errors/compare/v1.8.52...v1.8.53) (2025-04-05)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @effect/platform to v0.80.6 ([#273](https://github.com/jpb06/effect-errors/issues/273)) ([74822dc](https://github.com/jpb06/effect-errors/commit/74822dc9c88b23ac66ecb7153a9f41e6546a3a05))
+* **deps:** update dependency @effect/platform-node to v0.76.10 ([#274](https://github.com/jpb06/effect-errors/issues/274)) ([f1feaff](https://github.com/jpb06/effect-errors/commit/f1feaffebb273bc27b1188f745d54bf1d7663236))
+* **deps:** update dependency effect to v3.14.6 ([#271](https://github.com/jpb06/effect-errors/issues/271)) ([b2c500b](https://github.com/jpb06/effect-errors/commit/b2c500b38d19ed9195a12015bc1fe10319b485fe))
+
 ## [1.8.52](https://github.com/jpb06/effect-errors/compare/v1.8.51...v1.8.52) (2025-04-03)
 
 
