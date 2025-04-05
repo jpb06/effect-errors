@@ -73,7 +73,7 @@
     "readme-package-icons": "1.2.0",
     "ts-paths-resolver": "1.2.46",
     "tsx": "4.19.3",
-    "typescript": "5.8.2",
+    "typescript": "5.8.3",
     "vite-tsconfig-paths": "5.1.4",
     "vitest": "3.1.1",
     "vitest-mock-extended": "3.1.0"
