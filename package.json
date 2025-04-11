@@ -55,7 +55,7 @@
   },
   "dependencies": {
     "@effect/platform": "0.80.8",
-    "@effect/platform-node": "0.76.12",
+    "@effect/platform-node": "0.76.13",
     "comment-json": "4.2.5",
     "picocolors": "1.1.1",
     "source-map-js": "1.2.1"
