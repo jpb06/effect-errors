@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.9.0](https://github.com/jpb06/effect-errors/compare/v1.8.57...v1.9.0) (2025-04-12)
+
+
+### Features
+
+* unify spans ordering and removing `reverseSpans` option ([#295](https://github.com/jpb06/effect-errors/issues/295)) ([737e8ab](https://github.com/jpb06/effect-errors/commit/737e8ab78267100566707c0d8dab14e1fb6194ee))
+
 ## [1.8.57](https://github.com/jpb06/effect-errors/compare/v1.8.56...v1.8.57) (2025-04-12)
 
 
