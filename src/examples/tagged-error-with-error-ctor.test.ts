@@ -32,8 +32,8 @@ describe('tagged-error-with-error-ctor task', () => {
     const raw = stripAnsiCodes(result);
 
     expect(result).toContain('◯');
-    expect(raw).toContain('├─ with-tagged-error-task');
-    expect(raw).toContain('╰─ read-file');
+    expect(raw).toContain('├─ read-file');
+    expect(raw).toContain('╰─ with-tagged-error-task');
     expect(raw.match(durationRegex)).toHaveLength(2);
   });
 
@@ -46,13 +46,13 @@ describe('tagged-error-with-error-ctor task', () => {
 
     expect(raw).toContain('Sources 🕵️');
     expect(result).toMatch(
-      /│ at .*\/effect-errors\/src\/examples\/tagged-error-with-error-ctor\.ts:15:19/,
+      /│ at catcher \(\.\/src\/examples\/tagged-error-with-error-ctor\.ts:15:19\)/,
     );
     expect(result).toMatch(
-      /│ at .*\/effect-errors\/src\/examples\/tagged-error-with-error-ctor\.ts:22:10/,
+      /│ at \.\/src\/examples\/tagged-error-with-error-ctor\.ts:22:10/,
     );
     expect(result).toMatch(
-      /│ at .*\/effect-errors\/src\/examples\/tagged-error-with-error-ctor\.ts:17:10/,
+      /│ at \.\/src\/examples\/tagged-error-with-error-ctor\.ts:17:10/,
     );
   });
 });

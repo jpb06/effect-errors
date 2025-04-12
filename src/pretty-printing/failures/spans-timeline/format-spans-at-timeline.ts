@@ -15,12 +15,11 @@ type SpansAsTimeline = {
 
 export const formatSpansAsTimeline = (
   span: Span | undefined,
-  { stripCwd, reverseSpans }: PrettyPrintOptions,
+  { stripCwd }: PrettyPrintOptions,
 ): SpansAsTimeline => {
   const spans = extractSpans(span);
 
-  const orderedSpans = reverseSpans === true ? spans.toReversed() : spans;
-  return orderedSpans.reduce<SpansAsTimeline>(
+  return spans.reduce<SpansAsTimeline>(
     (output, { name, status, attributes }, index) => {
       const isFirstEntry = index === 0;
       const isLastEntry = index === spans.length - 1;

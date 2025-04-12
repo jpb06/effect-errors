@@ -30,8 +30,8 @@ describe('unknown-error task', () => {
     const raw = stripAnsiCodes(result);
 
     expect(result).toContain('◯');
-    expect(raw).toContain('├─ unknown-error-task');
-    expect(raw).toContain('╰─ fetch-user');
+    expect(raw).toContain('├─ fetch-user');
+    expect(raw).toContain('╰─ unknown-error-task');
     expect(raw.match(durationRegex)).toHaveLength(2);
   });
 
@@ -43,11 +43,7 @@ describe('unknown-error task', () => {
     const raw = stripAnsiCodes(result);
 
     expect(raw).toContain('Sources 🕵️');
-    expect(result).toMatch(
-      /│ at .*\/effect-errors\/src\/examples\/unknown-error\.ts:53:10/,
-    );
-    expect(result).toMatch(
-      /│ at .*\/effect-errors\/src\/examples\/unknown-error\.ts:30:12/,
-    );
+    expect(result).toMatch(/│ at .*\/src\/examples\/unknown-error\.ts:53:10/);
+    expect(result).toMatch(/│ at .*\/src\/examples\/unknown-error\.ts:30:12/);
   });
 });

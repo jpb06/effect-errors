@@ -21,7 +21,7 @@ describe('strip-cwd task', () => {
     const cause = await effectCause(task);
 
     const { prettyPrint } = await import('./../pretty-print.js');
-    const result = prettyPrint(cause, { stripCwd: true, reverseSpans: true });
+    const result = prettyPrint(cause, { stripCwd: true });
 
     expect(result).toContain(' SomethingBad ');
     expect(result).toContain(
@@ -33,12 +33,12 @@ describe('strip-cwd task', () => {
     const cause = await effectCause(task);
 
     const { prettyPrint } = await import('./../pretty-print.js');
-    const result = prettyPrint(cause, { stripCwd: true, reverseSpans: true });
+    const result = prettyPrint(cause, { stripCwd: true });
     const raw = stripAnsiCodes(result);
 
     expect(result).toContain('◯');
-    expect(raw).toContain('├─ ./src/examples/strip-cwd/task.ts');
-    expect(raw).toContain('╰─ ./src/examples/strip-cwd.ts');
+    expect(raw).toContain('├─ ./src/examples/strip-cwd.ts');
+    expect(raw).toContain('╰─ ./src/examples/strip-cwd/task.ts');
     expect(raw.match(durationRegex)).toHaveLength(2);
   });
 
@@ -46,7 +46,7 @@ describe('strip-cwd task', () => {
     const cause = await effectCause(task);
 
     const { prettyPrint } = await import('./../pretty-print.js');
-    const result = prettyPrint(cause, { stripCwd: true, reverseSpans: true });
+    const result = prettyPrint(cause, { stripCwd: true });
     const raw = stripAnsiCodes(result);
 
     expect(raw).toContain('Sources 🕵️');

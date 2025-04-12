@@ -32,8 +32,8 @@ describe('schema-error task', () => {
     const raw = stripAnsiCodes(result);
 
     expect(result).toContain('◯');
-    expect(raw).toContain('├─ with-schema-error-task');
-    expect(raw).toContain('╰─ read-file');
+    expect(raw).toContain('├─ read-file');
+    expect(raw).toContain('╰─ with-schema-error-task');
     expect(raw.match(durationRegex)).toHaveLength(2);
   });
 
@@ -47,7 +47,7 @@ describe('schema-error task', () => {
     expect(raw).toContain('Sources 🕵️');
     expect(raw).not.toContain('Node Stacktrace 🚨');
     expect(result).toMatch(
-      /│ at catcher \(.*\/effect-errors\/src\/examples\/schema-error\.ts:14:19\)/,
+      /│ at catcher \(.\/src\/examples\/schema-error\.ts:14:19\)/,
     );
   });
 

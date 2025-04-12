@@ -20,7 +20,6 @@ describe('captureErrors function', () => {
     const result = await Effect.runPromise(
       pipe(
         captureErrors(cause, {
-          reverseSpans: false,
           stripCwd: false,
         }),
         Effect.provide(NodeFileSystem.layer),
@@ -63,7 +62,6 @@ describe('captureErrors function', () => {
     const result = await Effect.runPromise(
       pipe(
         captureErrors(cause, {
-          reverseSpans: false,
           stripCwd: false,
         }),
         Effect.provide(NodeFileSystem.layer),
@@ -84,7 +82,6 @@ describe('captureErrors function', () => {
     const result = await Effect.runPromise(
       pipe(
         captureErrors(cause, {
-          reverseSpans: false,
           stripCwd: false,
         }),
         Effect.provide(NodeFileSystem.layer),

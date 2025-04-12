@@ -28,14 +28,12 @@ export interface CapturedErrors {
 }
 
 export interface CaptureErrorsOptions {
-  reverseSpans?: boolean;
   stripCwd?: boolean;
 }
 
 export const captureErrors = <E>(
   cause: Cause<E>,
   options: CaptureErrorsOptions = {
-    reverseSpans: true,
     stripCwd: true,
   },
 ): Effect.Effect<
