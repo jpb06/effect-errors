@@ -13,7 +13,7 @@ type MaybePrintSpansTimelineOutput = {
 export const maybePrintSpansTimeline = (
   span: Span | undefined,
   isPlainString: boolean,
-  { stripCwd, reverseSpans }: PrettyPrintOptions,
+  options: PrettyPrintOptions,
 ): MaybePrintSpansTimelineOutput => {
   if (span === undefined) {
     return {
@@ -22,10 +22,7 @@ export const maybePrintSpansTimeline = (
     };
   }
 
-  const { stack, message } = formatSpansAsTimeline(span, {
-    stripCwd,
-    reverseSpans,
-  });
+  const { stack, message } = formatSpansAsTimeline(span, options);
 
   return {
     spanAttributesStack: stack,

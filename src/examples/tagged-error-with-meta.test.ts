@@ -30,8 +30,8 @@ describe('tagged-error-with-meta task', () => {
     const raw = stripAnsiCodes(result);
 
     expect(result).toContain('◯');
-    expect(raw).toContain('├─ with-meta-tagged-error-task');
-    expect(raw).toContain('╰─ sub-task');
+    expect(raw).toContain('├─ sub-task');
+    expect(raw).toContain('╰─ with-meta-tagged-error-task');
     expect(raw.match(durationRegex)).toHaveLength(2);
   });
 
@@ -42,9 +42,9 @@ describe('tagged-error-with-meta task', () => {
     const result = prettyPrint(cause);
     const raw = stripAnsiCodes(result);
 
-    expect(raw).toContain('│    struff: awoowoo');
-    expect(raw).toContain('     cool: true');
-    expect(raw).toContain('     yolo: bro');
+    expect(raw).toContain('     struff: awoowoo');
+    expect(raw).toContain('│    cool: true');
+    expect(raw).toContain('│    yolo: bro');
   });
 
   it('should display the stack', async () => {
@@ -56,13 +56,13 @@ describe('tagged-error-with-meta task', () => {
 
     expect(raw).toContain('Sources 🕵️');
     expect(result).toMatch(
-      /│ at .*\/effect-errors\/src\/examples\/tagged-error-with-meta\.ts:11:15/,
+      /│ at .\/src\/examples\/tagged-error-with-meta\.ts:11:15/,
     );
     expect(result).toMatch(
-      /│ at .*\/effect-errors\/src\/examples\/tagged-error-with-meta\.ts:19:10/,
+      /│ at .\/src\/examples\/tagged-error-with-meta\.ts:19:10/,
     );
     expect(result).toMatch(
-      /│ at .*\/effect-errors\/src\/examples\/tagged-error-with-meta\.ts:12:10/,
+      /│ at .\/src\/examples\/tagged-error-with-meta\.ts:12:10/,
     );
   });
 });

@@ -9,7 +9,7 @@ import { getSourcesFromSpan } from './get-sources-from-span.js';
 import { getSourcesFromStack } from './get-sources-from-stack.js';
 
 export const transformRawError =
-  ({ reverseSpans, stripCwd }: CaptureErrorsOptions) =>
+  ({ stripCwd }: CaptureErrorsOptions) =>
   ({
     message,
     stack: maybeStack,
@@ -42,7 +42,7 @@ export const transformRawError =
             location.length > 0
               ? location.map(({ _tag, ...data }) => data)
               : undefined,
-          spans: reverseSpans === true ? spans.toReversed() : spans,
+          spans,
           isPlainString,
         };
       }),

@@ -36,8 +36,8 @@ describe('from-promise task', () => {
       const raw = stripAnsiCodes(result);
 
       expect(result).toContain('◯');
-      expect(raw).toContain('├─ from-promise-task');
-      expect(raw).toContain('╰─ fetch-user');
+      expect(raw).toContain('├─ fetch-user');
+      expect(raw).toContain('╰─ from-promise-task');
       expect(raw.match(durationRegex)).toHaveLength(2);
     });
 
@@ -97,8 +97,8 @@ describe('from-promise task', () => {
       const raw = stripAnsiCodes(message);
 
       expect(raw).toContain('◯');
-      expect(raw).toContain('├─ from-promise-task');
-      expect(raw).toContain('╰─ fetch-user');
+      expect(raw).toContain('├─ fetch-user');
+      expect(raw).toContain('╰─ from-promise-task');
       expect(raw.match(durationRegex)).toHaveLength(2);
     });
 

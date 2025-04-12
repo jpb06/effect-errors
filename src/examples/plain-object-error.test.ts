@@ -30,8 +30,8 @@ describe('plain-object-error task', () => {
     const raw = stripAnsiCodes(result);
 
     expect(result).toContain('◯');
-    expect(raw).toContain('├─ with-plain-object-error-task');
-    expect(raw).toContain('╰─ read-user');
+    expect(raw).toContain('├─ read-user');
+    expect(raw).toContain('╰─ with-plain-object-error-task');
     expect(raw.match(durationRegex)).toHaveLength(2);
   });
 

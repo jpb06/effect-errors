@@ -45,8 +45,8 @@ describe('long-running task', () => {
     const raw = stripAnsiCodes(result);
 
     expect(result).toContain('◯');
-    expect(raw).toContain('├─ long-running-task');
-    expect(raw).toContain('╰─ read-file');
+    expect(raw).toContain('├─ read-file');
+    expect(raw).toContain('╰─ long-running-task');
     expect(raw.match(durationRegex)).toHaveLength(2);
   });
 
@@ -61,7 +61,7 @@ describe('long-running task', () => {
     expect(raw).toContain('Sources 🕵️');
     expect(raw).not.toContain('Node Stacktrace 🚨');
     expect(result).toMatch(
-      /\/effect-errors\/src\/examples\/long-running.ts:14:19/,
+      /│ at catcher \(\.\/src\/examples\/long-running.ts:14:19\)/,
     );
   });
 

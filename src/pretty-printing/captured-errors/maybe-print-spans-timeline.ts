@@ -12,14 +12,13 @@ import type { ErrorSpan, PrettyPrintOptions } from '@type';
 export const maybePrintSpansTimeline = (
   spans: ErrorSpan[] | undefined,
   isPlainString: boolean,
-  { stripCwd, reverseSpans }: PrettyPrintOptions,
+  { stripCwd }: PrettyPrintOptions,
 ): string[] => {
   if (spans === undefined) {
     return isPlainString === false ? ['', missingSpansWarning, ''] : [];
   }
 
-  const orderedSpans = reverseSpans === true ? spans.toReversed() : spans;
-  return orderedSpans.reduce<string[]>(
+  return spans.reduce<string[]>(
     (output, { name, durationInMilliseconds, attributes }, index) => {
       const isFirstEntry = index === 0;
       const isLastEntry = index === spans.length - 1;

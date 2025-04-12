@@ -79,10 +79,6 @@ const prettyPrint: <E>(cause: Cause<E>, options?: PrettyPrintOptions) => string
 
 > default: `false` (absolute paths)
 
-#### `reverseSpans` - Whether spans order should reversed (entry point first instead of inner callee first)
-
-> default: `true` (entry point first)
-
 #### `hideStackTrace` - Whether node stacktrace should be displayed
 
 > default: `true`
@@ -123,7 +119,6 @@ const program = pipe(
       const message = prettyPrintFromCapturedErrors(errors, {
         stripCwd: true,
         hideStackTrace: true,
-        reverseSpans: true,
       });
 
       console.error(message);
@@ -230,7 +225,6 @@ export interface CapturedErrors {
 }
 
 export interface CaptureErrorsOptions {
-  reverseSpans?: boolean;
   stripCwd?: boolean;
 }
 

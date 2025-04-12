@@ -49,9 +49,9 @@ describe('parallel-errors task', () => {
       const raw = stripAnsiCodes(result);
 
       expect(result).toContain('◯');
-      expect(raw).toContain('├─ with-parallel-errors-task');
+      expect(raw).toContain('├─ read-user');
       expect(raw).toContain('├─ parallel-get');
-      expect(raw).toContain('╰─ read-user');
+      expect(raw).toContain('╰─ with-parallel-errors-task');
       expect(raw.match(durationRegex)).toHaveLength(9);
     });
 
@@ -63,9 +63,9 @@ describe('parallel-errors task', () => {
       const raw = stripAnsiCodes(result);
 
       expect(raw).toContain('│    names: yolo,bro,cool');
-      expect(raw).toContain('     name: yolo');
-      expect(raw).toContain('     name: bro');
-      expect(raw).toContain('     name: cool');
+      expect(raw).toContain('│    name: yolo');
+      expect(raw).toContain('│    name: bro');
+      expect(raw).toContain('│    name: cool');
     });
 
     it('should display sources by default', async () => {
@@ -135,9 +135,9 @@ describe('parallel-errors task', () => {
       const raw = stripAnsiCodes(message);
 
       expect(raw).toContain('◯');
-      expect(raw).toContain('├─ with-parallel-errors-task');
+      expect(raw).toContain('├─ read-user');
       expect(raw).toContain('├─ parallel-get');
-      expect(raw).toContain('╰─ read-user');
+      expect(raw).toContain('╰─ with-parallel-errors-task');
       expect(raw.match(durationRegex)).toHaveLength(9);
     });
 
@@ -152,9 +152,9 @@ describe('parallel-errors task', () => {
       const raw = stripAnsiCodes(message);
 
       expect(raw).toContain('│    names: yolo,bro,cool');
-      expect(raw).toContain('     name: yolo');
-      expect(raw).toContain('     name: bro');
-      expect(raw).toContain('     name: cool');
+      expect(raw).toContain('│    name: yolo');
+      expect(raw).toContain('│    name: bro');
+      expect(raw).toContain('│    name: cool');
     });
 
     it('should display sources by default', async () => {
