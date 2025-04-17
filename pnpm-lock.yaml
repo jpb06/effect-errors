@@ -12,8 +12,8 @@ importers:
         specifier: 0.80.10
         version: 0.80.10(effect@3.14.10)
       '@effect/platform-node':
-        specifier: 0.76.19
-        version: 0.76.19(@effect/cluster@0.29.0(@effect/platform@0.80.10(effect@3.14.10))(@effect/rpc@0.55.0(@effect/platform@0.80.10(effect@3.14.10))(effect@3.14.10))(@effect/sql@0.33.0(@effect/experimental@0.44.0(@effect/platform@0.80.10(effect@3.14.10))(effect@3.14.10))(@effect/platform@0.80.10(effect@3.14.10))(effect@3.14.10))(effect@3.14.10))(@effect/platform@0.80.10(effect@3.14.10))(@effect/rpc@0.55.0(@effect/platform@0.80.10(effect@3.14.10))(effect@3.14.10))(@effect/sql@0.33.0(@effect/experimental@0.44.0(@effect/platform@0.80.10(effect@3.14.10))(effect@3.14.10))(@effect/platform@0.80.10(effect@3.14.10))(effect@3.14.10))(effect@3.14.10)
+        specifier: 0.76.20
+        version: 0.76.20(@effect/cluster@0.29.0(@effect/platform@0.80.10(effect@3.14.10))(@effect/rpc@0.55.0(@effect/platform@0.80.10(effect@3.14.10))(effect@3.14.10))(@effect/sql@0.33.0(@effect/experimental@0.44.0(@effect/platform@0.80.10(effect@3.14.10))(effect@3.14.10))(@effect/platform@0.80.10(effect@3.14.10))(effect@3.14.10))(effect@3.14.10))(@effect/platform@0.80.10(effect@3.14.10))(@effect/rpc@0.55.0(@effect/platform@0.80.10(effect@3.14.10))(effect@3.14.10))(@effect/sql@0.33.0(@effect/experimental@0.44.0(@effect/platform@0.80.10(effect@3.14.10))(effect@3.14.10))(@effect/platform@0.80.10(effect@3.14.10))(effect@3.14.10))(effect@3.14.10)
       comment-json:
         specifier: 4.2.5
         version: 4.2.5
@@ -177,12 +177,30 @@ packages:
       '@effect/sql': ^0.33.10
       effect: ^3.14.10
 
+  '@effect/platform-node-shared@0.30.20':
+    resolution: {integrity: sha512-h5wh/suIsHGCYwI+p6wPACpZIuzMV8O/Sd0lzezINNz0a99T5cWFqR3Y3+CWedN6cxSGinGh2Ke8ThXNgPONPA==}
+    peerDependencies:
+      '@effect/cluster': ^0.29.20
+      '@effect/platform': ^0.80.10
+      '@effect/rpc': ^0.55.15
+      '@effect/sql': ^0.33.10
+      effect: ^3.14.10
+
   '@effect/platform-node@0.76.19':
     resolution: {integrity: sha512-L/B8A6HBGq5pn52CFbKrKx42aKNa25WAM4Qp4L4MwBWGYOADBhQIXpzlxrHt2TnFnGU+V6v/xzMvB5WmNBcrTg==}
     peerDependencies:
       '@effect/cluster': ^0.29.19
       '@effect/platform': ^0.80.10
       '@effect/rpc': ^0.55.14
+      '@effect/sql': ^0.33.10
+      effect: ^3.14.10
+
+  '@effect/platform-node@0.76.20':
+    resolution: {integrity: sha512-VoFCXC8F0lZVCkZNiwTY/E0y1/GTq2aVYm1USlPlbhbAT1EphtshhBGVjwuDkckK0TJJEVQO66duCi5hcKyeVg==}
+    peerDependencies:
+      '@effect/cluster': ^0.29.20
+      '@effect/platform': ^0.80.10
+      '@effect/rpc': ^0.55.15
       '@effect/sql': ^0.33.10
       effect: ^3.14.10
 
@@ -1509,11 +1527,40 @@ snapshots:
       - bufferutil
       - utf-8-validate
 
+  '@effect/platform-node-shared@0.30.20(@effect/cluster@0.29.0(@effect/platform@0.80.10(effect@3.14.10))(@effect/rpc@0.55.0(@effect/platform@0.80.10(effect@3.14.10))(effect@3.14.10))(@effect/sql@0.33.0(@effect/experimental@0.44.0(@effect/platform@0.80.10(effect@3.14.10))(effect@3.14.10))(@effect/platform@0.80.10(effect@3.14.10))(effect@3.14.10))(effect@3.14.10))(@effect/platform@0.80.10(effect@3.14.10))(@effect/rpc@0.55.0(@effect/platform@0.80.10(effect@3.14.10))(effect@3.14.10))(@effect/sql@0.33.0(@effect/experimental@0.44.0(@effect/platform@0.80.10(effect@3.14.10))(effect@3.14.10))(@effect/platform@0.80.10(effect@3.14.10))(effect@3.14.10))(effect@3.14.10)':
+    dependencies:
+      '@effect/cluster': 0.29.0(@effect/platform@0.80.10(effect@3.14.10))(@effect/rpc@0.55.0(@effect/platform@0.80.10(effect@3.14.10))(effect@3.14.10))(@effect/sql@0.33.0(@effect/experimental@0.44.0(@effect/platform@0.80.10(effect@3.14.10))(effect@3.14.10))(@effect/platform@0.80.10(effect@3.14.10))(effect@3.14.10))(effect@3.14.10)
+      '@effect/platform': 0.80.10(effect@3.14.10)
+      '@effect/rpc': 0.55.0(@effect/platform@0.80.10(effect@3.14.10))(effect@3.14.10)
+      '@effect/sql': 0.33.0(@effect/experimental@0.44.0(@effect/platform@0.80.10(effect@3.14.10))(effect@3.14.10))(@effect/platform@0.80.10(effect@3.14.10))(effect@3.14.10)
+      '@parcel/watcher': 2.5.1
+      effect: 3.14.10
+      multipasta: 0.2.5
+      ws: 8.18.1
+    transitivePeerDependencies:
+      - bufferutil
+      - utf-8-validate
+
   '@effect/platform-node@0.76.19(@effect/cluster@0.29.0(@effect/platform@0.80.10(effect@3.14.10))(@effect/rpc@0.55.0(@effect/platform@0.80.10(effect@3.14.10))(effect@3.14.10))(@effect/sql@0.33.0(@effect/experimental@0.44.0(@effect/platform@0.80.10(effect@3.14.10))(effect@3.14.10))(@effect/platform@0.80.10(effect@3.14.10))(effect@3.14.10))(effect@3.14.10))(@effect/platform@0.80.10(effect@3.14.10))(@effect/rpc@0.55.0(@effect/platform@0.80.10(effect@3.14.10))(effect@3.14.10))(@effect/sql@0.33.0(@effect/experimental@0.44.0(@effect/platform@0.80.10(effect@3.14.10))(effect@3.14.10))(@effect/platform@0.80.10(effect@3.14.10))(effect@3.14.10))(effect@3.14.10)':
     dependencies:
       '@effect/cluster': 0.29.0(@effect/platform@0.80.10(effect@3.14.10))(@effect/rpc@0.55.0(@effect/platform@0.80.10(effect@3.14.10))(effect@3.14.10))(@effect/sql@0.33.0(@effect/experimental@0.44.0(@effect/platform@0.80.10(effect@3.14.10))(effect@3.14.10))(@effect/platform@0.80.10(effect@3.14.10))(effect@3.14.10))(effect@3.14.10)
       '@effect/platform': 0.80.10(effect@3.14.10)
       '@effect/platform-node-shared': 0.30.19(@effect/cluster@0.29.0(@effect/platform@0.80.10(effect@3.14.10))(@effect/rpc@0.55.0(@effect/platform@0.80.10(effect@3.14.10))(effect@3.14.10))(@effect/sql@0.33.0(@effect/experimental@0.44.0(@effect/platform@0.80.10(effect@3.14.10))(effect@3.14.10))(@effect/platform@0.80.10(effect@3.14.10))(effect@3.14.10))(effect@3.14.10))(@effect/platform@0.80.10(effect@3.14.10))(@effect/rpc@0.55.0(@effect/platform@0.80.10(effect@3.14.10))(effect@3.14.10))(@effect/sql@0.33.0(@effect/experimental@0.44.0(@effect/platform@0.80.10(effect@3.14.10))(effect@3.14.10))(@effect/platform@0.80.10(effect@3.14.10))(effect@3.14.10))(effect@3.14.10)
+      '@effect/rpc': 0.55.0(@effect/platform@0.80.10(effect@3.14.10))(effect@3.14.10)
+      '@effect/sql': 0.33.0(@effect/experimental@0.44.0(@effect/platform@0.80.10(effect@3.14.10))(effect@3.14.10))(@effect/platform@0.80.10(effect@3.14.10))(effect@3.14.10)
+      effect: 3.14.10
+      mime: 3.0.0
+      undici: 7.8.0
+      ws: 8.18.1
+    transitivePeerDependencies:
+      - bufferutil
+      - utf-8-validate
+
+  '@effect/platform-node@0.76.20(@effect/cluster@0.29.0(@effect/platform@0.80.10(effect@3.14.10))(@effect/rpc@0.55.0(@effect/platform@0.80.10(effect@3.14.10))(effect@3.14.10))(@effect/sql@0.33.0(@effect/experimental@0.44.0(@effect/platform@0.80.10(effect@3.14.10))(effect@3.14.10))(@effect/platform@0.80.10(effect@3.14.10))(effect@3.14.10))(effect@3.14.10))(@effect/platform@0.80.10(effect@3.14.10))(@effect/rpc@0.55.0(@effect/platform@0.80.10(effect@3.14.10))(effect@3.14.10))(@effect/sql@0.33.0(@effect/experimental@0.44.0(@effect/platform@0.80.10(effect@3.14.10))(effect@3.14.10))(@effect/platform@0.80.10(effect@3.14.10))(effect@3.14.10))(effect@3.14.10)':
+    dependencies:
+      '@effect/cluster': 0.29.0(@effect/platform@0.80.10(effect@3.14.10))(@effect/rpc@0.55.0(@effect/platform@0.80.10(effect@3.14.10))(effect@3.14.10))(@effect/sql@0.33.0(@effect/experimental@0.44.0(@effect/platform@0.80.10(effect@3.14.10))(effect@3.14.10))(@effect/platform@0.80.10(effect@3.14.10))(effect@3.14.10))(effect@3.14.10)
+      '@effect/platform': 0.80.10(effect@3.14.10)
+      '@effect/platform-node-shared': 0.30.20(@effect/cluster@0.29.0(@effect/platform@0.80.10(effect@3.14.10))(@effect/rpc@0.55.0(@effect/platform@0.80.10(effect@3.14.10))(effect@3.14.10))(@effect/sql@0.33.0(@effect/experimental@0.44.0(@effect/platform@0.80.10(effect@3.14.10))(effect@3.14.10))(@effect/platform@0.80.10(effect@3.14.10))(effect@3.14.10))(effect@3.14.10))(@effect/platform@0.80.10(effect@3.14.10))(@effect/rpc@0.55.0(@effect/platform@0.80.10(effect@3.14.10))(effect@3.14.10))(@effect/sql@0.33.0(@effect/experimental@0.44.0(@effect/platform@0.80.10(effect@3.14.10))(effect@3.14.10))(@effect/platform@0.80.10(effect@3.14.10))(effect@3.14.10))(effect@3.14.10)
       '@effect/rpc': 0.55.0(@effect/platform@0.80.10(effect@3.14.10))(effect@3.14.10)
       '@effect/sql': 0.33.0(@effect/experimental@0.44.0(@effect/platform@0.80.10(effect@3.14.10))(effect@3.14.10))(@effect/platform@0.80.10(effect@3.14.10))(effect@3.14.10)
       effect: 3.14.10
