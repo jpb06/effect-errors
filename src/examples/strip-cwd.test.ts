@@ -1,7 +1,7 @@
-import { Effect, pipe } from 'effect';
+import { pipe } from 'effect';
 import { describe, expect, it, vi } from 'vitest';
 
-import { makeLoggerTestLayer } from '@tests/layers';
+import { makeConsoleTestLayer } from '@tests/layers';
 import { mockProcess } from '@tests/mocks';
 import { durationRegex } from '@tests/regex';
 import { effectCause } from '@tests/runners';
@@ -14,8 +14,8 @@ mockProcess({
 });
 
 describe('strip-cwd task', () => {
-  const { LoggerTestLayer } = makeLoggerTestLayer({});
-  const task = pipe(withCwdStrippingTask, Effect.provide(LoggerTestLayer));
+  const { ConsoleTestLayer } = makeConsoleTestLayer();
+  const task = pipe(withCwdStrippingTask, ConsoleTestLayer);
 
   it('should display the error', async () => {
     const cause = await effectCause(task);

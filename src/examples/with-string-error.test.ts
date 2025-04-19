@@ -1,7 +1,7 @@
-import { Effect, pipe } from 'effect';
+import { pipe } from 'effect';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { makeLoggerTestLayer } from '@tests/layers';
+import { makeConsoleTestLayer } from '@tests/layers';
 import { effectCause } from '@tests/runners';
 import { makeTaskWithCollectedErrors } from '@tests/util';
 
@@ -14,8 +14,8 @@ describe('with-string-error task', () => {
   });
 
   describe('pretty-print', () => {
-    const { LoggerTestLayer } = makeLoggerTestLayer({});
-    const task = pipe(withStringErrorTask, Effect.provide(LoggerTestLayer));
+    const { ConsoleTestLayer } = makeConsoleTestLayer();
+    const task = pipe(withStringErrorTask, ConsoleTestLayer);
 
     it('should display the error message', async () => {
       const cause = await effectCause(task);

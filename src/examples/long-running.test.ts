@@ -1,15 +1,15 @@
 import { Duration, Effect, Fiber, TestClock, TestContext, pipe } from 'effect';
 import { describe, expect, it } from 'vitest';
 
-import { makeLoggerTestLayer } from '@tests/layers';
+import { makeConsoleTestLayer } from '@tests/layers';
 import { durationRegex } from '@tests/regex';
 import { stripAnsiCodes } from '@tests/util';
 
 describe('long-running task', () => {
   const longRunningTaskEffect = async () => {
-    const { LoggerTestLayer } = makeLoggerTestLayer({});
+    const { ConsoleTestLayer } = makeConsoleTestLayer();
     const { longRunningTask } = await import('./long-running.js');
-    const task = pipe(longRunningTask, Effect.provide(LoggerTestLayer));
+    const task = pipe(longRunningTask, ConsoleTestLayer);
 
     return Effect.gen(function* () {
       const f = yield* pipe(task, Effect.fork);

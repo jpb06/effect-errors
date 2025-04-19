@@ -40,7 +40,6 @@
 		"rootDir": "./src",
 		"paths": {
 			"@dependencies/fs": ["./src/dependencies/fs/index.ts"],
-			"@dependencies/logger": ["./src/dependencies/logger/index.ts"],
 			"@logic/errors": ["./src/logic/errors/index.ts"],
 			"@logic/path": ["./src/logic/path/index.ts"],
 			"@logic/spans": ["./src/logic/spans/index.ts"],

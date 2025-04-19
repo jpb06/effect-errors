@@ -1,7 +1,7 @@
-import { Effect, pipe } from 'effect';
+import { pipe } from 'effect';
 import { describe, expect, it } from 'vitest';
 
-import { makeLoggerTestLayer } from '@tests/layers';
+import { makeConsoleTestLayer } from '@tests/layers';
 import { durationRegex } from '@tests/regex';
 import { effectCause } from '@tests/runners';
 import { stripAnsiCodes } from '@tests/util';
@@ -9,8 +9,8 @@ import { stripAnsiCodes } from '@tests/util';
 import { unknownErrorTask } from './unknown-error.js';
 
 describe('unknown-error task', () => {
-  const { LoggerTestLayer } = makeLoggerTestLayer({});
-  const task = pipe(unknownErrorTask, Effect.provide(LoggerTestLayer));
+  const { ConsoleTestLayer } = makeConsoleTestLayer();
+  const task = pipe(unknownErrorTask, ConsoleTestLayer);
 
   it('should display the error', async () => {
     const cause = await effectCause(task);

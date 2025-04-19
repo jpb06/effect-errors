@@ -1,7 +1,7 @@
-import { Effect, pipe } from 'effect';
+import { pipe } from 'effect';
 import { describe, expect, it } from 'vitest';
 
-import { makeLoggerTestLayer } from '@tests/layers';
+import { makeConsoleTestLayer } from '@tests/layers';
 import { durationRegex } from '@tests/regex';
 import { effectCause } from '@tests/runners';
 import { stripAnsiCodes } from '@tests/util';
@@ -9,8 +9,8 @@ import { stripAnsiCodes } from '@tests/util';
 import { withSchemaErrorTask } from './schema-error.js';
 
 describe('schema-error task', () => {
-  const { LoggerTestLayer } = makeLoggerTestLayer({});
-  const task = pipe(withSchemaErrorTask, Effect.provide(LoggerTestLayer));
+  const { ConsoleTestLayer } = makeConsoleTestLayer();
+  const task = pipe(withSchemaErrorTask, ConsoleTestLayer);
 
   it('should display the error', async () => {
     const cause = await effectCause(task);
