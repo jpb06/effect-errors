@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.10.0](https://github.com/jpb06/effect-errors/compare/v1.9.2...v1.10.0) (2025-04-19)
+
+
+### Features
+
+* use effect console internal layer ([#312](https://github.com/jpb06/effect-errors/issues/312)) ([9ddbdf8](https://github.com/jpb06/effect-errors/commit/9ddbdf8a5bc8cde75ba8a825b5fb583bc13fd3c5))
+
 ## [1.9.2](https://github.com/jpb06/effect-errors/compare/v1.9.1...v1.9.2) (2025-04-18)
 
 
