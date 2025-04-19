@@ -1,9 +1,7 @@
 import { readdir } from 'node:fs/promises';
 import path from 'node:path';
 
-import { Effect, pipe } from 'effect';
-
-import { type Logger, LoggerConsoleLive } from '@dependencies/logger';
+import type { Effect } from 'effect';
 
 import { runPromise } from '../../index.js';
 
@@ -15,11 +13,11 @@ import { runPromise } from '../../index.js';
       file !== 'index.ts' &&
       !file.endsWith('.test.ts')
     ) {
-      const task: { default: Effect.Effect<unknown, unknown, Logger> } =
+      const task: { default: Effect.Effect<unknown, unknown, never> } =
         await import(path.join('..', file));
 
       try {
-        await runPromise(pipe(task.default, Effect.provide(LoggerConsoleLive)));
+        await runPromise(task.default);
       } catch (_) {
         //  console.error(error);
       }

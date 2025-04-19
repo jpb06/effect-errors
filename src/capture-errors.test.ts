@@ -3,7 +3,7 @@ import { Effect, pipe } from 'effect';
 import { describe, expect, it } from 'vitest';
 
 import { checkParallelErrorsData } from '@tests/assertions';
-import { makeLoggerTestLayer } from '@tests/layers';
+import { makeConsoleTestLayer } from '@tests/layers';
 import { fromPromiseTaskSources } from '@tests/mock-data';
 import { effectCause } from '@tests/runners';
 
@@ -13,8 +13,8 @@ import { withParallelErrorsTask } from './examples/parallel-errors.js';
 
 describe('captureErrors function', () => {
   it('should capture errors from promises', async () => {
-    const { LoggerTestLayer } = makeLoggerTestLayer({});
-    const task = pipe(fromPromiseTask, Effect.provide(LoggerTestLayer));
+    const { ConsoleTestLayer } = makeConsoleTestLayer();
+    const task = pipe(fromPromiseTask, ConsoleTestLayer);
     const cause = await effectCause(task);
 
     const result = await Effect.runPromise(
@@ -55,8 +55,8 @@ describe('captureErrors function', () => {
   });
 
   it('should capture parallel errors', async () => {
-    const { LoggerTestLayer } = makeLoggerTestLayer({});
-    const task = pipe(withParallelErrorsTask, Effect.provide(LoggerTestLayer));
+    const { ConsoleTestLayer } = makeConsoleTestLayer();
+    const task = pipe(withParallelErrorsTask, ConsoleTestLayer);
     const cause = await effectCause(task);
 
     const result = await Effect.runPromise(

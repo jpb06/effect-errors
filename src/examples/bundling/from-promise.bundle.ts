@@ -1,7 +1,5 @@
 import { NodeFileSystem } from '@effect/platform-node';
-import { Effect, Layer, pipe } from 'effect';
-
-import { LoggerConsoleLive } from '@dependencies/logger';
+import { Effect, pipe } from 'effect';
 
 import { captureErrors } from '../../capture-errors.js';
 import fromPromiseTask from '../from-promise.js';
@@ -18,6 +16,6 @@ Effect.runPromise(
         return yield* Effect.fail(JSON.stringify(errors, bigIntReplacer, 2));
       }),
     ),
-    Effect.provide(Layer.mergeAll(NodeFileSystem.layer, LoggerConsoleLive)),
+    Effect.provide(NodeFileSystem.layer),
   ),
 ).catch(console.error);

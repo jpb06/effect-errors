@@ -1,8 +1,6 @@
 import path from 'node:path';
 
-import { Effect, pipe } from 'effect';
-
-import { type Logger, LoggerConsoleLive } from '@dependencies/logger';
+import type { Effect } from 'effect';
 
 import { runPromise } from '../../runners/run-promise.js';
 
@@ -16,11 +14,11 @@ import { runPromise } from '../../runners/run-promise.js';
   const stripCwd = process.argv[3] === 'strip';
   const hideStackTrace = process.argv[4] === 'noStackTrace';
 
-  const task: { default: Effect.Effect<unknown, unknown, Logger> } =
+  const task: { default: Effect.Effect<unknown, unknown, never> } =
     await import(path.join('..', file));
 
   try {
-    await runPromise(pipe(task.default, Effect.provide(LoggerConsoleLive)), {
+    await runPromise(task.default, {
       stripCwd,
       hideStackTrace,
     });
