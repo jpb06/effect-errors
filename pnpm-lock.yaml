@@ -46,8 +46,8 @@ importers:
         specifier: 0.25.2
         version: 0.25.2
       readme-package-icons:
-        specifier: 1.2.0
-        version: 1.2.0
+        specifier: 1.2.1
+        version: 1.2.1
       ts-paths-resolver:
         specifier: 1.2.53
         version: 1.2.53(@effect/cluster@0.29.0(@effect/platform@0.80.11(effect@3.14.11))(@effect/rpc@0.55.0(@effect/platform@0.80.11(effect@3.14.11))(effect@3.14.11))(@effect/sql@0.33.0(@effect/experimental@0.44.0(@effect/platform@0.80.11(effect@3.14.11))(effect@3.14.11))(@effect/platform@0.80.11(effect@3.14.11))(effect@3.14.11))(effect@3.14.11))(@effect/rpc@0.55.0(@effect/platform@0.80.11(effect@3.14.11))(effect@3.14.11))(@effect/sql@0.33.0(@effect/experimental@0.44.0(@effect/platform@0.80.11(effect@3.14.11))(effect@3.14.11))(@effect/platform@0.80.11(effect@3.14.11))(effect@3.14.11))(effect@3.14.11)(typescript@5.8.3)
@@ -1103,8 +1103,8 @@ packages:
   readable-stream@2.3.8:
     resolution: {integrity: sha512-8p0AUk4XODgIewSi0l8Epjs+EVnWiK7NoDIEGU0HhE7+ZyY8D1IMY7odu5lRrFXGg71L15KG8QrPmum45RTtdA==}
 
-  readme-package-icons@1.2.0:
-    resolution: {integrity: sha512-uiKcxmYCzMDpdT9wDtEAoBX8rrdVLPaQ6lyyK/A/Z+lxhydUc6yJT4gqNeWlO9kPsxzaVCOnYdSYRpV0q9uOZA==}
+  readme-package-icons@1.2.1:
+    resolution: {integrity: sha512-7q9NZ1rj4v3DkSiw0wPlKAU+0vkcTKDJ27SckCBOwoXfMB7NZFJPGzNu2aaXD+spjfrm2hm5dTaFsIo0D3fX/Q==}
     engines: {node: '>=20.x'}
     hasBin: true
 
@@ -2336,7 +2336,7 @@ snapshots:
       string_decoder: 1.1.1
       util-deprecate: 1.0.2
 
-  readme-package-icons@1.2.0:
+  readme-package-icons@1.2.1:
     dependencies:
       comment-json: 4.2.5
       picocolors: 1.1.1
