@@ -54,8 +54,10 @@
     "bundle-example": "pnpm esbuild --bundle --platform=node --format=esm --sourcemap=external --minify --inject:./src/examples/bundling/cjs-shims.ts --outfile=./src/tests/bundle/from-promise.js ./src/examples/bundling/from-promise.bundle.ts"
   },
   "dependencies": {
+    "@effect/cluster": "0.30.1",
     "@effect/platform": "0.80.13",
-    "@effect/platform-node": "0.76.22",
+    "@effect/platform-node": "0.77.1",
+    "@effect/rpc": "0.56.1",
     "comment-json": "4.2.5",
     "picocolors": "1.1.1",
     "source-map-js": "1.2.1"
@@ -71,7 +73,7 @@
     "del-cli": "6.0.0",
     "esbuild": "0.25.3",
     "readme-package-icons": "1.2.1",
-    "ts-paths-resolver": "1.2.55",
+    "ts-paths-resolver": "1.2.56",
     "tsx": "4.19.3",
     "typescript": "5.8.3",
     "vite-tsconfig-paths": "5.1.4",
