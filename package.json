@@ -61,7 +61,7 @@
     "source-map-js": "1.2.1"
   },
   "peerDependencies": {
-    "effect": "3.14.12"
+    "effect": "3.14.13"
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
