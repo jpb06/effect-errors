@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.10.3](https://github.com/jpb06/effect-errors/compare/v1.10.2...v1.10.3) (2025-04-24)
+
+
+### Bug Fixes
+
+* **deps:** update dependency effect to v3.14.14 ([#330](https://github.com/jpb06/effect-errors/issues/330)) ([c9c3c94](https://github.com/jpb06/effect-errors/commit/c9c3c94b9497289d7b2740b1d0c025d5c9393363))
+* moving effect libs as range to peer deps ([#328](https://github.com/jpb06/effect-errors/issues/328)) ([0b7d1ef](https://github.com/jpb06/effect-errors/commit/0b7d1efeed8f86b904329080f9961a9b43714628))
+
 ## [1.10.2](https://github.com/jpb06/effect-errors/compare/v1.10.1...v1.10.2) (2025-04-23)
 
 
