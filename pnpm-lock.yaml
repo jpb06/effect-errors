@@ -55,8 +55,8 @@ importers:
         specifier: 1.2.1
         version: 1.2.1
       ts-paths-resolver:
-        specifier: 1.2.57
-        version: 1.2.57(45ddb3b706de672be236ea1cf3e3f171)
+        specifier: 1.2.58
+        version: 1.2.58(27e2f890bbf0a4c8f0c5b7a3dcb9bd22)
       tsx:
         specifier: 4.19.3
         version: 4.19.3
@@ -783,11 +783,15 @@ packages:
   eastasianwidth@0.2.0:
     resolution: {integrity: sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==}
 
-  effect-errors@1.10.2:
-    resolution: {integrity: sha512-BRNvMnlQNQLtmhH5wlo8G2EoyZ7olqsBFA8yIFgkh/VLYHLJF0Sf/y6y5SnbJ4gBFW6NvH2NZVxhCpmnQZFOvg==}
+  effect-errors@1.10.3:
+    resolution: {integrity: sha512-PGIo957cm1msh4v1x43pGrt8h7n/cRW6v/wlAByrFU6iakntnChnL7PRvcWzf9IZ+CUuxJTUz9t1brwd66+7mQ==}
     engines: {node: '>=20.x'}
     peerDependencies:
-      effect: 3.14.13
+      '@effect/cluster': 0.30.x
+      '@effect/platform': 0.80.x
+      '@effect/platform-node': 0.77.x
+      '@effect/rpc': 0.56.x
+      effect: 3.14.14
 
   effect@3.14.14:
     resolution: {integrity: sha512-Dbt9MAZHqM1UAip41RrZnypzLa/hJJGHXIVS9MbgU0L+UoJTFXToWIwWmHY/OcaQVNlf/1YxpMrD3xtxoDP/qw==}
@@ -1253,16 +1257,16 @@ packages:
       typescript:
         optional: true
 
-  ts-paths-resolver@1.2.57:
-    resolution: {integrity: sha512-55tSqKO15YJyDUjOwbxCtGExMynA1EI3Kcwp3y3f9UWtqiABBsLF/n7AC1nDXP/pHXnAvGHaxg5Rz6WDBloBqg==}
+  ts-paths-resolver@1.2.58:
+    resolution: {integrity: sha512-FbZCvR5f9eqg165PocGtBi+GIfLkMNGV9YojMpfHWFozy1bqxfQtXoLzlVstviD8bzhzvLufKIkwRjrTX0LA+A==}
     engines: {node: '>=20.x'}
     hasBin: true
     peerDependencies:
-      '@effect/cluster': 0.30.1
-      '@effect/platform': 0.80.13
-      '@effect/platform-node': 0.77.1
-      '@effect/rpc': 0.56.1
-      effect: 3.14.13
+      '@effect/cluster': 0.30.x
+      '@effect/platform': 0.80.x
+      '@effect/platform-node': 0.77.x
+      '@effect/rpc': 0.56.x
+      effect: 3.14.14
       typescript: 5.8.3
 
   tsconfck@3.1.5:
@@ -2010,7 +2014,7 @@ snapshots:
 
   eastasianwidth@0.2.0: {}
 
-  effect-errors@1.10.2(@effect/sql@0.33.13(@effect/experimental@0.44.13(@effect/platform@0.80.13(effect@3.14.14))(effect@3.14.14))(@effect/platform@0.80.13(effect@3.14.14))(effect@3.14.14))(effect@3.14.14):
+  effect-errors@1.10.3(344a2811d9e9ca257527b18002ad107c):
     dependencies:
       '@effect/cluster': 0.30.1(@effect/platform@0.80.13(effect@3.14.14))(@effect/rpc@0.56.1(@effect/platform@0.80.13(effect@3.14.14))(effect@3.14.14))(@effect/sql@0.33.13(@effect/experimental@0.44.13(@effect/platform@0.80.13(effect@3.14.14))(effect@3.14.14))(@effect/platform@0.80.13(effect@3.14.14))(effect@3.14.14))(effect@3.14.14)
       '@effect/platform': 0.80.13(effect@3.14.14)
@@ -2020,10 +2024,6 @@ snapshots:
       effect: 3.14.14
       picocolors: 1.1.1
       source-map-js: 1.2.1
-    transitivePeerDependencies:
-      - '@effect/sql'
-      - bufferutil
-      - utf-8-validate
 
   effect@3.14.14:
     dependencies:
@@ -2498,7 +2498,7 @@ snapshots:
     optionalDependencies:
       typescript: 5.8.3
 
-  ts-paths-resolver@1.2.57(45ddb3b706de672be236ea1cf3e3f171):
+  ts-paths-resolver@1.2.58(27e2f890bbf0a4c8f0c5b7a3dcb9bd22):
     dependencies:
       '@effect/cluster': 0.30.1(@effect/platform@0.80.13(effect@3.14.14))(@effect/rpc@0.56.1(@effect/platform@0.80.13(effect@3.14.14))(effect@3.14.14))(@effect/sql@0.33.13(@effect/experimental@0.44.13(@effect/platform@0.80.13(effect@3.14.14))(effect@3.14.14))(@effect/platform@0.80.13(effect@3.14.14))(effect@3.14.14))(effect@3.14.14)
       '@effect/platform': 0.80.13(effect@3.14.14)
@@ -2506,15 +2506,11 @@ snapshots:
       '@effect/rpc': 0.56.1(@effect/platform@0.80.13(effect@3.14.14))(effect@3.14.14)
       comment-json: 4.2.5
       effect: 3.14.14
-      effect-errors: 1.10.2(@effect/sql@0.33.13(@effect/experimental@0.44.13(@effect/platform@0.80.13(effect@3.14.14))(effect@3.14.14))(@effect/platform@0.80.13(effect@3.14.14))(effect@3.14.14))(effect@3.14.14)
+      effect-errors: 1.10.3(344a2811d9e9ca257527b18002ad107c)
       glob: 11.0.2
       picocolors: 1.1.1
       typescript: 5.8.3
       yargs: 17.7.2
-    transitivePeerDependencies:
-      - '@effect/sql'
-      - bufferutil
-      - utf-8-validate
 
   tsconfck@3.1.5(typescript@5.8.3):
     optionalDependencies:
