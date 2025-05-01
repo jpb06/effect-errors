@@ -55,8 +55,8 @@ importers:
         specifier: 1.2.1
         version: 1.2.1
       ts-paths-resolver:
-        specifier: 1.2.58
-        version: 1.2.58(3fe1b020c465921b85523d234d86edc4)
+        specifier: 1.2.59
+        version: 1.2.59(3fe1b020c465921b85523d234d86edc4)
       tsx:
         specifier: 4.19.4
         version: 4.19.4
@@ -1257,8 +1257,8 @@ packages:
       typescript:
         optional: true
 
-  ts-paths-resolver@1.2.58:
-    resolution: {integrity: sha512-FbZCvR5f9eqg165PocGtBi+GIfLkMNGV9YojMpfHWFozy1bqxfQtXoLzlVstviD8bzhzvLufKIkwRjrTX0LA+A==}
+  ts-paths-resolver@1.2.59:
+    resolution: {integrity: sha512-HtLPJhqzaVIxctXM8//OyMjdG03IXKufkkjkCbxoiAubXczFuyNXnVcESc9lrfaEwcwFeaXUWloA1kXnhOhAgw==}
     engines: {node: '>=20.x'}
     hasBin: true
     peerDependencies:
@@ -1266,7 +1266,7 @@ packages:
       '@effect/platform': 0.80.x
       '@effect/platform-node': 0.77.x
       '@effect/rpc': 0.56.x
-      effect: 3.14.14
+      effect: 3.14.16
       typescript: 5.8.3
 
   tsconfck@3.1.5:
@@ -2498,7 +2498,7 @@ snapshots:
     optionalDependencies:
       typescript: 5.8.3
 
-  ts-paths-resolver@1.2.58(3fe1b020c465921b85523d234d86edc4):
+  ts-paths-resolver@1.2.59(3fe1b020c465921b85523d234d86edc4):
     dependencies:
       '@effect/cluster': 0.30.1(@effect/platform@0.80.13(effect@3.14.18))(@effect/rpc@0.56.1(@effect/platform@0.80.13(effect@3.14.18))(effect@3.14.18))(@effect/sql@0.33.13(@effect/experimental@0.44.13(@effect/platform@0.80.13(effect@3.14.18))(effect@3.14.18))(@effect/platform@0.80.13(effect@3.14.18))(effect@3.14.18))(effect@3.14.18)
       '@effect/platform': 0.80.13(effect@3.14.18)
