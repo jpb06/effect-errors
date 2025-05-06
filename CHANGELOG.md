@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.10.6](https://github.com/jpb06/effect-errors/compare/v1.10.5...v1.10.6) (2025-05-06)
+
+
+### Bug Fixes
+
+* **deps:** update dependency effect to v3.14.19 ([#345](https://github.com/jpb06/effect-errors/issues/345)) ([58cbb60](https://github.com/jpb06/effect-errors/commit/58cbb601fe781595e45c0a3c1115c2d7d4fd7f74))
+
 ## [1.10.5](https://github.com/jpb06/effect-errors/compare/v1.10.4...v1.10.5) (2025-05-01)
 
 
