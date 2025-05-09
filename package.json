@@ -20,7 +20,7 @@
     }
   },
   "name": "effect-errors",
-  "version": "1.10.7",
+  "version": "1.10.8",
   "author": "jpb06 <jp.bois.06@outlook.fr>",
   "description": "A POC for errors reporting in Effect",
   "keywords": [
