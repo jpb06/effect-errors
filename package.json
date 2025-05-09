@@ -62,7 +62,7 @@
     "@effect/cluster": "0.30.x",
     "@effect/platform": "0.80.x",
     "@effect/platform-node": "0.77.x",
-    "@effect/rpc": "0.56.x",
+    "@effect/rpc": "0.56.x || 0.57.x",
     "effect": "3.14.21"
   },
   "devDependencies": {
