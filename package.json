@@ -73,7 +73,7 @@
     "del-cli": "6.0.0",
     "esbuild": "0.25.4",
     "readme-package-icons": "1.2.1",
-    "ts-paths-resolver": "1.2.60",
+    "ts-paths-resolver": "1.2.61",
     "tsx": "4.19.4",
     "typescript": "5.8.3",
     "vite-tsconfig-paths": "5.1.4",
