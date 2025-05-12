@@ -9,25 +9,25 @@ importers:
   .:
     dependencies:
       '@effect/cluster':
-        specifier: 0.33.0
+        specifier: 0.x
         version: 0.33.0(@effect/platform@0.82.0(effect@3.15.0))(@effect/rpc@0.59.0(@effect/platform@0.82.0(effect@3.15.0))(effect@3.15.0))(@effect/sql@0.35.0(@effect/experimental@0.46.0(@effect/platform@0.82.0(effect@3.15.0))(effect@3.15.0))(@effect/platform@0.82.0(effect@3.15.0))(effect@3.15.0))(effect@3.15.0)
       '@effect/platform':
-        specifier: 0.82.0
+        specifier: 0.x
         version: 0.82.0(effect@3.15.0)
       '@effect/platform-node':
-        specifier: 0.80.0
+        specifier: 0.x
         version: 0.80.0(@effect/cluster@0.33.0(@effect/platform@0.82.0(effect@3.15.0))(@effect/rpc@0.59.0(@effect/platform@0.82.0(effect@3.15.0))(effect@3.15.0))(@effect/sql@0.35.0(@effect/experimental@0.46.0(@effect/platform@0.82.0(effect@3.15.0))(effect@3.15.0))(@effect/platform@0.82.0(effect@3.15.0))(effect@3.15.0))(effect@3.15.0))(@effect/platform@0.82.0(effect@3.15.0))(@effect/rpc@0.59.0(@effect/platform@0.82.0(effect@3.15.0))(effect@3.15.0))(@effect/sql@0.35.0(@effect/experimental@0.46.0(@effect/platform@0.82.0(effect@3.15.0))(effect@3.15.0))(@effect/platform@0.82.0(effect@3.15.0))(effect@3.15.0))(effect@3.15.0)
       '@effect/rpc':
-        specifier: 0.59.0
+        specifier: 0.x
         version: 0.59.0(@effect/platform@0.82.0(effect@3.15.0))(effect@3.15.0)
       '@effect/sql':
-        specifier: ^0.35.0
+        specifier: 0.x
         version: 0.35.0(@effect/experimental@0.46.0(@effect/platform@0.82.0(effect@3.15.0))(effect@3.15.0))(@effect/platform@0.82.0(effect@3.15.0))(effect@3.15.0)
       comment-json:
         specifier: 4.2.5
         version: 4.2.5
       effect:
-        specifier: 3.15.0
+        specifier: 3.x
         version: 3.15.0
       picocolors:
         specifier: 1.1.1
@@ -1155,8 +1155,8 @@ packages:
   safe-buffer@5.1.2:
     resolution: {integrity: sha512-Gd2UZBJDkXlY7GbJxfsE8/nvKkUEU1G38c1siN6QP6a9PT9MmHB8GnpscSmMJSoF8LOIrt8ud/wPtojys4G6+g==}
 
-  semver@7.7.1:
-    resolution: {integrity: sha512-hlq8tAfn0m/61p4BVRcPzIGr6LKiMwo4VM6dGi6pt4qcRkmNzTcWq6eCEjEh+qXjkMDvPlOFFSGwQjoEa6gyMA==}
+  semver@7.7.2:
+    resolution: {integrity: sha512-RF0Fw+rO5AMf9MAyaRXI4AV0Ulj5lMHqVxxdSgiVbixSCXoEmmX/jk0CuJw4+3SqroYO9VoUh+HcuJivvtJemA==}
     engines: {node: '>=10'}
     hasBin: true
 
@@ -2242,7 +2242,7 @@ snapshots:
 
   make-dir@4.0.0:
     dependencies:
-      semver: 7.7.1
+      semver: 7.7.2
 
   meow@13.2.0: {}
 
@@ -2414,7 +2414,7 @@ snapshots:
 
   safe-buffer@5.1.2: {}
 
-  semver@7.7.1: {}
+  semver@7.7.2: {}
 
   shebang-command@2.0.0:
     dependencies:
