@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.10.11](https://github.com/jpb06/effect-errors/compare/v1.10.10...v1.10.11) (2025-05-12)
+
+
+### Bug Fixes
+
+* extreme leniency for effect peer deps ([#370](https://github.com/jpb06/effect-errors/issues/370)) ([bf2dc2c](https://github.com/jpb06/effect-errors/commit/bf2dc2cee04277900597f672bf64b1728e7f1099))
+
 ## [1.10.10](https://github.com/jpb06/effect-errors/compare/v1.10.9...v1.10.10) (2025-05-12)
 
 
