@@ -60,7 +60,7 @@
   },
   "peerDependencies": {
     "@effect/cluster": "0.31.1",
-    "@effect/platform": "0.81.1",
+    "@effect/platform": "0.82.0",
     "@effect/platform-node": "0.78.1",
     "@effect/rpc": "0.59.0",
     "effect": "3.15.0"
