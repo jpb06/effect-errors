@@ -54,15 +54,16 @@
     "bundle-example": "pnpm esbuild --bundle --platform=node --format=esm --sourcemap=external --minify --inject:./src/examples/bundling/cjs-shims.ts --outfile=./src/tests/bundle/from-promise.js ./src/examples/bundling/from-promise.bundle.ts"
   },
   "dependencies": {
+    "@effect/cluster": "0.31.1",
+    "@effect/platform": "0.82.0",
+    "@effect/platform-node": "0.80.0",
+    "@effect/rpc": "0.59.0",
+    "@effect/sql": "^0.35.0",
     "comment-json": "4.2.5",
     "picocolors": "1.1.1",
     "source-map-js": "1.2.1"
   },
   "peerDependencies": {
-    "@effect/cluster": "0.31.1",
-    "@effect/platform": "0.82.0",
-    "@effect/platform-node": "0.80.0",
-    "@effect/rpc": "0.59.0",
     "effect": "3.15.0"
   },
   "devDependencies": {
