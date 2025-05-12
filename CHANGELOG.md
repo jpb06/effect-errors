@@ -1,5 +1,16 @@
 # Changelog
 
+## [1.10.10](https://github.com/jpb06/effect-errors/compare/v1.10.9...v1.10.10) (2025-05-12)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @effect/cluster to v0.33.0 ([#363](https://github.com/jpb06/effect-errors/issues/363)) ([84998da](https://github.com/jpb06/effect-errors/commit/84998dafb462b097f9780f13433b7676f853f4f8))
+* **deps:** update dependency @effect/platform to v0.82.0 ([#364](https://github.com/jpb06/effect-errors/issues/364)) ([d0ee1c9](https://github.com/jpb06/effect-errors/commit/d0ee1c9e2b46c8a5736f77179305fa8ef29baccf))
+* **deps:** update dependency @effect/platform-node to v0.80.0 ([#365](https://github.com/jpb06/effect-errors/issues/365)) ([6e2af47](https://github.com/jpb06/effect-errors/commit/6e2af477e80b9e0730ca98132c6f986eb57e47b2))
+* **deps:** update dependency @effect/rpc to v0.59.0 ([#366](https://github.com/jpb06/effect-errors/issues/366)) ([b3b491d](https://github.com/jpb06/effect-errors/commit/b3b491d290c6fbf3968d4d42e53dfb34e35d08f2))
+* **deps:** update dependency effect to v3.15.0 ([#367](https://github.com/jpb06/effect-errors/issues/367)) ([8a15469](https://github.com/jpb06/effect-errors/commit/8a154690dbf25769f96f13069d1715cd3bc7950a))
+
 ## [1.10.9](https://github.com/jpb06/effect-errors/compare/v1.10.8...v1.10.9) (2025-05-11)
 
 
