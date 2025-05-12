@@ -63,7 +63,7 @@
     "@effect/platform": "0.81.1",
     "@effect/platform-node": "0.78.1",
     "@effect/rpc": "0.57.1",
-    "effect": "3.14.22"
+    "effect": "3.15.0"
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
