@@ -237,11 +237,28 @@
 						"groups": [
 							":URL:",
 							":BLANK_LINE:",
-							":NODE:",
+							[":BUN:", ":NODE:"],
 							":BLANK_LINE:",
-							":PACKAGE:",
+							[
+								":PACKAGE:",
+								"!@dependencies/**",
+								"!@logic/**",
+								"!@pretty-print",
+								"!@pretty-print/**",
+								"!@sourcemaps",
+								"!@tests/**",
+								"!@type"
+							],
 							":BLANK_LINE:",
-							":ALIAS:",
+							[
+								"@dependencies/**",
+								"@logic/**",
+								"@pretty-print",
+								"@pretty-print/**",
+								"@sourcemaps",
+								"@tests/**",
+								"@type"
+							],
 							":BLANK_LINE:",
 							":PATH:"
 						]
