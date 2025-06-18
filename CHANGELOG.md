@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.10.12](https://github.com/jpb06/effect-errors/compare/v1.10.11...v1.10.12) (2025-06-18)
+
+
+### Bug Fixes
+
+* imports sorting config ([#397](https://github.com/jpb06/effect-errors/issues/397)) ([e72ed72](https://github.com/jpb06/effect-errors/commit/e72ed72f3d96a8d8554c06b1449b538432f05792))
+
 ## [1.10.11](https://github.com/jpb06/effect-errors/compare/v1.10.10...v1.10.11) (2025-05-12)
 
 
