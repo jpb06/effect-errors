@@ -1,7 +1,7 @@
 {
-	"$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
+	"$schema": "https://biomejs.dev/schemas/2.0.0/schema.json",
 	"files": {
-		"ignore": ["./src/tests/bundle"]
+		"includes": ["src/**", "!src/tests/bundle"]
 	},
 	"javascript": {
 		"formatter": {
@@ -9,16 +9,23 @@
 			"quoteStyle": "single",
 			"semicolons": "always"
 		},
+		"assist": {
+			"enabled": true
+		},
 		"globals": ["document", "navigator", "window", "exports"]
 	},
 	"linter": {
 		"enabled": true,
-		"ignore": [
-			"**/dist",
-			"**/node_modules",
-			"**/coverage",
-			"src/tests/bundle/*",
-			"src/examples/bundling/*"
+		"domains": {
+			"project": "none"
+		},
+		"includes": [
+			"**",
+			"!**/dist",
+			"!**/node_modules",
+			"!**/coverage",
+			"!**/src/tests/bundle/**/*",
+			"!**/src/examples/bundling/**/*"
 		],
 		"rules": {
 			"complexity": {
@@ -33,7 +40,6 @@
 				"noExcessiveNestedTestSuites": "error",
 				"noExtraBooleanCast": "error",
 				"noForEach": "error",
-				"noMultipleSpacesInRegularExpressionLiterals": "error",
 				"noStaticOnlyClass": "error",
 				"noThisInStatic": "error",
 				"noUselessCatch": "error",
@@ -48,29 +54,33 @@
 				"noUselessThisAlias": "error",
 				"noUselessTypeConstraint": "error",
 				"noVoid": "error",
-				"noWith": "error",
 				"useArrowFunction": "error",
 				"useFlatMap": "error",
 				"useLiteralKeys": "error",
 				"useOptionalChain": "error",
 				"useRegexLiterals": "error",
 				"useSimpleNumberKeys": "error",
-				"useSimplifiedLogicExpression": "error"
+				"useSimplifiedLogicExpression": "error",
+				"noAdjacentSpacesInRegex": "error",
+				"noFlatMapIdentity": "error",
+				"noUselessContinue": "error",
+				"noArguments": "error",
+				"noCommaOperator": "error",
+				"useNumericLiterals": "error",
+				"useWhile": "error"
 			},
 			"correctness": {
+				"useImportExtensions": "off",
 				"noChildrenProp": "error",
 				"noConstAssign": "error",
 				"noConstantCondition": "error",
 				"noConstructorReturn": "error",
 				"noEmptyCharacterClassInRegex": "error",
 				"noEmptyPattern": "error",
-				"noFlatMapIdentity": "error",
 				"noGlobalObjectCalls": "error",
 				"noInnerDeclarations": "error",
 				"noInvalidConstructorSuper": "error",
-				"noInvalidNewBuiltin": "error",
 				"noInvalidUseBeforeDeclaration": "error",
-				"noNewSymbol": "error",
 				"noPrecisionLoss": "error",
 				"noRenderReturnValue": "error",
 				"noSelfAssign": "error",
@@ -78,7 +88,6 @@
 				"noStringCaseMismatch": "error",
 				"noSwitchDeclarations": "error",
 				"noUndeclaredVariables": "error",
-				"noUnnecessaryContinue": "error",
 				"noUnreachable": "error",
 				"noUnreachableSuper": "error",
 				"noUnsafeFinally": "error",
@@ -89,13 +98,14 @@
 				"noUnusedVariables": "error",
 				"noVoidElementsWithChildren": "error",
 				"noVoidTypeReturn": "error",
-				"useArrayLiterals": "error",
 				"useExhaustiveDependencies": "error",
 				"useHookAtTopLevel": "error",
 				"useIsNan": "error",
 				"useJsxKeyInIterable": "error",
 				"useValidForDirection": "error",
-				"useYield": "error"
+				"useYield": "error",
+				"noInvalidBuiltinInstantiation": "error",
+				"useValidTypeof": "error"
 			},
 			"recommended": false,
 			"security": {
@@ -104,13 +114,10 @@
 				"noGlobalEval": "error"
 			},
 			"style": {
-				"noArguments": "error",
-				"noCommaOperator": "error",
 				"noDefaultExport": "error",
 				"noImplicitBoolean": "error",
 				"noInferrableTypes": "error",
 				"noNamespace": "error",
-				"noNamespaceImport": "error",
 				"noNegationElse": "error",
 				"noNonNullAssertion": "off",
 				"noParameterAssign": "error",
@@ -118,7 +125,6 @@
 				"noShoutyConstants": "error",
 				"noUnusedTemplateLiteral": "error",
 				"noUselessElse": "error",
-				"noVar": "error",
 				"useAsConstAssertion": "error",
 				"useBlockStatements": "error",
 				"useCollapsedElseIf": "error",
@@ -146,18 +152,15 @@
 				},
 				"useLiteralEnumMembers": "error",
 				"useNodejsImportProtocol": "error",
-				"useNumericLiterals": "error",
 				"useSelfClosingElements": "error",
-				"useShorthandArrayType": "error",
 				"useShorthandAssign": "error",
 				"useShorthandFunctionType": "error",
-				"useSingleCaseStatement": "error",
 				"useSingleVarDeclarator": "error",
 				"useTemplate": {
 					"fix": "none",
 					"level": "warn"
 				},
-				"useWhile": "error"
+				"useArrayLiterals": "error"
 			},
 			"suspicious": {
 				"noApproximativeNumericConstant": "error",
@@ -170,7 +173,6 @@
 				"noCompareNegZero": "error",
 				"noConfusingLabels": "error",
 				"noConfusingVoidType": "error",
-				"noConsoleLog": "error",
 				"noConstEnum": "error",
 				"noControlCharactersInRegex": "error",
 				"noDebugger": "error",
@@ -214,9 +216,38 @@
 				"useGetterReturn": "error",
 				"useIsArray": "error",
 				"useNamespaceKeyword": "error",
-				"useValidTypeof": "error"
+				"noWith": "error",
+				"noVar": "error",
+				"noConsole": {
+					"level": "error",
+					"options": { "allow": ["error", "info", "warn"] }
+				}
+			},
+			"performance": {
+				"noNamespaceImport": "error"
 			}
 		}
 	},
-	"organizeImports": { "enabled": true }
+	"assist": {
+		"actions": {
+			"source": {
+				"organizeImports": {
+					"level": "on",
+					"options": {
+						"groups": [
+							":URL:",
+							":BLANK_LINE:",
+							":NODE:",
+							":BLANK_LINE:",
+							":PACKAGE:",
+							":BLANK_LINE:",
+							":ALIAS:",
+							":BLANK_LINE:",
+							":PATH:"
+						]
+					}
+				}
+			}
+		}
+	}
 }
