@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.10.13](https://github.com/jpb06/effect-errors/compare/v1.10.12...v1.10.13) (2025-06-22)
+
+
+### Bug Fixes
+
+* use pnpm as package manager ([#403](https://github.com/jpb06/effect-errors/issues/403)) ([847231e](https://github.com/jpb06/effect-errors/commit/847231e19be75fbb2af3c653d1835ed8da9ac3c7))
+
 ## [1.10.12](https://github.com/jpb06/effect-errors/compare/v1.10.11...v1.10.12) (2025-06-18)
 
 
