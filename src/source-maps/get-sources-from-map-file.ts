@@ -8,7 +8,7 @@ import { type RawSourceMap, SourceMapConsumer } from 'source-map-js';
 import { type JsonParsingError, readJsonEffect } from '@dependencies/fs';
 
 import type { ErrorLocation } from './get-error-location-from-file-path.js';
-import { type SourceCode, getSourceCode } from './get-source-code.js';
+import { getSourceCode, type SourceCode } from './get-source-code.js';
 
 export interface ErrorRelatedSources {
   _tag: 'sources';

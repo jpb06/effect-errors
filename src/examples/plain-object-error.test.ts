@@ -1,10 +1,10 @@
-import { durationRegex } from '@tests/regex';
-import { effectCause } from '@tests/runners';
-import { stripAnsiCodes } from '@tests/util';
 import { pipe } from 'effect';
 import { describe, expect, it } from 'vitest';
 
 import { makeConsoleTestLayer } from '@tests/layers';
+import { durationRegex } from '@tests/regex';
+import { effectCause } from '@tests/runners';
+import { stripAnsiCodes } from '@tests/util';
 
 import { withPlainObjectErrorTask } from './plain-object-error.js';
 

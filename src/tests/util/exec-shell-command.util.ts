@@ -1,4 +1,4 @@
-import { exec, type ExecException } from 'node:child_process';
+import { type ExecException, exec } from 'node:child_process';
 
 export const execShellCommand = async (
   cmd: string,

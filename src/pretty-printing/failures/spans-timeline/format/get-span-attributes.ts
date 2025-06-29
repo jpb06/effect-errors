@@ -1,6 +1,5 @@
-import { formatSpanAttributes } from '@pretty-print/common';
-
 import { splitSpansAttributesByTypes } from '@logic/spans';
+import { formatSpanAttributes } from '@pretty-print/common';
 
 export const getSpanAttributes = (
   allAttributes: ReadonlyMap<string, unknown>,

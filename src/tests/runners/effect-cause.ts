@@ -1,4 +1,4 @@
-import { pipe, Effect } from 'effect';
+import { Effect, pipe } from 'effect';
 
 export const effectCause = async <A, E>(effect: Effect.Effect<A, E>) =>
   await Effect.runPromise(

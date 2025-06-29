@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 
-import { NodeFileSystem } from '@effect/platform-node';
 import { FileSystem } from '@effect/platform/FileSystem';
+import { NodeFileSystem } from '@effect/platform-node';
 import { Effect, Layer, Match, pipe } from 'effect';
 import { describe, expect, it, vi } from 'vitest';
 

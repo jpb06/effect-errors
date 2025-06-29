@@ -8,8 +8,8 @@ import { getErrorLocationFrom } from './get-error-location-from-file-path.js';
 import { getSourceCode } from './get-source-code.js';
 import {
   type ErrorRelatedSources,
-  type RawErrorLocation,
   getSourcesFromMapFile,
+  type RawErrorLocation,
 } from './get-sources-from-map-file.js';
 
 export const getErrorRelatedSources = (
