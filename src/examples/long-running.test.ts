@@ -1,4 +1,4 @@
-import { Duration, Effect, Fiber, TestClock, TestContext, pipe } from 'effect';
+import { Duration, Effect, Fiber, pipe, TestClock, TestContext } from 'effect';
 import { describe, expect, it } from 'vitest';
 
 import { makeConsoleTestLayer } from '@tests/layers';
