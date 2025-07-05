@@ -73,7 +73,7 @@
     "copyfiles": "2.4.1",
     "del-cli": "6.0.0",
     "esbuild": "0.25.5",
-    "readme-package-icons": "1.2.1",
+    "readme-package-icons": "1.2.2",
     "ts-paths-resolver": "1.2.67",
     "tsx": "4.20.3",
     "typescript": "5.8.3",
