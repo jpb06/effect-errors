@@ -58,8 +58,8 @@ importers:
         specifier: 1.2.2
         version: 1.2.2
       ts-paths-resolver:
-        specifier: 1.2.67
-        version: 1.2.67(9e66d4f49d469d19015fb6e0a9f91f4b)
+        specifier: 1.2.68
+        version: 1.2.68(9e66d4f49d469d19015fb6e0a9f91f4b)
       tsx:
         specifier: 4.20.3
         version: 4.20.3
@@ -811,8 +811,8 @@ packages:
   eastasianwidth@0.2.0:
     resolution: {integrity: sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==}
 
-  effect-errors@1.10.13:
-    resolution: {integrity: sha512-r1KaISEWiQ/w1xedrM3pc5H9VK+DxZgAjXF3gE6Z5D2g4Ota/96b6p0Ypn5w0Kvicz9NtS/8q1Ic2lRhpdqZtA==}
+  effect-errors@1.10.14:
+    resolution: {integrity: sha512-g1Q59I9oO8B5wFwsqa3q/tJHP8thsY7fIAgoet7vS6XD1rl1blMCRCzHS9vLTpRVj6QychBVBgZeRY+fQDLCJg==}
     engines: {node: '>=20.x'}
     peerDependencies:
       '@effect/cluster': 0.x
@@ -1303,8 +1303,8 @@ packages:
       typescript:
         optional: true
 
-  ts-paths-resolver@1.2.67:
-    resolution: {integrity: sha512-XtsfIXMNYyVJX/gkvHvEwsuTuN584TjwJc2Vq0aszSP0QrrB3lYJrSJRdJPm4YFHWT2w5XnWN17aoZ+0nc15wQ==}
+  ts-paths-resolver@1.2.68:
+    resolution: {integrity: sha512-hE9CUJq5UgnJgSQLWppbnodcv8s5lASqrV6dswiiovM/9OsD2pGyNj4fHRiL1qZj2itj9lkhE7/z8/a66G17xQ==}
     engines: {node: '>=20.x'}
     hasBin: true
     peerDependencies:
@@ -2091,7 +2091,7 @@ snapshots:
 
   eastasianwidth@0.2.0: {}
 
-  effect-errors@1.10.13(9e66d4f49d469d19015fb6e0a9f91f4b):
+  effect-errors@1.10.14(9e66d4f49d469d19015fb6e0a9f91f4b):
     dependencies:
       '@effect/cluster': 0.41.3(@effect/platform@0.87.1(effect@3.16.10))(@effect/rpc@0.64.2(@effect/platform@0.87.1(effect@3.16.10))(effect@3.16.10))(@effect/sql@0.40.1(@effect/experimental@0.51.1(@effect/platform@0.87.1(effect@3.16.10))(effect@3.16.10))(@effect/platform@0.87.1(effect@3.16.10))(effect@3.16.10))(@effect/workflow@0.4.2(@effect/platform@0.87.1(effect@3.16.10))(@effect/rpc@0.64.2(@effect/platform@0.87.1(effect@3.16.10))(effect@3.16.10))(effect@3.16.10))(effect@3.16.10)
       '@effect/platform': 0.87.1(effect@3.16.10)
@@ -2592,7 +2592,7 @@ snapshots:
     optionalDependencies:
       typescript: 5.8.3
 
-  ts-paths-resolver@1.2.67(9e66d4f49d469d19015fb6e0a9f91f4b):
+  ts-paths-resolver@1.2.68(9e66d4f49d469d19015fb6e0a9f91f4b):
     dependencies:
       '@effect/cluster': 0.41.3(@effect/platform@0.87.1(effect@3.16.10))(@effect/rpc@0.64.2(@effect/platform@0.87.1(effect@3.16.10))(effect@3.16.10))(@effect/sql@0.40.1(@effect/experimental@0.51.1(@effect/platform@0.87.1(effect@3.16.10))(effect@3.16.10))(@effect/platform@0.87.1(effect@3.16.10))(effect@3.16.10))(@effect/workflow@0.4.2(@effect/platform@0.87.1(effect@3.16.10))(@effect/rpc@0.64.2(@effect/platform@0.87.1(effect@3.16.10))(effect@3.16.10))(effect@3.16.10))(effect@3.16.10)
       '@effect/platform': 0.87.1(effect@3.16.10)
@@ -2600,7 +2600,7 @@ snapshots:
       '@effect/rpc': 0.64.2(@effect/platform@0.87.1(effect@3.16.10))(effect@3.16.10)
       comment-json: 4.2.5
       effect: 3.16.10
-      effect-errors: 1.10.13(9e66d4f49d469d19015fb6e0a9f91f4b)
+      effect-errors: 1.10.14(9e66d4f49d469d19015fb6e0a9f91f4b)
       glob: 11.0.3
       picocolors: 1.1.1
       yargs: 18.0.0
