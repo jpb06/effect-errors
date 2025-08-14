@@ -75,7 +75,7 @@
     "esbuild": "0.25.8",
     "readme-package-icons": "1.2.2",
     "ts-paths-resolver": "1.2.68",
-    "tsx": "4.20.3",
+    "tsx": "4.20.4",
     "typescript": "5.9.2",
     "vite-tsconfig-paths": "5.1.4",
     "vitest": "3.2.4",
