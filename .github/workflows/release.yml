@@ -22,7 +22,7 @@ jobs:
     timeout-minutes: 10
     steps:
       - name: 🛰️ Release please
-        uses: googleapis/release-please-action@v4.2.0
+        uses: googleapis/release-please-action@v4.3.0
         id: release
         with:
           config-file: release-please/config.json
