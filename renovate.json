@@ -3,7 +3,9 @@
   "extends": [
     "config:recommended",
     "customManagers:biomeVersions",
-    ":prHourlyLimitNone"
+    ":prHourlyLimitNone",    
+    "helpers:pinGitHubActionDigestsToSemver",
+    ":enableVulnerabilityAlerts"
   ],
   "schedule": "after 6am and before 6pm",
   "automerge": false,
