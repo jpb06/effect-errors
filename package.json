@@ -31,6 +31,7 @@
     "node": ">=20.x"
   },
   "scripts": {
+    "clean": "rm -rf ./dist && rm -rf node_modules && rm pnpm-lock.yaml",
     "copy-package": "copyfiles package.json ./dist/",
     "copy-readme": "copyfiles README.md ./dist/",
     "build": "del-cli ./dist && pnpm build-esm && pnpm build-cjs",
@@ -38,7 +39,7 @@
     "build-cjs": "tsc --project tsconfig.cjs.json",
     "postbuild-cjs": "echo '{\"type\": \"commonjs\"}' > dist/cjs/package.json",
     "postbuild-esm": "echo '{\"type\": \"module\"}' > dist/esm/package.json",
-    "postbuild": "pnpm copy-package && pnpm copy-readme && pnpm resolve-ts-paths-esm",
+    "postbuild": "pnpm copy-package && pnpm copy-readme && pnpm resolve-ts-paths-esm --path ./dist --tsconfigPath ./tsconfig.json --debug true",
     "format": "biome format --write ./src",
     "format-ci": "biome format ./src",
     "lint": "biome lint ./src",
