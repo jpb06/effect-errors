@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.10.15](https://github.com/jpb06/effect-errors/compare/v1.10.14...v1.10.15) (2025-09-06)
+
+
+### Bug Fixes
+
+* lockfile cleanup ([#456](https://github.com/jpb06/effect-errors/issues/456)) ([f5d8ce1](https://github.com/jpb06/effect-errors/commit/f5d8ce1041aabd9d79c235c4c040d4384167c005))
+
 ## [1.10.14](https://github.com/jpb06/effect-errors/compare/v1.10.13...v1.10.14) (2025-07-05)
 
 
