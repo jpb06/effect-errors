@@ -24,8 +24,8 @@ importers:
         specifier: 0.x
         version: 0.44.2(@effect/experimental@0.54.6(@effect/platform@0.90.7(effect@3.17.13))(effect@3.17.13))(@effect/platform@0.90.7(effect@3.17.13))(effect@3.17.13)
       comment-json:
-        specifier: 4.4.1
-        version: 4.4.1
+        specifier: 4.5.0
+        version: 4.5.0
       effect:
         specifier: 3.x
         version: 3.17.13
@@ -923,6 +923,10 @@ packages:
 
   comment-json@4.4.1:
     resolution: {integrity: sha512-r1To31BQD5060QdkC+Iheai7gHwoSZobzunqkf2/kQ6xIAfJyrKNAFUwdKvkK7Qgu7pVTKQEa7ok7Ed3ycAJgg==}
+    engines: {node: '>= 6'}
+
+  comment-json@4.5.0:
+    resolution: {integrity: sha512-aKl8CwoMKxVTfAK4dFN4v54AEvuUh9pzmgVIBeK6gBomLwMgceQUKKWHzJdW1u1VQXQuwnJ7nJGWYYMTl5U4yg==}
     engines: {node: '>= 6'}
 
   concat-map@0.0.1:
@@ -2295,6 +2299,12 @@ snapshots:
       repeat-string: 1.6.1
 
   comment-json@4.4.1:
+    dependencies:
+      array-timsort: 1.0.3
+      core-util-is: 1.0.3
+      esprima: 4.0.1
+
+  comment-json@4.5.0:
     dependencies:
       array-timsort: 1.0.3
       core-util-is: 1.0.3

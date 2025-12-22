@@ -56,7 +56,7 @@
     "bundle-example": "pnpm esbuild --bundle --platform=node --format=esm --sourcemap=external --minify --inject:./src/examples/bundling/cjs-shims.ts --outfile=./src/tests/bundle/from-promise.js ./src/examples/bundling/from-promise.bundle.ts"
   },
   "dependencies": {
-    "comment-json": "4.4.1",
+    "comment-json": "4.5.0",
     "picocolors": "1.1.1",
     "source-map-js": "1.2.1"
   },
