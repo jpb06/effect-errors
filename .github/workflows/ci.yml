@@ -33,7 +33,7 @@ jobs:
           cache-dependency-path: ./package.json
 
       - name: 📥 Install deps
-        run: pnpm install --frozen-lockfile
+        run: pnpm install --frozen-lockfile --ignore-scripts
 
       - name: 📓 Format
         run: pnpm format-ci
@@ -59,7 +59,7 @@ jobs:
           cache-dependency-path: ./package.json
 
       - name: 📥 Install deps
-        run: pnpm install --frozen-lockfile
+        run: pnpm install --frozen-lockfile --ignore-scripts
 
       - name: 🔎 Type check
         run: pnpm type-check
@@ -82,7 +82,7 @@ jobs:
           cache-dependency-path: ./package.json
 
       - name: 📥 Install deps
-        run: pnpm install --frozen-lockfile
+        run: pnpm install --frozen-lockfile --ignore-scripts
 
       - name: 🧪 Tests
         run: pnpm test-ci
