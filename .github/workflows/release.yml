@@ -45,7 +45,7 @@ jobs:
 
       - name: 📥 Install deps
         if: ${{ steps.release.outputs.release_created }}
-        run: pnpm install --frozen-lockfile
+        run: pnpm install --frozen-lockfile --ignore-scripts
 
       - name: ⚙️ Building package
         if: ${{ steps.release.outputs.release_created }}
