@@ -55,6 +55,8 @@ jobs:
       - name: 🚀 Publish package
         id: publish
         if: ${{ steps.release.outputs.release_created }}
-        run: NODE_AUTH_TOKEN="" npm publish ./dist --access public --provenance
         env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+          NPM_CONFIG_PROVENANCE: 'true'
+          NODE_AUTH_TOKEN: ''  # Clear placeholder set by setup-node to enable OIDC
+        run: npm publish ./dist --access public --provenance
+
