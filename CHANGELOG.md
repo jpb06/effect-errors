@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.10.21](https://github.com/jpb06/effect-errors/compare/v1.10.20...v1.10.21) (2026-01-10)
+
+
+### Bug Fixes
+
+* **publish:** clear node auth token ([#537](https://github.com/jpb06/effect-errors/issues/537)) ([333b27c](https://github.com/jpb06/effect-errors/commit/333b27c11d52d83ce4c0313e121dc245b410506e))
+
 ## [1.10.20](https://github.com/jpb06/effect-errors/compare/v1.10.19...v1.10.20) (2026-01-10)
 
 
