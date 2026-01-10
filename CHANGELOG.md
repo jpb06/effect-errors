@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.10.22](https://github.com/jpb06/effect-errors/compare/v1.10.21...v1.10.22) (2026-01-10)
+
+
+### Bug Fixes
+
+* **publish:** using node 24 and fixing repository url ([#541](https://github.com/jpb06/effect-errors/issues/541)) ([4f157ab](https://github.com/jpb06/effect-errors/commit/4f157ab520d158322e029ddf1b4984744fda8530))
+
 ## [1.10.21](https://github.com/jpb06/effect-errors/compare/v1.10.20...v1.10.21) (2026-01-10)
 
 
