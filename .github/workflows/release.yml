@@ -54,6 +54,6 @@ jobs:
       - name: 🚀 Publish package
         id: publish
         if: ${{ steps.release.outputs.release_created }}
-        run: npm publish ./dist --access public
+        run: NODE_AUTH_TOKEN="" npm publish ./dist --access public --provenance
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
