@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.10.20](https://github.com/jpb06/effect-errors/compare/v1.10.19...v1.10.20) (2026-01-10)
+
+
+### Bug Fixes
+
+* **publish:** missing id-token write permission ([#535](https://github.com/jpb06/effect-errors/issues/535)) ([e60bc5b](https://github.com/jpb06/effect-errors/commit/e60bc5b1e83b4100453b01d8d387e436bc9b157f))
+
 ## [1.10.19](https://github.com/jpb06/effect-errors/compare/v1.10.18...v1.10.19) (2026-01-10)
 
 
