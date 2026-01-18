@@ -31,7 +31,7 @@ export const formatSpansAsTimeline = (
 
       const maybeCircle = isFirstEntry ? `\r\n${color.gray('◯')}` : '';
       const trailing = spanStackTrailingChar(isLastEntry);
-      const filePath = ` ${stripCwd !== undefined ? color.underline(color.bold(stripCwdPath(name))) : color.underline(name)}`;
+      const filePath = ` ${stripCwd === undefined ? color.underline(name) : color.underline(color.bold(stripCwdPath(name)))}`;
       const duration = color.gray(getSpanDuration(status, isLastEntry));
 
       const message = `${maybeCircle}\r\n${trailing}${color.gray('─')}${filePath}${duration}${formattedAttributes}`;

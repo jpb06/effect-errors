@@ -18,12 +18,7 @@ describe('captureErrors function', () => {
     const cause = await effectCause(task);
 
     const result = await Effect.runPromise(
-      pipe(
-        captureErrors(cause, {
-          stripCwd: false,
-        }),
-        Effect.provide(NodeFileSystem.layer),
-      ),
+      pipe(captureErrors(cause, false), Effect.provide(NodeFileSystem.layer)),
     );
 
     expect(result.interrupted).toBe(false);
@@ -60,12 +55,7 @@ describe('captureErrors function', () => {
     const cause = await effectCause(task);
 
     const result = await Effect.runPromise(
-      pipe(
-        captureErrors(cause, {
-          stripCwd: false,
-        }),
-        Effect.provide(NodeFileSystem.layer),
-      ),
+      pipe(captureErrors(cause, false), Effect.provide(NodeFileSystem.layer)),
     );
 
     expect(result.interrupted).toBe(false);
@@ -80,12 +70,7 @@ describe('captureErrors function', () => {
     const cause = await effectCause(Effect.interrupt);
 
     const result = await Effect.runPromise(
-      pipe(
-        captureErrors(cause, {
-          stripCwd: false,
-        }),
-        Effect.provide(NodeFileSystem.layer),
-      ),
+      pipe(captureErrors(cause, false), Effect.provide(NodeFileSystem.layer)),
     );
 
     expect(result).toStrictEqual({

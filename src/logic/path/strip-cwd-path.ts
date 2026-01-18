@@ -1,5 +1,7 @@
 const cwdRegex =
-  global.process !== undefined ? new RegExp(global.process.cwd(), 'g') : null;
+  globalThis.process === undefined
+    ? null
+    : new RegExp(globalThis.process.cwd(), 'g');
 
 export const stripCwdPath = (path: string): string =>
   cwdRegex === null ? path : path.replace(cwdRegex, '.');

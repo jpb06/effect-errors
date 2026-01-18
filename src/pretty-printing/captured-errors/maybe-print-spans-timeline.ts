@@ -25,11 +25,12 @@ export const maybePrintSpansTimeline = (
 
       const maybeCircle = isFirstEntry ? `\r\n${color.gray('◯')}\r\n` : '';
       const trailing = spanStackTrailingChar(isLastEntry);
-      const filePath = ` ${stripCwd !== undefined ? color.underline(color.bold(stripCwdPath(name))) : color.underline(name)}`;
+      const filePath = ` ${stripCwd === undefined ? color.underline(name) : color.underline(color.bold(stripCwdPath(name)))}`;
       const duration =
-        durationInMilliseconds !== undefined
-          ? color.gray(formatSpanDuration(durationInMilliseconds, isLastEntry))
-          : '';
+        durationInMilliseconds === undefined
+          ? ''
+          : color.gray(formatSpanDuration(durationInMilliseconds, isLastEntry));
+
       const formattedAttributes = formatSpanAttributes(attributes, isLastEntry);
 
       const timelineEntry = color.white(
