@@ -11,7 +11,7 @@ export const collectErrorDetails =
   (cause: Cause<E>) =>
     pipe(
       Effect.gen(function* () {
-        const errors = yield* captureErrors(cause, {});
+        const errors = yield* captureErrors(cause);
 
         const message = prettyPrintFromCapturedErrors(errors, options);
 

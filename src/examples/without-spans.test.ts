@@ -122,7 +122,7 @@ describe('without-spans task', () => {
       expect(raw).not.toContain('Sources 🕵️');
       expect(raw).toContain('Node Stacktrace 🚨');
       expect(message).toMatch(
-        /│ at catcher (.*\/effect-errors\/src\/examples\/without-spans.ts:14:17)/,
+        /│ at catcher (.*\/src\/examples\/without-spans.ts:14:17)/,
       );
     });
   });

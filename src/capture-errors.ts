@@ -27,15 +27,9 @@ export interface CapturedErrors {
   errors: ErrorData[];
 }
 
-export interface CaptureErrorsOptions {
-  stripCwd?: boolean;
-}
-
 export const captureErrors = <E>(
   cause: Cause<E>,
-  options: CaptureErrorsOptions = {
-    stripCwd: true,
-  },
+  stripCwd?: boolean,
 ): Effect.Effect<
   CapturedErrors,
   PlatformError | JsonParsingError,
@@ -50,7 +44,10 @@ export const captureErrors = <E>(
     }
 
     const rawErrors = captureErrorsFrom<E>(cause);
-    const errors = yield* Effect.forEach(rawErrors, transformRawError(options));
+    const errors = yield* Effect.forEach(
+      rawErrors,
+      transformRawError(stripCwd),
+    );
 
     return {
       interrupted: false,

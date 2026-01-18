@@ -3,13 +3,12 @@ import { Effect, pipe } from 'effect';
 import { stripCwdPath } from '@logic/path';
 import { stackAtRegex } from '@logic/stack';
 
-import type { CaptureErrorsOptions } from '../capture-errors.js';
 import type { PrettyError } from '../types/pretty-error.type.js';
 import { getSourcesFromSpan } from './get-sources-from-span.js';
 import { getSourcesFromStack } from './get-sources-from-stack.js';
 
 export const transformRawError =
-  ({ stripCwd }: CaptureErrorsOptions) =>
+  (stripCwd?: boolean) =>
   ({
     message,
     stack: maybeStack,
@@ -27,7 +26,7 @@ export const transformRawError =
 
         let stack: string | undefined;
         if (maybeStack !== undefined) {
-          stack = stripCwd === true ? stripCwdPath(maybeStack) : maybeStack;
+          stack = stripCwd === false ? maybeStack : stripCwdPath(maybeStack);
         }
 
         return {
