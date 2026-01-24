@@ -79,7 +79,7 @@
     "ts-paths-resolver": "1.3.2",
     "tsx": "4.21.0",
     "typescript": "5.9.3",
-    "vite-tsconfig-paths": "6.0.4",
+    "vite-tsconfig-paths": "6.0.5",
     "vitest": "3.2.4",
     "vitest-mock-extended": "3.1.0"
   },
