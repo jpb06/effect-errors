@@ -424,7 +424,7 @@ If no map file is found, a `location` array will be returned instead of `sources
       "errorType": "FetchError",
       "message": "request to https://yolo-bro-oh-no.org/users/1 failed, reason: getaddrinfo ENOTFOUND yolo-bro-oh-no.org",
       "stack": [
-        "at catcher (file:///Users/jpb06/repos/remix-effect-errors/build/server/nodejs-eyJydW50aW1lIjoibm9kZWpzIn0/index.js?t=1729013117205.3699:2:14550)",
+        "at catch (file:///Users/jpb06/repos/remix-effect-errors/build/server/nodejs-eyJydW50aW1lIjoibm9kZWpzIn0/index.js?t=1729013117205.3699:2:14550)",
         "at EffectPrimitive.effect_instruction_i0 (file:///Users/jpb06/repos/remix-effect-errors/node_modules/effect/src/internal/core-effect.ts:1694:56)",
         "at body (file:///Users/jpb06/repos/remix-effect-errors/node_modules/effect/src/internal/fiberRuntime.ts:1113:41)",
         "at Object.effect_internal_function (file:///Users/jpb06/repos/remix-effect-errors/node_modules/effect/src/Utils.ts:780:14)",

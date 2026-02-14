@@ -46,7 +46,7 @@ describe('tagged-error-with-error-ctor task', () => {
 
     expect(raw).toContain('Sources 🕵️');
     expect(result).toMatch(
-      /│ at catcher \(\.\/src\/examples\/tagged-error-with-error-ctor\.ts:15:19\)/,
+      /│ at catch \(\.\/src\/examples\/tagged-error-with-error-ctor\.ts:15:19\)/,
     );
     expect(result).toMatch(
       /│ at \.\/src\/examples\/tagged-error-with-error-ctor\.ts:22:10/,

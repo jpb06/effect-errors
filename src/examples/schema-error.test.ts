@@ -47,7 +47,7 @@ describe('schema-error task', () => {
     expect(raw).toContain('Sources 🕵️');
     expect(raw).not.toContain('Node Stacktrace 🚨');
     expect(result).toMatch(
-      /│ at catcher \(.\/src\/examples\/schema-error\.ts:14:19\)/,
+      /│ at catch \(.\/src\/examples\/schema-error\.ts:14:19\)/,
     );
   });
 
@@ -61,7 +61,7 @@ describe('schema-error task', () => {
     expect(raw).toContain('Sources 🕵️');
     expect(raw).toContain('Node Stacktrace 🚨');
     expect(result).toMatch(
-      /│ at catcher \(.*\/effect-errors\/src\/examples\/schema-error\.ts:14:19\)/,
+      /│ at catch \(.*\/effect-errors\/src\/examples\/schema-error\.ts:14:19\)/,
     );
   });
 });
