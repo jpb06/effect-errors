@@ -61,7 +61,7 @@ describe('long-running task', () => {
     expect(raw).toContain('Sources 🕵️');
     expect(raw).not.toContain('Node Stacktrace 🚨');
     expect(result).toMatch(
-      /│ at catcher \(\.\/src\/examples\/long-running.ts:14:19\)/,
+      /│ at catch \(\.\/src\/examples\/long-running.ts:14:19\)/,
     );
   });
 
