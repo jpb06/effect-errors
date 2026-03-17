@@ -70,7 +70,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "2.4.6",
-    "@types/node": "25.3.5",
+    "@types/node": "25.5.0",
     "@vitest/coverage-v8": "4.1.0",
     "copyfiles": "2.4.1",
     "del-cli": "7.0.0",
