@@ -71,7 +71,7 @@
   "devDependencies": {
     "@biomejs/biome": "2.4.6",
     "@types/node": "25.5.2",
-    "@vitest/coverage-v8": "4.1.2",
+    "@vitest/coverage-v8": "4.1.4",
     "copyfiles": "2.4.1",
     "del-cli": "7.0.0",
     "esbuild": "0.27.4",
@@ -80,7 +80,7 @@
     "tsx": "4.21.0",
     "typescript": "5.9.3",
     "vite-tsconfig-paths": "6.1.1",
-    "vitest": "4.1.2",
+    "vitest": "4.1.4",
     "vitest-mock-extended": "3.1.1"
   },
   "pnpm": {
