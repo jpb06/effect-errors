@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.10.24](https://github.com/jpb06/effect-errors/compare/v1.10.23...v1.10.24) (2026-04-15)
+
+
+### Bug Fixes
+
+* **deps:** update dependency comment-json to v5 ([#596](https://github.com/jpb06/effect-errors/issues/596)) ([f0ee6d4](https://github.com/jpb06/effect-errors/commit/f0ee6d46b45fe4a6b1a66a7e1a355f74e25882a1))
+
 ## [1.10.23](https://github.com/jpb06/effect-errors/compare/v1.10.22...v1.10.23) (2026-03-05)
 
 
