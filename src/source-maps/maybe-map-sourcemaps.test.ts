@@ -198,7 +198,7 @@ describe('maybeMapSourcemaps function', () => {
       expect(error.source).not.toBeUndefined();
       expect(error.source).toStrictEqual(
         expected.source!.map((d) =>
-          d.column !== undefined ? d : { code: d.code, line: d.line },
+          d.column === undefined ? { code: d.code, line: d.line } : d,
         ),
       );
     }
